@@ -10,7 +10,7 @@
 	<!-- HikariConfig : 디비연결 정보 -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://localhost:3306/springdb"/>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://localhost:3306/projectdb"/>
 		<property name="username" value="root"/>
 		<property name="password" value="1234"/>
 	</bean>
