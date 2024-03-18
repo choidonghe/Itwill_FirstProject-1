@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mapper.StoreMapper">
+	
+	<resultMap type="com.itwillbs.domain.StoreVO" id="storeVO">
+		<result property="divcode" column="divcode"></result>
+		<result property="pno" column="pno"></result>
+		<result property="pname" column="pname"></result>
+		<result property="count" column="count"></result>
+		<result property="category" column="category"></result>
+		<result property="price" column="price"></result>
+		<result property="store_date" column="store_date"></result>
+		<result property="update_date" column="update_date"></result>
+		<result property="account_code" column="account_code"></result>
+		<collection property="codeVO" resultMap="codeVO"/>
+	</resultMap>
+	
+	<resultMap type="com.itwillbs.domain.CodeVO" id="codeVO">
+		<result property="divcode" column="divcode"></result>
+		<result property="daecode" column="daecode"></result>
+		<result property="smcode" column="smcode"></result>
+		<result property="korname" column="korname"></result>
+	</resultMap>
+	
+	<select id="selectStoreIngList" parameterType="storeVO" resultType="storeVO">
+		select c.korname, s.divcode, s.pno, s.pname, s.count, s.category, s.price, s.store_date, s.update_date, s.account_code 
+		from store s 
+		join code c 
+		on s.divcode = c.divcode
+	</select>
+	
+	
+	
+	
+</mapper>
