@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwillbs.mapper.MainMapper">
+
+	<select id="getSellTotal" resultType="String">
+		SELECT SUM(price) FROM projectdb.release 
+		WHERE release_date LIKE CONCAT('%',#{date},'%')
+	
+	</select>
+	
+	<select id="getReleaseMonth" resultType="String">	
+		SELECT CAST(release_date AS DATE) FROM projectdb.release 
+		WHERE release_date LIKE CONCAT('%',#{month},'%') 
+		GROUP BY CAST(release_date AS DATE)
+	</select>
+
+	
+</mapper>

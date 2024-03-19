@@ -2,6 +2,7 @@ package com.itwillbs.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.MemberVO;
+import com.itwillbs.service.MainService;
 import com.itwillbs.service.MemberService;
 
 /**
@@ -27,6 +29,9 @@ public class HomeController {
 	
 	@Inject
 	private MemberService mService;
+	
+	@Inject
+	private MainService mainService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -90,12 +95,23 @@ public class HomeController {
 		return "redirect:/main";
 	}
 	
-	@RequestMapping(value = "/main",method = RequestMethod.GET)
-	public void mainGET() throws Exception{
-		logger.debug(" mainGET() 호출");
 	
+	
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public void mainGET(Model model) throws Exception{
+		logger.debug(" main() 실행");
+		
+		List<String> sellList = mainService.sellTotalGet();
+		List<String> dayList = mainService.dayListGet();
+		List<String> releaseList = mainService.releaseListGet();
+		
+		model.addAttribute("sellList", sellList);
+		model.addAttribute("dayList", dayList);
+		model.addAttribute("releaseList", releaseList);
+		
+		//페이지 이동
+		
 	}
-	
 	
 	
 } // controller
