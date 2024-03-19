@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping(value = "/stock/*")
+//@RequestMapping(value = "/stock/*")
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -38,11 +38,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	// http://localhost:8088/stock/stockMain
-	@RequestMapping(value = "/stockMain" , method = RequestMethod.GET)
-	public void stock() {
-		logger.debug(" stock() 실행 ");
-	}
 	
 	
 }
