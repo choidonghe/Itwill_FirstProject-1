@@ -6,7 +6,9 @@
   
 	<mapper namespace="com.itwillbs.mapper.ReleaseMapper">
 	
-	
+	<select id="getReleaseList" resultType="ReleaseVO">
+		select * from `release`
+	</select>
 	
 	
 	
