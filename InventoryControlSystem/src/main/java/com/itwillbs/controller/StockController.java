@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.PageVO;
 import com.itwillbs.domain.StockVO;
 import com.itwillbs.service.StockService;
 
@@ -34,6 +36,28 @@ public class StockController {
 		logger.debug(" list.size : " + stockList.size());
 		// 연결된 뷰 페이지에 정보 전달 (Model)
 		model.addAttribute("stockList", stockList);
+	}
+	
+	
+	// 재고 리스트 페이징처리
+	// http://localhost:8088/stock/stockMainCri
+	@RequestMapping(value = "/stockMainCri", method = RequestMethod.GET)
+	public void listCriGET(Criteria cri, Model model, HttpSession session) throws Exception {
+		logger.debug(" /stock/stockMainCri -> listCriGET() 실행 ");
+		logger.debug(" /stock/stockMainCri.jsp 연결 ");
+		
+		PageVO pageVO = new PageVO();
+		pageVO.setCri(cri);
+		pageVO.setTotalCount(sService.getBoardListCount());
+		
+		List<StockVO> stockList = sService.getListCri(cri); // 페이징
+		logger.debug(" list.size : " + stockList.size());
+		
+		// 연결된 뷰페이지에 정보 전달(Model)
+		model.addAttribute("stockList", stockList);
+		model.addAttribute("cri", cri);
+		model.addAttribute("pageVO", pageVO);
+		
 		
 	}
 	

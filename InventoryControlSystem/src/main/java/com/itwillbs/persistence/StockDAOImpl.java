@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.StockVO;
 
 @Repository
@@ -25,5 +26,31 @@ public class StockDAOImpl implements StockDAO{
 		logger.debug(" stockListSelect() 호출 ");
 
 		return sqlSession.selectList(NAMESPACE + ".selectStockList");
+	}
+	
+
+	// 재고 리스트 조회 (페이징)
+	@Override
+	public List<StockVO> stockListPageSelect(int page) throws Exception {
+		logger.debug(" stockListPageSelect(int page) 호출 ");
+		logger.debug(" 페이징처리 번호 : " + page);
+		
+		page = (page - 1) * 10;
+		
+		return sqlSession.selectList(NAMESPACE + ".selectStockListPage", page);
+	}
+	
+	// 재고 리스트 조회 (Cri - 페이징)
+	@Override
+	public List<StockVO> stockListCriSelect(Criteria cri) throws Exception {
+		logger.debug(" stockListCriSelect(Criteria cri) 호출 ");
+		return sqlSession.selectList(NAMESPACE + ".selectStockListCri", cri);
+	}
+
+	// 총 글 개수 계산
+	@Override
+	public int stockListCount() throws Exception {
+		logger.debug(" boardListCount() 호출 ");
+		return sqlSession.selectOne(NAMESPACE + ".totalCount");
 	}
 }

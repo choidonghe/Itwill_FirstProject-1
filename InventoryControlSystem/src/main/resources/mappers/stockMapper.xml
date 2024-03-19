@@ -25,5 +25,38 @@
 	inner join category
 	on stock.category = category.category_code
 	</select>
+	
+		<!-- 글 목록 조회(페이징처리) -->
+	<select id = "selectStockListPage" resultType = "StockVO">
+		<![CDATA[
+		select stock.pno, stock.warehouse_code, stock.count,
+		product.pname, product.company, category.category
+		from stock
+		inner join product
+		on stock.pno=product.pno
+		inner join category
+		on stock.category = category.category_code
+		where stock.pno > 0 order by stock.pno desc limit #{page} , 10
+		]]>
+	</select>
+	
+		<!-- 글 목록 조회(페이징처리-Cri) -->
+	<select id = "selectStockListCri" resultType = "StockVO">
+		<![CDATA[
+		select stock.pno, stock.warehouse_code, stock.count,
+		product.pname, product.company, category.category
+		from stock
+		inner join product
+		on stock.pno=product.pno
+		inner join category
+		on stock.category = category.category_code
+		where stock.pno > 0 order by stock.pno desc limit #{startPage} , #{pageSize}
+		]]>
+	</select>
+	
+	<select id = "totalCount" resultType = "int">
+		select count(pno) from stock
+	</select>
+	
 	  
 </mapper>
