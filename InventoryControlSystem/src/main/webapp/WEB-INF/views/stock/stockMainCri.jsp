@@ -66,24 +66,52 @@
 					    </div>
 					</div>
 				
-			<!-- 한 페이지에 표시할 항목 수 스크립트 추가 -->	
-			<script>
-			    function changePageSize() {
-			        var selectedPageSize = document.getElementById("pageSizeSelect").value;
-			        location.href = "/stock/stockMainCri?page=1&pageSize=" + selectedPageSize;
-			    }
-			</script>
+					<!-- 한 페이지에 표시할 항목 수 스크립트 추가 -->	
+					<script>
+					    function changePageSize() {
+					        var selectedPageSize = document.getElementById("pageSizeSelect").value;
+					        location.href = "/stock/stockMainCri?page=1&pageSize=" + selectedPageSize;
+					    }
+					</script>
+				</div>
 			<!-- 한 페이지에 표시할 항목 수 스크립트 추가 -->
 				
-				<div class="col-sm-6">
-					<div id="example1_filter" class="dataTables_filter">
-						<label>검색 : <input type="search"
-							class="form-control input-sm" placeholder="입력하세요"
-							aria-controls="example1">
-						</label>
-					</div>
-				</div>
+				
+			<!-- 검색창 추가 -->
+			<div class="form-group" data-select2-id="37">
+			    <form id="searchForm" action="/stock/search" method="get"> <!-- 수정된 부분 : 검색을 위한 form 추가 -->
+			        <table>
+			            <tr>
+			                <td>
+			                    <select id="categorySelect" name="category" class="form-control select2 select2-hidden-accessible"
+			                            style="width: 100%; margin-bottom: 5px;" data-select2-id="1" tabindex="-1"
+			                            aria-hidden="true">
+			                        <option value="" selected="selected">전체</option>
+			                        <option value="pno">제품코드</option>
+			                        <option value="category">카테고리</option>
+			                        <option value="pname">품목명</option>
+			                        <option value="company">제조회사</option>
+			                        <option value="warehouse_code">창고위치</option>
+			                    </select>
+			                </td>
+			                <td>
+			                    <input type="text" id="searchInput" name="keyword" class="form-control" placeholder="검색어 입력"
+			                           style="margin-bottom: 5px;">
+			                </td>
+			                <td>
+			                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"
+			                            style="margin-left: 3px; margin-bottom: 5px;">
+			                        <i class="fa fa-search"></i>
+			                    </button>
+			                </td>
+			            </tr>
+			        </table>
+			    </form>
 			</div>
+			<!-- 검색창 추가 -->
+				
+				
+
 			<div class="row">
 				<div class="col-sm-12">
 					<table id="example1"
@@ -153,16 +181,14 @@
 			</div>
 			<div class="row">
                 <div class="col-sm-5">
-				 <c:choose>
-				    <c:when test="${param.page * param.pageSize >= pageVO.totalCount}">
-				    총 ${pageVO.totalCount}개의 항목 중 ${(param.page - 1) * param.pageSize + 1}번 부터 
-				    ${pageVO.totalCount}번까지 표시 중
-				    </c:when>
-				    <c:otherwise>
-				    총 ${pageVO.totalCount}개의 항목 중 ${(param.page * param.pageSize) - param.pageSize + 1}번 부터 
-				    ${param.page * param.pageSize}번까지 표시 중
-				    </c:otherwise>
-				</c:choose>
+					<c:choose>
+					    <c:when test="${param.page * param.pageSize >= pageVO.totalCount}">
+					        총 ${pageVO.totalCount}개의 항목 중 ${(param.page - 1) * param.pageSize + 1}번 부터 ${pageVO.totalCount}번까지 표시 중
+					    </c:when>
+					    <c:otherwise>
+					        총 ${pageVO.totalCount}개의 항목 중 ${(param.page * param.pageSize) - param.pageSize + 1}번 부터 ${param.page * param.pageSize}번까지 표시 중
+					    </c:otherwise>
+					</c:choose>
                 </div>
                 <div class="col-sm-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">

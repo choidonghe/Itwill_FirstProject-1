@@ -26,7 +26,7 @@
 	on stock.category = category.category_code
 	</select>
 	
-		<!-- 글 목록 조회(페이징처리) -->
+	<!-- 글 목록 조회(페이징처리) -->
 	<select id = "selectStockListPage" resultType = "StockVO">
 		<![CDATA[
 		select stock.pno, stock.warehouse_code, stock.count,
@@ -40,7 +40,7 @@
 		]]>
 	</select>
 	
-		<!-- 글 목록 조회(페이징처리-Cri) -->
+	<!-- 글 목록 조회(페이징처리-Cri) -->
 	<select id = "selectStockListCri" resultType = "StockVO">
 		<![CDATA[
 		select stock.pno, stock.warehouse_code, stock.count,
@@ -54,9 +54,36 @@
 		]]>
 	</select>
 	
+	<!-- 총 글 개수 조회 -->
 	<select id = "totalCount" resultType = "int">
 		select count(pno) from stock
 	</select>
+	
+	
+	<!-- 	검색 기능 (실험) -->
+	<select id = "getListPaging" resultType = "StockVO">
+		SELECT stock.pno, stock.warehouse_code, stock.count,
+		product.pname, product.company, category.category
+		FROM stock
+		INNER JOIN product 
+		ON stock.pno = product.pno
+		INNER JOIN category 
+		ON product.category_code = category.category_code
+		<if test = "keyword != null">
+		WHERE CONCAT(stock.pno, stock.warehouse_code, 
+		product.pname, product.company, category.category) 
+		LIKE '%#{keyword}%'
+		</if>
+		order by pno desc
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	  
 </mapper>

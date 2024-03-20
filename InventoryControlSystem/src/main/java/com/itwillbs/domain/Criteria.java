@@ -5,17 +5,28 @@ public class Criteria {
 	
 	private int page;
 	private int pageSize;
+	private String keyword; // 검색어 키워드
+	
 	
 	public Criteria() {
 		this.page = 1;
 		this.pageSize = 10;
 	}
 	
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	
 	@Override
 	public String toString() {
-		return "Criteria [page=" + page + ", pageSize=" + pageSize + "]";
+		return "Criteria [page=" + page + ", pageSize=" + pageSize + ", keyword=" + keyword + "]";
 	}
-	
+
 	// 페이지 정보를 인덱스로 변경하는 메서드 -----------------------------------
 	public int getStartPage() {
 		return (this.page - 1 ) * pageSize;
@@ -45,5 +56,17 @@ public class Criteria {
 		}
 		this.pageSize = pageSize;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
