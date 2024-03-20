@@ -82,7 +82,40 @@ public class MainDAOImpl implements MainDAO {
 	public List<String> getReleaseDay(String month) throws Exception {
 		logger.debug(" getReleaseDay(String month) 실행 : "+month);
 		
-		return sql.selectList(NAMESPACE+".getReleaseMonth", month );
+		List<String> list = sql.selectList(NAMESPACE+".getReleaseMonth", month );
+		List<String> newList = new ArrayList<String>();
+		
+		if(!list.isEmpty()) {
+			
+			for(int i = 0; i<list.size(); i++) {
+				String pDay =  "'"+list.get(i)+"'";
+				logger.debug("pDay"+pDay);
+				newList.add(pDay);
+			}
+			
+		}
+		logger.debug("newList"+newList);
+		return newList;
+	}
+
+	@Override
+	public List<String> getStoreDay(String month) throws Exception {
+		logger.debug(" getStoreDay(String month) 실행 : "+month);
+		
+		List<String> list = sql.selectList(NAMESPACE+".getStoreMonth", month );
+		List<String> newList = new ArrayList<String>();
+		
+		if(!list.isEmpty()) {
+			
+			for(int i = 0; i<list.size(); i++) {
+				String pDay =  "'"+list.get(i)+"'";
+				logger.debug("pDay"+pDay);
+				newList.add(pDay);
+			}
+			
+		}
+		logger.debug("newList"+newList);
+		return newList;
 	}
 	
 	

@@ -2,12 +2,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="./include/header.jsp"%>
 release : ${releaseList }
+store : ${storeList }
 <div id="parent">
 	<!-- calendar 태그 -->
 	<div id='calendar-container'>
 		<div id='calendar'></div>
 	</div>
 	<script>
+		
 		(function() {
 			$(function() {
 				// calendar element 취득
@@ -54,32 +56,39 @@ release : ${releaseList }
 								}
 								calendar.unselect()
 							},
-							events: [
-						          {
-						            title: '입고',
-						            start: '2024-03-17',
-						            color: 'orange',
-						          },
-						          {
-						            title: '출고',
-						            start: '2024-03-19',
-						          },
-						          {
-						            title: '입고',
-						            start: '2024-03-18',
-						            color:'orange',
-						          },
-						          {
-						            title: '출고',
-						            start: '2024-03-03'
-						          }
-						          ]
+							
+							
+							events: getList()
 
 						});
 				// 캘린더 랜더링
 				calendar.render();
 			});
 		})();
+		
+		var releaseList = ${releaseList};
+		var storeList = ${storeList};
+		
+		function getList(){
+		    var events = [];
+		    for(let i = 0; i < releaseList.length; i++){
+		        events.push({
+		            title: '출고',
+		            start: releaseList[i],
+		            color: 'orange'
+		         
+		        });
+		    }
+		    for(let i = 0; i < storeList.length; i++){
+		        events.push({
+		            title: '입고',
+		            start: storeList[i],
+		        });
+		    }
+		    return events;
+		};
+		
+		console.log(getList())
 	</script>
 
 	<!-- 차트 -->
@@ -110,7 +119,8 @@ release : ${releaseList }
 				}
 			}
 		});
-	</script>
+		</script>
+
 	
 	<!-- 긴급발주 -->
 	<div id="stock" class="box" style="margin-top: 30px">

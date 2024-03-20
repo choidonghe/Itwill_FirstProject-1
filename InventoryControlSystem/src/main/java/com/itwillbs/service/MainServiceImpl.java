@@ -53,6 +53,14 @@ public class MainServiceImpl implements MainService {
 		
 	}
 
+
+	@Override
+	public List<String> storeListGet() throws Exception {
+		logger.debug(" storeListGet() 호출");
+		
+		return mdao.getStoreDay(mdao.getTodayMonth());
+	}
+
 	
 	
 	

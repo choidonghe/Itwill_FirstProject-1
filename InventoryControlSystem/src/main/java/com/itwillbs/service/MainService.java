@@ -10,4 +10,7 @@ public interface MainService {
 	
 	public List<String> releaseListGet() throws Exception;
 
+	public List<String> storeListGet() throws Exception;
+	
+	
 }// service

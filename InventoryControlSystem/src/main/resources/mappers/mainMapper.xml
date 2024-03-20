@@ -17,5 +17,10 @@
 		GROUP BY CAST(release_date AS DATE)
 	</select>
 
+	<select id="getStoreMonth" resultType="String">	
+		SELECT CAST(store_date AS DATE) FROM store  
+		WHERE store_date LIKE CONCAT('%',#{month},'%') 
+		GROUP BY CAST(store_date AS DATE)
+	</select>
 	
 </mapper>

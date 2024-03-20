@@ -13,6 +13,6 @@ public interface MainDAO {
 	
 	public List<String> getReleaseDay(String month) throws Exception;
 
-	
+	public List<String> getStoreDay(String month) throws Exception;	
 
 }// dao

@@ -104,10 +104,13 @@ public class HomeController {
 		List<String> sellList = mainService.sellTotalGet();
 		List<String> dayList = mainService.dayListGet();
 		List<String> releaseList = mainService.releaseListGet();
+		List<String> storeList = mainService.storeListGet();
 		
 		model.addAttribute("sellList", sellList);
 		model.addAttribute("dayList", dayList);
 		model.addAttribute("releaseList", releaseList);
+		model.addAttribute("storeList", storeList);
+		
 		
 		//페이지 이동
 		
