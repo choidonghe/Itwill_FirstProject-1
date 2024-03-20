@@ -25,14 +25,26 @@
 		<result property="korname" column="korname"></result>
 	</resultMap>
 	
-	<select id="selectStoreIngList" parameterType="storeVO" resultType="storeVO">
+	<select id="selectStoreIngList" parameterType="storeVO" resultMap="storeVO">
 		select c.korname, s.divcode, s.pno, s.pname, s.count, s.category, s.price, s.store_date, s.update_date, s.account_code 
 		from store s 
 		join code c 
-		on s.divcode = c.divcode
+		on s.divcode = c.divcode 
+		where s.divcode=1
 	</select>
 	
+	<select id="selectCodeList" resultType="codeVO">
+		select * from code where divcode=1 or divcode=2 or divcode=3
+	</select>
 	
+	<update id="updateCode">
+		update store set divcode = #{divcode} 
+		where pno = #{pno}
+	</update>
 	
+	<select id="selectStore" resultType="StoreVO">
+		select * from store 
+		where pno = #{pno}
+	</select>
 	
 </mapper>

@@ -1,6 +1,7 @@
 package com.itwillbs.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -16,6 +17,6 @@ public class StoreVO {
 	private Timestamp update_date;
 	private String account_code;
 	
-	private CodeVO codeVO;
+	private List<CodeVO> codeVO;
 	
 }
