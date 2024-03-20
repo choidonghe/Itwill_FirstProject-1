@@ -25,7 +25,7 @@ public class InspectionController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(InspectionController.class);
 	
-	// 검수 메인 페이지
+	// 입고 검수 메인 페이지
 	// http://localhost:8088/inspec/inspectionMain
 	@RequestMapping(value = "/inspectionMain", method = RequestMethod.GET)
 	public void inspectionMain(Model model) throws Exception{
@@ -53,7 +53,25 @@ public class InspectionController {
 		return "redirect:/inspec/inspectionMain";
 	}
 	
+	// 검수 상태별 페이지 (미검수)
+	// http://local:8088/inspec/inspectionDiv2
+	@RequestMapping(value = "/inspectionDiv2", method = RequestMethod.POST)
+	public void inspectionDiv2(Model model) throws Exception{
+		logger.debug(" inspectionDiv2() 호출 ");
+		List<InspectionVO> inspectionList = iService.getInspectionDiv2();
+		model.addAttribute("inspectionList",inspectionList);
+	}
 	
+	// 검수 상태별 페이지 (검수완)
+	// http://local:8088/inspec/inspectionDiv3
+	@RequestMapping(value = "/inspectionDiv3", method = RequestMethod.POST)
+	public void inspectionDiv3(Model model) throws Exception{
+		logger.debug(" inspectionDiv3() 호출 ");
+		List<InspectionVO> inspectionList = iService.getInspectionDiv3();
+		model.addAttribute("inspectionList",inspectionList);
+	}
 	
+	// 입고검수는 요까지
+/////////////////////////////////////////////////////////////////////////////////////////	
 	
 }

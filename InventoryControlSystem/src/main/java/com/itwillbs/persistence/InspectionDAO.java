@@ -18,5 +18,14 @@ public interface InspectionDAO {
 	// 검수 remain_Quantity 업데이트
 	public void inspectionRemainUpdate(InspectionVO vo) throws Exception;
 	
+	// 검수목록 현황별 페이지 Div2 검수
+	public List<InspectionVO> div2() throws Exception;
+	
+	// 검수목록 현황별 페이지 Div3 완료
+	public List<InspectionVO> div3() throws Exception;
+	
+	
+	
+	
 	
 }

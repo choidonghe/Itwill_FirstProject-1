@@ -37,14 +37,11 @@ th {
 	 <h1>입고 검수 현황</h1>
 
 	<div class="button-container">
-		<form action="/inspec/inspectionMain" method="GET">
-			<button type="submit">전체</button>
-		</form>
-		<form action="/inspec/inspectionDiv2" method="post">
-			<button type="submit" value="div2">미검수</button>
+		<form action="/inspec/inspectionMain" method="get">
+			<button type="submit" name="all" value="all">전체</button>
 		</form>
 		<form action="/inspec/inspectionDiv3" method="post">
-		<button type="submit" value="div3">검수완료</button>
+			<button type="submit" name="status" value="검수완료">검수완료</button>
 		</form>
 	</div>
 

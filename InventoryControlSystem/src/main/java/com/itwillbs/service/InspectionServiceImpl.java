@@ -42,4 +42,16 @@ public class InspectionServiceImpl implements InspectionService{
 		
 	}
 
+	@Override
+	public List<InspectionVO> getInspectionDiv2() throws Exception {
+		logger.debug(" List<InspectionVO> getInspectionDiv2() 호출 ");
+		return idao.div2();
+	}
+
+	@Override
+	public List<InspectionVO> getInspectionDiv3() throws Exception {
+		logger.debug(" List<InspectionVO> getInspectionDiv3() 호출 ");
+		return idao.div3();
+	}
+
 }

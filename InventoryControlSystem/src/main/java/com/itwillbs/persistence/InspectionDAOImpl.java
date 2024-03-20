@@ -46,6 +46,18 @@ public class InspectionDAOImpl implements InspectionDAO{
 		sqlSession.update(NAMESPACE+".updateRemain",vo);
 	}
 
+	@Override
+	public List<InspectionVO> div2() throws Exception {
+		logger.debug(" div2 () 입고검수 호출 ");
+		return sqlSession.selectList(NAMESPACE+".inspectionDiv2");
+	}
+
+	@Override
+	public List<InspectionVO> div3() throws Exception {
+		logger.debug(" div3() 입고 검수 호출 ");
+		return sqlSession.selectList(NAMESPACE+".inspectionDiv3");
+	}
+
 	
 	
 	
