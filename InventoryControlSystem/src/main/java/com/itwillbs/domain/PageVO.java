@@ -44,7 +44,10 @@ public class PageVO {
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 		logger.debug(" 페이징처리에 필요한 정보를 계산 - 시작 ");
+		
 		pageCalc();
+		
+		logger.debug(" 페이징처리에 필요한 정보를 계산 - 끝");
 	}
 
 	public int getStartPage() {

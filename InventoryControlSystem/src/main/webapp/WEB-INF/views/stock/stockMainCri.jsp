@@ -58,7 +58,7 @@
 					<div class="dataTables_length" id="example1_length">
 						<label>Show <select name="example1_length"
 							aria-controls="example1" class="form-control input-sm">
-							<option value="10">10</option>
+								<option value="10">10</option>
 								<option value="25">25</option>
 								<option value="50">50</option>
 								<option value="100">100</option></select> entries
@@ -141,42 +141,49 @@
 					</table>
 				</div>
 			</div>
-			
-			<!-- 여기서부터 다시 작업 시작해야함@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 			<div class="row">
-				<div class="col-sm-5">
-					<div class="dataTables_info" id="example1_info" role="status"
-						aria-live="polite">Showing 1 to 10 of 57 entries</div>
-				</div>
-				<div class="col-sm-7">
-					<div class="dataTables_paginate paging_simple_numbers"
-						id="example1_paginate">
-						<ul class="pagination">
-							<li class="paginate_button previous disabled"
-								id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0"
-								tabindex="0">이전</a></li>
-							<li class="paginate_button active"><a href="#"
-								aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li>
-							<li class="paginate_button "><a href="#"
-								aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li>
-							<li class="paginate_button "><a href="#"
-								aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li>
-							<li class="paginate_button "><a href="#"
-								aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li>
-							<li class="paginate_button "><a href="#"
-								aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li>
-							<li class="paginate_button "><a href="#"
-								aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li>
-							<li class="paginate_button next" id="example1_next"><a
-								href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">다음</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                <div class="col-sm-5">
+				 <c:choose>
+				    <c:when test="${param.page * param.pageSize >= pageVO.totalCount}">
+				    총 ${pageVO.totalCount}개의 항목 중 ${(param.page - 1) * param.pageSize + 1}번 부터 
+				    ${pageVO.totalCount}번까지 표시 중
+				    </c:when>
+				    <c:otherwise>
+				    총 ${pageVO.totalCount}개의 항목 중 ${(param.page * param.pageSize) - param.pageSize + 1}번 부터 
+				    ${param.page * param.pageSize}번까지 표시 중
+				    </c:otherwise>
+				</c:choose>
+                </div>
+                <div class="col-sm-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                        <ul class="pagination">
+                        <c:if test="${pageVO.prev }">
+                            <li class="paginate_button previous" id="example1_previous">
+                            <a href="/stock/stockMainCri?page=${pageVO.startPage -1 }&pageSize=${param.pageSize}" 
+                            aria-controls="example1" data-dt-idx="0"
+                            tabindex="0">이전</a></li>
+                        </c:if>
+
+                        <c:forEach var = "idx" begin= "${pageVO.startPage }"
+                        end= "${pageVO.endPage}" step="1">
+                            <li ${pageVO.cri.page == idx? "class='active'":""}>
+                            <a href="/stock/stockMainCri?page=${idx }&pageSize=${param.pageSize}" 
+                            aria-controls="example1" data-dt-idx="1" tabindex="0">${idx }</a></li>
+                        </c:forEach>
+                            <c:if test="${pageVO.next }">
+                            <li class="paginate_button next" id="example1_next"><a
+                                href="/stock/stockMainCri?page=${pageVO.endPage + 1 }&pageSize=${param.pageSize}" 
+                                aria-controls="example1" data-dt-idx="7" tabindex="0">다음</a></li>
+                            </c:if>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
+
 
 
 
