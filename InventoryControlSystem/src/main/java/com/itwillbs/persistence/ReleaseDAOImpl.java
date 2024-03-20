@@ -28,6 +28,14 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 		
 		return sqlSession.selectList(NAMESPACE+".getReleaseList", vo);
 	}
+
+	@Override
+	public List<ReleaseVO> listInfoRelease(ReleaseVO vo) {
+		
+		return sqlSession.selectList(NAMESPACE+".getReleaseInfoList", vo);
+	}
+	
+	
 	
 	
 	

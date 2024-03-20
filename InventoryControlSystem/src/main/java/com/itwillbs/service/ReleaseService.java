@@ -8,5 +8,8 @@ public interface ReleaseService {
 
 	public List<ReleaseVO> releaseList(ReleaseVO vo);
 	
+	public List<ReleaseVO> releaseInfoList(ReleaseVO vo);
+	
+	
 	
 }

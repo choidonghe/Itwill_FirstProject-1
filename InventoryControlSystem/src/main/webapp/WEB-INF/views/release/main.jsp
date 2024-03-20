@@ -7,7 +7,11 @@
 
 	<h1>main.jsp</h1>
 	
-	${List}
+	${List} <br>
+	
+	<%-- <form role="form" action="" method="get" class="fm">	
+		<input type="hidden" name="divcode" value="${vo.divcode}">
+	</form> --%>
 	
 	<table border="1">
 		<tr>
@@ -15,33 +19,39 @@
 			<td>id</td>
 			<td>pno</td>
 			<td>pname</td>
-			<td>category</td>
 			<td>release_date</td>
-			<td>update_date</td>
-			<td>price</td>
 			<td>order_date</td>
 			<td>order_count</td>
-			<td>delivery_company</td>
-			<td>delivery_phone</td>
-			<td>delivery_manager</td>
 		</tr>
 		
 		<c:forEach var="List" items="${List}">
 			<tr>
 				<td>${List.divcode}</td>
 				<td>${List.id}</td>
-				<td>${List.pno}</td>
+				<td>
+				<a href="/release/information?divcode=${List.divcode}">${List.pno}</a>
+				</td>
 				<td>${List.pname}</td>
-				<td>${List.category}</td>
 				<td>${List.release_date}</td>
-				<td>${List.update_date}</td>
-				<td>${List.price}</td>
 				<td>${List.order_date}</td>
-				<td>${List.order_count}</td>
-				<td>${List.delivery_phone}</td>
-				<td>${List.delivery_manager}</td>
+				<td><input type="text" name="order_count"></td>
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<!-- <script>
+	$(document).ready(function(){
+		
+		var formObj = $("form[role='form']");
+		
+		$(".a").click(function(){
+			alert(" 상세정보  ! ")
+			
+			formObj.attr("action","/release/information");
+			formObj.submit();
+		});
+	});
+	
+	</script> -->
 	
 <%@ include file="../include/footer.jsp"%>

@@ -25,6 +25,14 @@ public class ReleaseServiceImpl implements ReleaseService{
 		
 		return rdao.listRelease(vo);
 	}
+
+	@Override
+	public List<ReleaseVO> releaseInfoList(ReleaseVO vo) {
+		
+		return rdao.listInfoRelease(vo);
+	}
+	
+	
 	
 	
 	

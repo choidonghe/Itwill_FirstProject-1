@@ -10,6 +10,10 @@
 		select * from `release`
 	</select>
 	
+	<select id="getReleaseInfoList" resultType="ReleaseVO">
+		select * from `release`
+		where divcode=#{divcode}
+	</select>
 	
 	
 	</mapper>
