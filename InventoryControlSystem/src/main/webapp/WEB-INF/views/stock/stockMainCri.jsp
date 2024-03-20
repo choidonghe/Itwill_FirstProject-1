@@ -49,26 +49,36 @@
 	<div class="box-header">
 		<h3 class="box-title">현재 재고</h3>
 	</div>
-
-	<div class="box-body">
-		<div id="example1_wrapper"
-			class="dataTables_wrapper form-inline dt-bootstrap">
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="dataTables_length" id="example1_length">
-						<label>Show <select name="example1_length"
-							aria-controls="example1" class="form-control input-sm">
-								<option value="10">10</option>
-								<option value="25">25</option>
-								<option value="50">50</option>
-								<option value="100">100</option></select> entries
-						</label>
+		<div class="box-body">
+			<div id="example1_wrapper"
+				class="dataTables_wrapper form-inline dt-bootstrap">
+				<div class="row">
+					<div class="col-sm-6">
+	    				<div class="dataTables_length" id="example1_length">
+	        				<label>한 페이지에 표시할 항목 수 :
+	            				<select name="pageSize" id="pageSizeSelect" onchange="changePageSize()">
+					                <option value="10" ${param.pageSize == 10 ? 'selected' : ''}>10</option>
+					                <option value="25" ${param.pageSize == 25 ? 'selected' : ''}>25</option>
+					                <option value="50" ${param.pageSize == 50 ? 'selected' : ''}>50</option>
+					                <option value="100" ${param.pageSize == 100 ? 'selected' : ''}>100</option>
+	            				</select>
+	        				</label>
+					    </div>
 					</div>
-				</div>
+				
+			<!-- 한 페이지에 표시할 항목 수 스크립트 추가 -->	
+			<script>
+			    function changePageSize() {
+			        var selectedPageSize = document.getElementById("pageSizeSelect").value;
+			        location.href = "/stock/stockMainCri?page=1&pageSize=" + selectedPageSize;
+			    }
+			</script>
+			<!-- 한 페이지에 표시할 항목 수 스크립트 추가 -->
+				
 				<div class="col-sm-6">
 					<div id="example1_filter" class="dataTables_filter">
 						<label>검색 : <input type="search"
-							class="form-control input-sm" placeholder=""
+							class="form-control input-sm" placeholder="입력하세요"
 							aria-controls="example1">
 						</label>
 					</div>
@@ -85,7 +95,7 @@
 									rowspan="1" colspan="1" aria-sort="ascending"
 									aria-label="Rendering engine: activate to sort column descending"
 									style="width: 297.469px;">
-									제품 코드</th>
+									제품 코드(클릭 시 상세보기)</th>
 								<th class="sorting" tabindex="0" aria-controls="example1"
 									rowspan="1" colspan="1"
 									aria-label="Browser: activate to sort column ascending"
