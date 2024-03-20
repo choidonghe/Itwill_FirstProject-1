@@ -3,50 +3,56 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  <mapper namespace="com.itwillbs.mapper.InspectionMapper">
-  	<resultMap type="com.itwillbs.domain.InspectionVO" id="inspection">
-  		<result property="pno" column="pno"/>
-  		<result property="id" column="id"/>
-  		<result property="divcode" column="divcode"/>
-  		<result property="quantity" column="quantity"/>
-  		<result property="finish_quantity" column="finish_quantity"/>
-  		<result property="remain_quantity" column="remain_quantity"/>
-  		<result property="regdate" column="regdate"/>
-  		<result property="update_date" column="update_date"/>
-  		<result property="warehouse_code" column="warehouse_code"/>
-  	</resultMap>
-  	
-  	
-  	<!-- 검수목록 조회 -->
-  	<select id="selectInspection" resultType="InspectionVO">
-  		select * from inspection order by regdate desc
-  	</select>
-  	
-  	
-  	<!-- 검수현황본문 조회 -->
-  	<select id="inspectionRead" resultType="InspectionVO" resultMap="inspection">
-  		select * from inspection where pno=#{pno}
-  	</select>
-  	
-  	
-  	 <!-- 검수현황업데이트 -->
+<mapper namespace="com.itwillbs.mapper.InspectionMapper">
+	<resultMap type="com.itwillbs.domain.InspectionVO"
+		id="inspection">
+		<result property="pno" column="pno" />
+		<result property="id" column="id" />
+		<result property="divcode" column="divcode" />
+		<result property="quantity" column="quantity" />
+		<result property="finish_quantity" column="finish_quantity" />
+		<result property="remain_quantity" column="remain_quantity" />
+		<result property="regdate" column="regdate" />
+		<result property="update_date" column="update_date" />
+		<result property="warehouse_code" column="warehouse_code" />
+	</resultMap>
+
+
+	<!-- 검수목록 조회 -->
+	<select id="selectInspection" resultType="InspectionVO">
+		select * from inspection order by regdate desc
+	</select>
+
+
+	<!-- 검수현황본문 조회 -->
+	<select id="inspectionRead" resultType="InspectionVO"
+		resultMap="inspection">
+		select * from inspection where pno=#{pno}
+	</select>
+
+
+	<!-- 검수현황업데이트 -->
 	<update id="updateInspection">
-    update projectdb.inspection
-    set divcode = #{divcode},
-        id = #{id},
-        finish_quantity = #{finish_quantity},
-        update_date = now(),
-        remain_quantity = (#{quantity} - #{finish_quantity}),
-        warehouse_code = #{warehouse_code}
-    where pno = #{pno}
+		update projectdb.inspection
+		set divcode = #{divcode},
+		id = #{id},
+		finish_quantity = #{finish_quantity},
+		update_date = now(),
+		remain_quantity = (#{quantity} - #{finish_quantity}),
+		warehouse_code = #{warehouse_code}
+		where pno = #{pno}
 	</update>
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  </mapper>
+
+	<!-- finish양 quantity에서 빼기 -->
+	<update id="updateRemain">
+    	update projectdb.inspection
+    	set remain_quantity = (#{quantity} - #{finish_quantity})
+    	where pno = #{pno}
+	</update>
+
+
+
+
+
+
+</mapper>

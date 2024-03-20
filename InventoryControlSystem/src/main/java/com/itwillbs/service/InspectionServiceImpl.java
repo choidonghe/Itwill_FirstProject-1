@@ -36,4 +36,10 @@ public class InspectionServiceImpl implements InspectionService{
 		idao.inspectionUpdate(vo);
 	}
 
+	@Override
+	public void updateRemain(InspectionVO vo) throws Exception {
+		logger.debug(" updateRemain() 실행 ");
+		
+	}
+
 }

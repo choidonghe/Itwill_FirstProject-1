@@ -6,25 +6,47 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+.button-container {
+	display: flex; /* 가로 정렬을 위해 flexbox 사용 */
+}
+
+.button-container button {
+	margin-right: 10px; /* 버튼 사이 간격을 조절 */
+}
+</style>
 </head>
 <div class="box">
 	<div class="box-header">
 	</div>
 	
 	 <h1>검수 현황</h1>
+
+	<div class="button-container">
+		<form action="/inspec/inspectionMain" method="get">
+			<button type="submit" name="all" value="all">전체</button>
+		</form>
+		<form action="/inspec/inspectionDiv" method="post">
+			<button type="submit" name="status" value="미검수">미검수</button>
+			<button type="submit" name="status" value="검수완료">검수완료</button>
+		</form>
+	</div>
+
+	<br>
     <table>
         <thead>
             <tr>
@@ -33,7 +55,7 @@
                 <th>상태</th>
                 <th>총 검수량</th>
                 <th>남은 검수량</th>
-                <th>등록날짜</th>
+                <th>입고날짜</th>
                 <th>수정날짜</th>
             </tr>
        		<c:forEach var="inspectionList" items="${inspectionList }">

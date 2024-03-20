@@ -15,6 +15,10 @@ public interface InspectionService {
 	// 검수 업데이트 동작
 	public void modify(InspectionVO vo) throws Exception;
 	
+	// 검수 remain_quantity 동작
+	public void updateRemain(InspectionVO vo) throws Exception;
+	
+
 	
 	
 	

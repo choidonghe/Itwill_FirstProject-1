@@ -49,6 +49,7 @@ public class InspectionController {
 	public String inspectionReadPOST(String pno, Model model,InspectionVO vo) throws Exception{
 		logger.debug(" inspectionReadPOST() 호출 ");
 		iService.modify(vo);
+		iService.updateRemain(vo);
 		return "redirect:/inspec/inspectionMain";
 	}
 	

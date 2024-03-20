@@ -37,6 +37,13 @@ public class InspectionDAOImpl implements InspectionDAO{
 	public void inspectionUpdate(InspectionVO vo) throws Exception {
 		logger.debug(" inspectionUpdate(InspectionVO vo) 호출 ");
 		sqlSession.update(NAMESPACE+".updateInspection", vo);
+		
+	}
+
+	@Override
+	public void inspectionRemainUpdate(InspectionVO vo) throws Exception {
+		logger.debug(" inspectionRemainUpdate() 실행 ");
+		sqlSession.update(NAMESPACE+".updateRemain",vo);
 	}
 
 	

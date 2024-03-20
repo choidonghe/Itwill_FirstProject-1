@@ -35,7 +35,7 @@
             <select name="divcode" required>
                 <option value="7">입고검수불량</option>
                 <option value="8">입고검수양호</option>
-                <option value="1">입고예정</option>
+                <option value="3">입고완료</option>
             </select>
         </td>
     </tr>

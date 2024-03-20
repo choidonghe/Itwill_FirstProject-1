@@ -15,4 +15,8 @@ public interface InspectionDAO {
 	// 검수 업데이트 
 	public void inspectionUpdate(InspectionVO vo) throws Exception;
 	
+	// 검수 remain_Quantity 업데이트
+	public void inspectionRemainUpdate(InspectionVO vo) throws Exception;
+	
+	
 }
