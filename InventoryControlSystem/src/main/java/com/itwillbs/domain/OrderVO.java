@@ -3,6 +3,6 @@ package com.itwillbs.domain;
 import lombok.Data;
 
 @Data
-public class OrederVO {
+public class OrderVO {
 
 }
