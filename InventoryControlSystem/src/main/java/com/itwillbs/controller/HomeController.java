@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.itwillbs.domain.EmergencyOrderVO;
+import com.itwillbs.domain.MainCriteria;
 import com.itwillbs.domain.MemberVO;
+import com.itwillbs.domain.NoticeVO;
+import com.itwillbs.domain.MainPageVO;
 import com.itwillbs.service.MainService;
 import com.itwillbs.service.MemberService;
 
@@ -98,7 +102,7 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void mainGET(Model model) throws Exception{
+	public void mainGET(MainCriteria oCri,MainCriteria nCri, Model model) throws Exception{
 		logger.debug(" main() 실행");
 		
 		List<String> sellList = mainService.sellTotalGet();
@@ -106,15 +110,42 @@ public class HomeController {
 		List<String> releaseList = mainService.releaseListGet();
 		List<String> storeList = mainService.storeListGet();
 		
+		// 긴급발주ListGET
+		MainPageVO orderPageVO = new MainPageVO();
+		orderPageVO.setCri(oCri);
+		orderPageVO.setTotalCount(mainService.getOrderListCount()); // 총 개수 직접 계산
+		
+		List<EmergencyOrderVO> ergList = mainService.ergOrederGet(oCri);
+		// 긴급발주 페이징정보
+		model.addAttribute("oCri", oCri);
+		model.addAttribute("orderPageVO", orderPageVO);
+		
+		// 공지사항ListGET
+		MainPageVO noticePageVO = new MainPageVO();
+		noticePageVO.setCri(nCri);
+		noticePageVO.setTotalCount(mainService.getNoticeListCount());
+		
+		List<NoticeVO> noList = mainService.noListGet(nCri);
+		
+		// 공지사항 페이징 정보
+		model.addAttribute("nCri", nCri);
+		model.addAttribute("noticePageVO", noticePageVO);
+		
+		// 데이터 저장
 		model.addAttribute("sellList", sellList);
 		model.addAttribute("dayList", dayList);
 		model.addAttribute("releaseList", releaseList);
 		model.addAttribute("storeList", storeList);
+		model.addAttribute("ergList", ergList);
+		model.addAttribute("noList", noList);
+		
+		
 		
 		
 		//페이지 이동
 		
 	}
+	
 	
 	
 } // controller

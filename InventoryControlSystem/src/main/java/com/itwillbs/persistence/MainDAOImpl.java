@@ -15,6 +15,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.EmergencyOrderVO;
+import com.itwillbs.domain.MainCriteria;
+import com.itwillbs.domain.NoticeVO;
+
 @Repository
 public class MainDAOImpl implements MainDAO {
 
@@ -118,6 +122,34 @@ public class MainDAOImpl implements MainDAO {
 		return newList;
 	}
 	
+	@Override
+	public List<EmergencyOrderVO> ergOrder(MainCriteria cri) throws Exception {
+		logger.debug(" ergOrder() 호출 ");
+		
+		return sql.selectList(NAMESPACE+".ergOrder",cri);
+		
+	}
+
+	@Override
+	public int boardCount() throws Exception {
+		logger.debug(" boardCount() 호출 ");
+		
+		return sql.selectOne(NAMESPACE+".orderTotalCount");
+	}
+
+	@Override
+	public int noticeCount() throws Exception {
+		logger.debug(" noticeCount() 호출 ");
+		
+		return sql.selectOne(NAMESPACE+".noticeTotalCount");
+	}
+
+	@Override
+	public List<NoticeVO> noticeBoard(MainCriteria cri) throws Exception {
+		logger.debug(" noticeBoard(MainCriteria cri) 호출 ");
+		
+		return sql.selectList(NAMESPACE+".noticeList", cri);
+	}
 	
 	
 	

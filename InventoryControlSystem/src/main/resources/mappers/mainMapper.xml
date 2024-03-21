@@ -23,4 +23,35 @@
 		GROUP BY CAST(store_date AS DATE)
 	</select>
 	
+	<select id="ergOrder" resultType="com.itwillbs.domain.EmergencyOrderVO">
+		SELECT p.pno, p.pname, s.count
+		FROM product p 
+		LEFT JOIN stock s
+		ON p.pno = s.pno
+		WHERE <![CDATA[ s.count < 5 ]]> 
+		limit #{startPage},#{pageSize};
+	</select>
+	
+	<select id="orderTotalCount" resultType="int">
+		SELECT count(p.pno) 
+		FROM product p 
+		LEFT JOIN stock s
+		ON p.pno = s.pno
+		WHERE <![CDATA[ s.count < 5 ]]>;
+	</select>
+	
+	<select id="noticeTotalCount" resultType="int">
+		SELECT count(bno) 
+		FROM notice
+	</select>
+	
+	<select id="noticeList" resultType="com.itwillbs.domain.NoticeVO">
+		<![CDATA[
+		select * from notice  
+		where bno > 0 
+		order by bno desc, regdate desc
+		limit #{startPage},#{pageSize}
+		]]>
+	</select>
+	
 </mapper>

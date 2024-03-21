@@ -2,7 +2,20 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="./include/header.jsp"%>
 release : ${releaseList }
+<br>
 store : ${storeList }
+<br>
+order : ${ergList }
+<br>
+notice : ${noList }
+<br>
+oCri : ${oCri }
+<br>
+nCri : ${nCri }
+<br>
+orderPageVO : ${orderPageVO }
+<br>
+noticePageVO : ${noticePageVO }
 <div id="parent">
 	<!-- calendar 태그 -->
 	<div id='calendar-container'>
@@ -59,7 +72,6 @@ store : ${storeList }
 							
 							
 							events: getList()
-
 						});
 				// 캘린더 랜더링
 				calendar.render();
@@ -121,7 +133,7 @@ store : ${storeList }
 		});
 		</script>
 
-	
+
 	<!-- 긴급발주 -->
 	<div id="stock" class="box" style="margin-top: 30px">
 		<div class="box-header">
@@ -136,8 +148,8 @@ store : ${storeList }
 				</ul>
 			</div>
 		</div>
-		
-		
+
+
 		<div class="box-body no-padding">
 			<table class="table">
 				<tbody>
@@ -146,48 +158,16 @@ store : ${storeList }
 						<th style="width: 200px">품목</th>
 						<th>잔여수량</th>
 					</tr>
-					<tr>
-						<td>코드번호</td>
-						<td>품목</td>
-						<td>수량</td>
-					</tr>
-					<tr>
-						<td>코드번호</td>
-						<td>품목</td>
-						<td>수량</td>
-					</tr>
-					<tr>
-						<td>코드번호</td>
-						<td>품목</td>
-						<td>수량</td>
-					</tr>
-					<tr>
-						<td>코드번호</td>
-						<td>품목</td>
-						<td>수량</td>
-					</tr>
-					<tr>
-						<td>코드번호</td>
-						<td>품목</td>
-						<td>수량</td>
-					</tr>
-					<tr>
-						<td>코드번호</td>
-						<td>품목</td>
-						<td>수량</td>
-					</tr>
-					<tr>
-						<td>코드번호</td>
-						<td>품목</td>
-						<td>수량</td>
-					</tr>
-					<tr>
-						<td>코드번호</td>
-						<td>품목</td>
-						<td>수량</td>
-					</tr>
-					
-					
+
+					<c:forEach var="list" items="${ergList }">
+						<tr>
+							<td>${list.pno }</td>
+							<td>${list.pname }</td>
+							<td>${list.count }</td>
+						</tr>
+					</c:forEach>
+
+
 				</tbody>
 			</table>
 		</div>
@@ -196,45 +176,59 @@ store : ${storeList }
 
 </div>
 
-<div class="col-xs-12">
-	<div class="box">
-		<div class="box-header">
-			<h3 class="box-title">공지사항</h3>
-			<div class="box-tools">
-				<div class="input-group input-group-sm hidden-xs" style="width: 150px;">
-					<input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-					<div class="input-group-btn">
-						<button type="submit" class="btn btn-default">
-							<i class="fa fa-search"></i>
-						</button>
-					</div>
+
+<div class="box-body" style="width: 1400px;">
+	<div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+		<div class="row">
+			<div class="col-sm-6"></div>
+			<div class="col-sm-6"></div>
+		</div>
+		<div class="row" style="background-color: white;">
+			<div class="col-sm-12">
+				<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+					<thead>
+					<tr role="row">
+							<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="3" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >공지사항</th>
+							
+					</tr>
+						<tr role="row">
+							<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">번호</th>
+							<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">제목</th>
+							<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">날짜</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach var="list" items="${noList }">
+						<tr>
+							<td style="width: 50px;"> ${list.bno }</td>
+							<td style="width: 1000px;"><a href="/main"> ${list.title } </a></td>
+							<td>${list.regdate }</td>
+
+						</tr>
+					</c:forEach>
+						
+					</tbody>
+					
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-5">
+				<div class="dataTables_info" id="example2_info" role="status" aria-live="polite"></div>
+			</div>
+			<div class="col-sm-7">
+				<div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+					<ul class="pagination">
+						<li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li>
+						<li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>
+						<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li>
+						<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li>
+						<li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
-
-		<div class="box-body table-responsive no-padding">
-			<table class="table table-hover">
-				<tbody>
-					<tr>
-						<th>ID</th>
-						<th>이름</th>
-						<th>제목</th>
-						<th>날짜</th>
-
-					</tr>
-					<tr>
-						<td>183</td>
-						<td>John Doe</td>
-						<td>11-7-2014</td>
-						<td><span class="label label-success">Approved</span></td>
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-
 	</div>
-
 </div>
 
 

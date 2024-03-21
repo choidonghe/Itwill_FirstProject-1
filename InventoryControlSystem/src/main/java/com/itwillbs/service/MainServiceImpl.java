@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.itwillbs.domain.EmergencyOrderVO;
+import com.itwillbs.domain.MainCriteria;
+import com.itwillbs.domain.NoticeVO;
 import com.itwillbs.persistence.MainDAO;
 
 @Service
@@ -61,7 +64,36 @@ public class MainServiceImpl implements MainService {
 		return mdao.getStoreDay(mdao.getTodayMonth());
 	}
 
-	
+	@Override
+	public List<EmergencyOrderVO> ergOrederGet(MainCriteria cri) throws Exception {
+		logger.debug(" ergOrederGet() 호출");
+		
+		return mdao.ergOrder(cri);
+	}
+
+
+	@Override
+	public int getOrderListCount() throws Exception {
+		logger.debug(" getOrderListCount() 호출 ");
+		
+		return mdao.boardCount();
+	}
+
+
+	@Override
+	public int getNoticeListCount() throws Exception {
+		logger.debug(" getNoticeListCount() 호출");
+		
+		return mdao.noticeCount();
+	}
+
+
+	@Override
+	public List<NoticeVO> noListGet(MainCriteria cri) throws Exception {
+		logger.debug(" noListGet(MainCriteria Cri) 호출 ");
+		
+		return mdao.noticeBoard(cri);
+	}
 	
 	
 	
