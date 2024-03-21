@@ -23,17 +23,36 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 	private static final String NAMESPACE =("com.itwillbs.mapper.ReleaseMapper");
 
 	@Override
-	public List<ReleaseVO> listRelease(ReleaseVO vo) {
+	public List<ReleaseVO> listRelease() throws Exception {
 		logger.debug("listRelease(ReleaseVO vo) 호출");
 		
-		return sqlSession.selectList(NAMESPACE+".getReleaseList", vo);
+		return sqlSession.selectList(NAMESPACE+".getReleaseList");
 	}
 
 	@Override
-	public List<ReleaseVO> listInfoRelease(ReleaseVO vo) {
+	public List<ReleaseVO> listInfoRelease(ReleaseVO vo) throws Exception {
+		logger.debug("listInfoRelease(ReleaseVO vo) 호출");
 		
 		return sqlSession.selectList(NAMESPACE+".getReleaseInfoList", vo);
 	}
+
+	@Override
+	public void modifyRelease(ReleaseVO vo) throws Exception {
+		logger.debug("modifyRelease(ReleaseVO vo) 호출");
+		
+		sqlSession.selectOne(NAMESPACE+".upReleaseModify", vo);
+		
+	}
+
+	@Override
+	public String checkRelease(ReleaseVO vo) throws Exception {
+		logger.debug(" checkRelease(ReleaseVO vo) 호출");
+		
+		return sqlSession.selectOne(NAMESPACE+".upCheckRelease", vo);
+	}
+	
+	
+
 	
 	
 	

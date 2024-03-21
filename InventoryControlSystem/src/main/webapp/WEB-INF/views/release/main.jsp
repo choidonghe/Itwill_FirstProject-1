@@ -9,9 +9,13 @@
 	
 	${List} <br>
 	
-	<%-- <form role="form" action="" method="get" class="fm">	
-		<input type="hidden" name="divcode" value="${vo.divcode}">
-	</form> --%>
+	<form role="form" action="" method="get" class="fm">	
+		<input type="hidden" name="divcode" value="${List[0].divcode}">
+	</form>
+	
+	<input type="button" name="q" value="전체">
+	<input type="button" name="w" value="출고">
+	<input type="button" name="e" value="미출고">
 	
 	<table border="1">
 		<tr>
@@ -22,6 +26,7 @@
 			<td>release_date</td>
 			<td>order_date</td>
 			<td>order_count</td>
+			<td>code_div</td>
 		</tr>
 		
 		<c:forEach var="List" items="${List}">
@@ -34,24 +39,36 @@
 				<td>${List.pname}</td>
 				<td>${List.release_date}</td>
 				<td>${List.order_date}</td>
-				<td><input type="text" name="order_count"></td>
+				<td>${List.order_count}</td>
+				
+				<td>
+				<!-- code_div -->
+				</td>
+				
+				<td>
+				<a href="/release/modify?divcode=${List.divcode}"><input type="button" name="modify" value="수정"></a>
+				</td>
+				
 			</tr>
 		</c:forEach>
 	</table>
 	
-	<!-- <script>
+	<input type="submit" value="출고" class="release">
+	
+
+	
+	<script>
 	$(document).ready(function(){
 		
 		var formObj = $("form[role='form']");
 		
-		$(".a").click(function(){
-			alert(" 상세정보  ! ")
+		$(".release").click(function(){
 			
-			formObj.attr("action","/release/information");
+			formObj.attr("action","/release/release");
 			formObj.submit();
 		});
 	});
 	
-	</script> -->
+	</script>
 	
 <%@ include file="../include/footer.jsp"%>

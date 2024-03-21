@@ -29,30 +29,76 @@ public class ReleaseController {
 	// http://localhost:8088/release/main
 	
 	@RequestMapping(value = "/main",method = RequestMethod.GET)
-	public String Main(ReleaseVO vo,Model model) {
-		logger.debug(" ReleaseMain() : +ReleaseMain()호출 ");
+	public void Main(ReleaseVO vo,Model model) throws Exception {
+		logger.debug(" ReleaseMain() 호출 ");
 		
-		List<ReleaseVO> List = rService.releaseList(vo);
+		List<ReleaseVO> List = rService.releaseList();
 		
 		model.addAttribute("List", List);
 		
-		return "/release/main";
+
 	}
 	
 	@RequestMapping(value = "/information",method = RequestMethod.GET)
-	public void information(Model model,@RequestParam("divcode") int divcode, ReleaseVO vo) {
+	public void information(Model model,@RequestParam("divcode") int divcode, ReleaseVO vo) throws Exception {
 		logger.debug("information() 호출");
 		
 		logger.debug("divcode:" +divcode);
 		
 		List<ReleaseVO> infoList = rService.releaseInfoList(vo);
 		
-		model.addAttribute("infoList", infoList);
+		model.addAttribute("infoList", infoList);	
+	}
+	
+	@RequestMapping(value = "/modify",method = RequestMethod.GET)
+	public void modify(@RequestParam("divcode") int divcode,Model model,ReleaseVO vo) throws Exception {
+		logger.debug(" modify() 호출 ");
+		
+		logger.debug("divcode() 호출");
+		
+		List<ReleaseVO> modify = rService.releaseInfoList(vo);
+		
+		model.addAttribute("modify", modify);
+	}
+	
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modifyPOST(@RequestParam("divcode") int divcode, ReleaseVO vo) throws Exception {
+		logger.debug("modify()POST");
+		
+		logger.debug("divcode:"+divcode);
 		
 		
+		rService.releaseModify(vo);
 		
+		
+		return "redirect:/release/main";
+	}
+	
+	@RequestMapping(value = "/release",method = RequestMethod.GET)
+	public void release(ReleaseVO vo,Model model) throws Exception{
+		logger.debug("release() 호출");
+		
+		List<ReleaseVO> release = rService.releaseInfoList(vo);
+		
+		model.addAttribute("release", release);
+	}
+	@RequestMapping(value = "/release",method = RequestMethod.POST)
+	public String releasePOST(ReleaseVO vo) throws Exception{
+		logger.debug(" release()POST 호출");
+		
+		logger.debug("vo:"+ vo);
+		
+		rService.releaseCheck(vo);
+		
+		
+		return "redirect:/release/main";
 		
 	}
+	
+
+	
+	
+	
 	
 
 }

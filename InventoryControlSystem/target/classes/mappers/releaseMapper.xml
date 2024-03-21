@@ -7,13 +7,22 @@
 	<mapper namespace="com.itwillbs.mapper.ReleaseMapper">
 	
 	<select id="getReleaseList" resultType="ReleaseVO">
-		select * from `release`
+		select * from tbl_release
 	</select>
 	
 	<select id="getReleaseInfoList" resultType="ReleaseVO">
-		select * from `release`
+		select * from tbl_release
 		where divcode=#{divcode}
 	</select>
 	
+	<update id="upReleaseModify">
+		update tbl_release set release_date=#{release_date}, order_count=#{order_count}
+		where divcode=#{divcode}
+	</update>
+	
+	<update id="upCheckRelease">
+		update tbl_release set pname=#{pname},pno=#{pno},order_count=order_count-#{order_count}
+		where divcode=#{divcode}
+	</update>
 	
 	</mapper>
