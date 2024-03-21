@@ -31,10 +31,11 @@ public class InspectionServiceImpl implements InspectionService{
 	}
 
 	@Override
-	public void modify(InspectionVO vo) throws Exception {
-		logger.debug(" modify(InspectionVO vo) 실행 ");
-		idao.inspectionUpdate(vo);
-	}
+    public void modify(InspectionVO vo) throws Exception {
+        logger.debug(" modify(InspectionVO vo) 실행 ");
+        idao.inspectionUpdate(vo);
+        idao.moveToStock();
+    } 
 
 	@Override
 	public void updateRemain(InspectionVO vo) throws Exception {

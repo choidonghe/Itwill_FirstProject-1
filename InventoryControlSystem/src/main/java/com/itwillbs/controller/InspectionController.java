@@ -13,7 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.itwillbs.domain.CodeVO;
 import com.itwillbs.domain.InspectionVO;
+import com.itwillbs.service.CodeService;
 import com.itwillbs.service.InspectionService;
 
 @Controller
@@ -22,6 +24,8 @@ public class InspectionController {
 	
 	@Inject
 	private InspectionService iService;
+	@Inject
+	private CodeService cService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(InspectionController.class);
 	
@@ -31,8 +35,10 @@ public class InspectionController {
 	public void inspectionMain(Model model) throws Exception{
 		logger.debug(" inspectionMain() 실행 ");
 		List<InspectionVO> inspectionList = iService.getInspectionList();
+		List<CodeVO> codeList = cService.allCodeList();
 		//logger.debug(" list.size : "+inspectionList.size());
 		model.addAttribute("inspectionList", inspectionList);
+		model.addAttribute("codeList", codeList);
 	}
 	
 	// 검수 본문 페이지 GET
@@ -46,12 +52,12 @@ public class InspectionController {
 	
 	// 검수 본문 업데이트 POST
 	@RequestMapping(value = "/inspectionRead", method = RequestMethod.POST)
-	public String inspectionReadPOST(String pno, Model model,InspectionVO vo) throws Exception{
-		logger.debug(" inspectionReadPOST() 호출 ");
-		iService.modify(vo);
-		iService.updateRemain(vo);
-		return "redirect:/inspec/inspectionMain";
-	}
+    public String inspectionReadPOST(String pno, Model model,InspectionVO vo) throws Exception{
+        logger.debug(" inspectionReadPOST() 호출 ");
+        iService.modify(vo);
+        iService.updateRemain(vo);
+        return "redirect:/inspec/inspectionMain";
+    }
 	
 	// 검수 상태별 페이지 (미검수)
 	// http://local:8088/inspec/inspectionDiv2

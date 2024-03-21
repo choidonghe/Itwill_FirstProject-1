@@ -319,7 +319,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="/storeinglist"><i class="fa fa-circle-o"></i> 입고예정</a></li>
-                <li><a href="/resources/index2.html"><i class="fa fa-circle-o"></i> 입고검수</a></li>
+                <li><a href="/inspec/inspectionMain"><i class="fa fa-circle-o"></i> 입고검수</a></li>
               </ul>
             </li>
             <li class="treeview">

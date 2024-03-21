@@ -35,7 +35,6 @@ th {
 	</div>
 	
 	 <h1>입고 검수 현황</h1>
-
 	<div class="button-container">
 		<form action="/inspec/inspectionMain" method="GET">
 			<button type="submit">전체</button>
@@ -52,7 +51,7 @@ th {
     <table>
         <thead>
             <tr>
-                <th>PNO</th>
+                <th>제품번호</th>
                 <th>담당자 아이디</th>
                 <th>상태</th>
                 <th>총 검수량</th>
@@ -64,7 +63,7 @@ th {
             <tr>
                 <td><a href="/inspec/inspectionRead?pno=${inspectionList.pno}">${inspectionList.pno }</td>
                 <td>${inspectionList.id }</td>
-                <td>${inspectionList.divcode}</td>
+                <td>${inspectionList.codeVO[0].korname }</td>
                 <td>${inspectionList.quantity }</td>
                 <td>${inspectionList.remain_quantity }</td>
                 <td>${inspectionList.regdate }</td>

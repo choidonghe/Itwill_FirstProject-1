@@ -58,7 +58,11 @@ public class InspectionDAOImpl implements InspectionDAO{
 		return sqlSession.selectList(NAMESPACE+".inspectionDiv3");
 	}
 
-	
+	@Override
+    public void moveToStock() throws Exception {
+        logger.debug(" moveToStock() 재고로 넘어가기 호출 ");
+        sqlSession.insert(NAMESPACE+".moveToStock");
+    }
 	
 	
 }

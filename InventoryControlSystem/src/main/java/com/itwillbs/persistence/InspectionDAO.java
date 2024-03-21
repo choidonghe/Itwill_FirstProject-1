@@ -23,8 +23,8 @@ public interface InspectionDAO {
 	
 	// 검수목록 현황별 페이지 Div3 완료
 	public List<InspectionVO> div3() throws Exception;
-	
-	
+	// 검수에서 재고로 넘어가기
+	public void moveToStock() throws Exception;
 	
 	
 	
