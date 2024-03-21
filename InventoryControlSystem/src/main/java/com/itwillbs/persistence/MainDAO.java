@@ -4,7 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.itwillbs.domain.EmergencyOrderVO;
-import com.itwillbs.domain.MainCriteria;
+import com.itwillbs.domain.ErgOrderCriteria;
+import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticeVO;
 
 public interface MainDAO {
@@ -21,10 +22,12 @@ public interface MainDAO {
 	
 	public int boardCount() throws Exception;
 	
-	public List<EmergencyOrderVO> ergOrder(MainCriteria cri) throws Exception;
+	public List<EmergencyOrderVO> ergOrder(ErgOrderCriteria cri) throws Exception;
 	
 	public int noticeCount() throws Exception;
 	
-	public List<NoticeVO> noticeBoard(MainCriteria cri) throws Exception;
+	public List<NoticeVO> noticeBoard(NoticeCriteria cri) throws Exception;
 
+	public List<NoticeVO> searchNoticeBoard(NoticeCriteria cri, String search) throws Exception;
+	
 }// dao

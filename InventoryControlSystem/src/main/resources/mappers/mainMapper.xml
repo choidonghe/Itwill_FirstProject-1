@@ -29,7 +29,7 @@
 		LEFT JOIN stock s
 		ON p.pno = s.pno
 		WHERE <![CDATA[ s.count < 5 ]]> 
-		limit #{startPage},#{pageSize};
+		limit #{startPage},#{orderPageSize};
 	</select>
 	
 	<select id="orderTotalCount" resultType="int">
@@ -50,8 +50,19 @@
 		select * from notice  
 		where bno > 0 
 		order by bno desc, regdate desc
-		limit #{startPage},#{pageSize}
+		limit #{startPage},#{noticePageSize}
 		]]>
 	</select>
+	
+	<select id="searchNoticeList" resultType="com.itwillbs.domain.NoticeVO">
+		SELECT * FROM notice  
+		WHERE content LIKE CONCAT('%',#{search},'%') 
+		
+	
+	</select>
+	
+	
+	
+	
 	
 </mapper>

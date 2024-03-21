@@ -3,7 +3,8 @@ package com.itwillbs.service;
 import java.util.List;
 
 import com.itwillbs.domain.EmergencyOrderVO;
-import com.itwillbs.domain.MainCriteria;
+import com.itwillbs.domain.ErgOrderCriteria;
+import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticeVO;
 
 public interface MainService {
@@ -18,11 +19,12 @@ public interface MainService {
 	
 	public int getOrderListCount() throws Exception;
 	
-	public List<EmergencyOrderVO> ergOrederGet(MainCriteria cri) throws Exception;
+	public List<EmergencyOrderVO> ergOrederGet(ErgOrderCriteria cri) throws Exception;
 	
 	public int getNoticeListCount() throws Exception;
 	
-	public List<NoticeVO> noListGet(MainCriteria cri) throws Exception;
+	public List<NoticeVO> noListGet(NoticeCriteria cri) throws Exception;
 	
+	public List<NoticeVO> searchNoListGet(NoticeCriteria cri, String search) throws Exception;
 	
 }// service

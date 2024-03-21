@@ -140,11 +140,17 @@ noticePageVO : ${noticePageVO }
 			<h3 class="box-title">긴급발주목록</h3>
 			<div class="box-tools">
 				<ul class="pagination pagination-sm no-margin pull-right">
-					<li><a href="#">«</a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">»</a></li>
+					<c:if test="${orderPageVO.prev }">
+						<li><a href="/main?page=${orderPageVO.startPage - 1}">«</a></li>
+					</c:if>
+					
+					<c:forEach var="idx" begin="${orderPageVO.startPage }" end="${orderPageVO.endPage }" step="1">
+						<li ${orderPageVO.cri.orderPage == idx? "class='active'" : "" }><a href="/main?orderPage=${idx }">${idx }</a></li>
+					</c:forEach>
+					
+					<c:if test="${orderPageVO.next }">
+						<li><a href="/main?orderPage=${orderPageVO.endPage + 1 }">»</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -188,8 +194,21 @@ noticePageVO : ${noticePageVO }
 				<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
 					<thead>
 					<tr role="row">
-							<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="3" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >공지사항</th>
+							<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >공지사항</th>
+							<th>
+								
+								<form action="/main" method="post">
+								<div class="input-group">
+										<input name="search" id="new-event" type="text" class="form-control" placeholder="검색키워드" >
+									
+									<div class="input-group-btn">
+										<button id="new-event" type="submit" class="btn btn-primary btn-flat">검색</button>
+									</div>
+								</div>
+								</form>
 							
+							
+							</th>
 					</tr>
 						<tr role="row">
 							<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">번호</th>
@@ -219,11 +238,17 @@ noticePageVO : ${noticePageVO }
 			<div class="col-sm-7">
 				<div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
 					<ul class="pagination">
-						<li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li>
-						<li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>
-						<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li>
-						<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li>
-						<li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li>
+						<c:if test="${noticePageVO.prev }">
+							<li><a href="/main?page=${noticePageVO.startPage - 1}">«</a></li>
+						</c:if>
+					
+						<c:forEach var="idx" begin="${noticePageVO.startPage }" end="${noticePageVO.endPage }" step="1">
+							<li ${noticePageVO.cri.noticePage == idx? "class='active'" : "" }><a href="/main?noticePage=${idx }">${idx }</a></li>
+						</c:forEach>
+					
+						<c:if test="${noticePageVO.next }">
+							<li><a href="/main?orderPage=${noticePageVO.endPage + 1 }">»</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</div>

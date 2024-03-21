@@ -4,10 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 // 페이징처리 하단 블럭
-public class MainPageVO {
+public class NoticePageVO {
 	
 	
-	private static final Logger logger = LoggerFactory.getLogger(MainPageVO.class);
+	private static final Logger logger = LoggerFactory.getLogger(NoticePageVO.class);
 	
 	private int totalCount; // 전체 글의 수
 	private int startPage;  // 블럭의 시작번호
@@ -20,11 +20,11 @@ public class MainPageVO {
 	
 	//private int page; // 페이지 번호
 	//private int pageSize; // 페이지 크기
-	private MainCriteria cri;
+	private NoticeCriteria cri;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void setCri(MainCriteria cri) {
+	public void setCri(NoticeCriteria cri) {
 		this.cri = cri;
 	}
 	
@@ -40,13 +40,13 @@ public class MainPageVO {
 	
 	
 	public void pageCalc() {
-		endPage = (int) Math.ceil(cri.getPage() / (double)pageBlock) * pageBlock;
+		endPage = (int) Math.ceil(cri.getNoticePage() / (double)pageBlock) * pageBlock;
 		
 		// startPage
 		startPage = (endPage - pageBlock) + 1; 
 		
 		// tmpEndPage (실제 endPage)
-		int tmpEndPage = (int)Math.ceil(totalCount / (double)cri.getPageSize());
+		int tmpEndPage = (int)Math.ceil(totalCount / (double)cri.getNoticePageSize());
 		
 		if(endPage > tmpEndPage) { // 글이 없음 부족함
 			endPage = tmpEndPage;
@@ -56,7 +56,7 @@ public class MainPageVO {
 		prev = startPage != 1;
 		
 		// next
-		next = endPage * cri.getPageSize() < totalCount;		
+		next = endPage * cri.getNoticePageSize() < totalCount;		
 	}
 	
 	
@@ -86,7 +86,7 @@ public class MainPageVO {
 		return pageBlock;
 	}
 
-	public MainCriteria getCri() {
+	public NoticeCriteria getCri() {
 		return cri;
 	}
 
@@ -113,7 +113,7 @@ public class MainPageVO {
 
 	@Override
 	public String toString() {
-		return "PageVO [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
+		return "NoticePageVO [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
 				+ prev + ", next=" + next + ", pageBlock=" + pageBlock + ", cri=" + cri + "]";
 	}
 

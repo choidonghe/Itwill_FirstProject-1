@@ -10,7 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.domain.EmergencyOrderVO;
-import com.itwillbs.domain.MainCriteria;
+import com.itwillbs.domain.ErgOrderCriteria;
+import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticeVO;
 import com.itwillbs.persistence.MainDAO;
 
@@ -65,7 +66,7 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
-	public List<EmergencyOrderVO> ergOrederGet(MainCriteria cri) throws Exception {
+	public List<EmergencyOrderVO> ergOrederGet(ErgOrderCriteria cri) throws Exception {
 		logger.debug(" ergOrederGet() 호출");
 		
 		return mdao.ergOrder(cri);
@@ -89,10 +90,18 @@ public class MainServiceImpl implements MainService {
 
 
 	@Override
-	public List<NoticeVO> noListGet(MainCriteria cri) throws Exception {
+	public List<NoticeVO> noListGet(NoticeCriteria cri) throws Exception {
 		logger.debug(" noListGet(MainCriteria Cri) 호출 ");
 		
 		return mdao.noticeBoard(cri);
+	}
+
+
+	@Override
+	public List<NoticeVO> searchNoListGet(NoticeCriteria cri, String search) throws Exception {
+		logger.debug("  searchNoListGet(NoticeCriteria cri) 호출");
+		
+		return mdao.searchNoticeBoard(cri, search);
 	}
 	
 	

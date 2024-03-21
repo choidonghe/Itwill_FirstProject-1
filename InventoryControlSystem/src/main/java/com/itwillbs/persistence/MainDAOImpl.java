@@ -16,7 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.EmergencyOrderVO;
-import com.itwillbs.domain.MainCriteria;
+import com.itwillbs.domain.ErgOrderCriteria;
+import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticeVO;
 
 @Repository
@@ -123,7 +124,7 @@ public class MainDAOImpl implements MainDAO {
 	}
 	
 	@Override
-	public List<EmergencyOrderVO> ergOrder(MainCriteria cri) throws Exception {
+	public List<EmergencyOrderVO> ergOrder(ErgOrderCriteria cri) throws Exception {
 		logger.debug(" ergOrder() 호출 ");
 		
 		return sql.selectList(NAMESPACE+".ergOrder",cri);
@@ -145,10 +146,17 @@ public class MainDAOImpl implements MainDAO {
 	}
 
 	@Override
-	public List<NoticeVO> noticeBoard(MainCriteria cri) throws Exception {
+	public List<NoticeVO> noticeBoard(NoticeCriteria cri) throws Exception {
 		logger.debug(" noticeBoard(MainCriteria cri) 호출 ");
 		
 		return sql.selectList(NAMESPACE+".noticeList", cri);
+	}
+
+	@Override
+	public List<NoticeVO> searchNoticeBoard(NoticeCriteria cri, String search) throws Exception {
+		logger.debug(" searchNoticeBoard(NoticeCriteria cri) 호출");
+		
+		return sql.selectList(NAMESPACE+".searchNoticeList", search);
 	}
 	
 	
