@@ -15,5 +15,8 @@ public interface StockService {
 	
 	// 총 글의 개수
 	public int getBoardListCount() throws Exception;
+	
+	// 재고 리스트 검색 (전체)
+	public List<StockVO> ListPaging(Criteria cri) throws Exception;
 
 }

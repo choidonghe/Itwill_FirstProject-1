@@ -54,6 +54,9 @@ public class StockController {
 		
 		List<StockVO> stockList = sService.getListCri(cri); // 페이징
 		logger.debug(" list.size : " + stockList.size());
+		logger.debug("키워드 : " + cri.getKeyword());
+		logger.debug("타입 : " + cri.getType());
+		logger.debug("cri toString : " + cri.toString());
 		
 		// 연결된 뷰페이지에 정보 전달(Model)
 		model.addAttribute("stockList", stockList);

@@ -41,6 +41,13 @@ public class StockServiceImpl implements StockService {
 		logger.debug(" service - getBoardListCount() 호출 ");
 		return sdao.stockListCount();
 	}
+
+
+	@Override
+	public List<StockVO> ListPaging(Criteria cri) throws Exception {
+		logger.debug(" service - ListPaging() 호출 ");
+		return sdao.stockListSearch(cri);
+	}
 	
 	
 

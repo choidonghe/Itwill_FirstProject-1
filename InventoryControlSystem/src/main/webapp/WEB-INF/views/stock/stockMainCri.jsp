@@ -79,35 +79,80 @@
 				
 			<!-- 검색창 추가 -->
 			<div class="form-group" data-select2-id="37">
-			    <form id="searchForm" action="/stock/search" method="get"> <!-- 수정된 부분 : 검색을 위한 form 추가 -->
+			    <form id="searchForm" action="/stock/stockMainCri" method="get"> <!-- 수정된 부분 : 검색을 위한 form 추가 -->
 			        <table>
 			            <tr>
 			                <td>
-			                    <select id="categorySelect" name="category" class="form-control select2 select2-hidden-accessible"
-			                            style="width: 100%; margin-bottom: 5px;" data-select2-id="1" tabindex="-1"
+			                    <select id="categorySelect" name="type" class="form-control select2 select2-hidden-accessible"
+			                            style="width: 100%; margin-bottom: 5px;" data-select2-id="1"	 tabindex="-1"
 			                            aria-hidden="true">
-			                        <option value="" selected="selected">전체</option>
-			                        <option value="pno">제품코드</option>
-			                        <option value="category">카테고리</option>
-			                        <option value="pname">품목명</option>
-			                        <option value="company">제조회사</option>
-			                        <option value="warehouse_code">창고위치</option>
+			                        <option value="all" 
+			                        <c:out value = "${pageVO.cri.type eq 'all'?'selected':'' }"/>
+			                        selected="selected">전체</option>
+			                        <option value="pno"
+			                        <c:out value = "${pageVO.cri.type eq 'pno'?'selected':'' }"/>>제품코드</option>
+			                        <option value="category"
+			                        <c:out value = "${pageVO.cri.type eq 'category'?'selected':'' }"/>>카테고리</option>
+			                        <option value="pname"
+			                        <c:out value = "${pageVO.cri.type eq 'pname'?'selected':'' }"/>>품목명</option>
+			                        <option value="company"
+			                        <c:out value = "${pageVO.cri.type eq 'company'?'selected':'' }"/>>제조회사</option>
+			                        <option value="warehouse_code"
+			                        <c:out value = "${pageVO.cri.type eq 'warehouse_code'?'selected':'' }"/>>창고위치</option>
 			                    </select>
 			                </td>
 			                <td>
 			                    <input type="text" id="searchInput" name="keyword" class="form-control" placeholder="검색어 입력"
-			                           style="margin-bottom: 5px;">
+			                           style="margin-bottom: 5px;"
+<%-- 			                           value='<c:out value="${pageVO.cri.keyword }"/>--%>'/>
+<!-- 			                    <input type="hidden" name="page" value = "1"> -->
+<%-- 			                    <input type="hidden" name="pageSize" value = ${param.pageSize }> --%>
 			                </td>
 			                <td>
-			                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"
+			                    <button id="search-btn" class="btn btn-flat"
 			                            style="margin-left: 3px; margin-bottom: 5px;">
 			                        <i class="fa fa-search"></i>
 			                    </button>
 			                </td>
 			            </tr>
 			        </table>
+			        				<input type = "hidden" name = "page" value = "${pageVO.cri.page }">
+				<input type = "hidden" name = "pageSize" value = "${pageVO.cri.pageSize }">
 			    </form>
 			</div>
+
+			<script>
+    $(document).ready(function() {
+        // 이 부분에서 moveForm을 찾아 정의합니다.
+        var searchForm = $("#searchForm");
+        
+        $(".form-group button").on("click", function(e){
+            e.preventDefault(); // 기본 이벤트 동작 방지
+
+            let type = $("#categorySelect").val(); // 검색 유형 가져오기
+            let keyword = $("#searchInput").val(); // 키워드 가져오기
+
+            if(!type) {
+                alert("검색 종류를 선택하세요.");
+                return false;
+            }
+
+            if(!keyword) {
+                alert("키워드를 입력하세요.");
+                return false;
+            }
+
+            // moveForm에 값 설정
+            searchForm.find("input[name='type']").val(type);
+            searchForm.find("input[name='keyword']").val(keyword);
+            searchForm.find("input[name='page']").val(1); // 페이지 값을 1로 설정합니다.
+
+            // 폼 제출
+            searchForm.submit();
+        });
+    });
+</script>
+			
 			<!-- 검색창 추가 -->
 				
 				

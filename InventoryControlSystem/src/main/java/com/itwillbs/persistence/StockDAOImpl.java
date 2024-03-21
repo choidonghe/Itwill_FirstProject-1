@@ -53,4 +53,12 @@ public class StockDAOImpl implements StockDAO{
 		logger.debug(" boardListCount() 호출 ");
 		return sqlSession.selectOne(NAMESPACE + ".totalCount");
 	}
+
+
+	// 재고 리스트 검색 (전체)
+	@Override
+	public List<StockVO> stockListSearch(Criteria cri) throws Exception {
+		logger.debug(" stockListSearch(Criteria cri) 호출 ");
+		return sqlSession.selectList(NAMESPACE+".getListPaging",cri);
+	}
 }
