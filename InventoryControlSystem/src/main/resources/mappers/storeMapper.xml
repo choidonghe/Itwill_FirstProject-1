@@ -36,12 +36,12 @@
 	</resultMap>
 	
 	<select id="productList" parameterType="productVO" resultMap="productMap">
-		select c.korname, p.divcode, p.pno, p.pname, p.count, p.price, p.sales_price, p.account_code  
+		select * 
 		from product p 
 		join code c on p.divcode = c.divcode
 		where p.divcode=1
 	</select>
-	
+	<!-- c.korname, p.divcode, p.pno, p.pname, p.count, p.price, p.sales_price, p.account_code -->  
 	<select id="selectCodeList" resultType="codeVO">
 		select * from code where divcode=1 or divcode=2 or divcode=3
 	</select>

@@ -33,7 +33,7 @@
 	<!-- 검수목록 조회 -->
 	<select id="selectInspection" resultMap="productMap">
 		select * 
-		from product p 
+		from inspection p 
 		join code c 
 		on c.divcode = p.divcode
 		where p.divcode = 2
@@ -41,7 +41,7 @@
 	<!-- 검수현황본문 조회 - product -->
 	<select id="productInspectionRead" resultType="ProductVO"
 		resultMap="productMap">
-		select * from product where pno=#{pno}
+		select * from inspection where pno=#{pno}
 	</select>
 
 
@@ -49,7 +49,7 @@
 	<!-- 검수현황업데이트 - product -->
     <update id="productUpdateInspection" parameterType="ProductVO">
     <!-- 해당 divcode가 7인 행에서 사용자가 선택한 finish_quantity만큼 quantity에서 차감하고 나머지는 다른 업데이트로 처리 -->
-        UPDATE product
+        UPDATE inspection
         	SET count = CASE WHEN divcode = 7 THEN count - #{finish_count}
                           ELSE count
                       END,
@@ -69,7 +69,7 @@
         INSERT INTO stock
         (divcode, pno, warehouse_code, category, count, regdate)
         SELECT divcode, pno, warehouse_code, SUBSTRING(pno, 1, 4) AS category, finish_count AS count, NOW() AS regdate
-        FROM product
+        FROM inspection
         WHERE divcode = 3 AND remain_count = 0
         ON DUPLICATE KEY UPDATE
         count = finish_count;
@@ -77,18 +77,18 @@
     
 	<!-- product - finish양 quantity에서 빼기 -->
 	<update id="productUpdateRemain">
-    	update product
+    	update inspection
     	set remain_count = (#{count} - #{finish_count})
     	where pno = #{pno}
 	</update>
     
 	<!-- product - divcode=2 인 검수목록 조회 -->
 	<select id="productInspectionDiv2" resultType="ProductVO">
-		select * from product where divcode=2 order by regdate desc
+		select * from inspection where divcode=2 order by regdate desc
 	</select>
 	<!-- product - divcode=3 인 검수목록 조회 -->
 	<select id="productInspectionDiv3" resultType="ProductVO">
-		select * from product where divcode=3 order by regdate desc
+		select * from inspection where divcode=3 order by regdate desc
 	</select>
 
 
