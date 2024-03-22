@@ -58,7 +58,8 @@ public class StockController {
 		logger.debug("타입 : " + cri.getType());
 		logger.debug("cri toString : " + cri.toString());
 		logger.debug(" 검색 결과 : " + stockList);
-		
+		logger.debug("pageVO" + pageVO);
+		logger.debug("listcount : " + sService.getBoardListCount(cri));
 		// 연결된 뷰페이지에 정보 전달(Model)
 		model.addAttribute("stockList", stockList);
 		model.addAttribute("cri", cri);

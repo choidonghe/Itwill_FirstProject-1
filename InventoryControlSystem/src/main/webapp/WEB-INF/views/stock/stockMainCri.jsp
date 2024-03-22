@@ -133,28 +133,34 @@
 			    </form>
 			</div>
 			<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // 폼 요소와 검색 버튼 요소 가져오기
-        var searchForm = document.getElementById("searchForm");
-        var searchBtn = document.getElementById("search-btn");
+			document.addEventListener("DOMContentLoaded", function() {
+			    // 폼 요소와 검색 버튼 요소 가져오기
+			    var searchForm = document.getElementById("searchForm");
+			    var searchBtn = document.getElementById("search-btn");
 
-        // 검색 버튼 클릭 시 이벤트 처리
-        searchBtn.addEventListener("click", function(event) {
-            event.preventDefault(); // 기본 동작 방지 (페이지 새로고침 방지)
+			    // 검색 버튼 클릭 시 이벤트 처리
+			    searchBtn.addEventListener("click", function(event) {
+			        event.preventDefault(); // 기본 동작 방지 (페이지 새로고침 방지)
 
-            // 검색어 입력 요소 가져오기
-            var searchInput = document.getElementById("searchInput");
+			        // 검색어 입력 요소 가져오기
+			        var searchInput = document.getElementById("searchInput");
 
-            // 검색어가 비어있는지 확인
-            if (searchInput.value.trim() !== "") {
-                // 검색어가 비어 있지 않으면 폼 제출
-                searchForm.submit();
-            } else {
-                // 검색어가 비어 있으면 알림 표시
-                alert("검색어를 입력해주세요.");
-            }
-        });
-    });
+			        // 검색어가 비어있는지 확인
+			        var keyword = searchInput.value.trim();
+			        if (keyword === "") {
+			            keyword = null; // 검색어가 비어 있으면 null 값으로 설정
+			        }
+
+			        // 선택된 카테고리 가져오기
+			        var type = document.getElementById("categorySelect").value;
+
+			        // 페이지 크기 가져오기
+			        var pageSize = document.getElementById("pageSizeSelect").value;
+
+			        // 새로운 URL로 이동
+			        location.href = "/stock/stockMainCri?page=1&pageSize=" + pageSize + "&keyword=" + encodeURIComponent(keyword) + "&type=" + type;
+			    });
+			});
 </script>
 
 				
