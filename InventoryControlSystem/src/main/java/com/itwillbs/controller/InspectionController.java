@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.CodeVO;
-import com.itwillbs.domain.InspectionVO;
+import com.itwillbs.domain.ProductVO;
 import com.itwillbs.service.CodeService;
 import com.itwillbs.service.InspectionService;
 
@@ -34,9 +34,9 @@ public class InspectionController {
 	@RequestMapping(value = "/inspectionMain", method = RequestMethod.GET)
 	public void inspectionMain(Model model) throws Exception{
 		logger.debug(" inspectionMain() 실행 ");
-		List<InspectionVO> inspectionList = iService.getInspectionList();
+		List<ProductVO> inspectionList = iService.productGetInspectionList();
 		List<CodeVO> codeList = cService.allCodeList();
-		//logger.debug(" list.size : "+inspectionList.size());
+		logger.debug("inspectionList : " + inspectionList);
 		model.addAttribute("inspectionList", inspectionList);
 		model.addAttribute("codeList", codeList);
 	}
@@ -46,25 +46,25 @@ public class InspectionController {
 	public void inspectionReadGET(String pno, Model model, HttpSession session) throws Exception{
 		logger.debug(" inspectionReadGET() 호출 ");
 		logger.debug(" pno : "+pno);
-		InspectionVO vo = iService.read(pno);
+		ProductVO vo = iService.productRead(pno);
 		model.addAttribute("vo", vo);
 	}
 	
 	// 검수 본문 업데이트 POST
 	@RequestMapping(value = "/inspectionRead", method = RequestMethod.POST)
-    public String inspectionReadPOST(String pno, Model model,InspectionVO vo) throws Exception{
-        logger.debug(" inspectionReadPOST() 호출 ");
-        iService.modify(vo);
-        iService.updateRemain(vo);
-        return "redirect:/inspec/inspectionMain";
-    }
+	public String inspectionReadPOST(String pno, Model model,ProductVO pvo) throws Exception{
+		logger.debug(" inspectionReadPOST() 호출 ");
+		iService.productModify(pvo);
+		iService.productUpdateRemain(pvo);
+		return "redirect:/inspec/inspectionMain";
+	}
 	
 	// 검수 상태별 페이지 (미검수)
 	// http://local:8088/inspec/inspectionDiv2
 	@RequestMapping(value = "/inspectionDiv2", method = RequestMethod.POST)
 	public void inspectionDiv2(Model model) throws Exception{
 		logger.debug(" inspectionDiv2() 호출 ");
-		List<InspectionVO> inspectionList = iService.getInspectionDiv2();
+		List<ProductVO> inspectionList = iService.productGetInspectionDiv2();
 		model.addAttribute("inspectionList",inspectionList);
 	}
 	
@@ -73,11 +73,8 @@ public class InspectionController {
 	@RequestMapping(value = "/inspectionDiv3", method = RequestMethod.POST)
 	public void inspectionDiv3(Model model) throws Exception{
 		logger.debug(" inspectionDiv3() 호출 ");
-		List<InspectionVO> inspectionList = iService.getInspectionDiv3();
+		List<ProductVO> inspectionList = iService.productGetInspectionDiv3();
 		model.addAttribute("inspectionList",inspectionList);
 	}
-	
-	// 입고검수는 요까지
-/////////////////////////////////////////////////////////////////////////////////////////	
 	
 }

@@ -16,13 +16,12 @@
 				<th>제품번호</th>
 				<th>제품명</th>
 				<th>수량</th>
-				<th>카테고리</th>
 				<th>가격</th>
-				<th>입고일</th>
-				<th>수정일</th>
+				<th>판매가격</th>
 				<th>계좌코드</th>
+				
 			</tr>
-			<c:forEach var="store" items="${storeIngList}">
+			<c:forEach var="store" items="${productList}">
 			<tr>
 				<td>
 					<form action="update" method="post">
@@ -40,11 +39,10 @@
 				<td>${store.pno }</td>
 				<td>${store.pname }</td>
 				<td>${store.count }</td>
-				<td>${store.category }</td>
 				<td>${store.price }</td>
-				<td>${store.store_date }</td>
-				<td>${store.update_date }</td>
+				<td>${store.sales_price }</td>
 				<td>${store.account_code }</td>
+				
 			</tr>
 			</c:forEach>
 			</tbody>

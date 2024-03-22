@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.itwillbs.domain.InspectionVO;
+import com.itwillbs.domain.ProductVO;
 import com.itwillbs.persistence.InspectionDAO;
 
 @Service
@@ -18,41 +18,42 @@ public class InspectionServiceImpl implements InspectionService{
 	@Inject
 	private InspectionDAO idao;
 	
-	@Override
-	public List<InspectionVO> getInspectionList() throws Exception {
-		logger.debug(" List<InspectionVO> getInspectionList() 실행 ");
-		return idao.inspectionList();
-	}
 
 	@Override
-	public InspectionVO read(String pno) throws Exception {
-		logger.debug(" read(String pno) 실행 ");
-		return idao.inspectionRead(pno);
-	}
-
-	@Override
-    public void modify(InspectionVO vo) throws Exception {
-        logger.debug(" modify(InspectionVO vo) 실행 ");
-        idao.inspectionUpdate(vo);
-        idao.moveToStock();
-    } 
-
-	@Override
-	public void updateRemain(InspectionVO vo) throws Exception {
-		logger.debug(" updateRemain() 실행 ");
+	public ProductVO productRead(String pno) throws Exception {
 		
+		return idao.productInspectionRead(pno);
 	}
 
 	@Override
-	public List<InspectionVO> getInspectionDiv2() throws Exception {
-		logger.debug(" List<InspectionVO> getInspectionDiv2() 호출 ");
-		return idao.div2();
+	public void productModify(ProductVO pvo) throws Exception {
+		idao.productInspectionUpdate(pvo);
+		idao.productMoveToStock();
 	}
 
 	@Override
-	public List<InspectionVO> getInspectionDiv3() throws Exception {
-		logger.debug(" List<InspectionVO> getInspectionDiv3() 호출 ");
-		return idao.div3();
+	public void productUpdateRemain(ProductVO pvo) throws Exception {
+		
+		idao.productInspectionRemainUpdate(pvo);
 	}
+
+	@Override
+	public List<ProductVO> productGetInspectionList() throws Exception {
+		
+		return idao.productInspectionList();
+	}
+	
+	@Override
+	public List<ProductVO> productGetInspectionDiv2() throws Exception {
+		
+		return idao.productDiv2();
+	}
+
+	@Override
+	public List<ProductVO> productGetInspectionDiv3() throws Exception {
+		
+		return idao.productDiv3();
+	}
+
 
 }

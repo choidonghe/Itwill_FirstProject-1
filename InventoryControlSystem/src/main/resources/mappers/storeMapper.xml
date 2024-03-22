@@ -5,17 +5,27 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.mapper.StoreMapper">
 	
-	<resultMap type="com.itwillbs.domain.StoreVO" id="storeVO">
-		<result property="divcode" column="divcode"></result>
-		<result property="pno" column="pno"></result>
-		<result property="pname" column="pname"></result>
-		<result property="count" column="count"></result>
-		<result property="category" column="category"></result>
-		<result property="price" column="price"></result>
-		<result property="store_date" column="store_date"></result>
-		<result property="update_date" column="update_date"></result>
-		<result property="account_code" column="account_code"></result>
+	<resultMap type="com.itwillbs.domain.ProductVO" id="productMap">
+		<result property="pno" column="pno"/>
+		<result property="category_code" column="category_code"/>
+		<result property="pname" column="pname"/>
+		<result property="regdate" column="regdate"/>
+		<result property="update_date" column="update_date"/>
+		<result property="price" column="price"/>
+		<result property="company" column="company"/>
+		<result property="sales_price" column="sales_price"/>
+		<result property="divcode" column="divcode"/>
+		<result property="count" column="count"/>
+		<result property="account_code" column="account_code"/>
+		<result property="warehouse_code" column="warehouse_code"/>
+		<result property="finish_count" column="finish_count"/>
+		<result property="remain_count" column="remain_count"/>
 		<collection property="codeVO" resultMap="codeVO"/>
+	</resultMap>
+	
+	<resultMap type="com.itwillbs.domain.CategoryVO" id="categoryVO">
+		<result property="category_code" column="category_code"/>
+		<result property="category" column="category"/>
 	</resultMap>
 	
 	<resultMap type="com.itwillbs.domain.CodeVO" id="codeVO">
@@ -25,26 +35,30 @@
 		<result property="korname" column="korname"></result>
 	</resultMap>
 	
-	<select id="selectStoreIngList" parameterType="storeVO" resultMap="storeVO">
-		select c.korname, s.divcode, s.pno, s.pname, s.count, s.category, s.price, s.store_date, s.update_date, s.account_code 
-		from store s 
-		join code c 
-		on s.divcode = c.divcode 
-		where s.divcode=1
+	<select id="productList" parameterType="productVO" resultMap="productMap">
+		select c.korname, p.divcode, p.pno, p.pname, p.count, p.price, p.sales_price, p.account_code  
+		from product p 
+		join code c on p.divcode = c.divcode
+		where p.divcode=1
 	</select>
 	
 	<select id="selectCodeList" resultType="codeVO">
 		select * from code where divcode=1 or divcode=2 or divcode=3
 	</select>
 	
-	<update id="updateCode">
-		update store set divcode = #{divcode} 
+	<update id="updateProductCode">
+		update product set divcode = #{divcode} 
 		where pno = #{pno}
 	</update>
 	
-	<select id="selectStore" resultType="StoreVO">
-		select * from store 
+	<select id="selectProduct" resultType="ProductVO">
+		select * from product 
 		where pno = #{pno}
 	</select>
+	
+	<update id="updateCode">
+		update store set divcode = #{divcode}, update_date=now()
+		where pno = #{pno}
+	</update>
 	
 </mapper>

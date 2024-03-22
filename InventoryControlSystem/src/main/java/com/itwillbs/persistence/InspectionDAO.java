@@ -2,30 +2,29 @@ package com.itwillbs.persistence;
 
 import java.util.List;
 
-import com.itwillbs.domain.InspectionVO;
+import com.itwillbs.domain.ProductVO;
 
 public interface InspectionDAO {
 	
 	// 검수 목록 조회
-	public List<InspectionVO> inspectionList() throws Exception;
+	public List<ProductVO> productInspectionList() throws Exception;
 	
-	// 검수 본문 조회
-	public InspectionVO inspectionRead(String pno) throws Exception;
+	// 검수 본문 조회 - product
+	public ProductVO productInspectionRead(String pno) throws Exception;
 	
-	// 검수 업데이트 
-	public void inspectionUpdate(InspectionVO vo) throws Exception;
+	// 검수 업데이트 - product 
+	public void productInspectionUpdate(ProductVO pvo) throws Exception;
 	
-	// 검수 remain_Quantity 업데이트
-	public void inspectionRemainUpdate(InspectionVO vo) throws Exception;
+	// 검수 remain_count 업데이트 - product
+	public void productInspectionRemainUpdate(ProductVO pvo) throws Exception;
 	
-	// 검수목록 현황별 페이지 Div2 검수
-	public List<InspectionVO> div2() throws Exception;
+	// 검수에서 재고로 넘어가기 - product
+	public void productMoveToStock() throws Exception;
 	
-	// 검수목록 현황별 페이지 Div3 완료
-	public List<InspectionVO> div3() throws Exception;
-	// 검수에서 재고로 넘어가기
-	public void moveToStock() throws Exception;
+	// 검수목록 현황별 페이지 Div2 검수 - product
+	public List<ProductVO> productDiv2() throws Exception;
 	
-	
+	// 검수목록 현황별 페이지 Div3 완료 - product
+	public List<ProductVO> productDiv3() throws Exception;
 	
 }

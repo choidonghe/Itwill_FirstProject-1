@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.itwillbs.domain.InspectionVO;
+import com.itwillbs.domain.ProductVO;
 
 @Repository
 public class InspectionDAOImpl implements InspectionDAO{
@@ -22,47 +22,44 @@ public class InspectionDAOImpl implements InspectionDAO{
 	private static final String NAMESPACE = "com.itwillbs.mapper.InspectionMapper";
 	
 	@Override
-	public List<InspectionVO> inspectionList() throws Exception {
-		logger.debug(" List<InspectionVO> inspectionList() 호출 ");
-		return sqlSession.selectList(NAMESPACE+".selectInspection");
-	}
-
-	@Override
-	public InspectionVO inspectionRead(String pno) throws Exception {
-		logger.debug(" inspectionRead(String pno) 호출 ");
-		return sqlSession.selectOne(NAMESPACE+".inspectionRead",pno);
-	}
-
-	@Override
-	public void inspectionUpdate(InspectionVO vo) throws Exception {
-		logger.debug(" inspectionUpdate(InspectionVO vo) 호출 ");
-		sqlSession.update(NAMESPACE+".updateInspection", vo);
+	public void productInspectionUpdate(ProductVO pvo) throws Exception {
 		
+		sqlSession.update(NAMESPACE + ".productUpdateInspection", pvo);
 	}
 
 	@Override
-	public void inspectionRemainUpdate(InspectionVO vo) throws Exception {
-		logger.debug(" inspectionRemainUpdate() 실행 ");
-		sqlSession.update(NAMESPACE+".updateRemain",vo);
+	public void productInspectionRemainUpdate(ProductVO pvo) throws Exception {
+		sqlSession.update(NAMESPACE + ".productUpdateRemain", pvo);
 	}
 
 	@Override
-	public List<InspectionVO> div2() throws Exception {
-		logger.debug(" div2 () 입고검수 호출 ");
-		return sqlSession.selectList(NAMESPACE+".inspectionDiv2");
+	public void productMoveToStock() throws Exception {
+		sqlSession.insert(NAMESPACE + ".productMoveToStock");
 	}
 
 	@Override
-	public List<InspectionVO> div3() throws Exception {
-		logger.debug(" div3() 입고 검수 호출 ");
-		return sqlSession.selectList(NAMESPACE+".inspectionDiv3");
+	public List<ProductVO> productDiv2() throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + ".productInspectionDiv2");
 	}
 
 	@Override
-    public void moveToStock() throws Exception {
-        logger.debug(" moveToStock() 재고로 넘어가기 호출 ");
-        sqlSession.insert(NAMESPACE+".moveToStock");
-    }
+	public ProductVO productInspectionRead(String pno) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE + ".productInspectionRead", pno);
+	}
+
+	@Override
+	public List<ProductVO> productInspectionList() throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + ".selectInspection");
+	}
+
+	@Override
+	public List<ProductVO> productDiv3() throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + ".productInspectionDiv3");
+	}
 	
 	
 }

@@ -13,21 +13,21 @@
         <td>제품 번호:</td>
         <td><input type="text" name="pno" required readonly value="${vo.pno }"></td>
     </tr>
-    <tr>
+<%--     <tr>
         <td>담당자명:</td>
         <td><input type="text" name="id" required value="${vo.id }"></td>
-    </tr>
+    </tr> --%>
     <tr>
         <td>전체 수량:</td>
-        <td><input type="number" name="quantity" required readonly value="${vo.quantity }"></td>
+        <td><input type="number" name="count" required readonly value="${vo.count }"></td>
     </tr>
      <tr>
         <td>검수 수량:</td>
-        <td><input type="number" name="finish_quantity" required value="${vo.finish_quantity }"></td>
+        <td><input type="number" name="finish_count" required value="${vo.finish_count }"></td>
     </tr>
     <tr>
         <td>남은 수량:</td>
-        <td><input type="number" name="remain_quantity" required readonly="readonly" value="${vo.remain_quantity }"></td>
+        <td><input type="number" name="remain_count" required readonly="readonly" value="${vo.remain_count }"></td>
     </tr>
     <tr>
         <td>검수 여부:</td>
