@@ -34,6 +34,7 @@
 					</c:if>
 					<input type="hidden" name="pno" value="${store.pno }">
 					<input type="hidden" name="count" value="${store.count }">
+					<input type="hidden" name="remain_count" value="${store.remain_count }">
 					<input type="hidden" name="regdate" value="${store.regdate }">
 					<input type="hidden" name="warehouse_code" value="${store.warehouse_code }">
 					<input type="hidden" name="category_code" value="${store.category_code }">

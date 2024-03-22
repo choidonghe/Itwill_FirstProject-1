@@ -57,7 +57,7 @@ th {
                 <th>총 검수량</th>
                 <th>남은 검수량</th>
                 <th>입고날짜</th>
-                <th>수정날짜</th>
+                <th>검수날짜</th>
             </tr>
        		<c:forEach var="inspectionList" items="${inspectionList }">
             <tr>
