@@ -190,6 +190,23 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping(value = "/notice",method = RequestMethod.GET)
+	public void noticeGET()throws Exception{
+		logger.debug(" noticeGET() 호출");
+		
+		
+	}
+	
+	@RequestMapping(value = "/notice",method = RequestMethod.POST)
+	public String noticePOST()throws Exception{
+		logger.debug(" noticePOST() 호출 ");
+		
+		
+		
+		return "redirect:/main";
+	}
+	
+	
 	
 	
 } // controller
