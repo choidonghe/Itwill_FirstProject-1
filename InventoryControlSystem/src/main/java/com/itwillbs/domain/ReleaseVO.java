@@ -20,6 +20,6 @@ public class ReleaseVO {
 	private String delivery_company;
 	private String delivery_phone;
 	private String delivery_manager;
-	private boolean code_div;
+
 
 }

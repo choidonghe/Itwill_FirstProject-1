@@ -8,7 +8,7 @@
 	<h1>informatin.jsp</h1>
 	
 	${infoList} <br>
-	
+
 	<table border="1">
 		<tr>
 			<td>divcode</td>
@@ -25,27 +25,27 @@
 			<td>delivery_phone</td>
 			<td>delivery_manager</td>
 		</tr>
-		
-		<c:forEach var="infoList" items="${infoList}">
-			<tr>
-				<td>${infoList.divcode}</td>
-				<td>${infoList.id}</td>
-				<td>${infoList.pno}</td>
-				<td>${infoList.pname}</td>
-				<td>${infoList.category}</td>
-				<td>${infoList.release_date}</td>
-				<td>${infoList.update_date}</td>
-				<td>${infoList.price}</td>
-				<td>${infoList.order_date}</td>
-				<td>${infoList.order_count}</td>
-				<td>${infoList.delivery_phone}</td>
-				<td>${infoList.delivery_manager}</td>
-			</tr>
-		</c:forEach>
+		<tr>
+			<td>${infoList.divcode}</td>
+			<td>${infoList.id}</td>
+			<td>${infoList.pno}</td>
+			<td>${infoList.pname}</td>
+			<td>${infoList.category}</td>
+			<td>${infoList.release_date}</td>
+			<td>${infoList.update_date}</td>
+			<td>${infoList.price}</td>
+			<td>${infoList.order_date}</td>
+			<td>${infoList.order_count}</td>
+			<td>${infoList.delivery_phone}</td>
+			<td>${infoList.delivery_manager}</td>
+			<td>
+			<input type="button" name="modify" value="수정" onclick="location.href='/release/modify?pno=${infoList.pno}';">
+			</td>
+		</tr>
 	</table>
-	
 
-	
+	<button onclick="history.back()">뒤로가기</button>
+
 <%@ include file="../include/footer.jsp"%>
 
 			

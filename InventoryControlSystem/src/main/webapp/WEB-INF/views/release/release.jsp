@@ -9,16 +9,14 @@
 	
 	${release}
 	
-	업체명, 제품명, 출고 수량 
-	pname, pno order_count
-	
 	<fieldset>
 		<form action="" method="post">
-			업체명 : <input type="text" name="pname" value="${release[0].pname}" readonly="readonly">
-			제품명 : <input type="text" name="pno" value="${release[0].pno}" readonly="readonly">
+			주문번호 : <input type="text" name="pno" value="${release[0].pno}" readonly="readonly">
+			제품명 : <input type="text" name="pname" value="${release[0].pname}" readonly="readonly">
 			출고 수량 : <input type="text" name="order_count" value="${release[0].order_count}" readonly="readonly"> <br>
 			
 			<input type="submit" value="출고 확인">
+			<button onclick="history.back()">뒤로가기</button>
 		</form>
 	</fieldset>
 	

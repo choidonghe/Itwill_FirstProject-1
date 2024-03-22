@@ -28,77 +28,48 @@ public class ReleaseController {
 	
 	// http://localhost:8088/release/main
 	
-	@RequestMapping(value = "/main",method = RequestMethod.GET)
-	public void Main(ReleaseVO vo,Model model) throws Exception {
-		logger.debug(" ReleaseMain() 호출 ");
+	@RequestMapping(value = "main",method = RequestMethod.GET)
+	public void main(Model model) throws Exception{
+		logger.debug("main() 호출");
 		
-		List<ReleaseVO> List = rService.releaseList();
+		List<ReleaseVO> mainList = rService.releaseList();
 		
-		model.addAttribute("List", List);
-		
-
+		model.addAttribute("mainList", mainList);
 	}
 	
-	@RequestMapping(value = "/information",method = RequestMethod.GET)
-	public void information(Model model,@RequestParam("divcode") int divcode, ReleaseVO vo) throws Exception {
-		logger.debug("information() 호출");
+	@RequestMapping(value = "information",method = RequestMethod.GET)
+	public void information(String pno,Model model) throws Exception{
+		logger.debug("informatino() 호출");
 		
-		logger.debug("divcode:" +divcode);
+		logger.debug("pno:"+pno);
 		
-		List<ReleaseVO> infoList = rService.releaseInfoList(vo);
+		ReleaseVO infoList = rService.releaseInfoList(pno);
+		logger.debug("infoList:"+infoList);
 		
-		model.addAttribute("infoList", infoList);	
+		model.addAttribute("infoList", infoList);
 	}
 	
-	@RequestMapping(value = "/modify",method = RequestMethod.GET)
-	public void modify(@RequestParam("divcode") int divcode,Model model,ReleaseVO vo) throws Exception {
-		logger.debug(" modify() 호출 ");
+	@RequestMapping(value = "modify",method = RequestMethod.GET)
+	public void modify(String pno,Model model) throws Exception{
+		logger.debug("modify() 호출");
 		
-		logger.debug("divcode() 호출");
+		logger.debug("pno:"+pno);
 		
-		List<ReleaseVO> modify = rService.releaseInfoList(vo);
+		ReleaseVO modifyList = rService.releaseInfoList(pno);
+		logger.debug("modifyList:"+modifyList);
 		
-		model.addAttribute("modify", modify);
+		model.addAttribute("modifyList", modifyList);
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modifyPOST(@RequestParam("divcode") int divcode, ReleaseVO vo) throws Exception {
-		logger.debug("modify()POST");
+	public String modifyPOST(ReleaseVO vo,Model model,String pno) throws Exception{
+		logger.debug(" modifyPOST() 호출");
 		
-		logger.debug("divcode:"+divcode);
-		
+		logger.debug("vo:"+vo);
 		
 		rService.releaseModify(vo);
 		
-		
 		return "redirect:/release/main";
 	}
-	
-	@RequestMapping(value = "/release",method = RequestMethod.GET)
-	public void release(ReleaseVO vo,Model model) throws Exception{
-		logger.debug("release() 호출");
-		
-		List<ReleaseVO> release = rService.releaseInfoList(vo);
-		
-		model.addAttribute("release", release);
-	}
-	@RequestMapping(value = "/release",method = RequestMethod.POST)
-	public String releasePOST(ReleaseVO vo) throws Exception{
-		logger.debug(" release()POST 호출");
-		
-		logger.debug("vo:"+ vo);
-		
-		rService.releaseCheck(vo);
-		
-		
-		return "redirect:/release/main";
-		
-	}
-	
-
-	
-	
-	
-	
 
 }

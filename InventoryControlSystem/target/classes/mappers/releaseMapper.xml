@@ -12,17 +12,22 @@
 	
 	<select id="getReleaseInfoList" resultType="ReleaseVO">
 		select * from tbl_release
-		where divcode=#{divcode}
+		where pno=#{pno}
 	</select>
 	
-	<update id="upReleaseModify">
-		update tbl_release set release_date=#{release_date}, order_count=#{order_count}
-		where divcode=#{divcode}
+	<update id="upReleaseModify" parameterType="ReleaseVO">
+		update tbl_release set order_count=#{order_count}
+		where pno=#{pno}
 	</update>
 	
 	<update id="upCheckRelease">
 		update tbl_release set pname=#{pname},pno=#{pno},order_count=order_count-#{order_count}
-		where divcode=#{divcode}
+		where pno=#{pno}
 	</update>
+	
+	<delete id="deRelease">
+		delete from tbl_release
+		where pno=#{pno}
+	</delete>
 	
 	</mapper>

@@ -30,17 +30,17 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 	}
 
 	@Override
-	public List<ReleaseVO> listInfoRelease(ReleaseVO vo) throws Exception {
+	public ReleaseVO listInfoRelease(String pno) throws Exception {
 		logger.debug("listInfoRelease(ReleaseVO vo) 호출");
 		
-		return sqlSession.selectList(NAMESPACE+".getReleaseInfoList", vo);
+		return sqlSession.selectOne(NAMESPACE+".getReleaseInfoList", pno);
 	}
 
 	@Override
 	public void modifyRelease(ReleaseVO vo) throws Exception {
 		logger.debug("modifyRelease(ReleaseVO vo) 호출");
 		
-		sqlSession.selectOne(NAMESPACE+".upReleaseModify", vo);
+		sqlSession.update(NAMESPACE+".upReleaseModify", vo);
 		
 	}
 
@@ -50,6 +50,15 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 		
 		return sqlSession.selectOne(NAMESPACE+".upCheckRelease", vo);
 	}
+
+	@Override
+	public void deleteRelease(String pno) throws Exception {
+		logger.debug("deleteRelease(ReleaseVO vo) 호출");
+		
+		sqlSession.selectOne(NAMESPACE+".deRelease", pno);
+	}
+	
+	
 	
 	
 

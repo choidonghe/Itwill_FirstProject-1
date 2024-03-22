@@ -27,10 +27,10 @@ public class ReleaseServiceImpl implements ReleaseService{
 	}
 
 	@Override
-	public List<ReleaseVO> releaseInfoList(ReleaseVO vo) throws Exception {
+	public ReleaseVO releaseInfoList(String pno) throws Exception {
 		logger.debug("releaseInfoList(ReleaseVO vo) 호출");
 		
-		return rdao.listInfoRelease(vo);
+		return rdao.listInfoRelease(pno);
 	}
 
 	@Override
@@ -47,6 +47,15 @@ public class ReleaseServiceImpl implements ReleaseService{
 		
 		return rdao.checkRelease(vo);
 	}
+
+	@Override
+	public void releaseDelete(String pno) throws Exception {
+		logger.debug("releaseDelete(ReleaseVO vo) 호출");
+		
+		rdao.deleteRelease(pno);
+	}
+	
+	
 	
 	
 	
