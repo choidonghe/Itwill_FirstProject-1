@@ -10,4 +10,7 @@ public interface ProductDAO {
 	public void productCodeUpdate(ProductVO pvo) throws Exception;
 	
 	public ProductVO selectProduct(String pno) throws Exception;
+	
+	public void insertInspection(ProductVO pvo) throws Exception;
+	
 }

@@ -29,6 +29,11 @@ public class ProductDAOImpl implements ProductDAO {
 		
 		return sqlSession.selectOne(NAMESPACE + ".selectProduct", pno);
 	}
+	@Override
+	public void insertInspection(ProductVO pvo) throws Exception {
+		
+		sqlSession.insert(NAMESPACE + ".insertInspection", pvo);
+	}
 	
 	
 }

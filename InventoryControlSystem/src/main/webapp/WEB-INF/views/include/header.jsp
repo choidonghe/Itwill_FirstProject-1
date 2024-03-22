@@ -311,11 +311,11 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="header">MAIN NAVIGATION</li>
-					<li class="treeview"><a href="#"> <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+					<li class="treeview"><a href="#"> <i class="fa fa-dashboard"></i> <span>입고</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="/resources/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-							<li><a href="/resources/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+							<li><a href="/storeinglist"><i class="fa fa-circle-o"></i> 입고예정</a></li>
+							<li><a href="/inspec/inspectionMain"><i class="fa fa-circle-o"></i> 입고검수</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-files-o"></i> <span>Layout Options</span> <span class="label label-primary pull-right">4</span>
 					</a>

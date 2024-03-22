@@ -28,6 +28,11 @@ public class ProductServiceIpl implements ProductService {
 		
 		return pdao.selectProduct(pno);
 	}
+	@Override
+	public void insertInspection(ProductVO pvo) throws Exception {
+		
+		pdao.insertInspection(pvo);
+	}
 	
 	
 }

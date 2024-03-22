@@ -11,4 +11,6 @@ public interface ProductService {
 	public void updateProductCode(ProductVO pvo) throws Exception;
 	
 	public ProductVO pRead(String pno) throws Exception;
+	
+	public void insertInspection(ProductVO pvo) throws Exception;
 }
