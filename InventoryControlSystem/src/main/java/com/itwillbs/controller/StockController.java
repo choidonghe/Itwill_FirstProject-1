@@ -50,13 +50,14 @@ public class StockController {
 		
 		PageVO pageVO = new PageVO();
 		pageVO.setCri(cri);
-		pageVO.setTotalCount(sService.getBoardListCount());
+		pageVO.setTotalCount(sService.getBoardListCount(cri));
 		
 		List<StockVO> stockList = sService.getListCri(cri); // 페이징
 		logger.debug(" list.size : " + stockList.size());
 		logger.debug("키워드 : " + cri.getKeyword());
 		logger.debug("타입 : " + cri.getType());
 		logger.debug("cri toString : " + cri.toString());
+		logger.debug(" 검색 결과 : " + stockList);
 		
 		// 연결된 뷰페이지에 정보 전달(Model)
 		model.addAttribute("stockList", stockList);

@@ -67,12 +67,26 @@
 					</div>
 				
 					<!-- 한 페이지에 표시할 항목 수 스크립트 추가 -->	
-					<script>
-					    function changePageSize() {
-					        var selectedPageSize = document.getElementById("pageSizeSelect").value;
-					        location.href = "/stock/stockMainCri?page=1&pageSize=" + selectedPageSize;
-					    }
-					</script>
+<script>
+    function changePageSize() {
+        // 선택된 페이지 크기 가져오기
+        var selectedPageSize = document.getElementById("pageSizeSelect").value;
+        
+        // 검색어와 검색 유형 가져오기
+        var keyword = document.getElementById("searchInput").value.trim();
+        var type = document.getElementById("categorySelect").value;
+        
+        // 검색어가 존재하는 경우에만 URL에 추가
+        var searchParams = "";
+        if (keyword !== "") {
+            searchParams = "&type=" + type + "&keyword=" + encodeURIComponent(keyword);
+        }
+        
+        // 새로운 URL로 이동
+        location.href = "/stock/stockMainCri?page=1&pageSize=" + selectedPageSize + searchParams;
+    }
+</script>
+
 				</div>
 			<!-- 한 페이지에 표시할 항목 수 스크립트 추가 -->
 				
@@ -103,11 +117,9 @@
 			                </td>
 			                <td>
 			                    <input type="text" id="searchInput" name="keyword" class="form-control" placeholder="검색어 입력"
-			                           style="margin-bottom: 5px;"
-<%-- 			                           value='<c:out value="${pageVO.cri.keyword }"/>--%>'/>
-<!-- 			                    <input type="hidden" name="page" value = "1"> -->
-<%-- 			                    <input type="hidden" name="pageSize" value = ${param.pageSize }> --%>
+			                           style="margin-bottom: 5px;" value = "${PageVO.cri.keyword }"/>
 			                </td>
+			                
 			                <td>
 			                    <button id="search-btn" class="btn btn-flat"
 			                            style="margin-left: 3px; margin-bottom: 5px;">
@@ -116,44 +128,35 @@
 			                </td>
 			            </tr>
 			        </table>
-			        				<input type = "hidden" name = "page" value = "${pageVO.cri.page }">
+    				<input type = "hidden" name = "page" value = "${pageVO.cri.page }">
 				<input type = "hidden" name = "pageSize" value = "${pageVO.cri.pageSize }">
 			    </form>
 			</div>
-
 			<script>
-    $(document).ready(function() {
-        // 이 부분에서 moveForm을 찾아 정의합니다.
-        var searchForm = $("#searchForm");
-        
-        $(".form-group button").on("click", function(e){
-            e.preventDefault(); // 기본 이벤트 동작 방지
+    document.addEventListener("DOMContentLoaded", function() {
+        // 폼 요소와 검색 버튼 요소 가져오기
+        var searchForm = document.getElementById("searchForm");
+        var searchBtn = document.getElementById("search-btn");
 
-            let type = $("#categorySelect").val(); // 검색 유형 가져오기
-            let keyword = $("#searchInput").val(); // 키워드 가져오기
+        // 검색 버튼 클릭 시 이벤트 처리
+        searchBtn.addEventListener("click", function(event) {
+            event.preventDefault(); // 기본 동작 방지 (페이지 새로고침 방지)
 
-            if(!type) {
-                alert("검색 종류를 선택하세요.");
-                return false;
+            // 검색어 입력 요소 가져오기
+            var searchInput = document.getElementById("searchInput");
+
+            // 검색어가 비어있는지 확인
+            if (searchInput.value.trim() !== "") {
+                // 검색어가 비어 있지 않으면 폼 제출
+                searchForm.submit();
+            } else {
+                // 검색어가 비어 있으면 알림 표시
+                alert("검색어를 입력해주세요.");
             }
-
-            if(!keyword) {
-                alert("키워드를 입력하세요.");
-                return false;
-            }
-
-            // moveForm에 값 설정
-            searchForm.find("input[name='type']").val(type);
-            searchForm.find("input[name='keyword']").val(keyword);
-            searchForm.find("input[name='page']").val(1); // 페이지 값을 1로 설정합니다.
-
-            // 폼 제출
-            searchForm.submit();
         });
     });
 </script>
-			
-			<!-- 검색창 추가 -->
+
 				
 				
 
@@ -248,7 +251,7 @@
                         <c:forEach var = "idx" begin= "${pageVO.startPage }"
                         end= "${pageVO.endPage}" step="1">
                             <li ${pageVO.cri.page == idx? "class='active'":""}>
-                            <a href="/stock/stockMainCri?page=${idx }&pageSize=${param.pageSize}" 
+                            <a href="/stock/stockMainCri?page=${idx }&pageSize=${param.pageSize}&keyword=${param.keyword}&type=${param.type}" 
                             aria-controls="example1" data-dt-idx="1" tabindex="0">${idx }</a></li>
                         </c:forEach>
                             <c:if test="${pageVO.next }">
@@ -262,7 +265,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 

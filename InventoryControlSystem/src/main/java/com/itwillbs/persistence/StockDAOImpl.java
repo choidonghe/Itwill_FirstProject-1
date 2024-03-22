@@ -49,7 +49,7 @@ public class StockDAOImpl implements StockDAO{
 
 	// 총 글 개수 계산
 	@Override
-	public int stockListCount() throws Exception {
+	public int stockListCount(Criteria cri) throws Exception {
 		logger.debug(" boardListCount() 호출 ");
 		return sqlSession.selectOne(NAMESPACE + ".totalCount");
 	}

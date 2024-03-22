@@ -37,9 +37,9 @@ public class StockServiceImpl implements StockService {
 
 
 	@Override
-	public int getBoardListCount() throws Exception {
+	public int getBoardListCount(Criteria cri) throws Exception {
 		logger.debug(" service - getBoardListCount() 호출 ");
-		return sdao.stockListCount();
+		return sdao.stockListCount(cri);
 	}
 
 

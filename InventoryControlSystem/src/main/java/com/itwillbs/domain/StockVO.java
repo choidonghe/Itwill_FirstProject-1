@@ -11,7 +11,11 @@ public class StockVO {
 	private String pname;
 	private String company;
 	private String category;
-		
+	
+	private Criteria cri;
+
+	
+	
 
 }
 
