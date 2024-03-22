@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwillbs.mapper.MainMapper">
+
+	<select id="getSellTotal" resultType="String">
+		SELECT SUM(price) FROM projectdb.release 
+		WHERE release_date LIKE CONCAT('%',#{date},'%')
+	
+	</select>
+	
+	<select id="getReleaseMonth" resultType="String">	
+		SELECT CAST(release_date AS DATE) FROM projectdb.release 
+		WHERE release_date LIKE CONCAT('%',#{month},'%') 
+		GROUP BY CAST(release_date AS DATE)
+	</select>
+
+	<select id="getStoreMonth" resultType="String">	
+		SELECT CAST(store_date AS DATE) FROM store  
+		WHERE store_date LIKE CONCAT('%',#{month},'%') 
+		GROUP BY CAST(store_date AS DATE)
+	</select>
+	
+	<select id="ergOrder" resultType="com.itwillbs.domain.EmergencyOrderVO">
+		SELECT p.pno, p.pname, s.count
+		FROM product p 
+		LEFT JOIN stock s
+		ON p.pno = s.pno
+		WHERE <![CDATA[ s.count < 5 ]]> 
+		limit #{startPage},#{orderPageSize};
+	</select>
+	
+	<select id="orderTotalCount" resultType="int">
+		SELECT count(p.pno) 
+		FROM product p 
+		LEFT JOIN stock s
+		ON p.pno = s.pno
+		WHERE <![CDATA[ s.count < 5 ]]>;
+	</select>
+	
+	<select id="noticeTotalCount" resultType="int">
+		SELECT count(bno) 
+		FROM notice
+	</select>
+	
+	<select id="noticeList" resultType="com.itwillbs.domain.NoticeVO">
+		<![CDATA[
+		select * from notice  
+		where bno > 0 
+		order by bno desc, regdate desc
+		limit #{startPage},#{noticePageSize}
+		]]>
+	</select>
+	
+	<select id="searchNoticeCount" resultType="int">
+		SELECT COUNT(bno) FROM notice 
+		WHERE content LIKE CONCAT('%',#{search},'%')
+	
+	</select>
+	
+	<select id="searchNoticeList" resultType="com.itwillbs.domain.NoticeVO">
+		SELECT * FROM notice  
+		WHERE content LIKE CONCAT('%',#{search},'%') 
+	
+	</select>
+	
+	<select id="getNoticeBno" resultType="int">
+		SELECT MAX(bno) FROM notice
+	</select>
+	
+	
+	<insert id="insertNotice">
+		INSERT INTO notice (bno, title, content) 
+		VALUES(#{bno}, #{title}, #{content})
+	
+	</insert>
+	
+	
+	
+</mapper>

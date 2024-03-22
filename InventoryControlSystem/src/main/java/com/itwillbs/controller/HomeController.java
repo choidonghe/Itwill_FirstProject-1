@@ -2,6 +2,7 @@ package com.itwillbs.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -16,7 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.itwillbs.domain.EmergencyOrderVO;
+import com.itwillbs.domain.ErgOrderCriteria;
 import com.itwillbs.domain.MemberVO;
+import com.itwillbs.domain.NoticeCriteria;
+import com.itwillbs.domain.NoticePageVO;
+import com.itwillbs.domain.NoticeVO;
+import com.itwillbs.domain.ErgOrderPageVO;
+import com.itwillbs.service.MainService;
 import com.itwillbs.service.MemberService;
 
 /**
@@ -27,6 +35,9 @@ public class HomeController {
 	
 	@Inject
 	private MemberService mService;
+	
+	@Inject
+	private MainService mainService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -90,11 +101,111 @@ public class HomeController {
 		return "redirect:/main";
 	}
 	
-	@RequestMapping(value = "/main",method = RequestMethod.GET)
-	public void mainGET() throws Exception{
-		logger.debug(" mainGET() 호출");
 	
+	
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public void mainGET(ErgOrderCriteria oCri,NoticeCriteria nCri, Model model) throws Exception{
+		logger.debug(" main() 실행");
+		
+		List<String> sellList = mainService.sellTotalGet();
+		List<String> dayList = mainService.dayListGet();
+		List<String> releaseList = mainService.releaseListGet();
+		List<String> storeList = mainService.storeListGet();
+		
+		// 긴급발주ListGET
+		ErgOrderPageVO orderPageVO = new ErgOrderPageVO();
+		orderPageVO.setCri(oCri);
+		orderPageVO.setTotalCount(mainService.getOrderListCount()); // 총 개수 직접 계산
+		
+		List<EmergencyOrderVO> ergList = mainService.ergOrederGet(oCri);
+		// 긴급발주 페이징정보
+		model.addAttribute("oCri", oCri);
+		model.addAttribute("orderPageVO", orderPageVO);
+		
+		// 공지사항ListGET
+		NoticePageVO noticePageVO = new NoticePageVO();
+		noticePageVO.setCri(nCri);
+		noticePageVO.setTotalCount(mainService.getNoticeListCount());
+		
+		List<NoticeVO> noList = mainService.noListGet(nCri);
+		
+		// 공지사항 페이징 정보
+		model.addAttribute("nCri", nCri);
+		model.addAttribute("noticePageVO", noticePageVO);
+		
+		// 데이터 저장
+		model.addAttribute("sellList", sellList);
+		model.addAttribute("dayList", dayList);
+		model.addAttribute("releaseList", releaseList);
+		model.addAttribute("storeList", storeList);
+		model.addAttribute("ergList", ergList);
+		model.addAttribute("noList", noList);
+		
+		
+		
+		
+		//페이지 이동
+		
 	}
+	
+	@RequestMapping(value = "/main", method = RequestMethod.POST)
+	public void mainPOST(@RequestParam("search") String search, ErgOrderCriteria oCri,NoticeCriteria nCri, Model model) throws Exception {
+		logger.debug(" mainPOST() 호출");
+		List<String> sellList = mainService.sellTotalGet();
+		List<String> dayList = mainService.dayListGet();
+		List<String> releaseList = mainService.releaseListGet();
+		List<String> storeList = mainService.storeListGet();
+		
+		// 긴급발주ListGET
+		ErgOrderPageVO orderPageVO = new ErgOrderPageVO();
+		orderPageVO.setCri(oCri);
+		orderPageVO.setTotalCount(mainService.getOrderListCount()); // 총 개수 직접 계산
+		
+		List<EmergencyOrderVO> ergList = mainService.ergOrederGet(oCri);
+		
+		// 긴급발주 페이징정보
+		model.addAttribute("oCri", oCri);
+		model.addAttribute("orderPageVO", orderPageVO);
+		
+		// 공지사항ListGET
+		NoticePageVO noticePageVO = new NoticePageVO();
+		noticePageVO.setCri(nCri);
+		noticePageVO.setTotalCount(mainService.searchNoCount());
+		
+		List<NoticeVO> noList = mainService.searchNoListGet(nCri, search);
+		
+		// 공지사항 페이징 정보
+		model.addAttribute("nCri", nCri);
+		model.addAttribute("noticePageVO", noticePageVO);
+		
+		// 데이터 저장
+		model.addAttribute("sellList", sellList);
+		model.addAttribute("dayList", dayList);
+		model.addAttribute("releaseList", releaseList);
+		model.addAttribute("storeList", storeList);
+		model.addAttribute("ergList", ergList);
+		model.addAttribute("noList", noList);		
+		
+		
+		
+	}
+	
+	@RequestMapping(value = "/notice",method = RequestMethod.GET)
+	public void noticeGET()throws Exception{
+		logger.debug(" noticeGET() 호출");
+		
+		
+	}
+	
+	@RequestMapping(value = "/notice",method = RequestMethod.POST)
+	public String noticePOST(NoticeVO vo)throws Exception{
+		logger.debug(" noticePOST() 호출 ");
+		
+		mainService.noticeWrite(vo);
+		
+		return "redirect:/main";
+	}
+	
 	
 	
 	
