@@ -151,6 +151,16 @@ public class MainDAOImpl implements MainDAO {
 		
 		return sql.selectList(NAMESPACE+".noticeList", cri);
 	}
+	
+	
+	
+
+	@Override
+	public int serchNoticeCount() throws Exception {
+		logger.debug(" serchNoticeCount() 호출");
+		
+		return sql.selectOne(NAMESPACE+".searchNoticeCount");
+	}
 
 	@Override
 	public List<NoticeVO> searchNoticeBoard(NoticeCriteria cri, String search) throws Exception {

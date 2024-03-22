@@ -54,10 +54,15 @@
 		]]>
 	</select>
 	
+	<select id="searchNoticeCount" resultType="int">
+		SELECT COUNT(bno) FROM notice 
+		WHERE content LIKE CONCAT('%',#{search},'%')
+	
+	</select>
+	
 	<select id="searchNoticeList" resultType="com.itwillbs.domain.NoticeVO">
 		SELECT * FROM notice  
 		WHERE content LIKE CONCAT('%',#{search},'%') 
-		
 	
 	</select>
 	

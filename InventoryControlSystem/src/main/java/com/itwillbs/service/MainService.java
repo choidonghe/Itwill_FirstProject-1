@@ -25,6 +25,8 @@ public interface MainService {
 	
 	public List<NoticeVO> noListGet(NoticeCriteria cri) throws Exception;
 	
+	public int searchNoCount() throws Exception;
+	
 	public List<NoticeVO> searchNoListGet(NoticeCriteria cri, String search) throws Exception;
 	
 	public void noticeWrite(NoticeVO vo)throws Exception;

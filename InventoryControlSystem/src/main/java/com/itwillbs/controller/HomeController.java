@@ -170,7 +170,7 @@ public class HomeController {
 		// 공지사항ListGET
 		NoticePageVO noticePageVO = new NoticePageVO();
 		noticePageVO.setCri(nCri);
-		noticePageVO.setTotalCount(mainService.getNoticeListCount());
+		noticePageVO.setTotalCount(mainService.searchNoCount());
 		
 		List<NoticeVO> noList = mainService.searchNoListGet(nCri, search);
 		

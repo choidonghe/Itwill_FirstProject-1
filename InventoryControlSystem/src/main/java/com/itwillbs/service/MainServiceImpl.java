@@ -96,6 +96,16 @@ public class MainServiceImpl implements MainService {
 		return mdao.noticeBoard(cri);
 	}
 
+	
+	
+
+	@Override
+	public int searchNoCount() throws Exception {
+		logger.debug(" searchNoCount() 호출 ");
+		
+		return mdao.serchNoticeCount();
+	}
+
 
 	@Override
 	public List<NoticeVO> searchNoListGet(NoticeCriteria cri, String search) throws Exception {

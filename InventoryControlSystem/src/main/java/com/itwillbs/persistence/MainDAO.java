@@ -27,6 +27,8 @@ public interface MainDAO {
 	public int noticeCount() throws Exception;
 	
 	public List<NoticeVO> noticeBoard(NoticeCriteria cri) throws Exception;
+	
+	public int serchNoticeCount() throws Exception;
 
 	public List<NoticeVO> searchNoticeBoard(NoticeCriteria cri, String search) throws Exception;
 	
