@@ -30,4 +30,8 @@ public interface MainDAO {
 
 	public List<NoticeVO> searchNoticeBoard(NoticeCriteria cri, String search) throws Exception;
 	
+	public int getNoticeBno() throws Exception;
+	
+	public void writeNotice(NoticeVO vo) throws Exception;
+	
 }// dao

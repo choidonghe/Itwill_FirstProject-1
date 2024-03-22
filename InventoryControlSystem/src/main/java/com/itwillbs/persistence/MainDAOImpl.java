@@ -155,8 +155,24 @@ public class MainDAOImpl implements MainDAO {
 	@Override
 	public List<NoticeVO> searchNoticeBoard(NoticeCriteria cri, String search) throws Exception {
 		logger.debug(" searchNoticeBoard(NoticeCriteria cri) 호출");
+		logger.debug(" search : "+search);
 		
 		return sql.selectList(NAMESPACE+".searchNoticeList", search);
+	}
+	
+	
+	@Override
+	public int getNoticeBno() throws Exception {
+		logger.debug(" getNoticeBno() 호출 ");
+		
+		return sql.selectOne(NAMESPACE+".getNoticeBno");
+	}
+
+	@Override
+	public void writeNotice(NoticeVO vo) throws Exception {
+		logger.debug(" insertNotice(NoticeVO vo) 호출 ");
+		
+		sql.insert(NAMESPACE+".insertNotice", vo);
 	}
 	
 	

@@ -103,6 +103,16 @@ public class MainServiceImpl implements MainService {
 		
 		return mdao.searchNoticeBoard(cri, search);
 	}
+
+
+	@Override
+	public void noticeWrite(NoticeVO vo) throws Exception {
+		logger.debug(" noticeWrite(NoticeVO vo) 호출");
+		vo.setBno(mdao.getNoticeBno()+1);
+		mdao.writeNotice(vo);
+		
+		logger.debug(" 글쓰기 완료 ");
+	}
 	
 	
 	

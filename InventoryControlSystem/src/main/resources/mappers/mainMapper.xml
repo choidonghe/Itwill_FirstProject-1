@@ -61,7 +61,16 @@
 	
 	</select>
 	
+	<select id="getNoticeBno" resultType="int">
+		SELECT MAX(bno) FROM notice
+	</select>
 	
+	
+	<insert id="insertNotice">
+		INSERT INTO notice (bno, title, content) 
+		VALUES(#{bno}, #{title}, #{content})
+	
+	</insert>
 	
 	
 	

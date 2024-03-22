@@ -198,10 +198,10 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/notice",method = RequestMethod.POST)
-	public String noticePOST()throws Exception{
+	public String noticePOST(NoticeVO vo)throws Exception{
 		logger.debug(" noticePOST() 호출 ");
 		
-		
+		mainService.noticeWrite(vo);
 		
 		return "redirect:/main";
 	}
