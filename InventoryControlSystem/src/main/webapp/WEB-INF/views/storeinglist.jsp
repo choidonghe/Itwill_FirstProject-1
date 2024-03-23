@@ -33,6 +33,7 @@
 					</select>
 					</c:if>
 					<input type="hidden" name="pno" value="${store.pno }">
+					<input type="hidden" name="pname" value="${store.pname }">
 					<input type="hidden" name="count" value="${store.count }">
 					<input type="hidden" name="remain_count" value="${store.remain_count }">
 					<input type="hidden" name="regdate" value="${store.regdate }">

@@ -49,13 +49,13 @@ th {
     <table>
         <thead>
             <tr>
-                <th>PNO</th>
+                <th>제품명</th>
                 <!-- <th>담당자 아이디</th> -->
                 <th>상태</th>
                 <th>총 검수량</th>
                 <th>남은 검수량</th>
                 <th>입고날짜</th>
-                <th>수정날짜</th>
+                <th>검수날짜</th>
             </tr>
        		<c:forEach var="inspectionList" items="${inspectionList }">
             <tr>

@@ -2,6 +2,7 @@ package com.itwillbs.service;
 
 import java.util.List;
 
+import com.itwillbs.domain.ErrorVO;
 import com.itwillbs.domain.ProductVO;
 
 public interface ProductService {
@@ -13,4 +14,7 @@ public interface ProductService {
 	public ProductVO pRead(String pno) throws Exception;
 	
 	public void insertInspection(ProductVO pvo) throws Exception;
+	
+	
+	
 }

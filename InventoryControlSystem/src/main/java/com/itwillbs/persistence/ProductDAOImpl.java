@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.ErrorVO;
 import com.itwillbs.domain.ProductVO;
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -34,6 +35,8 @@ public class ProductDAOImpl implements ProductDAO {
 		
 		sqlSession.insert(NAMESPACE + ".insertInspection", pvo);
 	}
+	
+	
 	
 	
 }

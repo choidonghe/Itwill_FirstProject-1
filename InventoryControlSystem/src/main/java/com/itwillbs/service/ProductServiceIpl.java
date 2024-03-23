@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.itwillbs.domain.ErrorVO;
 import com.itwillbs.domain.ProductVO;
 import com.itwillbs.persistence.ProductDAO;
 
@@ -33,6 +34,8 @@ public class ProductServiceIpl implements ProductService {
 		
 		pdao.insertInspection(pvo);
 	}
+	
+
 	
 	
 }

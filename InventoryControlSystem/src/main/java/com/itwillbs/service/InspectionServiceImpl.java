@@ -8,7 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.itwillbs.domain.ErrorVO;
 import com.itwillbs.domain.ProductVO;
+import com.itwillbs.domain.WarehouseVO;
 import com.itwillbs.persistence.InspectionDAO;
 
 @Service
@@ -55,5 +57,22 @@ public class InspectionServiceImpl implements InspectionService{
 		return idao.productDiv3();
 	}
 
+	// 창고목록 조회
+	@Override
+	public List<WarehouseVO> warehouseList() throws Exception {
 
+		return idao.warehouseList();
+	}
+	// 에러제품 넘기기
+	@Override
+	public void insertError(ProductVO pvo) throws Exception {
+		idao.insertError(pvo);
+	}
+
+	
+	// 불량품 목록 조회
+	@Override
+	public List<ErrorVO> errorList() throws Exception {
+		return idao.errorList();
+	}
 }

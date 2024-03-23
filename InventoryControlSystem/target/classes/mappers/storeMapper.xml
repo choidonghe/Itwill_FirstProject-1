@@ -47,13 +47,13 @@
 	</select>
 	
 	<update id="updateProductCode">
-		update product set divcode = #{divcode}, remain_count=count
+		update product set divcode = #{divcode}, remain_count=count, pname=#{pname}
 		where pno = #{pno}
 	</update>
 	
 	<insert id="insertInspection">
-		insert into inspection(pno,divcode,count,finish_count,remain_count,regdate,update_date,warehouse_code,category_code) 
-		values(#{pno},#{divcode},#{count},#{finish_count},#{remain_count},#{regdate},now(),#{warehouse_code},#{category_code})
+		insert into inspection(pno,pname,divcode,count,finish_count,remain_count,regdate,update_date,warehouse_code,category_code) 
+		values(#{pno},#{pname},#{divcode},#{count},#{finish_count},#{remain_count},#{regdate},now(),#{warehouse_code},#{category_code})
 	</insert>
 	
 	<select id="selectProduct" resultType="ProductVO">

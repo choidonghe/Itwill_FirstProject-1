@@ -21,6 +21,7 @@
 		<result property="finish_count" column="finish_count"/>
 		<result property="remain_count" column="remain_count"/>
 		<collection property="codeVO" resultMap="codeMap"/>
+		<collection property="warehouseVO" resultMap="warehouseVO"/>
 	</resultMap>
 
 	<resultMap type="com.itwillbs.domain.CodeVO" id="codeMap">
@@ -29,6 +30,27 @@
 		<result property="smcode" column="smcode"></result>
 		<result property="korname" column="korname"></result>
 	</resultMap>
+		
+	<resultMap type="com.itwillbs.domain.WarehouseVO" id="warehouseVO">
+		<result property="warehouse_code" column="warehouse_code"/>
+		<result property="category_code" column="category_code"/>
+		<result property="location" column="location"/>
+		<result property="pname" column="pname"/>
+		<result property="capacity" column="capacity"/>
+		<result property="manager" column="manager"/>
+		<result property="regdate" column="regdate"/>
+		<result property="update_date" column="update_date"/>
+	</resultMap>
+	
+	<resultMap type="com.itwillbs.domain.ErrorVO" id="errorVO">
+		<result property="pno" column="pno"/>
+		<result property="pname" column="pname"/>
+		<result property="divcode" column="divcode"/>
+		<result property="count" column="count"/>
+		<result property="regdate" column="regdate"/>
+		<result property="warehouse_code" column="warehouse_code"/>
+		<collection property="warehouseVO" resultMap="warehouseVO"></collection>
+	</resultMap>
 	
 	<!-- 검수목록 조회 -->
 	<select id="selectInspection" resultMap="productMap">
@@ -36,20 +58,24 @@
 		from inspection p 
 		join code c 
 		on c.divcode = p.divcode
-		where p.divcode = 2
+		where p.divcode = 2 or p.divcode = 7
 	</select>
+	
 	<!-- 검수현황본문 조회 - product -->
 	<select id="productInspectionRead" resultType="ProductVO"
 		resultMap="productMap">
 		select * from inspection where pno=#{pno}
 	</select>
-
-
-
+	
+	<!-- 창고 코드 조회 -->
+	<select id="selectWarehouse" resultMap="warehouseVO">
+		select * from warehouse
+	</select>
+	
 	<!-- 검수현황업데이트 - product -->
     <update id="productUpdateInspection" parameterType="ProductVO">
     <!-- 해당 divcode가 7인 행에서 사용자가 선택한 finish_quantity만큼 quantity에서 차감하고 나머지는 다른 업데이트로 처리 -->
-        UPDATE inspection
+       UPDATE inspection
         	SET count = CASE WHEN divcode = 7 THEN count - #{finish_count}
                           ELSE count
                       END,
@@ -57,12 +83,21 @@
                                   WHEN divcode = 7 THEN remain_count - #{finish_count}
                                   ELSE remain_count - #{finish_count}
                               END,
-            divcode = #{divcode},
             finish_count = #{finish_count},
             update_date = now(),
             warehouse_code = #{warehouse_code}
         WHERE pno = #{pno};
     </update>
+    
+    <!-- 검수 중 불량을 error테이블로 보내기 -->
+    <insert id="insertError">
+    	insert into error(pno,pname,divcode,count,regdate,warehouse_code) 
+        select pno, pname, 7 AS divcode, finish_count, now() AS regdate, warehouse_code from inspection where pno=#{pno}
+        <!-- values(#{pno},#{pname},#{divcode},#{finish_count},now(),#{warehouse_code}) -->
+        ON DUPLICATE KEY UPDATE 
+        error.count = error.count + #{finish_count}
+    </insert>
+    
     
     <!-- product에서 검수완료 상태이며, remain_count가 0인 데이터 stock으로 옮기기 -->
     <insert id="productMoveToStock" parameterType="java.lang.String">
@@ -90,8 +125,10 @@
 	<select id="productInspectionDiv3" resultType="ProductVO">
 		select * from inspection where divcode=3 order by regdate desc
 	</select>
-
-
+	<!-- product - 불량 제품 목록 조회 -->
+	<select id="errorProduct" resultMap="errorVO">
+		select * from error
+	</select>
 	
 	
 

@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.ErrorVO;
 import com.itwillbs.domain.ProductVO;
+import com.itwillbs.domain.WarehouseVO;
 
 @Repository
 public class InspectionDAOImpl implements InspectionDAO{
@@ -60,6 +62,24 @@ public class InspectionDAOImpl implements InspectionDAO{
 		
 		return sqlSession.selectList(NAMESPACE + ".productInspectionDiv3");
 	}
+
+	// 창고 코드 조회
+	@Override
+	public List<WarehouseVO> warehouseList() throws Exception {
+
+		return sqlSession.selectList(NAMESPACE + ".selectWarehouse");
+	}
+
+	@Override
+	public void insertError(ProductVO pvo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertError", pvo);
+	}
 	
+	
+	// 불량품 목록 조회
+	@Override
+	public List<ErrorVO> errorList() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".errorProduct");
+	}
 	
 }

@@ -13,6 +13,10 @@
         <td>제품 번호:</td>
         <td><input type="text" name="pno" required readonly value="${vo.pno }"></td>
     </tr>
+    <tr>
+        <td>제품명:</td>
+        <td><input type="text" name="pname" required readonly value="${vo.pname }"></td>
+    </tr>
 <%--     <tr>
         <td>담당자명:</td>
         <td><input type="text" name="id" required value="${vo.id }"></td>
@@ -43,10 +47,13 @@
         <td>창고위치:</td>
         <td>
             <select name="warehouse_code" required>
-                <option value="A01">A01</option>
-                <option value="A02">A02</option>
-                <option value="A03">A03</option>
-                <option value="A04">A04</option>
+            	<c:forEach var="warehouseList" items="${warehouseList}">
+            		<option value="${warehouseList.warehouse_code }">${warehouseList.location }</option>
+            	</c:forEach>
+<!--                 <option value="A01">A01</option> -->
+<!--                 <option value="A02">A02</option> -->
+<!--                 <option value="A03">A03</option> -->
+<!--                 <option value="A04">A04</option> -->
             </select>
         </td>
     </tr>

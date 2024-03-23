@@ -34,7 +34,7 @@ th {
 	<div class="box-header">
 	</div>
 	
-	 <h1>입고 검수 현황</h1>
+	<!-- <h1>입고 검수 현황</h1>
 	<div class="button-container">
 		<form action="/inspec/inspectionMain" method="GET">
 			<button type="submit">전체</button>
@@ -45,56 +45,55 @@ th {
 		<form action="/inspec/inspectionDiv3" method="post">
 		<button type="submit" value="div3">검수완료</button>
 		</form>
-	</div>
+	</div> -->
 
+	<fieldset>
+		<legend>입고 검수 현황</legend>
+		<div class="button-container">
+			<form action="/inspec/inspectionMain" method="GET">
+				<button type="submit">전체</button>
+			</form>
+			<form action="/inspec/inspectionDiv2" method="post">
+				<button type="submit" value="div2">미검수</button>
+			</form>
+			<form action="/inspec/inspectionDiv3" method="post">
+				<button type="submit" value="div3">검수완료</button>
+			</form>
+			<form action="/inspec/inspectionDiv4" method="post">
+				<button type="submit" value="div4">불량제품</button>
+			</form>
+			
+		</div>
+	    <table>
+	        <thead>
+	            <tr>
+	                <th>제품번호</th>
+	                <th>제품명</th>
+	                <!-- <th>담당자 아이디</th> -->
+	                <th>상태</th>
+	                <th>총 검수량</th>
+	                <th>남은 검수량</th>
+	                <th>입고날짜</th>
+	                <th>검수날짜</th>
+	            </tr>
+	       		<c:forEach var="inspectionList" items="${inspectionList }">
+	            <tr>
+	                <td><a href="/inspec/inspectionRead?pno=${inspectionList.pno}">${inspectionList.pno }</td>
+	                <%-- <td>${inspectionList.id }</td> --%>
+	                <td>${inspectionList.pname }</td>
+	                <td>${inspectionList.codeVO[0].korname }</td>
+	                <td>${inspectionList.count }</td>
+	                <td>${inspectionList.remain_count }</td>
+	                <td>${inspectionList.regdate }</td>
+	                <td>${inspectionList.update_date }</td>
+	            </tr>
+	            </c:forEach>
+	        </tbody>
+	    </table>
+	</fieldset>
 	<br>
-    <table>
-        <thead>
-            <tr>
-                <th>제품번호</th>
-                <!-- <th>담당자 아이디</th> -->
-                <th>상태</th>
-                <th>총 검수량</th>
-                <th>남은 검수량</th>
-                <th>입고날짜</th>
-                <th>검수날짜</th>
-            </tr>
-       		<c:forEach var="inspectionList" items="${inspectionList }">
-            <tr>
-                <td><a href="/inspec/inspectionRead?pno=${inspectionList.pno}">${inspectionList.pno }</td>
-                <%-- <td>${inspectionList.id }</td> --%>
-                <td>${inspectionList.codeVO[0].korname }</td>
-                <td>${inspectionList.count }</td>
-                <td>${inspectionList.remain_count }</td>
-                <td>${inspectionList.regdate }</td>
-                <td>${inspectionList.update_date }</td>
-            </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-	
-	
-	
-	
-	
 	
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <%@ include file="../include/footer.jsp"%>

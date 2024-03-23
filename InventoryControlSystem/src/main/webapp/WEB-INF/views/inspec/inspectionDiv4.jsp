@@ -34,14 +34,10 @@ th {
 	<div class="box-header">
 	</div>
 	
-	 <h1>입고 검수 현황</h1>
-
+	<h1>불량 제품</h1>
 	<div class="button-container">
 		<form action="/inspec/inspectionMain" method="get">
 			<button type="submit" name="all" value="all">전체</button>
-		</form>
-		<form action="/inspec/inspectionDiv3" method="post">
-			<button type="submit" name="status" value="검수완료">검수완료</button>
 		</form>
 	</div>
 
@@ -49,50 +45,26 @@ th {
     <table>
         <thead>
             <tr>
-            	<th>제품명</th>
-                <!-- <th>담당자 아이디</th> -->
+                <th>제품번호</th>
+                <th>제품명</th>
                 <th>상태</th>
-                <th>총 검수량</th>
-                <th>남은 검수량</th>
-                <th>입고날짜</th>
-                <th>검수날짜</th>
+                <th>수량</th>
+                <th>불량지정 날짜</th>
+                <th>창고위치</th>
             </tr>
-       		<c:forEach var="inspectionList" items="${inspectionList }">
+       		<c:forEach var="errorList" items="${errorList }">
             <tr>
-                <td><a href="/inspec/inspectionRead?pno=${inspectionList.pno}">${inspectionList.pno }</td>
-                <%-- <td>${inspectionList.id }</td> --%>
-                <td>${inspectionList.divcode}</td>
-                <td>${inspectionList.count }</td>
-                <td>${inspectionList.remain_count }</td>
-                <td>${inspectionList.regdate }</td>
-                <td>${inspectionList.update_date }</td>
+                <td>${errorList.pno }</td>
+                <td>${errorList.pname}</td>
+                <td>${errorList.divcode }</td>
+                <td>${errorList.count }</td>
+                <td>${errorList.regdate }</td>
+   	          	<td>${errorList.warehouse_code}</td>
             </tr>
             </c:forEach>
         </tbody>
     </table>
 	
-	
-	
-	
-	
-	
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <%@ include file="../include/footer.jsp"%>

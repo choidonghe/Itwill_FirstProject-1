@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.CodeVO;
+import com.itwillbs.domain.ErrorVO;
 import com.itwillbs.domain.ProductVO;
 import com.itwillbs.service.CodeService;
 import com.itwillbs.service.ProductService;
@@ -49,8 +50,6 @@ public class StoreIngController {
 		logger.debug("vo : " + pvo);	
 		return "redirect:storeinglist";
 	}
-	
-	
 	
 	
 	
