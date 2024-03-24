@@ -34,7 +34,7 @@ th {
 	<div class="box-header">
 	</div>
 	
-	 <h1>입고 검수 현황</h1>
+	 <h1>입고 검수완료 현황</h1>
 
 	<div class="button-container">
 		<form action="/inspec/inspectionMain" method="get">
@@ -42,6 +42,9 @@ th {
 		</form>
 		<form action="/inspec/inspectionDiv2" method="post">
 			<button type="submit" value="div2">미검수</button>
+		</form>
+		<form action="/inspec/inspectionDiv4" method="post">
+			<button type="submit" value="div4">불량제품</button>
 		</form>
 	</div>
 

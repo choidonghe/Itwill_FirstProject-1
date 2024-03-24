@@ -66,6 +66,7 @@ public class InspectionServiceImpl implements InspectionService{
 	// 에러제품 넘기기
 	@Override
 	public void insertError(ProductVO pvo) throws Exception {
+		idao.productInspectionUpdate(pvo);
 		idao.insertError(pvo);
 	}
 

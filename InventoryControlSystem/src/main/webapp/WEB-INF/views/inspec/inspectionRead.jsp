@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -27,7 +27,9 @@
     </tr>
      <tr>
         <td>검수 수량:</td>
-        <td><input type="number" name="finish_count" required value="${vo.finish_count }"></td>
+        <td><input type="number" name="finish_count" required 
+        		   min ="0" max="${vo.remain_count }" value="0">
+  		</td>
     </tr>
     <tr>
         <td>남은 수량:</td>
@@ -59,8 +61,15 @@
     </tr>
    
 </table>
-
-<input type="submit" value="수정 완료">
+	
+	<c:choose>
+		<c:when test="${vo.remain_count == 0}">
+			<input type="text" value="수정할 것 없음" readonly>
+		</c:when>
+		<c:otherwise>
+			<input type="submit" value="수정 완료">
+		</c:otherwise>
+	</c:choose>
 </form>
 
 

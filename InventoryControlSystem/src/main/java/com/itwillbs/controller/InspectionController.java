@@ -62,11 +62,21 @@ public class InspectionController {
 	
 	// 검수 본문 업데이트 POST
 	@RequestMapping(value = "/inspectionRead", method = RequestMethod.POST)
-	public String inspectionReadPOST(String pno, Model model,ProductVO pvo) throws Exception{
+	public String inspectionReadPOST(String pno,int divcode, Model model,ProductVO pvo) throws Exception{
 		logger.debug(" inspectionReadPOST() 호출 ");
-		iService.productModify(pvo);
+		
+		logger.debug(" divcode : " + divcode);
+		if(divcode == 3) {
+			iService.productModify(pvo);
+		}
+		
 		iService.productUpdateRemain(pvo);
-		iService.insertError(pvo);
+		
+		logger.debug(" divcode : " + divcode);
+		if(divcode == 7) {
+			iService.insertError(pvo);
+		}
+		
 		return "redirect:/inspec/inspectionMain";
 	}
 	
