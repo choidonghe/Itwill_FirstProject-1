@@ -36,4 +36,6 @@ public interface MainDAO {
 	
 	public void writeNotice(NoticeVO vo) throws Exception;
 	
+	public NoticeVO getContent(String bno) throws Exception;
+	
 }// dao

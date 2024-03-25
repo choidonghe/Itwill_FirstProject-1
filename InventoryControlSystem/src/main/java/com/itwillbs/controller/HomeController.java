@@ -6,15 +6,19 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.EmergencyOrderVO;
@@ -50,14 +54,33 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping(value = "/confirmid", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<Integer> idCheckPOST(String id) throws Exception{
+		logger.debug(" idCheckPOST() 호출");
+		logger.debug("조회된 아이디 : "+mService.idCheck(id));
+		int result = 0;;
+		
+		if(mService.idCheck(id)==0) {
+			result = 1;
+			
+		}
+		
+		return new ResponseEntity<Integer>(result, HttpStatus.OK );
+		
+	}
+	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPOST(MemberVO vo, Model model) throws Exception{
+	public String loginPOST(MemberVO vo, HttpSession session) throws Exception{
 		logger.debug(" loginPOST() 호출");
 		String id = mService.memberLogin(vo);
 		logger.debug(" 로그인 id : "+id);
 		
+		
+		
 		if(!id.isEmpty()) { // 정상 로그인
-			model.addAttribute("id", id);
+			session.setAttribute("id", id);
 			
 			return "redirect:/main";
 		}
@@ -78,7 +101,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/registerkakao", method = RequestMethod.GET)
-	public String registerkakaoGET(@RequestParam("code") String code, Model model)throws Exception{
+	public String registerkakaoGET(@RequestParam("code") String code, HttpSession session)throws Exception{
 		logger.debug("tokenGET() 호출");
 		logger.debug(" code : "+code);
 		
@@ -95,17 +118,28 @@ public class HomeController {
 			
 		}
 			
-		model.addAttribute("id", vo.getId());
+		session.setAttribute("id", vo.getId());
 		
 		logger.debug(" main 페이지로 이동");
 		return "redirect:/main";
 	}
+	
+	@GetMapping(value = "/logout")
+	public String logoutGET(HttpSession session) throws Exception{
+		logger.debug("logoutGET() 실행");
+		session.invalidate();
+		
+		return "redirect:/login";
+	}
+	
 	
 	
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public void mainGET(ErgOrderCriteria oCri,NoticeCriteria nCri, Model model) throws Exception{
 		logger.debug(" main() 실행");
+		
+		//model.addAttribute("memberVO", vo);
 		
 		List<String> sellList = mainService.sellTotalGet();
 		List<String> dayList = mainService.dayListGet();
@@ -149,8 +183,10 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
-	public void mainPOST(@RequestParam("search") String search, ErgOrderCriteria oCri,NoticeCriteria nCri, Model model) throws Exception {
+	public void mainPOST(@RequestParam("id")String id ,@RequestParam("search") String search, ErgOrderCriteria oCri,NoticeCriteria nCri, Model model) throws Exception {
 		logger.debug(" mainPOST() 호출");
+		model.addAttribute("id", id);
+		
 		List<String> sellList = mainService.sellTotalGet();
 		List<String> dayList = mainService.dayListGet();
 		List<String> releaseList = mainService.releaseListGet();
@@ -205,6 +241,15 @@ public class HomeController {
 		
 		return "redirect:/main";
 	}
+	
+	@GetMapping(value = "/noticeContent")
+	public void NoticeContentGET(@RequestParam("bno") String bno, Model model ) throws Exception{
+		logger.debug(" NoticeContentGET() 호출 ");
+		
+		model.addAttribute("content", mainService.noticeGet(bno));
+		
+	}
+	
 	
 	
 	

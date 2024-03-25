@@ -77,6 +77,11 @@
 	
 	</insert>
 	
+	<select id="getcontent" resultType="com.itwillbs.domain.NoticeVO">
+		SELECT * FROM notice 
+		WHERE bno = #{bno}
+	
+	</select>
 	
 	
 </mapper>
