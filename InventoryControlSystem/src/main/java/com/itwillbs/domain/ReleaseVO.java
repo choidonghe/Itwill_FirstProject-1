@@ -1,6 +1,7 @@
 package com.itwillbs.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -21,5 +22,5 @@ public class ReleaseVO {
 	private String delivery_phone;
 	private String delivery_manager;
 
-
+	private List<CodeVO> codeVO;
 }

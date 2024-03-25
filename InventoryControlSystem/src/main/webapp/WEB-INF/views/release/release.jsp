@@ -6,6 +6,10 @@
 
 <h1>release.jsp</h1>
 
+cri=${cri } <br>
+pageVO=${pageVO } <br>
+${vo} <br>
+
 <%-- ${vo} <br>
 ${code} <br> --%>
 
@@ -36,9 +40,9 @@ ${code} <br> --%>
 						<td>delivery_phone</td>
 						<td>delivery_manager</td>
 					</tr>
-					<tr>
 						<c:forEach var="vo" items="${vo}">
 							<c:if test="${vo.divcode==6}">
+								<tr>
 								<td><input type="text" value="출고완료" readonly="readonly"></td>
 								<td>${vo.id}</td>
 								<td>${vo.pno}</td>
@@ -51,17 +55,33 @@ ${code} <br> --%>
 								<td>${vo.order_count}</td>
 								<td>${vo.delivery_phone}</td>
 								<td>${vo.delivery_manager}</td>
+								</tr>
 							</c:if>
 						</c:forEach>
-					</tr>
 			</table>
 		</div>
 
 		<div class="box-footer clearfix">
+		
 			<button onclick="history.back()">뒤로가기</button>
-		</div>
+			
+			<ul class="pagination pagination-sm no-margin pull-right">
+				<c:if test="${pageVO.prev}">
+					<li><a href="/release/release?page=${pageVO.startPage-1}">«</a></li>
+				</c:if>
+				
+				<c:forEach var="idx" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
+					<li ${pageVO.cri.page == idx? "class=active":""}>
+					<a href="/release/release?page=${idx}">${idx}</a></li>
+				</c:forEach>
+				
+				<c:if test="${pageVO.next}">
+					<li><a href="/release/release?page=${pageVO.endPage+1}">»</a></li>
+				</c:if>
+			</ul>
 	</div>
 </div>
+
 
 
 

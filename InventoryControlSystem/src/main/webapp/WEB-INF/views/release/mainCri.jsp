@@ -14,12 +14,10 @@ cri.pageSize : ${param.pageSize} <br>
 
 pageVO : ${pageVO} <br>
 
-${mainList} <br>
-	${code} <br>
+mainList: ${mainList} <br>
+	code: ${code} <br>
 
-<input type="button" value="전체" onclick="location.href='/release/main'">
-<input type="button" value="검수" onclick="location.href='/release/inspection'">
-<input type="button" value="출고" onclick="location.href='/release/release'">
+
 
 <div class="content">
 	<div class="box">
@@ -70,7 +68,7 @@ ${mainList} <br>
 								</form>
 							</td>
 							<td>${mainList.id}</td>
-							<td><a href="/release/information?pno=${mainList.pno}">${mainList.pno}</a></td>
+							<td><a href="/release/information?pno=${mainList.pno}&page=${cri.page}&pageSize=${cri.pageSize}">${mainList.pno}</a></td>
 							<td>${mainList.order_count}</td>
 							<td>${mainList.price}</td>
 							<td>${mainList.order_date}</td>
@@ -86,16 +84,16 @@ ${mainList} <br>
 		<div class="box-footer clearfix">
 			<ul class="pagination pagination-sm no-margin pull-right">
 				<c:if test="${pageVO.prev}">
-				<li><a href="/release/main?page=${pageVO.startPage-1}">«</a></li>
+				<li><a href="/release/mainCri?page=${pageVO.startPage-1}">«</a></li>
 				</c:if>
 				
 				<c:forEach var="idx" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
 				<li ${pageVO.cri.page == idx? "class=active":""}>
-					<a href="/release/main?page=${idx}">${idx}</a></li>
+					<a href="/release/mainCri?page=${idx}">${idx}</a></li>
 				</c:forEach>
 				
 				<c:if test="${pageVO.next}">
-				<li><a href="/release/main?page=${pageVO.endPage+1}">»</a></li>
+				<li><a href="/release/mainCri?page=${pageVO.endPage+1}">»</a></li>
 				</c:if>
 			</ul>
 		</div>

@@ -47,6 +47,31 @@
 	<select id="getUpdatedData" parameterType="String" resultType="ReleaseVO">
 		SELECT * FROM tbl_release WHERE pno = #{pno}
 	</select>
+	
+	<!-- 글 목록 조회(페이징처리) -->
+		<select id="selectBoardListPage" resultType="ReleaseVO">
+			<![CDATA[
+			select * from tbl_release 
+			where divcode > 0
+			order by pno desc, order_date desc
+			limit #{page},10
+			]]>
+		</select>
+		
+		<!-- 글 목록 조회(페이징처리-Cri) -->
+		<select id="releaseMainListCri" resultType="ReleaseVO">
+			<![CDATA[
+			select * from tbl_release
+			where divcode > 0
+			order by pno asc, order_date asc
+			limit #{startPage},#{pageSize} 
+			]]> <!-- #{Cri.(get)page}, #{Cri.(get)pageSize} -> #{} = get 메서드 호출  -->
+		</select>
+		
+		<!-- 총 글의 개수 -->
+		<select id="totalCount" resultType="int">
+			select count(pno) from tbl_release
+		</select>
 
 
 </mapper>

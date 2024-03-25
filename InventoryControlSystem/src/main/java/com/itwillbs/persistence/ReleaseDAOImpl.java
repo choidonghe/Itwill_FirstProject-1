@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.CodeVO;
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.ReleaseVO;
 
 
@@ -102,6 +103,19 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 	    logger.debug("updatedData:" + updatedData);
 	    
 	    return updatedData;
+	}
+	
+	@Override
+	public List<ReleaseVO> boardListCriSelect(Criteria cri) throws Exception {
+		logger.debug(" boardListCriSelect(Criteria cri) 호출 ");
+		
+		return sqlSession.selectList(NAMESPACE+".releaseMainListCri", cri);
+	}
+	
+	@Override
+	public int releaseListCount() throws Exception {
+		logger.debug(" boardListCount() 호출");
+		return sqlSession.selectOne(NAMESPACE + ".totalCount");
 	}
 	
 	

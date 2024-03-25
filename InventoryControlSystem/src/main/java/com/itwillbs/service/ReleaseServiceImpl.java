@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.domain.CodeVO;
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.ReleaseVO;
 import com.itwillbs.persistence.ReleaseDAO;
 
@@ -79,6 +80,19 @@ public class ReleaseServiceImpl implements ReleaseService{
 		return rdao.modifyInspection(pno, divcode);
 	}
 	
+	
+	@Override
+	public List<ReleaseVO> getListCri(Criteria cri) throws Exception {
+		logger.debug("getListCri(Criteria cri) 호출");
+		
+		return rdao.boardListCriSelect(cri);
+	}
+
+	@Override
+	public int getReleaseListCount() throws Exception {
+		logger.debug(" getBoardListCount() 호출 ");
+		return rdao.releaseListCount();
+	}
 	
 	
 	

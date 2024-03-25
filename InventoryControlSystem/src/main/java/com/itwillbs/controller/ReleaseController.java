@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.domain.CodeVO;
+import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.PageVO;
 import com.itwillbs.domain.ReleaseVO;
 import com.itwillbs.service.ReleaseService;
 
@@ -32,17 +34,37 @@ public class ReleaseController {
 	// http://localhost:8088/release/main
 	
 	@RequestMapping(value = "main",method = RequestMethod.GET)
-	public void main(Model model) throws Exception{
+	public void main(Criteria cri, Model model) throws Exception{
 		logger.debug("main() 호출");
+		// 페이징 처리 객체
+				//Criteria cri = new Criteria();
+				//cri.setPageSize(20);
+				PageVO pageVO = new PageVO();
+				pageVO.setCri(cri);
+				//pageVO.setTotalCount(3840); // 총 개수 직접 계산
+				pageVO.setTotalCount(rService.getReleaseListCount()); // SQL 구문 계산
+				
+				
+				// 서비스 -> DAO 게시판 글 목록 가져오기
+				//List<BoardVO> boardList = bService.getList(); //all
+				List<ReleaseVO> mainList = rService.getListCri(cri); //페이징
+				logger.debug("list.size :" +mainList.size());
+				
+				List<CodeVO> code = rService.codeList();
+				
+				// 연결된 뷰 페이지에 정보 전달
+				model.addAttribute("mainList", mainList);
+				
+				model.addAttribute("cri", cri); // 페이징 처리 정보 전달
+				
+				model.addAttribute("pageVO", pageVO); // 페이징 처리 정보 전달
+				
+				model.addAttribute("code", code);
+				
+				
+				
+				
 		
-		List<ReleaseVO> mainList = rService.releaseList();
-		List<CodeVO> code = rService.codeList();
-		
-		logger.debug("mainList:"+mainList);
-		logger.debug("code:"+code);
-		
-		model.addAttribute("mainList", mainList);
-		model.addAttribute("code", code);
 	}
 	
 	@RequestMapping(value = "information",method = RequestMethod.GET)
@@ -58,7 +80,7 @@ public class ReleaseController {
 	}
 	
 	@RequestMapping(value = "modify",method = RequestMethod.GET)
-	public void modify(String pno,Model model) throws Exception{
+	public void modify(String pno,Model model,Criteria cri) throws Exception{
 		logger.debug("modify() 호출");
 		
 		logger.debug("pno:"+pno);
@@ -71,10 +93,11 @@ public class ReleaseController {
 		
 		model.addAttribute("modifyList", modifyList);
 		model.addAttribute("code", code);
+		model.addAttribute("cri", cri);
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modifyPOST(ReleaseVO vo,Model model,String pno,Integer divcode, CodeVO code) throws Exception{
+	public String modifyPOST(ReleaseVO vo,Model model,String pno,Integer divcode, CodeVO code,Criteria cri) throws Exception{
 		logger.debug(" modifyPOST() 호출");
 		
 		logger.debug("vo:"+vo);
@@ -90,18 +113,18 @@ public class ReleaseController {
 		
 		rService.releaseModify(vo);
 
-		return "redirect:/release/main";
+		return "redirect:/release/mainCri?page=\"+cri.getPage()+\"&pageSize=\"+cri.getPageSize();";
 	}
 	
 	@RequestMapping(value = "/information",method = RequestMethod.POST)
-	public String removePOST(@RequestParam("pno") String pno) throws Exception{
+	public String removePOST(@RequestParam("pno") String pno,Criteria cri) throws Exception{
 		logger.debug("String removePOST() 호출");
 		logger.debug("pno:"+pno);
 		
 		rService.releaseDelete(pno);
 		
 		
-		return "redirect:/release/main";
+		return "redirect:/release/mainCri?page=\"+cri.getPage()+\"&pageSize=\"+cri.getPageSize();";
 		
 	}
 	
@@ -133,14 +156,38 @@ public class ReleaseController {
 	}
 	
 	@RequestMapping(value = "/inspection", method = RequestMethod.GET)
-	public void inspection(HttpSession session, Model model) throws Exception {
+	public void inspection(HttpSession session, Model model,Criteria cri) throws Exception {
 	   logger.debug("inspection() 호출");
-	   
-	   List<ReleaseVO> vo = rService.releaseList();
-	   List<CodeVO> code = rService.codeList();
-	   
-	   model.addAttribute("vo", vo);
-	   model.addAttribute("code", code);
+
+	// 페이징 처리 객체
+		//Criteria cri = new Criteria();
+		//cri.setPageSize(20);
+		PageVO pageVO = new PageVO();
+		pageVO.setCri(cri);
+		//pageVO.setTotalCount(3840); // 총 개수 직접 계산
+		pageVO.setTotalCount(rService.getReleaseListCount()); // SQL 구문 계산
+		
+		
+		// 서비스 -> DAO 게시판 글 목록 가져오기
+		//List<BoardVO> boardList = bService.getList(); //all
+		List<ReleaseVO> vo = rService.getListCri(cri); //페이징
+		logger.debug("list.size :" +vo.size());
+		
+		List<CodeVO> code = rService.codeList();
+		
+		// 연결된 뷰 페이지에 정보 전달
+		model.addAttribute("vo", vo);
+		
+		model.addAttribute("cri", cri); // 페이징 처리 정보 전달
+		
+		model.addAttribute("pageVO", pageVO); // 페이징 처리 정보 전달
+		
+		model.addAttribute("code", code);
+		
+		
+		
+		
+		
 	   
 		/*
 		 * ReleaseVO inspectionList = (ReleaseVO)
@@ -179,14 +226,34 @@ public class ReleaseController {
 	}
 	
 	@RequestMapping(value = "/release", method = RequestMethod.GET)
-	public void release(HttpSession session, Model model) throws Exception {
+	public void release(HttpSession session, Model model,Criteria cri) throws Exception {
 	   logger.debug("release() 호출");
 	   
-	   List<ReleaseVO> vo = rService.releaseList();
-	   List<CodeVO> code = rService.codeList();
-	   
-	   model.addAttribute("vo", vo);
-	   model.addAttribute("code", code);
+	// 페이징 처리 객체
+			//Criteria cri = new Criteria();
+			//cri.setPageSize(20);
+			PageVO pageVO = new PageVO();
+			pageVO.setCri(cri);
+			//pageVO.setTotalCount(3840); // 총 개수 직접 계산
+			pageVO.setTotalCount(rService.getReleaseListCount()); // SQL 구문 계산
+			
+			
+			// 서비스 -> DAO 게시판 글 목록 가져오기
+			//List<BoardVO> boardList = bService.getList(); //all
+			List<ReleaseVO> vo = rService.getListCri(cri); //페이징
+			logger.debug("list.size :" +vo.size());
+			
+			List<CodeVO> code = rService.codeList();
+			
+			// 연결된 뷰 페이지에 정보 전달
+			model.addAttribute("vo", vo);
+			
+			model.addAttribute("cri", cri); // 페이징 처리 정보 전달
+			
+			model.addAttribute("pageVO", pageVO); // 페이징 처리 정보 전달
+			
+			model.addAttribute("code", code);
+		
 	}
 	
 	
