@@ -48,6 +48,8 @@ th {
 	</div> -->
 
 	<fieldset>
+	${spageVO }
+	${cri }
 		<legend>입고 검수 현황</legend>
 		<div class="button-container">
 			<form action="/inspec/inspectionMain" method="GET">
@@ -92,6 +94,19 @@ th {
 	    </table>
 	</fieldset>
 	<br>
+	<div class="box-footer clearfix">
+			<ul class="pagination pagination-sm no-margin pull-right">
+			<c:if test="${spageVO.prev }">
+				<li><a href="inspectionMain?page=${spageVO.startPage - 1 }">«</a></li>
+			</c:if>
+			<c:forEach var="idx" begin="${spageVO.startPage }" end="${spageVO.endPage }" step="1">
+				<li ${spageVO.cri.page == idx? "class=active": ""}><a href="inspectionMain?page=${idx }">${idx }</a></li>
+			</c:forEach>
+			<c:if test="${spageVO.next }">
+				<li><a href="inspectionMain?page=${spageVO.endPage + 1 }">»</a></li>
+			</c:if>
+			</ul>
+		</div>
 	
 </div>
 

@@ -53,13 +53,39 @@
 		<collection property="codeVO" resultMap="codeMap"/>
 	</resultMap>
 	
-	<!-- 검수목록 조회 -->
+	<!-- 검수목록 조회 페이징
 	<select id="selectInspection" resultMap="productMap">
 		select * 
 		from inspection p 
 		join code c 
 		on c.divcode = p.divcode
 		where p.divcode = 2 or p.divcode = 7
+	</select> -->
+	
+	<!-- 검수목록 조회 페이징처리 -->
+	<select id="selectInspection" resultMap="productMap">
+    <![CDATA[
+        SELECT * 
+        FROM inspection p 
+        JOIN code c ON c.divcode = p.divcode
+        WHERE p.divcode = 2 OR p.divcode = 7
+        LIMIT #{start}, #{pageSize}
+    ]]>
+	</select>
+	<!-- 페이징 처리 - Cri -->
+	<select id="inspecListCri" resultType="productVO">
+		<![CDATA[
+		select * from product p
+		join code c 
+		on p.divcode = c.divcode
+		where p.divcode = 2 OR p.divcode = 7
+		order by p.regdate desc 
+		limit #{startPage},#{pageSize}
+		]]>
+	</select>
+	<!-- 총 제품의 개수 -->
+	<select id="totalCount" resultType="int">
+		select count(pno) from product
 	</select>
 	
 	<!-- 검수현황본문 조회 - product -->
@@ -120,9 +146,28 @@
 	</update>
     
 	<!-- product - divcode=2 인 검수목록 조회 -->
-	<select id="productInspectionDiv2" resultType="ProductVO">
-		select * from inspection where divcode=2 and remain_count != 0 order by regdate desc
+	<!-- 검수목록 조회 페이징처리 -->
+	<select id="selectInspection2" resultMap="productMap">
+    <![CDATA[
+        SELECT * 
+        FROM inspection p 
+        JOIN code c ON c.divcode = p.divcode
+        WHERE p.divcode = 2
+        LIMIT #{start}, #{pageSize}
+    ]]>
 	</select>
+	<!-- 페이징 처리 - Cri -->
+	<select id="inspecListCri2" resultType="productVO">
+		<![CDATA[
+		select * from product p
+		join code c 
+		on p.divcode = c.divcode
+		where p.divcode = 2
+		order by p.regdate desc 
+		limit #{startPage},#{pageSize}
+		]]>
+	</select>
+
 	<!-- product - divcode=3 인 검수목록 조회 -->
 	<select id="productInspectionDiv3" resultType="ProductVO">
 		select * from stock s 
@@ -130,15 +175,29 @@
 		on s.divcode = c.divcode 
 		where s.divcode = 3 order by regdate desc
 	</select>
+	
 	<!-- product - 불량 제품 목록 조회 -->
 	<select id="errorProduct" resultMap="errorVO">
-		select * from error e
-		join code c
-		on e.divcode = c.divcode
-		where e.divcode = 7 or e.divcode = 8
+    <![CDATA[
+    select * from error e
+    join code c
+    on e.divcode = c.divcode
+    where e.divcode = 7 or e.divcode = 8
+    order by e.regdate desc
+    limit #{start}, #{pageSize}
+    ]]>
 	</select>
-	
-
+	<!-- 페이징 처리 - Cri -->
+	<select id="inspecListCri2" resultType="productVO">
+		<![CDATA[
+		select * from error e
+		join code c 
+		on p.divcode = c.divcode
+		where e.divcode = 7 or e.divcode = 8
+		order by e.regdate desc 
+		limit #{startPage},#{pageSize}
+		]]>
+	</select>
 
 
 
