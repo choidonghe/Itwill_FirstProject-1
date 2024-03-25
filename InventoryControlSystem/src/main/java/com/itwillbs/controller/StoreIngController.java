@@ -72,6 +72,16 @@ public class StoreIngController {
 		return "redirect:storeinglist";
 	}
 	
+	@RequestMapping(value = "/insertPro", method = RequestMethod.GET)
+	public void registerGET() throws Exception{
+		logger.debug(" registerGET() 호출 ");
+	}
 	
+	@RequestMapping(value = "/insertPro", method = RequestMethod.POST)
+	public String registerPOST(ProductVO pvo) throws Exception{
+		logger.debug(" 전달정보 : " + pvo);
+		pService.insertProduct(pvo);
+		return "redirect:/storeinglist";
+	}
 	
 }

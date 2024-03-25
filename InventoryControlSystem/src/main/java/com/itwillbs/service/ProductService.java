@@ -25,5 +25,6 @@ public interface ProductService {
 	// 총 제품의 개수
 	public int getProductListCount() throws Exception;
 	
-	
+	// product 생산
+	public void insertProduct(ProductVO pvo) throws Exception;
 }

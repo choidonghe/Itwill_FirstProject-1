@@ -66,6 +66,12 @@ public class ProductDAOImpl implements ProductDAO {
 	public int productListCount() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".totalCount");
 	}
+
+
+	@Override
+	public void insertProduct(ProductVO pvo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertProduct", pvo);
+	}
 	
 	
 	

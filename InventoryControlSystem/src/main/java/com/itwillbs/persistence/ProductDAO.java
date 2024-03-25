@@ -25,4 +25,7 @@ public interface ProductDAO {
 	// 총 제품 개수 계산
 	public int productListCount() throws Exception;
 	
+	
+	// product 생산
+	public void insertProduct(ProductVO pvo) throws Exception;
 }

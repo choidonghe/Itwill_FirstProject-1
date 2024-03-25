@@ -5,9 +5,9 @@
 <div class="content">
 	<div class="box">
 	<div class="box-header with-border">
-		<h3 class="box-title">입고예정</h3>
-		${spageVO } <br>
-		${mvo }
+		<h3 class="box-title">입고예정</h3> <br>
+		
+		<a href="insertPro">제품 생산</a>
 	</div>
 	
 	<div class="box-body">

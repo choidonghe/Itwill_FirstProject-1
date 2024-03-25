@@ -58,6 +58,12 @@ public class ProductServiceIpl implements ProductService {
 		return pdao.productListCount();
 	}
 
+
+	@Override
+	public void insertProduct(ProductVO pvo) throws Exception {
+		pdao.insertProduct(pvo);
+	}
+
 	
 
 	
