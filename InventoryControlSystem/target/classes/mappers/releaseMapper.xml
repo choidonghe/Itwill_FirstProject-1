@@ -3,31 +3,50 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-	<mapper namespace="com.itwillbs.mapper.ReleaseMapper">
-	
+
+<mapper namespace="com.itwillbs.mapper.ReleaseMapper">
+
 	<select id="getReleaseList" resultType="ReleaseVO">
 		select * from tbl_release
+		order by divcode
 	</select>
-	
+
 	<select id="getReleaseInfoList" resultType="ReleaseVO">
 		select * from tbl_release
 		where pno=#{pno}
+		order by pno
 	</select>
-	
+
 	<update id="upReleaseModify" parameterType="ReleaseVO">
-		update tbl_release set order_count=#{order_count}
+		update tbl_release
+		set order_count=#{order_count}, update_date=now()
 		where pno=#{pno}
 	</update>
-	
-	<update id="upCheckRelease">
-		update tbl_release set pname=#{pname},pno=#{pno},order_count=order_count-#{order_count}
+
+	<update id="upSubtractRelease">
+		update tbl_release set order_count=order_count-#{order_count}
 		where pno=#{pno}
 	</update>
-	
+
 	<delete id="deRelease">
 		delete from tbl_release
 		where pno=#{pno}
+		order by divcode
 	</delete>
-	
-	</mapper>
+
+	<select id="selectCodeList" resultType="codeVO">
+		select * from code where
+		divcode=4 or divcode=5 or divcode=6
+	</select>
+
+	<update id="updateCode">
+		update tbl_release set divcode=#{divcode}, update_date=now()
+		where pno = #{pno}
+	</update>
+
+	<select id="getUpdatedData" parameterType="String" resultType="ReleaseVO">
+		SELECT * FROM tbl_release WHERE pno = #{pno}
+	</select>
+
+
+</mapper>

@@ -39,7 +39,11 @@
 			<td>${infoList.delivery_phone}</td>
 			<td>${infoList.delivery_manager}</td>
 			<td>
-			<input type="button" name="modify" value="수정" onclick="location.href='/release/modify?pno=${infoList.pno}';">
+			<input type="button" name="pno" value="수정" onclick="location.href='/release/modify?pno=${infoList.pno}';">
+			<form action="" method="POST">
+				<input type="hidden" value="${infoList.pno}">
+				<input type="submit" value="삭제">
+			</form>
 			</td>
 		</tr>
 	</table>

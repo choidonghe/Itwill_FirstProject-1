@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.itwillbs.domain.CodeVO;
 import com.itwillbs.domain.ReleaseVO;
 import com.itwillbs.persistence.ReleaseDAO;
 
@@ -42,10 +43,10 @@ public class ReleaseServiceImpl implements ReleaseService{
 	}
 
 	@Override
-	public String releaseCheck(ReleaseVO vo) throws Exception {
-		logger.debug("releaseRelease(ReleaseVO vo) 호출");
+	public void releaseSubtract(String pno) throws Exception {
+		logger.debug("releaseSubtract(ReleaseVO vo) 호출");
 		
-		return rdao.checkRelease(vo);
+		  rdao.subtractRelease(pno);
 	}
 
 	@Override
@@ -53,7 +54,33 @@ public class ReleaseServiceImpl implements ReleaseService{
 		logger.debug("releaseDelete(ReleaseVO vo) 호출");
 		
 		rdao.deleteRelease(pno);
+		
+		
 	}
+
+	@Override
+	public List<CodeVO> codeList() throws Exception {
+		logger.debug("codeList() 호출");
+		
+		
+		return rdao.listCode();
+	}
+
+	@Override
+	public ReleaseVO mainInspection(String pno,int divcode) throws Exception {
+		logger.debug("mainInspection(String pno) 호출");
+		
+		return rdao.inspectionMain(pno, divcode);
+	}
+
+	@Override
+	public ReleaseVO inspectionModify(String pno, int divcode) throws Exception {
+		// TODO Auto-generated method stub
+		return rdao.modifyInspection(pno, divcode);
+	}
+	
+	
+	
 	
 	
 	
