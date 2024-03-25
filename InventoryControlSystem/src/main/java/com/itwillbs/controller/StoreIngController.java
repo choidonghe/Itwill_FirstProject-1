@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.CodeVO;
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.ErrorVO;
 import com.itwillbs.domain.ProductVO;
+import com.itwillbs.domain.StorePageVO;
 import com.itwillbs.service.CodeService;
 import com.itwillbs.service.ProductService;
 
@@ -27,16 +29,28 @@ public class StoreIngController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(StoreIngController.class);
 	
+	//http://localhost:8088/storeinglist
 	@RequestMapping(value = "/storeinglist", method = RequestMethod.GET)
-	public void storeIngListGET(Model model) throws Exception{
+	public void storeIngListGET(Criteria cri, Model model) throws Exception{
 
 		logger.debug(" storeIngListGET() 실행 ");
-		List<ProductVO> productList = pService.productGetList();
+		StorePageVO spageVO = new StorePageVO();
+		spageVO.setCri(cri);
+		spageVO.setTotalCount(pService.getProductListCount());
+		
+		//List<ProductVO> productList = pService.productGetList();
+		List<ProductVO> productList = pService.productGetListCri(cri);
+		//List<ProductVO> productListPage = pService.productListPaget(1);
 		List<CodeVO> codeList = cService.allCodeList();
+		
 		logger.debug(" list.size() : " + productList.size());
 		logger.debug(" @!@!@!" + productList);
+		logger.debug("spageVO : " + spageVO);
 		model.addAttribute("productList", productList);
+		model.addAttribute("cri", cri);
+		model.addAttribute("spageVO", spageVO);
 		model.addAttribute("codeList", codeList);
+		//model.addAttribute("productListPage", productListPage);
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)

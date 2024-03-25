@@ -19,6 +19,7 @@ import com.itwillbs.domain.ProductVO;
 import com.itwillbs.domain.WarehouseVO;
 import com.itwillbs.service.CodeService;
 import com.itwillbs.service.InspectionService;
+import com.itwillbs.service.ProductService;
 
 @Controller
 @RequestMapping(value = "/inspec/*")
@@ -28,7 +29,8 @@ public class InspectionController {
 	private InspectionService iService;
 	@Inject
 	private CodeService cService;
-	
+	@Inject
+	private ProductService pService;
 	private static final Logger logger = LoggerFactory.getLogger(InspectionController.class);
 	
 	// 입고 검수 메인 페이지
@@ -95,7 +97,9 @@ public class InspectionController {
 	public void inspectionDiv3(Model model) throws Exception{
 		logger.debug(" inspectionDiv3() 호출 ");
 		List<ProductVO> inspectionList = iService.productGetInspectionDiv3();
+		List<CodeVO> codeList = cService.allCodeList();
 		model.addAttribute("inspectionList",inspectionList);
+		model.addAttribute("codeList",codeList);
 	}
 	
 	

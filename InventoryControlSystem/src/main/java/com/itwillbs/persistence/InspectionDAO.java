@@ -31,8 +31,12 @@ public interface InspectionDAO {
 	
 	// 창고목록 조회
 	public List<WarehouseVO> warehouseList() throws Exception;
+	
 	// 불량 제품 넘기기
 	public void insertError(ProductVO pvo) throws Exception;
 	// 불량품 목록
 	public List<ErrorVO> errorList() throws Exception;
+	
+	
+	
 }

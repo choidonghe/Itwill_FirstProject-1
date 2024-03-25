@@ -15,4 +15,5 @@ public class ErrorVO {
 	private String warehouse_code;
 	
 	private List<WarehouseVO> warehouseVO;
+	private List<CodeVO> codeVO;
 }

@@ -50,6 +50,7 @@
 		<result property="regdate" column="regdate"/>
 		<result property="warehouse_code" column="warehouse_code"/>
 		<collection property="warehouseVO" resultMap="warehouseVO"></collection>
+		<collection property="codeVO" resultMap="codeMap"/>
 	</resultMap>
 	
 	<!-- 검수목록 조회 -->
@@ -88,7 +89,7 @@
             finish_count = #{finish_count},
             update_date = now(),
             warehouse_code = #{warehouse_code}
-        WHERE pno = #{pno};
+        WHERE pno = #{pno}
     </update>
     
     <!-- 검수 중 불량을 error테이블로 보내기 -->
@@ -124,13 +125,18 @@
 	</select>
 	<!-- product - divcode=3 인 검수목록 조회 -->
 	<select id="productInspectionDiv3" resultType="ProductVO">
-		select * from stock where divcode=3 order by regdate desc
+		select * from stock s 
+		join code c 
+		on s.divcode = c.divcode 
+		where s.divcode = 3 order by regdate desc
 	</select>
 	<!-- product - 불량 제품 목록 조회 -->
 	<select id="errorProduct" resultMap="errorVO">
-		select * from error
+		select * from error e
+		join code c
+		on e.divcode = c.divcode
+		where e.divcode = 7 or e.divcode = 8
 	</select>
-	
 	
 
 

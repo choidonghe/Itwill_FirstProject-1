@@ -78,7 +78,7 @@ th {
 	            </tr>
 	       		<c:forEach var="inspectionList" items="${inspectionList }">
 	            <tr>
-	                <td><a href="/inspec/inspectionRead?pno=${inspectionList.pno}">${inspectionList.pno }</td>
+	                <td><a href="/inspec/inspectionRead?pno=${inspectionList.pno}">${inspectionList.pno }</a></td>
 	                <%-- <td>${inspectionList.id }</td> --%>
 	                <td>${inspectionList.pname }</td>
 	                <td>${inspectionList.codeVO[0].korname }</td>

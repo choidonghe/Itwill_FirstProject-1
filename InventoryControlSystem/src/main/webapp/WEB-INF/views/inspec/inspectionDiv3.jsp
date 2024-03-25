@@ -35,7 +35,9 @@ th {
 	</div>
 	
 	 <h1>입고 검수완료 현황</h1>
-
+	 ${codeList } <br>
+	 <h2>stock이랑 합치면 상태에 korname으로 출력하게 하기</h2>
+	 
 	<div class="button-container">
 		<form action="/inspec/inspectionMain" method="get">
 			<button type="submit" name="all" value="all">전체</button>
@@ -62,7 +64,7 @@ th {
             </tr>
        		<c:forEach var="inspectionList" items="${inspectionList }">
             <tr>
-                <td><a href="/inspec/inspectionRead?pno=${inspectionList.pno}">${inspectionList.pno }</td>
+                <td><a href="/inspec/inspectionRead?pno=${inspectionList.pno}">${inspectionList.pno }</a></td>
                 <%-- <td>${inspectionList.id }</td> --%>
                 <td>${inspectionList.divcode}</td>
                 <td>${inspectionList.count }</td>

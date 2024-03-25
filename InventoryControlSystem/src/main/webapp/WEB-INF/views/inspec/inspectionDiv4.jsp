@@ -56,7 +56,7 @@ th {
             <tr>
                 <td>${errorList.pno }</td>
                 <td>${errorList.pname}</td>
-                <td>${errorList.divcode }</td>
+                <td>${errorList.codeVO[0].korname }</td>
                 <td>${errorList.count }</td>
                 <td>${errorList.regdate }</td>
    	          	<td>${errorList.warehouse_code}</td>

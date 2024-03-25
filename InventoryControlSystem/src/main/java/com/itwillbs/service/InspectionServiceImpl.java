@@ -76,4 +76,7 @@ public class InspectionServiceImpl implements InspectionService{
 	public List<ErrorVO> errorList() throws Exception {
 		return idao.errorList();
 	}
+
+	
+	
 }

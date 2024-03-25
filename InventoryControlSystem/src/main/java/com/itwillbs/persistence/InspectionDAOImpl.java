@@ -75,7 +75,7 @@ public class InspectionDAOImpl implements InspectionDAO{
 		sqlSession.insert(NAMESPACE + ".insertError", pvo);
 	}
 	
-	
+
 	// 불량품 목록 조회
 	@Override
 	public List<ErrorVO> errorList() throws Exception {

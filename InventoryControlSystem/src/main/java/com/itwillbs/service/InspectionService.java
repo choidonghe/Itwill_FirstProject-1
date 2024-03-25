@@ -35,6 +35,4 @@ public interface InspectionService {
 	// 불량품 목록
 	public List<ErrorVO> errorList() throws Exception;
 	
-	
-	
 }
