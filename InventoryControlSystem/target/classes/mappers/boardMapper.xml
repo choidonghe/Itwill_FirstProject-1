@@ -6,8 +6,8 @@
 <mapper namespace="com.itwillbs.mapper.BoardMapper">
 
 	<insert id="insertMember">
-		insert into member (id, pass, name, email,phone, salt) 
-		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt})
+		insert into member (id, pass, name, email,phone, salt, eno) 
+		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt}, #{eno})
 	
 	</insert>
 

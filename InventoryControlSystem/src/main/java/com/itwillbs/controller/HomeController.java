@@ -104,9 +104,9 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void mainGET(ErgOrderCriteria oCri,NoticeCriteria nCri, Model model) throws Exception{
+	public void mainGET(ErgOrderCriteria oCri,NoticeCriteria nCri, Model model, MemberVO mvo) throws Exception{
 		logger.debug(" main() 실행");
-		
+		logger.debug("member : " + mvo);
 		List<String> sellList = mainService.sellTotalGet();
 		List<String> dayList = mainService.dayListGet();
 		List<String> releaseList = mainService.releaseListGet();
@@ -140,7 +140,7 @@ public class HomeController {
 		model.addAttribute("storeList", storeList);
 		model.addAttribute("ergList", ergList);
 		model.addAttribute("noList", noList);
-		
+		model.addAttribute("mvo", mvo);
 		
 		
 		
@@ -149,7 +149,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
-	public void mainPOST(@RequestParam("search") String search, ErgOrderCriteria oCri,NoticeCriteria nCri, Model model) throws Exception {
+	public void mainPOST(@RequestParam("search") String search, ErgOrderCriteria oCri,NoticeCriteria nCri, Model model, MemberVO mvo) throws Exception {
 		logger.debug(" mainPOST() 호출");
 		List<String> sellList = mainService.sellTotalGet();
 		List<String> dayList = mainService.dayListGet();
@@ -185,7 +185,7 @@ public class HomeController {
 		model.addAttribute("storeList", storeList);
 		model.addAttribute("ergList", ergList);
 		model.addAttribute("noList", noList);		
-		
+		model.addAttribute("mvo", mvo);
 		
 		
 	}

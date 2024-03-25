@@ -1,5 +1,7 @@
 package com.itwillbs.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -93,6 +95,12 @@ public class MemberServiceImpl implements MemberService {
 			
 		return 1;
 	}
+
+	@Override
+	public MemberVO getMember(MemberVO vo) throws Exception {
+		return dao.getMember(vo);
+	}
+
 	
 	
 

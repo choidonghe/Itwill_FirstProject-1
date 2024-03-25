@@ -1,5 +1,7 @@
 package com.itwillbs.service;
 
+import java.util.List;
+
 import com.itwillbs.domain.MemberVO;
 
 public interface MemberService {
@@ -14,4 +16,6 @@ public interface MemberService {
 	
 	public int checkUser(MemberVO vo) throws Exception;
 
+	public MemberVO getMember(MemberVO vo) throws Exception;
+	
 } //service

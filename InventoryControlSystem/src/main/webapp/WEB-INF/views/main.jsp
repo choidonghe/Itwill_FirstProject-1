@@ -16,6 +16,8 @@ nCri : ${nCri }
 orderPageVO : ${orderPageVO }
 <br>
 noticePageVO : ${noticePageVO }
+<br>
+mvo : ${mvo }
 <div id="parent">
 	<!-- calendar 태그 -->
 	<div id='calendar-container'>

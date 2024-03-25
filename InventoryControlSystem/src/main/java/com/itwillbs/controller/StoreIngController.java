@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.itwillbs.domain.CodeVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.ErrorVO;
+import com.itwillbs.domain.MemberVO;
 import com.itwillbs.domain.ProductVO;
 import com.itwillbs.domain.StorePageVO;
 import com.itwillbs.service.CodeService;
+import com.itwillbs.service.MemberService;
 import com.itwillbs.service.ProductService;
 
 @Controller
@@ -26,12 +28,14 @@ public class StoreIngController {
 	private CodeService cService;
 	@Inject
 	private ProductService pService;
+	@Inject
+	private MemberService mService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(StoreIngController.class);
 	
 	//http://localhost:8088/storeinglist
 	@RequestMapping(value = "/storeinglist", method = RequestMethod.GET)
-	public void storeIngListGET(Criteria cri, Model model) throws Exception{
+	public void storeIngListGET(Criteria cri, Model model, MemberVO vo) throws Exception{
 
 		logger.debug(" storeIngListGET() 실행 ");
 		StorePageVO spageVO = new StorePageVO();
@@ -42,14 +46,17 @@ public class StoreIngController {
 		List<ProductVO> productList = pService.productGetListCri(cri);
 		//List<ProductVO> productListPage = pService.productListPaget(1);
 		List<CodeVO> codeList = cService.allCodeList();
+		MemberVO mvo = mService.getMember(vo);
 		
 		logger.debug(" list.size() : " + productList.size());
 		logger.debug(" @!@!@!" + productList);
 		logger.debug("spageVO : " + spageVO);
+		logger.debug(" mvo : " + mvo);
 		model.addAttribute("productList", productList);
 		model.addAttribute("cri", cri);
 		model.addAttribute("spageVO", spageVO);
 		model.addAttribute("codeList", codeList);
+		model.addAttribute("mvo", mvo);
 		//model.addAttribute("productListPage", productListPage);
 	}
 	

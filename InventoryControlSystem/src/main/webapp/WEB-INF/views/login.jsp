@@ -154,7 +154,8 @@ span {
 				<input type="password" class="input-field" placeholder="Enter Password" name="pass" required>
 				<input type="text" class="input-field" placeholder="Enter Name" name="name" required>
 				<input type="email" class="input-field" placeholder="Your Email" name="email" required> 
-				<input type="number" class="input-field" placeholder="Your PhoneNumber" name="phone" required> 
+				<input type="number" class="input-field" placeholder="Your PhoneNumber" name="phone" required>
+				<input type="text" class="input-field" placeholder="사원번호" name="eno" required> 
 				<button class="submit">회원가입하기</button>
 			</form>
 		</div>

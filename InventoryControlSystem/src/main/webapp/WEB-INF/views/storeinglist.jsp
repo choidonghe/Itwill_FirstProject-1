@@ -6,7 +6,8 @@
 	<div class="box">
 	<div class="box-header with-border">
 		<h3 class="box-title">입고예정</h3>
-		${spageVO }
+		${spageVO } <br>
+		${mvo }
 	</div>
 	
 	<div class="box-body">
