@@ -184,6 +184,13 @@ public class MainDAOImpl implements MainDAO {
 		
 		sql.insert(NAMESPACE+".insertNotice", vo);
 	}
+
+	@Override
+	public NoticeVO getContent(String bno) throws Exception {
+		logger.debug(" getContent(String bno) 호출");
+		
+		return sql.selectOne(NAMESPACE+".getcontent", bno);
+	}
 	
 	
 	

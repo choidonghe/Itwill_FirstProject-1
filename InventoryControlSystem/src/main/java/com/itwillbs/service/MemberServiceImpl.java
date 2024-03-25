@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.domain.MemberVO;
+import com.itwillbs.domain.NoticeVO;
 import com.itwillbs.persistence.MemberDAO;
 
 @Service
@@ -17,6 +18,14 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
+	
+	@Override
+	public int idCheck(String id) throws Exception {
+		logger.debug(" idCheck(String id) 실행");
+		
+		return dao.checkId(id);
+	}
+	
 	
 	@Override
 	public void memberInsert(MemberVO vo) throws Exception{
@@ -93,6 +102,10 @@ public class MemberServiceImpl implements MemberService {
 			
 		return 1;
 	}
+
+
+
+
 	
 	
 

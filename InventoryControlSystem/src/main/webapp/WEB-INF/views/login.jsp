@@ -20,7 +20,7 @@
 }
 .form-wrap {
     width: 380px;
-    height: 480px;
+    height: 550px;
     position: relative;
     margin: 6% auto;
     background: #fff;
@@ -111,7 +111,7 @@ span {
 }
 
 </style>
-
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
 <body style="background-color: rgb(60,141,188);">
 
@@ -127,22 +127,53 @@ span {
  	    });
  	  }
  	 
+
+ 	 $(document).ready(function() {
+     
+     	$("#id").on("focusout", function() {
+     		
+     		var id = $("#id").val();
+     		
+     		
+ 
+         	$.ajax({
+         		url : './confirmid',
+         		data : {
+         			id : id
+         		},
+         		type : 'POST',
+         		dataType : 'json',
+         		success : function(result) {
+         			if (result == 1) {
+         				$("#label1").css("color", "black").text("사용 가능한 ID 입니다.");
+         			} else{
+         				$("#label1").css("color", "red").text("사용 불가능한 ID 입니다.");
+         				$("#id").val('');
+         			}
+         		}
+         	}); //End Ajax
+     	});
+     })
+ 	 
 </script>
+ 	 
+ 	 
 
 
 
 	<div class="wrap">
+	<h1 style="text-align: center; margin-top: 100px;, margin-bottom: 10px;">InventoryControlSystem</h1>
 		<div class="form-wrap" >
 			<div class="button-wrap">
 				<div id="btn"></div>
 				<button type="button" class="togglebtn" onclick="login()">로그인</button>
 				<button type="button" class="togglebtn" onclick="register()">회원가입</button>
 			</div>
-			<div class="social-icons">
-				<a id="kakao-login-btn" href="javascript:loginWithKakao()"><img src="/resources/img/kakaotalk_sharing_btn_medium.png" alt="kakao"></a> 
-				<img src="/resources/img/btnG_아이콘사각.png" alt="naver"> 
-				
+			
+			<div class="social-icons" style="height: 100px;">
+				<a id="kakao-login-btn" href="javascript:loginWithKakao()"><img src="https://cs.kakao.com/img/cskakaocom/pc/thumb/thumb_kakaotalk.png" alt="kakao"></a> 
 			</div>
+			
 			<form id="login" action="" class="input-group" method="post">
 				<input type="text" class="input-field" placeholder="User ID" name="id" required> 
 				<input type="password" class="input-field" placeholder="Enter Password" name="pass" required> 
@@ -150,11 +181,19 @@ span {
 				<button class="submit">Login</button>
 			</form>
 			<form id="register" action="/register" class="input-group" method="post">
-				<input type="text" class="input-field" placeholder="User ID" name="id" required> 
+				<input id="id" type="text" class="input-field" placeholder="User ID" name="id" required> 
+				<label id="label1"></label>
 				<input type="password" class="input-field" placeholder="Enter Password" name="pass" required>
 				<input type="text" class="input-field" placeholder="Enter Name" name="name" required>
 				<input type="email" class="input-field" placeholder="Your Email" name="email" required> 
 				<input type="number" class="input-field" placeholder="Your PhoneNumber" name="phone" required> 
+				<input type="text" list="position" class="input-field" placeholder="position" name="position" required> 
+				<datalist id="position">
+					<option value="부장" />
+        			<option value="과장"/>
+        			<option value="대리"/>
+        			<option value="사원"/>
+				</datalist>
 				<button class="submit">회원가입하기</button>
 			</form>
 		</div>
