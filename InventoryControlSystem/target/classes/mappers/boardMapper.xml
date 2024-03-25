@@ -14,7 +14,7 @@
 
 	<insert id="insertMember">
 		insert into member (id, pass, name, email,phone, salt, position) 
-		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt},'사원')
+		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt}, #{position})
 	
 	</insert>
 

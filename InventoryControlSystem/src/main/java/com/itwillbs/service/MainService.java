@@ -31,4 +31,6 @@ public interface MainService {
 	
 	public void noticeWrite(NoticeVO vo)throws Exception;
 	
+	public NoticeVO noticeGet(String bno)throws Exception;
+	
 }// service

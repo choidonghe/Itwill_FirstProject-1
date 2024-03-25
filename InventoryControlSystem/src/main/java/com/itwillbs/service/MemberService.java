@@ -1,6 +1,7 @@
 package com.itwillbs.service;
 
 import com.itwillbs.domain.MemberVO;
+import com.itwillbs.domain.NoticeVO;
 
 public interface MemberService {
 
@@ -15,5 +16,7 @@ public interface MemberService {
 	public MemberVO kakaoInfo(String code) throws Exception;
 	
 	public int checkUser(MemberVO vo) throws Exception;
+	
+	
 
 } //service

@@ -242,7 +242,13 @@ public class HomeController {
 		return "redirect:/main";
 	}
 	
-	
+	@GetMapping(value = "/noticeContent")
+	public void NoticeContentGET(@RequestParam("bno") String bno, Model model ) throws Exception{
+		logger.debug(" NoticeContentGET() 호출 ");
+		
+		model.addAttribute("content", mainService.noticeGet(bno));
+		
+	}
 	
 	
 	
