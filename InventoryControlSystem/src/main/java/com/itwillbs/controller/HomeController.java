@@ -104,8 +104,10 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void mainGET(ErgOrderCriteria oCri,NoticeCriteria nCri, Model model) throws Exception{
+	public void mainGET(@RequestParam("id")String id ,ErgOrderCriteria oCri,NoticeCriteria nCri, Model model) throws Exception{
 		logger.debug(" main() 실행");
+		
+		model.addAttribute("id", id);
 		
 		List<String> sellList = mainService.sellTotalGet();
 		List<String> dayList = mainService.dayListGet();
@@ -149,8 +151,10 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
-	public void mainPOST(@RequestParam("search") String search, ErgOrderCriteria oCri,NoticeCriteria nCri, Model model) throws Exception {
+	public void mainPOST(@RequestParam("id")String id ,@RequestParam("search") String search, ErgOrderCriteria oCri,NoticeCriteria nCri, Model model) throws Exception {
 		logger.debug(" mainPOST() 호출");
+		model.addAttribute("id", id);
+		
 		List<String> sellList = mainService.sellTotalGet();
 		List<String> dayList = mainService.dayListGet();
 		List<String> releaseList = mainService.releaseListGet();

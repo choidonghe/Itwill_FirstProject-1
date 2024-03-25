@@ -139,8 +139,8 @@ span {
 				<button type="button" class="togglebtn" onclick="register()">회원가입</button>
 			</div>
 			<div class="social-icons">
-				<a id="kakao-login-btn" href="javascript:loginWithKakao()"><img src="/resources/img/kakaotalk_sharing_btn_medium.png" alt="kakao"></a> 
-				<img src="/resources/img/btnG_아이콘사각.png" alt="naver"> 
+				<a id="kakao-login-btn" href="javascript:loginWithKakao()"><img src="https://cs.kakao.com/img/cskakaocom/pc/thumb/thumb_kakaotalk.png" alt="kakao"></a> 
+			
 				
 			</div>
 			<form id="login" action="" class="input-group" method="post">

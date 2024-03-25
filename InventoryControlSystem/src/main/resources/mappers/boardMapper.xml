@@ -6,14 +6,22 @@
 <mapper namespace="com.itwillbs.mapper.BoardMapper">
 
 	<insert id="insertMember">
-		insert into member (id, pass, name, email,phone, salt) 
-		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt})
+		insert into member (id, pass, name, email,phone, salt, position) 
+		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt},'사원')
 	
 	</insert>
 
 	<insert id="insertKakaoMember">
-		insert into member (id, pass, name, email, phone, salt, sns_email) 
-		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt}, #{sns_email} )
+		insert into member (id
+						   ,pass
+						   ,name
+						   ,email
+						   ,phone
+						   ,salt
+						   ,position
+						   ,sns_email
+						   ,regdate)
+		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt},'사원', #{sns_email},now() )
 	
 	</insert>
 	

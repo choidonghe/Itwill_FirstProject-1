@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="./include/header.jsp"%>
+
 release : ${releaseList }
 <br>
 store : ${storeList }
@@ -21,6 +22,7 @@ noticePageVO : ${noticePageVO }
 	<div id='calendar-container'>
 		<div id='calendar'></div>
 	</div>
+
 	<script>
 		
 		(function() {
@@ -197,7 +199,7 @@ noticePageVO : ${noticePageVO }
 							<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >공지사항</th>
 							<th>
 								
-								<form action="/main" method="post">
+								<form action="/main?id=${id }" method="post">
 								<div class="input-group">
 										<input name="search" id="new-event" type="text" class="form-control" placeholder="검색키워드" >
 									
