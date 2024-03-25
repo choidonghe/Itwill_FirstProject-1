@@ -9,7 +9,7 @@ public class Criteria {
 		this.page = 1;
 		this.pageSize = 10;
 	}
-	
+	 
 	// 롬북없이 get,set 만들기
 	public void setPage(int page) {
 		if(page <= 0) { // 페이지번호가 음수일때
