@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -27,6 +28,7 @@ import com.itwillbs.domain.MemberVO;
 import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticePageVO;
 import com.itwillbs.domain.NoticeVO;
+import com.itwillbs.domain.ProductVO;
 import com.itwillbs.domain.ErgOrderPageVO;
 import com.itwillbs.service.MainService;
 import com.itwillbs.service.MemberService;
@@ -249,6 +251,20 @@ public class HomeController {
 		model.addAttribute("content", mainService.noticeGet(bno));
 		
 	}
+	
+	@RequestMapping(value = "/dayStoreRelease", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<List> dayStoreReleasePOST(String startStr) throws Exception{
+		logger.debug(" dayStoreReleasePOST() 호출");
+		logger.debug("클릭한 날짜 : "+startStr);
+		
+		List<ProductVO> productList = mainService.productDayGet(startStr);
+		logger.debug("!@@@@@@@@@"+productList);
+		
+		return new ResponseEntity<List>(productList, HttpStatus.OK );
+	}
+	
+	
 	
 	
 	

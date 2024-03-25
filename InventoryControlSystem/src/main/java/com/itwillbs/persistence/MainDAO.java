@@ -7,6 +7,7 @@ import com.itwillbs.domain.EmergencyOrderVO;
 import com.itwillbs.domain.ErgOrderCriteria;
 import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticeVO;
+import com.itwillbs.domain.ProductVO;
 
 public interface MainDAO {
 	
@@ -37,5 +38,7 @@ public interface MainDAO {
 	public void writeNotice(NoticeVO vo) throws Exception;
 	
 	public NoticeVO getContent(String bno) throws Exception;
+	
+	public List<ProductVO> getProductDay(String startStr) throws Exception;
 	
 }// dao

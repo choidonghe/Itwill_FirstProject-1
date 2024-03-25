@@ -6,6 +6,7 @@ import com.itwillbs.domain.EmergencyOrderVO;
 import com.itwillbs.domain.ErgOrderCriteria;
 import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticeVO;
+import com.itwillbs.domain.ProductVO;
 
 public interface MainService {
 	
@@ -32,5 +33,7 @@ public interface MainService {
 	public void noticeWrite(NoticeVO vo)throws Exception;
 	
 	public NoticeVO noticeGet(String bno)throws Exception;
+	
+	public List<ProductVO> productDayGet(String startStr) throws Exception;
 	
 }// service

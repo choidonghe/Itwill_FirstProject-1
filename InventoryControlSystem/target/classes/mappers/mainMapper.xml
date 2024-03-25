@@ -5,6 +5,31 @@
   
 <mapper namespace="com.itwillbs.mapper.MainMapper">
 
+	<resultMap type="com.itwillbs.domain.ProductVO" id="productMap">
+		<result property="pno" column="pno"/>
+		<result property="category_code" column="category_code"/>
+		<result property="pname" column="pname"/>
+		<result property="regdate" column="regdate"/>
+		<result property="update_date" column="update_date"/>
+		<result property="price" column="price"/>
+		<result property="company" column="company"/>
+		<result property="sales_price" column="sales_price"/>
+		<result property="divcode" column="divcode"/>
+		<result property="count" column="count"/>
+		<result property="account_code" column="account_code"/>
+		<result property="warehouse_code" column="warehouse_code"/>
+		<result property="finish_count" column="finish_count"/>
+		<result property="remain_count" column="remain_count"/>
+		<collection property="codeVO" resultMap="codeMap"/>
+	</resultMap>
+
+	<resultMap type="com.itwillbs.domain.CodeVO" id="codeMap">
+		<result property="divcode" column="divcode"></result>
+		<result property="daecode" column="daecode"></result>
+		<result property="smcode" column="smcode"></result>
+		<result property="korname" column="korname"></result>
+	</resultMap>
+
 	<select id="getSellTotal" resultType="String">
 		SELECT SUM(price) FROM projectdb.release 
 		WHERE release_date LIKE CONCAT('%',#{date},'%')
@@ -80,6 +105,15 @@
 	<select id="getcontent" resultType="com.itwillbs.domain.NoticeVO">
 		SELECT * FROM notice 
 		WHERE bno = #{bno}
+	
+	</select>
+	
+	<select id="productDay" resultMap="productMap">
+		SELECT pno, pname, count, finish_count, remain_count,e.korname 
+		FROM product p
+		LEFT JOIN code e 
+		ON p.divcode = e.divcode 
+		WHERE p.regdate LIKE CONCAT('%',#{startStr},'%');
 	
 	</select>
 	

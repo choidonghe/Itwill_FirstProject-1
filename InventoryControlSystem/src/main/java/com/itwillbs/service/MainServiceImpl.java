@@ -13,6 +13,7 @@ import com.itwillbs.domain.EmergencyOrderVO;
 import com.itwillbs.domain.ErgOrderCriteria;
 import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticeVO;
+import com.itwillbs.domain.ProductVO;
 import com.itwillbs.persistence.MainDAO;
 
 @Service
@@ -129,6 +130,14 @@ public class MainServiceImpl implements MainService {
 		logger.debug(" noticeGet(String bno) 실행");
 		
 		return mdao.getContent(bno);
+	}
+
+
+	@Override
+	public List<ProductVO> productDayGet(String startStr) throws Exception {
+		logger.debug(" productDayGet(String startStr) 실행");
+	
+		return mdao.getProductDay(startStr);
 	}
 
 	

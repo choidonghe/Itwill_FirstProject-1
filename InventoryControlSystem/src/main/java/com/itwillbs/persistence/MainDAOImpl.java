@@ -19,6 +19,7 @@ import com.itwillbs.domain.EmergencyOrderVO;
 import com.itwillbs.domain.ErgOrderCriteria;
 import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticeVO;
+import com.itwillbs.domain.ProductVO;
 
 @Repository
 public class MainDAOImpl implements MainDAO {
@@ -190,6 +191,13 @@ public class MainDAOImpl implements MainDAO {
 		logger.debug(" getContent(String bno) 호출");
 		
 		return sql.selectOne(NAMESPACE+".getcontent", bno);
+	}
+
+	@Override
+	public List<ProductVO> getProductDay(String startStr) throws Exception {
+		logger.debug(" getProductDay(String startStr) 호출");
+		
+		return sql.selectList(NAMESPACE+".productDay", startStr);
 	}
 	
 	

@@ -18,15 +18,46 @@ nCri : ${nCri }
 orderPageVO : ${orderPageVO }
 <br>
 noticePageVO : ${noticePageVO } --%>
+<!-- 모달창 -->
+<div id="customModal" class="modal">
+	<div class="col-xs-12">
+		<div class="box box-default">
+			<div class="box-header with-border">
+				<h3 class="box-title">입고 정보</h3>
+			</div>
+			<div class="box-body">
+				<div class="box-body table-responsive no-padding">
+					<table id="modalTable" class="table table-hover">
+						<tbody>
+							<tr>
+								<th>제품코드</th>
+								<th>제품명</th>
+								<th>입고수량</th>
+								<th>검수완료</th>
+								<th>검수대기</th>
+								<th>상태</th>
+							</tr>
+						
+						</tbody>
+					</table>
+				</div>
+
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default" onclick="location.href='/inspectionMain'">입고 페이지로</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="parent">
 	<!-- calendar 태그 -->
+
 	<div id='calendar-container'>
 		<div id='calendar'></div>
 	</div>
-	
+
 
 	<script>
-		
 		(function() {
 			$(function() {
 				// calendar element 취득
@@ -47,7 +78,7 @@ noticePageVO : ${noticePageVO } --%>
 							},
 							initialView : 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
 							navLinks : false, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
-							editable : true, // 수정 가능?
+							editable : false, // 수정 가능?
 							selectable : true, // 달력 일자 드래그 설정가능
 							nowIndicator : true, // 현재 시간 마크
 							dayMaxEvents : true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
@@ -61,18 +92,38 @@ noticePageVO : ${noticePageVO } --%>
 							eventRemove : function(obj) { // 이벤트가 삭제되면 발생하는 이벤트
 								console.log(obj);
 							},
-							select : function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
-								var title = prompt('Event Title:');
-								if (title) {
-									calendar.addEvent({
-										title : title,
-										start : arg.start,
-										end : arg.end,
-										allDay : arg.allDay
-									})
-								}
-								calendar.unselect()
+						
+							// 입,출고 데이터 가져오기
+							select : function(obj){
+								console.log(obj.startStr);
+								
+								$.ajax({
+									url : './dayStoreRelease',
+									data : {
+										startStr : obj.startStr
+									},
+									type : 'post',
+									dataType : 'json',
+									
+									success : function(productList){
+										
+								        productList.forEach(function(product) {
+								       		 $('#modalTable').append("<tr><td>"+product.pno+
+								       				 				 "</td><td>"+product.pname+
+								       				 				 "</td><td>"+product.count+
+								       				 				 "</td><td>"+product.finish_count+
+								       				 				 "</td><td>"+product.remain_count+
+								       				 				 "</td><td>"+product.codeVO.korname+
+								       				 				 "</td></tr>");
+								        
+								        });
+
+										$('#customModal').modal();
+										
+									}
+								});
 							},
+							
 							
 							
 							events: getList()
@@ -81,6 +132,7 @@ noticePageVO : ${noticePageVO } --%>
 				calendar.render();
 			});
 		})();
+		
 		
 		var releaseList = ${releaseList};
 		var storeList = ${storeList};
@@ -105,6 +157,9 @@ noticePageVO : ${noticePageVO } --%>
 		};
 		
 		console.log(getList())
+		
+		
+		
 	</script>
 
 	<!-- 차트 -->
@@ -147,11 +202,11 @@ noticePageVO : ${noticePageVO } --%>
 					<c:if test="${orderPageVO.prev }">
 						<li><a href="/main?page=${orderPageVO.startPage - 1}">«</a></li>
 					</c:if>
-					
+
 					<c:forEach var="idx" begin="${orderPageVO.startPage }" end="${orderPageVO.endPage }" step="1">
 						<li ${orderPageVO.cri.orderPage == idx? "class='active'" : "" }><a href="/main?orderPage=${idx }">${idx }</a></li>
 					</c:forEach>
-					
+
 					<c:if test="${orderPageVO.next }">
 						<li><a href="/main?orderPage=${orderPageVO.endPage + 1 }">»</a></li>
 					</c:if>
@@ -197,23 +252,24 @@ noticePageVO : ${noticePageVO } --%>
 			<div class="col-sm-12">
 				<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
 					<thead>
-					<tr role="row">
-							<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >공지사항
-							<button type="button" class="btn bg-navy margin" onclick="location.href='/notice'">작성하기</button> </th>
-							<th>
-								
-								<form action="/main?id=${id }" method="post">
-								<div class="input-group">
-										<input name="search" id="new-event" type="text" class="form-control" placeholder="검색키워드" >
-									
-									<div class="input-group-btn">
-										<button id="new-event" type="submit" class="btn btn-primary btn-flat">검색</button>
-									</div>
-								</div>
-								</form>
-							
+						<tr role="row">
+							<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">공지사항
+								<button type="button" class="btn bg-navy margin" onclick="location.href='/notice'">작성하기</button>
 							</th>
-					</tr>
+							<th>
+
+								<form action="/main?id=${id }" method="post">
+									<div class="input-group">
+										<input name="search" id="new-event" type="text" class="form-control" placeholder="검색키워드">
+
+										<div class="input-group-btn">
+											<button id="new-event" type="submit" class="btn btn-primary btn-flat">검색</button>
+										</div>
+									</div>
+								</form>
+
+							</th>
+						</tr>
 						<tr role="row">
 							<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">번호</th>
 							<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">제목</th>
@@ -221,17 +277,17 @@ noticePageVO : ${noticePageVO } --%>
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach var="list" items="${noList }">
-						<tr>
-							<td style="width: 50px;"> ${list.bno }</td>
-							<td style="width: 1000px;"><a href="/noticeContent?bno=${list.bno }"> ${list.title } </a></td>
-							<td>${list.regdate }</td>
+						<c:forEach var="list" items="${noList }">
+							<tr>
+								<td style="width: 50px;">${list.bno }</td>
+								<td style="width: 1000px;"><a href="/noticeContent?bno=${list.bno }"> ${list.title } </a></td>
+								<td>${list.regdate }</td>
 
-						</tr>
-					</c:forEach>
-						
+							</tr>
+						</c:forEach>
+
 					</tbody>
-					
+
 				</table>
 			</div>
 		</div>
@@ -245,11 +301,11 @@ noticePageVO : ${noticePageVO } --%>
 						<c:if test="${noticePageVO.prev }">
 							<li><a href="/main?page=${noticePageVO.startPage - 1}">«</a></li>
 						</c:if>
-					
+
 						<c:forEach var="idx" begin="${noticePageVO.startPage }" end="${noticePageVO.endPage }" step="1">
 							<li ${noticePageVO.cri.noticePage == idx? "class='active'" : "" }><a href="/main?noticePage=${idx }">${idx }</a></li>
 						</c:forEach>
-					
+
 						<c:if test="${noticePageVO.next }">
 							<li><a href="/main?orderPage=${noticePageVO.endPage + 1 }">»</a></li>
 						</c:if>
