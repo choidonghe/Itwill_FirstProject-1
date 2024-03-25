@@ -7,6 +7,8 @@ import com.itwillbs.domain.MemberVO;
 
 public interface MemberDAO {
 	
+	public int checkId(String id) throws Exception;
+	
 	public String createSalt() throws Exception;
 	
 	public String hashPass(String pass, String salt) throws Exception;

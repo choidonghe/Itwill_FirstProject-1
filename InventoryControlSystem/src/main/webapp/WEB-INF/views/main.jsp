@@ -2,6 +2,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="./include/header.jsp"%>
 
+	
+	
+id : ${id }
+<br>
 release : ${releaseList }
 <br>
 store : ${storeList }
@@ -22,6 +26,7 @@ noticePageVO : ${noticePageVO }
 	<div id='calendar-container'>
 		<div id='calendar'></div>
 	</div>
+	
 
 	<script>
 		

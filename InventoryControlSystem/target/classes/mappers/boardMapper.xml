@@ -5,6 +5,13 @@
   
 <mapper namespace="com.itwillbs.mapper.BoardMapper">
 
+	<select id="checkId" resultType="int">
+		SELECT COUNT(*) FROM member 
+		WHERE id = #{id}
+	
+	</select>
+	
+
 	<insert id="insertMember">
 		insert into member (id, pass, name, email,phone, salt, position) 
 		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt},'사원')
@@ -12,7 +19,8 @@
 	</insert>
 
 	<insert id="insertKakaoMember">
-		insert into member (id
+		insert into member (
+						   id
 						   ,pass
 						   ,name
 						   ,email
@@ -20,7 +28,8 @@
 						   ,salt
 						   ,position
 						   ,sns_email
-						   ,regdate)
+						   ,regdate
+						   )
 		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt},'사원', #{sns_email},now() )
 	
 	</insert>

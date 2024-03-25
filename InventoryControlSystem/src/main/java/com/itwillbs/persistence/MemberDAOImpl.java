@@ -31,6 +31,14 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	private static final String NAMESPACE = "com.itwillbs.mapper.BoardMapper";
 
+
+	@Override
+	public int checkId(String id) throws Exception {
+		logger.debug(" checkId(String id) 실행");
+		
+		return sql.selectOne(NAMESPACE+".checkId", id);
+	}
+	
 	
 	@Override
 	public String createSalt() throws Exception {
@@ -252,7 +260,8 @@ public class MemberDAOImpl implements MemberDAO {
 	    
 		return vo;
 	}
-	
+
+
 
 	
 	

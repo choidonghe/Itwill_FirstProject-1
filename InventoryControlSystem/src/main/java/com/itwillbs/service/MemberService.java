@@ -4,6 +4,8 @@ import com.itwillbs.domain.MemberVO;
 
 public interface MemberService {
 
+	public int idCheck(String id) throws Exception;
+
 	public void memberInsert(MemberVO vo) throws Exception;
 	
 	public void memberKakaoInsert(MemberVO vo) throws Exception;

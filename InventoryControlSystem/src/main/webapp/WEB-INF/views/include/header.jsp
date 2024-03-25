@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,6 +86,10 @@
 <!-- jQuery 2.1.4 -->
 <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <body class="skin-blue sidebar-mini">
+
+<c:if test="${empty id}">
+	<c:redirect url="localhost:8088/login"/>
+</c:if>
 	<div class="wrapper">
 
 		<header class="main-header">
@@ -246,8 +250,11 @@
 								</li>
 								<li class="footer"><a href="#">View all tasks</a></li>
 							</ul></li>
+							<li>
+								<button type="button" class="btn btn-danger" onclick="location.href='/logout'">logout</button>
+							</li>
 						<!-- User Account: style can be found in dropdown.less -->
-						<li class="dropdown user user-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image" /> <span class="hidden-xs">Alexander Pierce</span>
+						<li class="dropdown user user-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image" /> <span class="hidden-xs">${id }</span>
 						</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->

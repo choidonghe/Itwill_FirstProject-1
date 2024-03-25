@@ -111,7 +111,7 @@ span {
 }
 
 </style>
-
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
 <body style="background-color: rgb(60,141,188);">
 
@@ -127,7 +127,37 @@ span {
  	    });
  	  }
  	 
+
+ 	 $(document).ready(function() {
+     
+     	$("#id").on("focusout", function() {
+     		
+     		var id = $("#id").val();
+     		
+     		
+ 
+         	$.ajax({
+         		url : './confirmid',
+         		data : {
+         			id : id
+         		},
+         		type : 'POST',
+         		dataType : 'json',
+         		success : function(result) {
+         			if (result == 1) {
+         				$("#label1").css("color", "black").text("사용 가능한 ID 입니다.");
+         			} else{
+         				$("#label1").css("color", "red").text("사용 불가능한 ID 입니다.");
+         				$("#id").val('');
+         			}
+         		}
+         	}); //End Ajax
+     	});
+     })
+ 	 
 </script>
+ 	 
+ 	 
 
 
 
@@ -150,7 +180,8 @@ span {
 				<button class="submit">Login</button>
 			</form>
 			<form id="register" action="/register" class="input-group" method="post">
-				<input type="text" class="input-field" placeholder="User ID" name="id" required> 
+				<input id="id" type="text" class="input-field" placeholder="User ID" name="id" required> 
+				<label id="label1"></label>
 				<input type="password" class="input-field" placeholder="Enter Password" name="pass" required>
 				<input type="text" class="input-field" placeholder="Enter Name" name="name" required>
 				<input type="email" class="input-field" placeholder="Your Email" name="email" required> 
