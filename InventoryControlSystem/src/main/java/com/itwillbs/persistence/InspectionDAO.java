@@ -40,7 +40,8 @@ public interface InspectionDAO {
 	public void insertError(ProductVO pvo) throws Exception;
 	
 	// 불량품 목록
-	public List<ErrorVO> errorList() throws Exception;
+	public List<ErrorVO> errorList(int page) throws Exception;
+	public List<ErrorVO> errorCri(Criteria cri) throws Exception;
 	
 	
 	

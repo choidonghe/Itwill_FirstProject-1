@@ -177,23 +177,17 @@
 	</select>
 	
 	<!-- product - 불량 제품 목록 조회 -->
-	<select id="errorProduct" resultMap="errorVO">
+	<select id="errorList" resultMap="errorVO">
     <![CDATA[
     select * from error e
-    join code c
-    on e.divcode = c.divcode
-    where e.divcode = 7 or e.divcode = 8
     order by e.regdate desc
     limit #{start}, #{pageSize}
     ]]>
 	</select>
 	<!-- 페이징 처리 - Cri -->
-	<select id="inspecListCri2" resultType="productVO">
+	<select id="errorCri" resultType="productVO">
 		<![CDATA[
 		select * from error e
-		join code c 
-		on p.divcode = c.divcode
-		where e.divcode = 7 or e.divcode = 8
 		order by e.regdate desc 
 		limit #{startPage},#{pageSize}
 		]]>

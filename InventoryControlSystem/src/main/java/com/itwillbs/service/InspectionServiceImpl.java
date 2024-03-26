@@ -74,8 +74,8 @@ public class InspectionServiceImpl implements InspectionService{
 	
 	// 불량품 목록 조회
 	@Override
-	public List<ErrorVO> errorList() throws Exception {
-		return idao.errorList();
+	public List<ErrorVO> errorList(int page) throws Exception {
+		return idao.errorList(page);
 	}
 
 	@Override
@@ -86,6 +86,11 @@ public class InspectionServiceImpl implements InspectionService{
 	@Override
 	public List<ProductVO> productGetInspectionCri2(Criteria cri) throws Exception {
 		return idao.productDiv2Cri(cri);
+	}
+
+	@Override
+	public List<ErrorVO> errorCri(Criteria cri) throws Exception {
+		return idao.errorCri(cri);
 	}
 
 	

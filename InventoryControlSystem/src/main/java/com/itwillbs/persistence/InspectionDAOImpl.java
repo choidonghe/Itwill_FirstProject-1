@@ -74,8 +74,8 @@ public class InspectionDAOImpl implements InspectionDAO{
 
 	// 불량품 목록 조회
 	@Override
-	public List<ErrorVO> errorList() throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".errorProduct");
+	public List<ErrorVO> errorList(int page) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".errorList");
 	}
 
 	@Override
@@ -95,6 +95,11 @@ public class InspectionDAOImpl implements InspectionDAO{
 	public List<ProductVO> productDiv2Cri(Criteria cri) throws Exception {
 		
 		return sqlSession.selectList(NAMESPACE + ".inspecListCri2", cri);
+	}
+
+	@Override
+	public List<ErrorVO> errorCri(Criteria cri) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".errorCri", cri);
 	}
 	
 }

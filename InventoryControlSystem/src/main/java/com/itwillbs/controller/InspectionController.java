@@ -120,12 +120,19 @@ public class InspectionController {
 	// 검수 상태별 페이지 (불량제품)
 	// http://local:8088/inspec/inspectionDiv4
 	@RequestMapping(value = "/inspectionDiv4", method = RequestMethod.POST)
-	public void inspectionDiv4(Model model) throws Exception{
+	public void inspectionDiv4(Model model,Criteria cri) throws Exception{
 		logger.debug(" inspectionDiv4() 호출 ");
-		List<ErrorVO> errorList = iService.errorList();
+		StorePageVO spageVO = new StorePageVO();
+		spageVO.setCri(cri);
+		spageVO.setTotalCount(pService.getProductListCount());
+		List<ErrorVO> errorList = iService.errorCri(cri);
 		List<WarehouseVO> warehouseList = iService.warehouseList();
+		List<CodeVO> codeList = cService.allCodeList();
 		model.addAttribute("errorList",errorList);
 		model.addAttribute("warehouseList", warehouseList);
+		model.addAttribute("cri", cri);
+		model.addAttribute("spageVO", spageVO);
+		model.addAttribute("codeList", codeList);
 	}
 	
 	
