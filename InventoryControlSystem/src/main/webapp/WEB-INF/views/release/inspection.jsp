@@ -9,20 +9,6 @@ pageVO=${pageVO } <br>
 ${vo} <br> --%>
 
 
-<script type="text/javascript">
-
-	$(document).ready(function(){
-		
-		$(".btn-danger").click(function(){
-			
-			var order_count= document.getElementById("order_count").value;
-			consol.log(order_count);
-			alert('ㅇㅇ');
-			return false;
-		});
-	});
-
-</script>
 <h1>inspection.jsp</h1>
 
 
@@ -49,10 +35,11 @@ ${vo} <br> --%>
 						<th>order_date</th>
 						<th>order_count</th>
 						<th>order_count</th>
+						
 					</tr>
 
 					<c:forEach var="vo" items="${vo}">
-					<c:if test="${vo.divcode==5 || vo.divcode == 8}">
+<%-- 					<c:if test="${vo.divcode==5 || vo.divcode == 8}"> --%>
 						<tr>
 							<td>
 								<form action="" method="post" onsubmit="return test()">
@@ -63,9 +50,9 @@ ${vo} <br> --%>
 												</c:if>
 											</c:forEach>
 										</select>
-										<input type="text" name="order_count" placeholder="출고 수량을 적으세요.">
+										<input type="text" name="release_count" placeholder="수량을 적으세요." required="required">
 										<input type="hidden" name="pno" value="${vo.pno}">
-										<input type="button" value="수정" class="btn btn-danger">
+										<input type="submit" value="수정" class="btn btn-danger">
 								</form>
 							</td>
 							<td>${vo.id}</td>
@@ -74,8 +61,9 @@ ${vo} <br> --%>
 							<td>${vo.release_date}</td>
 							<td>${vo.order_date}</td>
 							<td>${vo.order_count}</td>
+							
 						</tr>
-						</c:if>
+<%-- 						</c:if> --%>
 					</c:forEach>
 				</tbody>
 			</table>

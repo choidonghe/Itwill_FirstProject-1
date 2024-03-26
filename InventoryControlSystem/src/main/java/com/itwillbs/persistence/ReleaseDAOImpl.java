@@ -112,13 +112,13 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 	}
 	
 	@Override
-	public ReleaseVO subtractRelease(String pno,int order_count) throws Exception {
+	public ReleaseVO subtractRelease(String pno,int release_count) throws Exception {
 		logger.debug(" subtractRelease() 호출");
 		
 		// 데이터 업데이트 수행
 	    Map<String, Object> parameters = new HashMap<>();
 	    parameters.put("pno", pno);
-	    parameters.put("order_count", order_count);
+	    parameters.put("release_count", release_count);
 	    sqlSession.update(NAMESPACE + ".upSubtractRelease", parameters);
 	    
 	    // 업데이트된 데이터 조회
@@ -128,15 +128,26 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 	    
 	    return getupSubtractRelease;
 	}
-	
-	
-	
-	
-	
 
+	@Override
+	public ReleaseVO errorRelease(String pno,int release_count, int error_count) throws Exception {
+		logger.debug("errorRelease(String pno) 호출");
+		
+		// 데이터 업데이트 수행
+	    Map<String, Object> parameters = new HashMap<>();
+	    parameters.put("pno", pno);
+	    parameters.put("release_count", release_count);
+	    parameters.put("error_count", error_count);
+	    
+	    sqlSession.update(NAMESPACE + ".upErrorRelease", parameters);
+	    
+	    // 업데이트된 데이터 조회
+	    ReleaseVO getupSubtractRelease = sqlSession.selectOne(NAMESPACE + ".getupSubtractRelease", pno);
+	    
+	    logger.debug("updatedData:" + getupSubtractRelease);
+	    
+	    return getupSubtractRelease;
 	
-	
-	
-	
+	}
 	
 }

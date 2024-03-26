@@ -29,7 +29,10 @@ public interface ReleaseService {
 	// 총 글의 개수
 	public int getReleaseListCount() throws Exception;
 	
-	public ReleaseVO releaseSubtract(String pno,int order_count) throws Exception;
+	// 검수완료 & 불량
+	public ReleaseVO releaseSubtract(String pno,int release_count) throws Exception;
+	
+	public ReleaseVO releaseError(String pno,int release_count, int error_count) throws Exception;
 	
 	
 }

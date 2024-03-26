@@ -6,10 +6,40 @@
 
 <mapper namespace="com.itwillbs.mapper.ReleaseMapper">
 
-	<select id="getReleaseList" resultType="ReleaseVO">
-		select * from tbl_release
-		order by divcode
+	<resultMap type="com.itwillbs.domain.ProductVO" id="productMap">
+		<result property="pno" column="pno"/>
+		<result property="category_code" column="category_code"/>
+		<result property="pname" column="pname"/>
+		<result property="regdate" column="regdate"/>
+		<result property="update_date" column="update_date"/>
+		<result property="price" column="price"/>
+		<result property="company" column="company"/>
+		<result property="sales_price" column="sales_price"/>
+		<result property="divcode" column="divcode"/>
+		<result property="count" column="count"/>
+		<result property="account_code" column="account_code"/>
+		<result property="warehouse_code" column="warehouse_code"/>
+		<result property="finish_count" column="finish_count"/>
+		<result property="remain_count" column="remain_count"/>
+		
+		<collection property="codeVO" resultMap="codeVO"/>
+	</resultMap>
+	
+	<resultMap type="com.itwillbs.domain.CodeVO" id="codeMap">
+		<result property="divcode" column="divcode"></result>
+		<result property="daecode" column="daecode"></result>
+		<result property="smcode" column="smcode"></result>
+		<result property="korname" column="korname"></result>
+	</resultMap>
+
+	<select id="getReleaseList" resultMap="productMap">
+		select * 
+		from product p 
+		join code c 
+		on c.divcode = p.divcode
+		where p.divcode = 4
 	</select>
+
 
 	<select id="getReleaseInfoList" resultType="ReleaseVO">
 		select * from tbl_release
@@ -67,8 +97,10 @@
 		select count(pno) from tbl_release
 	</select>
 	
+	
+<!-- // 검수완료 & 불량 -->
 	<update id="upSubtractRelease">
-		update tbl_release set order_count=order_count-#{order_count}
+		update tbl_release set order_count = order_count - #{release_count}
 		where pno=#{pno}
 	</update>
 	
@@ -76,6 +108,14 @@
 		select * from tbl_release
 		where pno=#{pno}
 	</select>
+	
+	<update id="upErrorRelease">
+		update tbl_release set order_count = (order_count - #{release_count}) - #{error_count}
+		where pno=#{pno}
+	</update>
+	
+	
+	
 		
 
 </mapper>

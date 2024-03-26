@@ -29,5 +29,7 @@ public interface ReleaseDAO {
 	// 총 글의 개수 계산
 	public int releaseListCount() throws Exception;
 	
-	public ReleaseVO subtractRelease(String pno,int order_count) throws Exception;
+	public ReleaseVO subtractRelease(String pno,int release_count) throws Exception;
+	
+	public ReleaseVO errorRelease(String pno,int release_count, int error_count) throws Exception;
 }

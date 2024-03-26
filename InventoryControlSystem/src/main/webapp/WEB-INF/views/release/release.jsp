@@ -42,7 +42,7 @@ ${code} <br> --%>
 
 
 					<c:forEach var="vo" items="${vo}">
-					<c:if test="${vo.divcode==6 }">
+<%-- 					<c:if test="${vo.divcode==6 }"> --%>
 						<tr>
 							<td>
 								<c:forEach var="code" items="${code}">
@@ -63,7 +63,7 @@ ${code} <br> --%>
 							<td>${vo.delivery_phone}</td>
 							<td>${vo.delivery_manager}</td>
 						</tr>
-						</c:if>
+<%-- 						</c:if> --%>
 					</c:forEach>
 				</tbody>
 			</table>

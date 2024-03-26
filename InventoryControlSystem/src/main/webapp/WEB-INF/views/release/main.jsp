@@ -51,7 +51,7 @@ ${mainList} <br>
 										<c:when test="${mainList.divcode==4}">
 											<select name="divcode" aria-controls="example1" class="form-control input-sm">
 												<c:forEach var="code" items="${code}">
-													<c:if test="${code.divcode != 6 && code.divcode != 8}">
+													<c:if test="${code.divcode != 4 && code.divcode != 6 && code.divcode != 8}">
 														<option value="${code.divcode}">${code.korname}</option>
 													</c:if>
 												</c:forEach>
