@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="box">
 	<div class="box-header">
 		<h3 class="box-title">현재 재고</h3>
-		${stockList }
 	</div>
 		<div class="box-body">
 			<div id="example1_wrapper"
@@ -205,9 +204,10 @@ document.addEventListener("DOMContentLoaded", function() {
 								<td>${sVO.category }</td>
 								<td>${sVO.pname }</td>
 								<td>${sVO.company }</td>
-								<td>${sVO.count }</td>
+								<td data-available-count="${sVO.count }">${sVO.count }</td>
 								<td>${sVO.warehouse_code }</td>		
-								<td><input type="text" style="width : 100px;"><button type="button" class="btn btn-block btn-primary" style ="width: 60px;">출고</button></td>													
+								<td><input type="number" style="width : 100px;">
+								<button type="button" class="btn btn-block btn-primary" style ="width: 60px;">출고</button></td>													
 							</tr>
 						</c:forEach>
 						</tbody>
@@ -227,6 +227,45 @@ document.addEventListener("DOMContentLoaded", function() {
 					</table>
 				</div>
 			</div>
+			
+			<!-- 출고 버튼 클릭 시 DB에 정보 전달 -->
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+			    // 출고 버튼 클릭 시 이벤트 처리
+			    var releaseButtons = document.querySelectorAll('button.btn-primary');
+			    releaseButtons.forEach(function(button) {
+			        button.addEventListener('click', function() {
+			            var productCode = button.closest('tr').querySelector('td[data-product-code]').innerText;
+			            var releaseCount = parseInt(button.closest('tr').querySelector('input[type="number"]').value);
+			            var availableCount = parseInt(button.closest('tr').querySelector('td[data-available-count]').innerText);
+			
+			            if (releaseCount > availableCount) {
+			                alert('재고량보다 많습니다.');
+			                return;
+			            }
+			
+			            // AJAX를 사용하여 서버로 데이터 전송
+			            var xhr = new XMLHttpRequest();
+			            xhr.open('POST', '/stock/moveRelease', true);
+			            xhr.setRequestHeader('Content-Type', 'application/json');
+			            xhr.onreadystatechange = function() {
+			                if (xhr.readyState === XMLHttpRequest.DONE) {
+			                    if (xhr.status === 200) {
+			                        alert('출고가 완료되었습니다.');
+			                        // 성공적으로 처리된 경우에 수행할 작업 추가
+			                    } else {
+			                        alert('오류가 발생했습니다. 다시 시도해주세요.');
+			                        // 오류 발생 시 처리
+			                    }
+			                }
+			            };
+			            xhr.send(JSON.stringify({ productCode: productCode, releaseCount: releaseCount }));
+			        });
+			    });
+			});
+			</script>
+			
+			<!-- 출고 버튼 클릭 시 DB에 정보 전달 -->
 			<div class="row">
                 <div class="col-sm-5">
 					<c:choose>

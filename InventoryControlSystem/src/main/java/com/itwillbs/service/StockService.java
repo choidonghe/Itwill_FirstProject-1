@@ -20,6 +20,9 @@ public interface StockService {
 	// 제품 상세보기 조회
 	public List<StockDetailVO> getDetailList(String pno) throws Exception;
 	
+	// 출고 테이블로 정보 이동
+	public void moveRelease(StockVO stockVO) throws Exception;
+	
 
 
 }

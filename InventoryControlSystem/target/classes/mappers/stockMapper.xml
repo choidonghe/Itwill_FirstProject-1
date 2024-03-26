@@ -2,118 +2,132 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.itwillbs.mapper.stockMapper">
 
 	<resultMap type="com.itwillbs.domain.StockVO" id="stock">
-		<result property="pno" column="pno"/>
-		<result property="warehouse_code" column="warehouse_code"/>
-		<result property="count" column="count"/>
-		<result property="pname" column="pname"/>
-		<result property="company" column="divcode"/>
-<!-- 		<result property="category" column="category"/> -->
-<!-- 		<result property= "type" column= "type"/> -->
-<!-- 		<result property= "keyword" column="keyword"/> -->
-	</resultMap>
-	
-	<resultMap type="com.itwillbs.domain.StockDetailVO" id="stockDetail">
-		<result property="pno" column="pno"/>
-		<result property="pname" column="pname"/>
-		<result property="category" column="category"/>
-		<result property="regdate" column="regdate"/>
-		<result property="company" column="company"/>
-		<result property="unit_price" column="unit_price"/>
-		<result property="sales_price" column="sales_price"/>
-		<result property="location" column="location"/>
-		<result property="count" column="count"/>
+		<result property="pno" column="pno" />
+		<result property="warehouse_code" column="warehouse_code" />
+		<result property="count" column="count" />
+		<result property="pname" column="pname" />
+		<result property="company" column="divcode" />
+		<!-- <result property="category" column="category"/> -->
+		<!-- <result property= "type" column= "type"/> -->
+		<!-- <result property= "keyword" column="keyword"/> -->
 	</resultMap>
 
-	
+	<resultMap type="com.itwillbs.domain.StockDetailVO"
+		id="stockDetail">
+		<result property="pno" column="pno" />
+		<result property="pname" column="pname" />
+		<result property="category" column="category" />
+		<result property="regdate" column="regdate" />
+		<result property="company" column="company" />
+		<result property="unit_price" column="unit_price" />
+		<result property="sales_price" column="sales_price" />
+		<result property="location" column="location" />
+		<result property="count" column="count" />
+		<result property="id" column="id" />
+	</resultMap>
+
+
 	<!-- 검색기능 sql 구문 (criteria) -->
-	<sql id = "criteria">
-	<trim prefix="where (" suffix= ")" prefixOverrides="OR">
-	
-		<choose>
-			<when test="type == 'all'.toString()">
-				CONCAT(stock.pno, stock.warehouse_code, 
-				product.pname, product.company, category.category) 
-				LIKE CONCAT('%',#{keyword},'%')
-			</when>
-			<when test="type == 'pno'.toString()">
-				stock.pno LIKE CONCAT('%',#{keyword},'%')
-			</when>
-			<when test="type == 'category'.toString()">
-				category.category LIKE CONCAT('%',#{keyword},'%')
-			</when>
-			<when test="type == 'pname'.toString()">
-				product.pname LIKE CONCAT('%',#{keyword},'%')
-			</when>
-			<when test="type == 'company'.toString()">
-				product.company LIKE CONCAT('%',#{keyword},'%')
-			</when>
-			<when test="type == 'warehouse_code'.toString()">
-				stock.warehouse_code LIKE CONCAT('%',#{keyword},'%')
-			</when>
-		</choose>
-	</trim>
-	</sql>
-	
+	<sql id="criteria">
+		<trim prefix="where (" suffix=")" prefixOverrides="OR">
 
-	
+			<choose>
+				<when test="type == 'all'.toString()">
+					CONCAT(stock.pno, stock.warehouse_code,
+					product.pname, product.company, category.category)
+					LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type == 'pno'.toString()">
+					stock.pno LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type == 'category'.toString()">
+					category.category LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type == 'pname'.toString()">
+					product.pname LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type == 'company'.toString()">
+					product.company LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type == 'warehouse_code'.toString()">
+					stock.warehouse_code LIKE CONCAT('%',#{keyword},'%')
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
+
+
 	<!-- 글 목록 조회(페이징처리-Cri) -->
-	<select id = "selectStockListCri" resultType = "StockVO">
-		
+	<select id="selectStockListCri" resultType="StockVO">
+
 		select stock.pno, stock.warehouse_code, stock.count,
-		product.pname, product.company, category.category
+		product.pname,
+		product.company, category.category
 		from stock
 		inner join product
-		on stock.pno=product.pno
+		on
+		stock.pno=product.pno
 		inner join category
-		on stock.category = category.category_code
-			<include refid = "criteria"></include>
-		order by stock.pno desc 
+		on stock.category =
+		category.category_code
+		<include refid="criteria"></include>
+		order by stock.pno desc
 		limit #{startPage} , #{pageSize}
-		
+
 	</select>
-	
-	
+
+
 	<!-- 총 글 개수 조회 -->
-	<select id = "totalCount" resultType = 'int'>
-    select count(concat(stock.pno, stock.warehouse_code, stock.count, product.pname, product.company, category.category))
-    from stock
-    inner join product on stock.pno=product.pno
-    inner join category on stock.category = category.category_code
-		<include refid = "criteria"></include>
+	<select id="totalCount" resultType='int'>
+		select count(concat(stock.pno, stock.warehouse_code, stock.count,
+		product.pname, product.company, category.category))
+		from stock
+		inner join product on stock.pno=product.pno
+		inner join category on stock.category = category.category_code
+		<include refid="criteria"></include>
 	</select>
-	
-	
+
+
 	<!-- 제품 상세보기 구문 -->
 	<select id="detailView" resultType="StockDetailVO">
-	    SELECT 
-	        stock.pno, 
-	        stock.warehouse_code, 
-	        stock.count,
-	        product.pname, 
-	        product.company, 
-	        category.category, 
-	        warehouse.location,
-	        product.unit_price, 
-	        product.sales_price,
-	        inspection.id
-	    FROM 
-	        stock
-	    INNER JOIN 
-	        product ON stock.pno = product.pno
-	    INNER JOIN 
-	        category ON stock.category = category.category_code
-	    INNER JOIN 
-	        warehouse ON stock.warehouse_code = warehouse.warehouse_code
-	    INNER JOIN inspection
-	    ON stock.pno = inspection.pno
-	    WHERE 
-	        stock.pno = CONCAT(#{pno})
+		SELECT
+		stock.pno,
+		stock.warehouse_code,
+		stock.count,
+		product.pname,
+		product.company,
+		category.category,
+		warehouse.location,
+		product.unit_price,
+		product.sales_price,
+		inspection.id
+		FROM
+		stock
+		INNER JOIN
+		product ON stock.pno = product.pno
+		INNER JOIN
+		category ON stock.category = category.category_code
+		INNER JOIN
+		warehouse ON stock.warehouse_code = warehouse.warehouse_code
+		INNER JOIN inspection
+		ON stock.pno = inspection.pno
+		WHERE
+		stock.pno = CONCAT(#{pno})
 	</select>
 	
-	
-	  
+	<!-- 출고 테이블로 정보 이동 구문 -->
+	<insert id = "moveRelease">
+	insert into tbl_release (divcode, pno, order_count)
+	value ('4', #{pno} , #{count} )
+	on duplicate key update
+	order_count = #{count} + order_count
+	</insert>
+
+
+
 </mapper>

@@ -65,5 +65,14 @@ public class StockDAOImpl implements StockDAO{
 	}
 
 
+	@Override
+	public void moveReleaseUpdate(StockVO stockVO) throws Exception {
+		logger.debug(" moveReleaseUpdate(stockVO) 호출 ");
+		
+		sqlSession.update(NAMESPACE+".moveRelease");
+		
+	}
+
+
 
 }

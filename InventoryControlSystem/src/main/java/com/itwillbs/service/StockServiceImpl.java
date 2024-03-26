@@ -52,6 +52,13 @@ public class StockServiceImpl implements StockService {
 	}
 
 
+	@Override
+	public void moveRelease(StockVO stockVO) throws Exception {
+		logger.debug(" Serivce - moveRelease(StockVO stockVO) 호출 ");
+		sdao.moveReleaseUpdate(stockVO);
+	}
+
+
 
 	
 	

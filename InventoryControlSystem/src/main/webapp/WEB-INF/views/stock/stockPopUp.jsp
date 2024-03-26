@@ -6,6 +6,7 @@
 <html lang="ko">
 <head>
 <style>
+
   h1 {
   	margin-bottom: 5px;
   }
@@ -59,7 +60,9 @@
     <tr>
         <th>입고일자</th>
         <c:forEach var="sdVO" items="${detailList}">
-            <td>${sdVO.regdate }</td>
+            <td>
+            	<fmt:formatDate value="${sdVO.regdate }" pattern="yyyy.MM.dd"/>
+            </td>
         </c:forEach>
     </tr>
     <tr>
