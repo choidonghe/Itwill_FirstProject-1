@@ -47,6 +47,7 @@ th {
             <tr>
                 <th>제품번호</th>
                 <th>제품명</th>
+                <th>담당자 아이디</th>
                 <th>상태</th>
                 <th>수량</th>
                 <th>불량지정 날짜</th>
@@ -56,6 +57,7 @@ th {
             <tr>
                 <td>${errorList.pno }</td>
                 <td>${errorList.pname}</td>
+                <td>${sessionScope.id }</td>
                 <td>${errorList.codeVO[0].korname }</td>
                 <td>${errorList.count }</td>
                 <td>${errorList.regdate }</td>

@@ -52,7 +52,7 @@ th {
         <thead>
             <tr>
             	<th>제품명</th>
-                <!-- <th>담당자 아이디</th> -->
+          		<th>담당자 아이디</th>
                 <th>상태</th>
                 <th>총 검수량</th>
                 <th>남은 검수량</th>
@@ -62,7 +62,7 @@ th {
        		<c:forEach var="inspectionList" items="${inspectionList }">
             <tr>
                 <td><a href="/inspec/inspectionRead?pno=${inspectionList.pno}">${inspectionList.pno }</a></td>
-                <%-- <td>${inspectionList.id }</td> --%>
+                <td>${sessionScope.id }</td>
                 <td>${inspectionList.divcode}</td>
                 <td>${inspectionList.count }</td>
                 <td>${inspectionList.remain_count }</td>

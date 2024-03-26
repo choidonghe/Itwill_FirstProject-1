@@ -68,7 +68,7 @@ public class StoreIngController {
 		logger.debug("vo : " + pvo);
 		pService.updateProductCode(pvo);
 		pService.insertInspection(pvo);
-		logger.debug("vo : " + pvo);	
+		logger.debug("vo : " + pvo);
 		return "redirect:storeinglist";
 	}
 	

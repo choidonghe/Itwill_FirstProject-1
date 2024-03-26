@@ -6,7 +6,7 @@
 	<div class="box">
 	<div class="box-header with-border">
 		<h3 class="box-title">입고예정</h3> <br>
-		
+		id : ${sessionScope.id } <br>
 		<a href="insertPro">제품 생산</a>
 	</div>
 	

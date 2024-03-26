@@ -6,6 +6,7 @@
 <link href="<c:url value='/resources/bootstrap/css/style.css' />" rel="stylesheet">
 
 <h1>inspectionRead.jsp</h1>
+${sessionScope.id }
 <form action="/inspec/inspectionRead" method="post">
 
 <table class="styled-table">
@@ -17,10 +18,10 @@
         <td>제품명:</td>
         <td><input type="text" name="pname" required readonly value="${vo.pname }"></td>
     </tr>
-<%--     <tr>
+    <tr>
         <td>담당자명:</td>
-        <td><input type="text" name="id" required value="${vo.id }"></td>
-    </tr> --%>
+        <td><input type="text" name="id" required readonly value="${sessionScope.id }"></td>
+    </tr>
     <tr>
         <td>전체 수량:</td>
         <td><input type="number" name="count" required readonly value="${vo.count }"></td>
@@ -52,16 +53,11 @@
             	<c:forEach var="warehouseList" items="${warehouseList}">
             		<option value="${warehouseList.warehouse_code }">${warehouseList.location }</option>
             	</c:forEach>
-<!--                 <option value="A01">A01</option> -->
-<!--                 <option value="A02">A02</option> -->
-<!--                 <option value="A03">A03</option> -->
-<!--                 <option value="A04">A04</option> -->
             </select>
         </td>
     </tr>
    
 </table>
-	
 	<c:choose>
 		<c:when test="${vo.remain_count == 0}">
 			<input type="text" value="수정할 것 없음" readonly>
@@ -71,11 +67,5 @@
 		</c:otherwise>
 	</c:choose>
 </form>
-
-
-
-
-
-
 
 <%@ include file="../include/footer.jsp"%>

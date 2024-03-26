@@ -77,35 +77,29 @@
     <update id="productUpdateInspection" parameterType="ProductVO">
     <!-- 해당 divcode가 7인 행에서 사용자가 선택한 finish_quantity만큼 quantity에서 차감하고 나머지는 다른 업데이트로 처리 -->
        UPDATE inspection
-        	SET count = CASE WHEN divcode = 2 OR divcode=7 THEN count - #{finish_count}
-                          ELSE count
-                      END,
+        	SET count = CASE WHEN divcode = 2 OR divcode=7 THEN count - #{finish_count} ELSE count END,
             remain_count = count,
-            <!-- CASE
-                                  WHEN divcode = 2 OR divcode=7 THEN remain_count - #{finish_count}
-                                  ELSE remain_count - #{finish_count}
-                              END, -->
             divcode = CASE WHEN count = 0 AND divcode = 2 OR divcode=7 THEN 3 ELSE divcode END,
             finish_count = #{finish_count},
             update_date = now(),
-            warehouse_code = #{warehouse_code}
+            warehouse_code = #{warehouse_code},
+            id = #{id}
         WHERE pno = #{pno}
     </update>
     
     <!-- 검수 중 불량을 error테이블로 보내기 -->
     <insert id="insertError">
-    	insert into error(pno,pname,divcode,count,regdate,warehouse_code) 
-        select pno, pname, 7 AS divcode, finish_count, now() AS regdate, warehouse_code from inspection where pno=#{pno}
+    	insert into error(pno,pname,divcode,count,regdate,warehouse_code, id) 
+        select pno, pname, 7 AS divcode, finish_count, now() AS regdate, warehouse_code, id from inspection where pno=#{pno}
         ON DUPLICATE KEY UPDATE 
         error.count = error.count + #{finish_count}
     </insert>
     
-    
     <!-- product에서 검수완료 상태이며, remain_count가 0인 데이터 stock으로 옮기기 -->
     <insert id="productMoveToStock" parameterType="java.lang.String">
         INSERT INTO stock
-        (divcode, pno, warehouse_code, category, count, regdate)
-        SELECT 3, pno, warehouse_code, SUBSTRING(pno, 1, 4) AS category, finish_count AS count, NOW() AS regdate
+        (divcode, pno, warehouse_code, category, count, regdate, id)
+        SELECT 3, pno, warehouse_code, SUBSTRING(pno, 1, 4) AS category, finish_count AS count, NOW() AS regdate, id
         FROM inspection
         <!-- WHERE divcode = 2 AND remain_count = 0 -->
         ON DUPLICATE KEY UPDATE

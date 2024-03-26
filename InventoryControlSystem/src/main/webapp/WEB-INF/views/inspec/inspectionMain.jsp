@@ -32,21 +32,7 @@ th {
 </head>
 <div class="box">
 	<div class="box-header">
-	</div>
-	
-	<!-- <h1>입고 검수 현황</h1>
-	<div class="button-container">
-		<form action="/inspec/inspectionMain" method="GET">
-			<button type="submit">전체</button>
-		</form>
-		<form action="/inspec/inspectionDiv2" method="post">
-			<button type="submit" value="div2">미검수</button>
-		</form>
-		<form action="/inspec/inspectionDiv3" method="post">
-		<button type="submit" value="div3">검수완료</button>
-		</form>
-	</div> -->
-
+</div>
 	<fieldset>
 		<legend>입고 검수 현황</legend>
 		<div class="button-container">
@@ -69,7 +55,7 @@ th {
 	            <tr>
 	                <th>제품번호</th>
 	                <th>제품명</th>
-	                <!-- <th>담당자 아이디</th> -->
+	                <th>담당자 아이디</th>
 	                <th>상태</th>
 	                <th>총 검수량</th>
 	                <th>남은 검수량</th>
@@ -79,8 +65,8 @@ th {
 	       		<c:forEach var="inspectionList" items="${inspectionList }">
 	            <tr>
 	                <td><a href="/inspec/inspectionRead?pno=${inspectionList.pno}">${inspectionList.pno }</a></td>
-	                <%-- <td>${inspectionList.id }</td> --%>
 	                <td>${inspectionList.pname }</td>
+	                <td>${sessionScope.id }</td>
 	                <td>${inspectionList.codeVO[0].korname }</td>
 	                <td>${inspectionList.count }</td>
 	                <td>${inspectionList.remain_count }</td>
