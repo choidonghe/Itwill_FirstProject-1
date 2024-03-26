@@ -124,6 +124,12 @@ public class MainServiceImpl implements MainService {
 		logger.debug(" 글쓰기 완료 ");
 	}
 	
-	
+	@Override
+	public NoticeVO noticeGet(String bno) throws Exception {
+		logger.debug(" noticeGet(String bno) 실행");
+		
+		return mdao.getContent(bno);
+	}
+
 	
 }// serviceImpl

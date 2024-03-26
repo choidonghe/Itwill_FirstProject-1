@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="./include/header.jsp"%>
+<%-- id : ${id }
+<br>
 release : ${releaseList }
 <br>
 store : ${storeList }
@@ -18,11 +20,14 @@ orderPageVO : ${orderPageVO }
 noticePageVO : ${noticePageVO }
 <br>
 mvo : ${mvo }
+noticePageVO : ${noticePageVO } --%>
 <div id="parent">
 	<!-- calendar 태그 -->
 	<div id='calendar-container'>
 		<div id='calendar'></div>
 	</div>
+	
+
 	<script>
 		
 		(function() {
@@ -196,10 +201,11 @@ mvo : ${mvo }
 				<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
 					<thead>
 					<tr role="row">
-							<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >공지사항</th>
+							<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >공지사항
+							<button type="button" class="btn bg-navy margin" onclick="location.href='/notice'">작성하기</button> </th>
 							<th>
 								
-								<form action="/main" method="post">
+								<form action="/main?id=${id }" method="post">
 								<div class="input-group">
 										<input name="search" id="new-event" type="text" class="form-control" placeholder="검색키워드" >
 									
@@ -208,7 +214,6 @@ mvo : ${mvo }
 									</div>
 								</div>
 								</form>
-							
 							
 							</th>
 					</tr>
@@ -222,7 +227,7 @@ mvo : ${mvo }
 					<c:forEach var="list" items="${noList }">
 						<tr>
 							<td style="width: 50px;"> ${list.bno }</td>
-							<td style="width: 1000px;"><a href="/main"> ${list.title } </a></td>
+							<td style="width: 1000px;"><a href="/noticeContent?bno=${list.bno }"> ${list.title } </a></td>
 							<td>${list.regdate }</td>
 
 						</tr>

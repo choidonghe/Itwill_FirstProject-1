@@ -5,15 +5,37 @@
   
 <mapper namespace="com.itwillbs.mapper.BoardMapper">
 
+	<select id="checkId" resultType="int">
+		SELECT COUNT(*) FROM member 
+		WHERE id = #{id}
+	
+	</select>
+	
+
 	<insert id="insertMember">
+<<<<<<< HEAD
 		insert into member (id, pass, name, email,phone, salt, eno) 
 		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt}, #{eno})
+=======
+		insert into member (id, pass, name, email,phone, salt, position) 
+		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt}, #{position})
+>>>>>>> branch 'feat-33-현진-입고-2번째' of https://github.com/95hyunjin/Itwill_FirstProject.git
 	
 	</insert>
 
 	<insert id="insertKakaoMember">
-		insert into member (id, pass, name, email, phone, salt, sns_email) 
-		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt}, #{sns_email} )
+		insert into member (
+						   id
+						   ,pass
+						   ,name
+						   ,email
+						   ,phone
+						   ,salt
+						   ,position
+						   ,sns_email
+						   ,regdate
+						   )
+		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt},'사원', #{sns_email},now() )
 	
 	</insert>
 	
