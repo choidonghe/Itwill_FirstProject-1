@@ -14,6 +14,7 @@ import com.itwillbs.domain.ErgOrderCriteria;
 import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticeVO;
 import com.itwillbs.domain.ProductVO;
+import com.itwillbs.domain.ReleaseVO;
 import com.itwillbs.persistence.MainDAO;
 
 @Service
@@ -139,6 +140,19 @@ public class MainServiceImpl implements MainService {
 	
 		return mdao.getProductDay(startStr);
 	}
+
+
+	@Override
+	public List<ReleaseVO> releaseDayGet(String startStr) throws Exception {
+		logger.debug(" releaseDayGet(String startStr) 실행");
+		
+		return mdao.getReleaseDayList(startStr);
+	}
+	
+	
+	
+	
+	
 
 	
 }// serviceImpl

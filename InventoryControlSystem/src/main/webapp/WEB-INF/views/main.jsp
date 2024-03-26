@@ -18,16 +18,19 @@ nCri : ${nCri }
 orderPageVO : ${orderPageVO }
 <br>
 noticePageVO : ${noticePageVO } --%>
+
 <!-- 모달창 -->
 <div id="customModal" class="modal">
 	<div class="col-xs-12">
 		<div class="box box-default">
 			<div class="box-header with-border">
-				<h3 class="box-title">입고 정보</h3>
+				<button id="closeModalBtn" type="button" class="btn btn-box-tool" style="float: right;"><i class="fa fa-remove"></i></button>
+				<h2 style="text-align: center; color: blue;">입,출고 정보</h2>
 			</div>
+			<h4 class="box-title">입고 정보</h4>
 			<div class="box-body">
 				<div class="box-body table-responsive no-padding">
-					<table id="modalTable" class="table table-hover">
+					<table id="productTable" class="table table-hover">
 						<tbody>
 							<tr>
 								<th>제품코드</th>
@@ -43,8 +46,30 @@ noticePageVO : ${noticePageVO } --%>
 				</div>
 
 				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default" onclick="location.href='/inspectionMain'">입고 페이지로</button>
+				
+				<h4 class="box-title">출고 정보</h4>
+			
+			<div class="box-body">
+				<div class="box-body table-responsive no-padding">
+					<table id="releaseTable" class="table table-hover">
+						<tbody>
+							<tr>
+								<th>제품코드</th>
+								<th>제품명</th>
+								<th>출고접수일</th>
+								<th>출고수량</th>
+								<th>배송업체</th>
+								<th>상태</th>
+							</tr>
+						
+						</tbody>
+					</table>
+				</div>
 
-			</div>
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default" onclick="location.href='/inspectionMain'">출고 페이지로</button>
+				</div>
+			  </div>
+			  
 		</div>
 	</div>
 </div>
@@ -95,6 +120,7 @@ noticePageVO : ${noticePageVO } --%>
 						
 							// 입,출고 데이터 가져오기
 							select : function(obj){
+								
 								console.log(obj.startStr);
 								
 								$.ajax({
@@ -105,18 +131,34 @@ noticePageVO : ${noticePageVO } --%>
 									type : 'post',
 									dataType : 'json',
 									
-									success : function(productList){
+									success : function(response){
 										
-								        productList.forEach(function(product) {
-								       		 $('#modalTable').append("<tr><td>"+product.pno+
-								       				 				 "</td><td>"+product.pname+
-								       				 				 "</td><td>"+product.count+
-								       				 				 "</td><td>"+product.finish_count+
-								       				 				 "</td><td>"+product.remain_count+
-								       				 				 "</td><td>"+product.codeVO.korname+
+										var map = response;
+										
+										console.log(map);
+										console.log(map.productList);
+										console.log(map.productList[0].codeVO[0].korname);
+										
+										map.productList.forEach(function(productList) {
+								       		 $('#productTable').append("<tr><td>"+productList.pno+
+								       				 				 "</td><td>"+productList.pname+
+								       				 				 "</td><td>"+productList.count+
+								       				 				 "</td><td>"+productList.finish_count+
+								       				 				 "</td><td>"+productList.remain_count+
+								       				 				 "</td><td>"+productList.codeVO[0].korname+
 								       				 				 "</td></tr>");
 								        
-								        });
+								        }); 
+										map.releaseList.forEach(function(releaseList) {
+								       		 $('#releaseTable').append("<tr><td>"+releaseList.pno+
+								       				 				 "</td><td>"+releaseList.pname+
+								       				 				 "</td><td>"+releaseList.order_date+
+								       				 				 "</td><td>"+releaseList.order_count+
+								       				 				 "</td><td>"+releaseList.delivery_company+
+								       				 				 "</td><td>"+releaseList.codeVO[0].korname+
+								       				 				 "</td></tr>");
+								        
+								        }); 
 
 										$('#customModal').modal();
 										
@@ -124,11 +166,8 @@ noticePageVO : ${noticePageVO } --%>
 								});
 							},
 							
-							
-							
 							events: getList()
 						});
-				// 캘린더 랜더링
 				calendar.render();
 			});
 		})();
@@ -160,6 +199,20 @@ noticePageVO : ${noticePageVO } --%>
 		
 		
 		
+	</script>
+	
+	<script>
+		$('#closeModalBtn').on('click',function(){
+			console.log('닫기 버튼 클릭');
+			$('#customModal').modal('hide')
+		});
+		
+			$('.modal').on('hidden.bs.modal', function (e) {
+    			console.log('modal close');
+  				$(this).find('#productTable').empty();
+  				$(this).find('#releaseTable').empty();
+			});
+
 	</script>
 
 	<!-- 차트 -->

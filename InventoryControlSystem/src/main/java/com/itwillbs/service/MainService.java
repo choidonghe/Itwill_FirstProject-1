@@ -7,6 +7,7 @@ import com.itwillbs.domain.ErgOrderCriteria;
 import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticeVO;
 import com.itwillbs.domain.ProductVO;
+import com.itwillbs.domain.ReleaseVO;
 
 public interface MainService {
 	
@@ -35,5 +36,7 @@ public interface MainService {
 	public NoticeVO noticeGet(String bno)throws Exception;
 	
 	public List<ProductVO> productDayGet(String startStr) throws Exception;
+	
+	public List<ReleaseVO> releaseDayGet(String startStr) throws Exception;
 	
 }// service
