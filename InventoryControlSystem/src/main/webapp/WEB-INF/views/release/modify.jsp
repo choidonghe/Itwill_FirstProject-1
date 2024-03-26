@@ -10,10 +10,12 @@
 	${code} <br> --%>
 	
 	<form action="" method="post">
+		<input type="hidden" name="page" value=${cri.page }>
+		<input type="hidden" name="pageSize" value=${cri.pageSize }>
 		<div class="content">
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">제품 상세 정보</h3>
+					<h3 class="box-title">제품 수정</h3>
 				</div>
 	
 	

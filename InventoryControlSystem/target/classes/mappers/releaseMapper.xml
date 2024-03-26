@@ -23,11 +23,6 @@
 		where pno=#{pno}
 	</update>
 
-	<update id="upSubtractRelease">
-		update tbl_release set order_count=order_count-#{order_count}
-		where pno=#{pno}
-	</update>
-
 	<delete id="deRelease">
 		delete from tbl_release
 		where pno=#{pno}
@@ -36,7 +31,7 @@
 
 	<select id="selectCodeList" resultType="codeVO">
 		select * from code where
-		divcode=4 or divcode=5 or divcode=6
+		divcode=4 or divcode=5 or divcode=6 or divcode=8
 	</select>
 
 	<update id="updateCode">
@@ -45,33 +40,42 @@
 	</update>
 
 	<select id="getUpdatedData" parameterType="String" resultType="ReleaseVO">
-		SELECT * FROM tbl_release WHERE pno = #{pno}
+		SELECT * FROM tbl_release 
+		WHERE pno = #{pno}
 	</select>
 	
 	<!-- 글 목록 조회(페이징처리) -->
-		<select id="selectBoardListPage" resultType="ReleaseVO">
-			<![CDATA[
-			select * from tbl_release 
-			where divcode > 0
-			order by pno desc, order_date desc
-			limit #{page},10
-			]]>
-		</select>
+	<select id="selectBoardListPage" resultType="ReleaseVO">
+		<![CDATA[
+		select * from tbl_release 
+		where divcode > 0
+		limit #{page},10
+		]]>
+	</select>
 		
-		<!-- 글 목록 조회(페이징처리-Cri) -->
-		<select id="releaseMainListCri" resultType="ReleaseVO">
-			<![CDATA[
-			select * from tbl_release
-			where divcode > 0
-			order by pno asc, order_date asc
-			limit #{startPage},#{pageSize} 
-			]]> <!-- #{Cri.(get)page}, #{Cri.(get)pageSize} -> #{} = get 메서드 호출  -->
-		</select>
+	<!-- 글 목록 조회(페이징처리-Cri) -->
+	<select id="releaseMainListCri" resultType="ReleaseVO">
+		<![CDATA[
+		select * from tbl_release
+		where divcode > 0
+		limit #{startPage},#{pageSize} 
+		]]> <!-- #{Cri.(get)page}, #{Cri.(get)pageSize} -> #{} = get 메서드 호출  -->
+	</select>
 		
-		<!-- 총 글의 개수 -->
-		<select id="totalCount" resultType="int">
-			select count(pno) from tbl_release
-		</select>
-
+	<!-- 총 글의 개수 -->
+	<select id="totalCount" resultType="int">
+		select count(pno) from tbl_release
+	</select>
+	
+	<update id="upSubtractRelease">
+		update tbl_release set order_count=order_count-#{order_count}
+		where pno=#{pno}
+	</update>
+	
+	<select id="getupSubtractRelease" resultType="ReleaseVO">
+		select * from tbl_release
+		where pno=#{pno}
+	</select>
+		
 
 </mapper>

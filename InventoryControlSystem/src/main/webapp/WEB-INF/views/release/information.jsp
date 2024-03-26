@@ -48,8 +48,10 @@
 						<td>${infoList.delivery_phone}</td>
 						<td>${infoList.delivery_manager}</td>
 						<td>
-							<input type="button" name="pno" value="수정" class="btn btn-success" onclick="location.href='/release/modify?pno=${infoList.pno}';">
+							<input type="button" name="pno" value="수정" class="btn btn-success" onclick="location.href='/release/modify?pno=${infoList.pno}&page=${cri.page}&pageSize=${cri.pageSize}'">
 								<form role="form" action="" method="POST">
+								<input type="hidden" name="page" value=${cri.page }>
+								<input type="hidden" name="pageSize" value=${cri.pageSize }>
 									<input type="hidden" value="${infoList.pno}">
 									<input type="button" value="삭제" class="btn btn-danger">
 								</form>

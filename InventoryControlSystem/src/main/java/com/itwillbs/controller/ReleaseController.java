@@ -68,7 +68,7 @@ public class ReleaseController {
 	}
 	
 	@RequestMapping(value = "information",method = RequestMethod.GET)
-	public void information(String pno,Model model) throws Exception{
+	public void information(String pno,Model model,Criteria cri) throws Exception{
 		logger.debug("informatino() 호출");
 		
 		logger.debug("pno:"+pno);
@@ -77,6 +77,15 @@ public class ReleaseController {
 		logger.debug("infoList:"+infoList);
 		
 		model.addAttribute("infoList", infoList);
+		
+		PageVO pageVO = new PageVO();
+		pageVO.setCri(cri);
+		pageVO.setTotalCount(rService.getReleaseListCount()); 
+		
+		model.addAttribute("cri", cri); // 페이징 처리 정보 전달
+		
+		model.addAttribute("pageVO", pageVO); // 페이징 처리 정보 전달
+
 	}
 	
 	@RequestMapping(value = "modify",method = RequestMethod.GET)
@@ -113,7 +122,7 @@ public class ReleaseController {
 		
 		rService.releaseModify(vo);
 
-		return "redirect:/release/mainCri?page=\"+cri.getPage()+\"&pageSize=\"+cri.getPageSize();";
+		return "redirect:/release/main?page="+cri.getPage()+"&pageSize="+cri.getPageSize();
 	}
 	
 	@RequestMapping(value = "/information",method = RequestMethod.POST)
@@ -124,7 +133,7 @@ public class ReleaseController {
 		rService.releaseDelete(pno);
 		
 		
-		return "redirect:/release/mainCri?page=\"+cri.getPage()+\"&pageSize=\"+cri.getPageSize();";
+		return "redirect:/release/main?page="+cri.getPage()+"&pageSize="+cri.getPageSize();
 		
 	}
 	
@@ -199,8 +208,9 @@ public class ReleaseController {
 	}
 	
 	@RequestMapping(value = "/inspection", method = RequestMethod.POST)
-	public String InspectionPOST(String pno, int divcode, HttpSession session,Model model,ReleaseVO vo) throws Exception {
+	public String InspectionPOST(String pno, int divcode, HttpSession session,Model model,ReleaseVO vo,Integer order_count) throws Exception {
 	    logger.debug("mainInspectionPOST() 호출");
+	    logger.debug("order_count:"+order_count);
 	    
 	    logger.debug("pno:" + pno);
 	    logger.debug("divcode:" + divcode);
@@ -211,9 +221,16 @@ public class ReleaseController {
 	    
 	    model.addAttribute("inspectionList", inspectionList);
 	    
+	    ReleaseVO subtract = rService.releaseSubtract(pno, order_count);
+	    
+	    logger.debug("subtract:"+subtract);
+	    
+	    logger.debug("");
+	    
 	    if(divcode == 4) {
 	    	return "redirect:/release/main";
 	    } else if(divcode == 6) {
+	    	model.addAttribute("subtract", subtract);
 	      	return "redirect:/release/release";
 	    }
 	    

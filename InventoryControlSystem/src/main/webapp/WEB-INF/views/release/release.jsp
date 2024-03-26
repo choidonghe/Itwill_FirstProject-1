@@ -6,15 +6,14 @@
 
 <h1>release.jsp</h1>
 
-cri=${cri } <br>
+<%-- cri=${cri } <br>
 pageVO=${pageVO } <br>
-${vo} <br>
-
-<%-- ${vo} <br>
+${vo} <br> 
 ${code} <br> --%>
 
 <input type="button" value="전체" onclick="location.href='/release/main'">
 <input type="button" value="검수" onclick="location.href='/release/inspection'">
+
 
 <div class="content">
 	<div class="box">
@@ -40,47 +39,59 @@ ${code} <br> --%>
 						<td>delivery_phone</td>
 						<td>delivery_manager</td>
 					</tr>
-						<c:forEach var="vo" items="${vo}">
-							<c:if test="${vo.divcode==6}">
-								<tr>
-								<td><input type="text" value="출고완료" readonly="readonly"></td>
-								<td>${vo.id}</td>
-								<td>${vo.pno}</td>
-								<td>${vo.pname}</td>
-								<td>${vo.category}</td>
-								<td>${vo.release_date}</td>
-								<td>${vo.update_date}</td>
-								<td>${vo.price}</td>
-								<td>${vo.order_date}</td>
-								<td>${vo.order_count}</td>
-								<td>${vo.delivery_phone}</td>
-								<td>${vo.delivery_manager}</td>
-								</tr>
-							</c:if>
-						</c:forEach>
-			</table>
-		</div>
 
+
+					<c:forEach var="vo" items="${vo}">
+					<c:if test="${vo.divcode==6 }">
+						<tr>
+							<td>
+								<c:forEach var="code" items="${code}">
+									<c:if test="${code.divcode != 4 && code.divcode != 5 && code.divcode != 8}">
+										<input type="text" value="${code.korname}" readonly="readonly">
+									</c:if>
+								</c:forEach>
+							</td>
+							<td>${vo.id}</td>
+							<td>${vo.pno}</td>
+							<td>${vo.pname}</td>
+							<td>${vo.category}</td>
+							<td>${vo.release_date}</td>
+							<td>${vo.update_date}</td>
+							<td>${vo.price}</td>
+							<td>${vo.order_date}</td>
+							<td>${vo.order_count}</td>
+							<td>${vo.delivery_phone}</td>
+							<td>${vo.delivery_manager}</td>
+						</tr>
+						</c:if>
+					</c:forEach>
+				</tbody>
+			</table>
+
+		</div>
 		<div class="box-footer clearfix">
-		
+
 			<button onclick="history.back()">뒤로가기</button>
-			
+
 			<ul class="pagination pagination-sm no-margin pull-right">
 				<c:if test="${pageVO.prev}">
 					<li><a href="/release/release?page=${pageVO.startPage-1}">«</a></li>
 				</c:if>
-				
+
 				<c:forEach var="idx" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
-					<li ${pageVO.cri.page == idx? "class=active":""}>
-					<a href="/release/release?page=${idx}">${idx}</a></li>
+					<li ${pageVO.cri.page == idx? "class=active":""}><a href="/release/release?page=${idx}">${idx}</a></li>
 				</c:forEach>
-				
+
 				<c:if test="${pageVO.next}">
 					<li><a href="/release/release?page=${pageVO.endPage+1}">»</a></li>
 				</c:if>
 			</ul>
+		</div>
 	</div>
 </div>
+
+
+
 
 
 

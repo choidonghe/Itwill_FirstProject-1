@@ -7,7 +7,7 @@
 
 <h1>main.jsp</h1>
 
-cri : ${cri } <br>
+<%-- cri : ${cri } <br>
 
 cri.page : ${param.page} <br>
 cri.pageSize : ${param.pageSize} <br>
@@ -15,7 +15,7 @@ cri.pageSize : ${param.pageSize} <br>
 pageVO : ${pageVO} <br>
 
 ${mainList} <br>
-	${code} <br>
+	${code} <br> --%>
 
 <input type="button" value="전체" onclick="location.href='/release/main'">
 <input type="button" value="검수" onclick="location.href='/release/inspection'">
@@ -45,11 +45,13 @@ ${mainList} <br>
 						<tr>
 							<td>
 								<form action="" method="post">
+								<input type="hidden" name="page" value=${cri.page }>
+								<input type="hidden" name="pageSize" value=${cri.pageSize }>
 									<c:choose>
-										<c:when test="${mainList.divcode==4 }">
+										<c:when test="${mainList.divcode==4}">
 											<select name="divcode" aria-controls="example1" class="form-control input-sm">
 												<c:forEach var="code" items="${code}">
-													<c:if test="${code.divcode != 6}">
+													<c:if test="${code.divcode != 6 && code.divcode != 8}">
 														<option value="${code.divcode}">${code.korname}</option>
 													</c:if>
 												</c:forEach>
@@ -70,7 +72,7 @@ ${mainList} <br>
 								</form>
 							</td>
 							<td>${mainList.id}</td>
-							<td><a href="/release/information?pno=${mainList.pno}">${mainList.pno}</a></td>
+							<td><a href="/release/information?pno=${mainList.pno}&page=${cri.page}&pageSize=${cri.pageSize}">${mainList.pno}</a></td>
 							<td>${mainList.order_count}</td>
 							<td>${mainList.price}</td>
 							<td>${mainList.order_date}</td>

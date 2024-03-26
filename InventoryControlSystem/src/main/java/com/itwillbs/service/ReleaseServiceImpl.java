@@ -43,12 +43,6 @@ public class ReleaseServiceImpl implements ReleaseService{
 		
 	}
 
-	@Override
-	public void releaseSubtract(String pno) throws Exception {
-		logger.debug("releaseSubtract(ReleaseVO vo) 호출");
-		
-		  rdao.subtractRelease(pno);
-	}
 
 	@Override
 	public void releaseDelete(String pno) throws Exception {
@@ -94,6 +88,12 @@ public class ReleaseServiceImpl implements ReleaseService{
 		return rdao.releaseListCount();
 	}
 	
+	@Override
+	public ReleaseVO releaseSubtract(String pno,int order_count) throws Exception {
+		logger.debug("releaseSubtract(ReleaseVO vo) 호출");
+		
+		 return rdao.subtractRelease(pno, order_count);
+	}
 	
 	
 	
