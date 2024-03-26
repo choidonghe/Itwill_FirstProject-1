@@ -14,7 +14,18 @@
 <!-- 		<result property="category" column="category"/> -->
 <!-- 		<result property= "type" column= "type"/> -->
 <!-- 		<result property= "keyword" column="keyword"/> -->
-		
+	</resultMap>
+	
+	<resultMap type="com.itwillbs.domain.StockDetailVO" id="stockDetail">
+		<result property="pno" column="pno"/>
+		<result property="pname" column="pname"/>
+		<result property="category" column="category"/>
+		<result property="regdate" column="regdate"/>
+		<result property="company" column="company"/>
+		<result property="unit_price" column="unit_price"/>
+		<result property="sales_price" column="sales_price"/>
+		<result property="location" column="location"/>
+		<result property="count" column="count"/>
 	</resultMap>
 
 	
@@ -72,11 +83,36 @@
     from stock
     inner join product on stock.pno=product.pno
     inner join category on stock.category = category.category_code
-	<include refid = "criteria"></include>
-	<!--     </if> -->
-		
+		<include refid = "criteria"></include>
 	</select>
 	
+	
+	<!-- 제품 상세보기 구문 -->
+	<select id="detailView" resultType="StockDetailVO">
+	    SELECT 
+	        stock.pno, 
+	        stock.warehouse_code, 
+	        stock.count,
+	        product.pname, 
+	        product.company, 
+	        category.category, 
+	        warehouse.location,
+	        product.unit_price, 
+	        product.sales_price,
+	        inspection.id
+	    FROM 
+	        stock
+	    INNER JOIN 
+	        product ON stock.pno = product.pno
+	    INNER JOIN 
+	        category ON stock.category = category.category_code
+	    INNER JOIN 
+	        warehouse ON stock.warehouse_code = warehouse.warehouse_code
+	    INNER JOIN inspection
+	    ON stock.pno = inspection.pno
+	    WHERE 
+	        stock.pno = CONCAT(#{pno})
+	</select>
 	
 	
 	  

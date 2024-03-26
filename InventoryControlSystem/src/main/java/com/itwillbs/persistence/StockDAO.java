@@ -3,6 +3,7 @@ package com.itwillbs.persistence;
 import java.util.List;
 
 import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.StockDetailVO;
 import com.itwillbs.domain.StockVO;
 
 public interface StockDAO {
@@ -18,6 +19,9 @@ public interface StockDAO {
 	
 	// 총 글의 개수 계산
 	public int stockListCount(Criteria cri) throws Exception;
+	
+	// 제품 상세보기 조회
+	public List<StockDetailVO> stockDetailList(String pno) throws Exception;
 	
 
 	

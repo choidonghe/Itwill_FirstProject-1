@@ -3,6 +3,7 @@ package com.itwillbs.service;
 import java.util.List;
 
 import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.StockDetailVO;
 import com.itwillbs.domain.StockVO;
 
 public interface StockService {
@@ -15,6 +16,9 @@ public interface StockService {
 	
 	// 총 글의 개수
 	public int getBoardListCount(Criteria cri) throws Exception;
+	
+	// 제품 상세보기 조회
+	public List<StockDetailVO> getDetailList(String pno) throws Exception;
 	
 
 

@@ -4,51 +4,37 @@
 <%@ include file="../include/header.jsp"%>
 
 <!-- 품번 클릭시 제품 상세보기 코드 작성 -->
-
 <script>
-	// 팝업을 띄우는 함수 정의
-	function openPopup(productCode) {
-		// 팝업에 표시할 내용을 생성
-		var popupContent = "제품 코드: " + productCode;
-		
-		// 팝업창 크기 조절
-		var popupWidth = 400;
-		var popupHeight = 300;
-
-		// 팝업창 가운데 정렬
-		var left = (window.screen.width - popupWidth) / 2;
-		var top = (window.screen.height - popupHeight) / 2;
-
-		// 팝업창 열기
-		var popupWindow = window.open("", "_blank", "width=" + popupWidth
-				+ ",height=" + popupHeight + ",left=" + left + ",top=" + top);
-
-		// 팝업창 내용부분
-		popupWindow.document.write("<html><head><title>제품 상세보기</title></head><body>");
-		popupWindow.document.write("<h1> 제품 상세보기 </h1>");
-		popupWindow.document.write("<p>" + popupContent + "</p>");
-		popupWindow.document.write("</body></html>");
-	}
-
-	// 페이지가 로드될 때 실행되는 함수
-	window.onload = function() {
-		// 제품 코드가 있는 각 <td> 요소를 선택
-		var productCells = document.querySelectorAll('td[data-product-code]');
-
-		// 각 제품 코드를 클릭했을 때 팝업을 띄우도록 이벤트를 추가
-		productCells.forEach(function(cell) {
-			cell.addEventListener('click', function() {
-				var productCode = cell.getAttribute('data-product-code');
-				openPopup(productCode);
-			});
-		});
-	};
+document.addEventListener("DOMContentLoaded", function() {
+    var productCodes = document.querySelectorAll('td[data-product-code]');
+    productCodes.forEach(function(td) {
+        td.addEventListener('click', function() {
+            var productCode = String(td.dataset.productCode); // 제품 코드를 문자열로 변환
+            var popupUrl = '/stock/stockPopUp?pno=' + encodeURIComponent(productCode);
+            
+            // 팝업창을 가운데에 띄우기 위해 추가한 코드
+            var width = 600;
+            var height = 600;
+            var left = (window.innerWidth - width) / 2;
+            var top = (window.innerHeight - height) / 2;
+            var popupWindow = window.open(popupUrl, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+            
+            // 팝업창이 차단되었을 때 대비하여 체크
+            if (window.focus) {
+                popupWindow.focus();
+            }
+        });
+    });
+});
 </script>
+
+
 <!-- 품번 클릭시 제품 상세보기 코드 작성 -->
 
 <div class="box">
 	<div class="box-header">
 		<h3 class="box-title">현재 재고</h3>
+		${stockList }
 	</div>
 		<div class="box-body">
 			<div id="example1_wrapper"
@@ -66,8 +52,6 @@
 	        				</label>
 					    </div>
 					</div>
-					${param.keyword }
-				
 					<!-- 한 페이지에 표시할 항목 수 스크립트 추가 -->	
 <script>
     function changePageSize() {

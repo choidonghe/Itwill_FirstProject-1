@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.StockDetailVO;
 import com.itwillbs.domain.StockVO;
 import com.itwillbs.persistence.StockDAO;
 
@@ -40,6 +41,14 @@ public class StockServiceImpl implements StockService {
 	public int getBoardListCount(Criteria cri) throws Exception {
 		logger.debug(" service - getBoardListCount() 호출 ");
 		return sdao.stockListCount(cri);
+	}
+
+
+	// 제품 상세보기 조회
+	@Override
+	public List<StockDetailVO> getDetailList(String pno) throws Exception {
+		logger.debug(" Service - getDetailList() 호출 ");
+		return sdao.stockDetailList(pno);
 	}
 
 

@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.PageVO;
+import com.itwillbs.domain.StockDetailVO;
 import com.itwillbs.domain.StockVO;
 import com.itwillbs.service.StockService;
 
@@ -47,6 +49,7 @@ public class StockController {
 		logger.debug("cri toString : " + cri.toString());
 		logger.debug("pageVO의 listcount : "+ pageVO.getTotalCount());
 		logger.debug("s.Service의 listcount : " + sService.getBoardListCount(cri));
+		logger.debug("stockList" + stockList);
 		// 연결된 뷰페이지에 정보 전달(Model)
 		model.addAttribute("stockList", stockList);
 		model.addAttribute("cri", cri);
@@ -54,6 +57,21 @@ public class StockController {
 		
 		
 		// return "redirect:/stock/stockMainCri?page="+cri.getPage()+"&pageSize="+cri.getPageSize();
+	}
+	
+	@RequestMapping(value = "/stockPopUp", method = RequestMethod.GET)
+	public void stockPopUpGET(@RequestParam("pno") String pno ,Model model, HttpSession session) throws Exception {
+		logger.debug(" /stock/stockMainCri -> 제품 상세보기 실행 ");
+		logger.debug(" /stock/stockPopUp.jsp 연결 ");
+		
+		logger.debug("pno : " + pno);
+		
+		List<StockDetailVO> detailList = sService.getDetailList(pno);
+		logger.debug(" list.size : " + detailList.size());
+		logger.debug(" detailList : " + detailList);
+		
+		model.addAttribute("detailList", detailList);
+		
 	}
 	
 	

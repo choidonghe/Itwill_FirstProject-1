@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.StockDetailVO;
 import com.itwillbs.domain.StockVO;
 
 @Repository
@@ -53,6 +54,14 @@ public class StockDAOImpl implements StockDAO{
 		logger.debug(" boardListCount() 호출 ");
 		logger.debug(" keyword : " + cri.getKeyword());
 		return sqlSession.selectOne(NAMESPACE+".totalCount", cri);
+	}
+
+	
+	// 제품 상세보기 조회
+	@Override
+	public List<StockDetailVO> stockDetailList(String pno) throws Exception {
+		logger.debug(" stockDetailList() 호출 ");
+		return sqlSession.selectList(NAMESPACE + ".detailView",pno);
 	}
 
 

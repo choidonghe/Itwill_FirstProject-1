@@ -4,6 +4,19 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <style>
+  .popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 9999; /* 팝업창을 다른 요소 위로 올립니다. */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 팝업창에 그림자 효과를 추가합니다. */
+}
+  </style>
     <meta charset="UTF-8">
     <title>AdminLTE 2 | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
