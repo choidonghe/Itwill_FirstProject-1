@@ -13,14 +13,8 @@
 	
 
 	<insert id="insertMember">
-<<<<<<< HEAD
 		insert into member (id, pass, name, email,phone, salt, eno) 
 		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt}, #{eno})
-=======
-		insert into member (id, pass, name, email,phone, salt, position) 
-		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt}, #{position})
->>>>>>> branch 'feat-33-현진-입고-2번째' of https://github.com/95hyunjin/Itwill_FirstProject.git
-	
 	</insert>
 
 	<insert id="insertKakaoMember">
