@@ -19,7 +19,7 @@ public class StockDAOImpl implements StockDAO{
 	
 	private static final Logger logger = LoggerFactory.getLogger(StockDAOImpl.class);
 	
-	private static final String NAMESPACE = "com.itwillbs.mapper.StockMapper";
+	private static final String NAMESPACE = "com.itwillbs.mapper.stockMapper";
 
 	@Override
 	public List<StockVO> stockListSelect() throws Exception {
@@ -51,14 +51,10 @@ public class StockDAOImpl implements StockDAO{
 	@Override
 	public int stockListCount(Criteria cri) throws Exception {
 		logger.debug(" boardListCount() 호출 ");
-		return sqlSession.selectOne(NAMESPACE + ".totalCount");
+		logger.debug(" keyword : " + cri.getKeyword());
+		return sqlSession.selectOne(NAMESPACE+".totalCount", cri);
 	}
 
 
-	// 재고 리스트 검색 (전체)
-	@Override
-	public List<StockVO> stockListSearch(Criteria cri) throws Exception {
-		logger.debug(" stockListSearch(Criteria cri) 호출 ");
-		return sqlSession.selectList(NAMESPACE+".getListPaging",cri);
-	}
+
 }

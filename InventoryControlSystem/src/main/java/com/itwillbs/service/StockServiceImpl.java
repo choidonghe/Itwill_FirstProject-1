@@ -43,11 +43,7 @@ public class StockServiceImpl implements StockService {
 	}
 
 
-	@Override
-	public List<StockVO> ListPaging(Criteria cri) throws Exception {
-		logger.debug(" service - ListPaging() 호출 ");
-		return sdao.stockListSearch(cri);
-	}
+
 	
 	
 

@@ -19,8 +19,7 @@ public interface StockDAO {
 	// 총 글의 개수 계산
 	public int stockListCount(Criteria cri) throws Exception;
 	
-	// 재고 리스트 검색 (전체)
-	public List<StockVO> stockListSearch(Criteria cri) throws Exception;
+
 	
 	
 

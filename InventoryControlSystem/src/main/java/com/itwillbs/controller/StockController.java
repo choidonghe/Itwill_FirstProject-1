@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,20 +26,7 @@ public class StockController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(StockController.class);
 	
-	// 재고 리스트 GET : /stock/stockMain
-	// http://localhost:8088/stock/stockMain
-	@RequestMapping(value = "/stockMain", method = RequestMethod.GET)
-	public void listGET(Model model, HttpSession session) throws Exception {
-		logger.debug(" /stock/stockMain -> listGET() 실행 ");
-		logger.debug(" /stock/stockMain.jsp 연결 ");
-		// 서비스 -> DAO 재고 목록 가져오기
-		List<StockVO> stockList = sService.getList();
-		logger.debug(" list.size : " + stockList.size());
-		// 연결된 뷰 페이지에 정보 전달 (Model)
-		model.addAttribute("stockList", stockList);
-	}
-	
-	
+		
 	// 재고 리스트 페이징처리
 	// http://localhost:8088/stock/stockMainCri
 	// 실제로 사용하게 될 주소
@@ -57,13 +45,13 @@ public class StockController {
 		logger.debug("키워드 : " + cri.getKeyword());
 		logger.debug("타입 : " + cri.getType());
 		logger.debug("cri toString : " + cri.toString());
-		logger.debug(" 검색 결과 : " + stockList);
-		logger.debug("pageVO" + pageVO);
-		logger.debug("listcount : " + sService.getBoardListCount(cri));
+		logger.debug("pageVO의 listcount : "+ pageVO.getTotalCount());
+		logger.debug("s.Service의 listcount : " + sService.getBoardListCount(cri));
 		// 연결된 뷰페이지에 정보 전달(Model)
 		model.addAttribute("stockList", stockList);
 		model.addAttribute("cri", cri);
 		model.addAttribute("pageVO", pageVO);
+		
 		
 		// return "redirect:/stock/stockMainCri?page="+cri.getPage()+"&pageSize="+cri.getPageSize();
 	}

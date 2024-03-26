@@ -4,6 +4,7 @@
 <%@ include file="../include/header.jsp"%>
 
 <!-- 품번 클릭시 제품 상세보기 코드 작성 -->
+
 <script>
 	// 팝업을 띄우는 함수 정의
 	function openPopup(productCode) {
@@ -65,6 +66,7 @@
 	        				</label>
 					    </div>
 					</div>
+					${param.keyword }
 				
 					<!-- 한 페이지에 표시할 항목 수 스크립트 추가 -->	
 <script>
@@ -117,7 +119,7 @@
 			                </td>
 			                <td>
 			                    <input type="text" id="searchInput" name="keyword" class="form-control" placeholder="검색어 입력"
-			                           style="margin-bottom: 5px;" value = "${PageVO.cri.keyword }"/>
+			                           style="margin-bottom: 5px;" value = "${cri.keyword }"/>
 			                </td>
 			                
 			                <td>
@@ -128,40 +130,41 @@
 			                </td>
 			            </tr>
 			        </table>
-    				<input type = "hidden" name = "page" value = "${pageVO.cri.page }">
-				<input type = "hidden" name = "pageSize" value = "${pageVO.cri.pageSize }">
+    				<input type = "hidden" name = "page" value = "${cri.page }">
+				<input type = "hidden" name = "pageSize" value = "${cri.pageSize }">
 			    </form>
 			</div>
-			<script>
-			document.addEventListener("DOMContentLoaded", function() {
-			    // 폼 요소와 검색 버튼 요소 가져오기
-			    var searchForm = document.getElementById("searchForm");
-			    var searchBtn = document.getElementById("search-btn");
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 폼 요소와 검색 버튼 요소 가져오기
+        var searchForm = document.getElementById("searchForm");
+        var searchBtn = document.getElementById("search-btn");
 
-			    // 검색 버튼 클릭 시 이벤트 처리
-			    searchBtn.addEventListener("click", function(event) {
-			        event.preventDefault(); // 기본 동작 방지 (페이지 새로고침 방지)
+        // 검색 버튼 클릭 시 이벤트 처리
+        searchBtn.addEventListener("click", function(event) {
+            event.preventDefault(); // 기본 동작 방지 (페이지 새로고침 방지)
 
-			        // 검색어 입력 요소 가져오기
-			        var searchInput = document.getElementById("searchInput");
+            // 검색어 입력 요소 가져오기
+            var searchInput = document.getElementById("searchInput");
+            
+            // 검색어에서 공백 제거
+            var keyword = searchInput.value.trim();
 
-			        // 검색어가 비어있는지 확인
-			        var keyword = searchInput.value.trim();
-			        if (keyword === "") {
-			            keyword = null; // 검색어가 비어 있으면 null 값으로 설정
-			        }
+            // 선택된 카테고리 가져오기
+            var type = document.getElementById("categorySelect").value;
 
-			        // 선택된 카테고리 가져오기
-			        var type = document.getElementById("categorySelect").value;
+            // 페이지 크기 가져오기
+            var pageSize = document.getElementById("pageSizeSelect").value;
 
-			        // 페이지 크기 가져오기
-			        var pageSize = document.getElementById("pageSizeSelect").value;
-
-			        // 새로운 URL로 이동
-			        location.href = "/stock/stockMainCri?page=1&pageSize=" + pageSize + "&keyword=" + encodeURIComponent(keyword) + "&type=" + type;
-			    });
-			});
+            // 새로운 URL로 이동
+            location.href = "/stock/stockMainCri?page=1&pageSize=" + pageSize + "&keyword=" + encodeURIComponent(keyword) + "&type=" + type;
+            
+            searchForm.submit();
+            
+        });
+    });
 </script>
+
 
 				
 				
@@ -170,18 +173,18 @@
 				<div class="col-sm-12">
 					<table id="example1"
 						class="table table-bordered table-striped dataTable" role="grid"
-						aria-describedby="example1_info">
+						aria-describedby="example1_info" style ="border-collapse: collapse;">
 						<thead>
 							<tr role="row">
 								<th class="sorting_asc" tabindex="0" aria-controls="example1"
 									rowspan="1" colspan="1" aria-sort="ascending"
 									aria-label="Rendering engine: activate to sort column descending"
-									style="width: 297.469px;">
+									style="width: 200.469px;">
 									제품 코드(클릭 시 상세보기)</th>
 								<th class="sorting" tabindex="0" aria-controls="example1"
 									rowspan="1" colspan="1"
 									aria-label="Browser: activate to sort column ascending"
-									style="width: 361.984px;">
+									style="width: 150.984px;">
 									제품 카테고리</th>
 								<th class="sorting" tabindex="0" aria-controls="example1"
 									rowspan="1" colspan="1"
@@ -196,13 +199,18 @@
 								<th class="sorting" tabindex="0" aria-controls="example1"
 									rowspan="1" colspan="1"
 									aria-label="CSS grade: activate to sort column ascending"
-									style="width: 188.188px;">
+									style="width: 70.188px;">
 									수량</th>
 								<th class="sorting" tabindex="0" aria-controls="example1"
 									rowspan="1" colspan="1"
 									aria-label="CSS grade: activate to sort column ascending"
 									style="width: 188.188px;">
 									창고위치</th>
+								<th class="sorting" tabindex="0" aria-controls="example1"
+									rowspan="1" colspan="1"
+									aria-label="CSS grade: activate to sort column ascending"
+									style="width: 200.188px;">
+									출고</th>
 							</tr>
 						</thead>
 						<!-------------------------- 제품 내용 넣는 곳 -------------------------->
@@ -214,7 +222,8 @@
 								<td>${sVO.pname }</td>
 								<td>${sVO.company }</td>
 								<td>${sVO.count }</td>
-								<td>${sVO.warehouse_code }</td>															
+								<td>${sVO.warehouse_code }</td>		
+								<td><input type="text" style="width : 100px;"><button type="button" class="btn btn-block btn-primary" style ="width: 60px;">출고</button></td>													
 							</tr>
 						</c:forEach>
 						</tbody>
@@ -227,6 +236,7 @@
 								<th rowspan="1" colspan="1">제조회사</th>
 								<th rowspan="1" colspan="1">수량</th>
 								<th rowspan="1" colspan="1">창고위치</th>
+								<th rowspan="1" colspan="1">출고</th>
 								
 							</tr>
 						</tfoot>

@@ -44,8 +44,8 @@ public class Criteria {
 		return keyword;
 	}
 
-	public String setKeyword(String keyword) {
-		return this.keyword = keyword;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 	

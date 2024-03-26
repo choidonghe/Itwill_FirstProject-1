@@ -7,6 +7,7 @@ public class PageVO {
 
 	private static final Logger logger = LoggerFactory.getLogger(PageVO.class);
 
+	
 	private int totalCount; // 전체 글의 수
 	private int startPage; // 블럭의 시작번호
 	private int endPage; // 블럭의 끝번호
@@ -18,7 +19,7 @@ public class PageVO {
 
 	private Criteria cri;
 	
-	public void pageCalc() {
+	public void pageCalc(Criteria cri, int total) {
 		// endPage
 		endPage = (int) Math.ceil(cri.getPage() / (double) pageBlock) * pageBlock;
 		
@@ -45,7 +46,7 @@ public class PageVO {
 		this.totalCount = totalCount;
 		logger.debug(" 페이징처리에 필요한 정보를 계산 - 시작 ");
 		
-		pageCalc();
+		pageCalc(cri, totalCount);
 		
 		logger.debug(" 페이징처리에 필요한 정보를 계산 - 끝");
 	}
