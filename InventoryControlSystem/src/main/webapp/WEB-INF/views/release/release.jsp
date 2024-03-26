@@ -11,6 +11,7 @@ pageVO=${pageVO } <br>
 ${vo} <br> 
 ${code} <br> --%>
 
+
 <input type="button" value="전체" onclick="location.href='/release/main'">
 <input type="button" value="검수" onclick="location.href='/release/inspection'">
 
@@ -34,7 +35,7 @@ ${code} <br> --%>
 						<td>update_date</td>
 						<td>price</td>
 						<td>order_date</td>
-						<td>order_count</td>
+						<td>release_count</td>
 						<td>delivery_company</td>
 						<td>delivery_phone</td>
 						<td>delivery_manager</td>
@@ -59,7 +60,7 @@ ${code} <br> --%>
 							<td>${vo.update_date}</td>
 							<td>${vo.price}</td>
 							<td>${vo.order_date}</td>
-							<td>${vo.order_count}</td>
+							<td>${vo.release_count}</td>
 							<td>${vo.delivery_phone}</td>
 							<td>${vo.delivery_manager}</td>
 						</tr>

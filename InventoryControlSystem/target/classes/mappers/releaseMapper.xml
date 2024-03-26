@@ -98,9 +98,11 @@
 	</select>
 	
 	
-<!-- // 검수완료 & 불량 -->
+<!-- // 검수완료 -->
 	<update id="upSubtractRelease">
-		update tbl_release set order_count = order_count - #{release_count}
+		update tbl_release 
+		set release_count = ${release_count},
+		order_count = order_count - ${release_count}
 		where pno=#{pno}
 	</update>
 	

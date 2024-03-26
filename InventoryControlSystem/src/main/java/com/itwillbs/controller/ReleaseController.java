@@ -208,10 +208,10 @@ public class ReleaseController {
 	}
 	
 	@RequestMapping(value = "/inspection", method = RequestMethod.POST)
-	public String InspectionPOST(String pno, int divcode, HttpSession session,Model model,ReleaseVO vo,Integer release_count,Integer order_count,Integer error_count) throws Exception {
+	public String InspectionPOST(String pno, int divcode, HttpSession session,Model model,ReleaseVO vo,Integer order_count,Integer release_count) throws Exception {
 	    logger.debug("mainInspectionPOST() 호출");
+	    logger.debug("order_count:"+order_count);
 	    logger.debug("release_count:"+release_count);
-	    logger.debug("error_count:"+error_count);
 	    
 	    logger.debug("pno:" + pno);
 	    logger.debug("divcode:" + divcode);
@@ -228,27 +228,15 @@ public class ReleaseController {
 	    
 	    logger.debug("subtract:"+subtract);
 	    
-	    if(order_count != 0)
-		    if(divcode == 4) {
-		    	return "redirect:/release/main";
-		    	
-		    } else if(divcode == 5){
-		    	return "redirect:/release/information";
-		    	
-		    }else if(divcode == 6) {
-		    	model.addAttribute("subtract", subtract);
-		    	
-		     	return "redirect:/release/release";
-		     	
-		    }else if(divcode == 8) {
-				/*
-				 * model.addAttribute("error", error); logger.debug("error->"+error);
-				 * logger.debug("divcode?"+divcode);
-				 */
-		    	return "redirect:/release/error";
-		    }
+		if(divcode == 6) {
+			logger.debug("subtract -> " + subtract);
+			
+			model.addAttribute("subtract", subtract);
+			
+			return "redirect:/release/release";
+		}
 		    
-		    return "redirect:/release/release";
+	    return "redirect:/release/release";
 	    
 	    //session.setAttribute("inspectionList", inspectionList);
 	    
