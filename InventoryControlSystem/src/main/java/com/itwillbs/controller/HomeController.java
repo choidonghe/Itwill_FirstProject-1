@@ -1,9 +1,12 @@
 package com.itwillbs.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -27,6 +30,8 @@ import com.itwillbs.domain.MemberVO;
 import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticePageVO;
 import com.itwillbs.domain.NoticeVO;
+import com.itwillbs.domain.ProductVO;
+import com.itwillbs.domain.ReleaseVO;
 import com.itwillbs.domain.ErgOrderPageVO;
 import com.itwillbs.service.MainService;
 import com.itwillbs.service.MemberService;
@@ -249,6 +254,29 @@ public class HomeController {
 		model.addAttribute("content", mainService.noticeGet(bno));
 		
 	}
+	
+	@RequestMapping(value = "/dayStoreRelease", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> dayStoreReleasePOST(String startStr) throws Exception{
+		logger.debug(" dayStoreReleasePOST() 호출");
+		logger.debug("클릭한 날짜 : "+startStr);
+		
+//		List<ProductVO> productList = mainService.productDayGet(startStr);
+//		logger.debug("!@@@@@@@@@"+productList);
+//		
+//		List<ReleaseVO> releaseList = mainService.releaseDayGet(startStr);
+//		logger.debug(" !@@@@@@@@@@"+releaseList);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("productList", mainService.productDayGet(startStr));
+		map.put("releaseList", mainService.releaseDayGet(startStr));
+		logger.debug("@@@@@@@"+map);
+		
+		return new ResponseEntity<>(map, HttpStatus.OK );
+	}
+	
+	
 	
 	
 	
