@@ -75,7 +75,7 @@
 	<!-- 페이징 처리 - Cri -->
 	<select id="inspecListCri" resultType="productVO">
 		<![CDATA[
-		select * from product p
+		select * from inspection p
 		join code c 
 		on p.divcode = c.divcode
 		where p.divcode = 2 OR p.divcode = 7
@@ -102,26 +102,20 @@
 	<!-- 검수현황업데이트 - product -->
     <update id="productUpdateInspection" parameterType="ProductVO">
     <!-- 해당 divcode가 7인 행에서 사용자가 선택한 finish_quantity만큼 quantity에서 차감하고 나머지는 다른 업데이트로 처리 -->
-       UPDATE inspection
-        	SET count = CASE WHEN divcode = 2 OR divcode=7 THEN count - #{finish_count}
-                          ELSE count
-                      END,
-            remain_count = count,
-            <!-- CASE
-                                  WHEN divcode = 2 OR divcode=7 THEN remain_count - #{finish_count}
-                                  ELSE remain_count - #{finish_count}
-                              END, -->
-            divcode = CASE WHEN count = 0 AND divcode = 2 OR divcode=7 THEN 3 ELSE divcode END,
-            finish_count = #{finish_count},
-            update_date = now(),
-            warehouse_code = #{warehouse_code}
-        WHERE pno = #{pno}
+	UPDATE inspection
+	SET count = count - #{finish_count},
+	    remain_count = count,
+	    divcode = CASE WHEN count = 0 AND (divcode = 2 OR divcode = 7) THEN 3 ELSE divcode END,
+	    finish_count = #{finish_count},
+	    update_date = now(),
+	    warehouse_code = #{warehouse_code}
+	WHERE pno = #{pno}
     </update>
     
     <!-- 검수 중 불량을 error테이블로 보내기 -->
     <insert id="insertError">
     	insert into error(pno,pname,divcode,count,regdate,warehouse_code) 
-        select pno, pname, 7 AS divcode, finish_count, now() AS regdate, warehouse_code from inspection where pno=#{pno}
+        select pno, pname, 7 AS divcode, finish_count, now() AS regdate, warehouse_code from inspection where pno=#{pno} and divcode = 7
         ON DUPLICATE KEY UPDATE 
         error.count = error.count + #{finish_count}
     </insert>
@@ -159,7 +153,7 @@
 	<!-- 페이징 처리 - Cri -->
 	<select id="inspecListCri2" resultType="productVO">
 		<![CDATA[
-		select * from product p
+		select * from inspection p
 		join code c 
 		on p.divcode = c.divcode
 		where p.divcode = 2
