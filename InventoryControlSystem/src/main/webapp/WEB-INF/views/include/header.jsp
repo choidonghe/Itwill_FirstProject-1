@@ -153,27 +153,19 @@
 								<li class="footer"><a href="#">See All Messages</a></li>
 							</ul></li>
 						<!-- Notifications: style can be found in dropdown.less -->
-						<li class="dropdown notifications-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning">10</span>
+						<li class="dropdown notifications-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning">2</span>
 						</a>
 							<ul class="dropdown-menu">
-								<li class="header">You have 10 notifications</li>
+								<li class="header">2개의 공지가 있습니다.</li>
 								<li>
 									<!-- inner menu: contains the actual data -->
 									<ul class="menu">
-										<li><a href="#"> <i class="fa fa-users text-aqua"></i> 5 new members joined today
+										<li><a href="#"> <i class="fa fa-users text-aqua"></i> 제품2024032689 입고 완료 
 										</a></li>
-										<li><a href="#"> <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the page and may cause design problems
-										</a></li>
-										<li><a href="#"> <i class="fa fa-users text-red"></i> 5 new members joined
-										</a></li>
-
-										<li><a href="#"> <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-										</a></li>
-										<li><a href="#"> <i class="fa fa-user text-red"></i> You changed your username
+										<li><a href="#"> <i class="fa fa-warning text-yellow"></i> 28. 출고 검수 요망 
 										</a></li>
 									</ul>
 								</li>
-								<li class="footer"><a href="#">View all</a></li>
 							</ul></li>
 						<!-- Tasks: style can be found in dropdown.less -->
 						
@@ -184,14 +176,32 @@
 								<!-- User image -->
 								<li class="user-header"><img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
 									<p>
-										Admin <small>Member since Nov. 2012</small>
+										Admin
 									</p></li>
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-right">
-										<a href="#" class="btn btn-default btn-flat">Sign out</a>
+										<a href="#" id="logoutBtn" class="btn btn-default btn-flat">Sign out</a>
 									</div>
 								</li>
+
+								<script>
+									document
+											.getElementById("logoutBtn")
+											.addEventListener(
+													"click",
+													function(event) {
+														event.preventDefault(); // 기본 동작(링크 이동) 방지
+
+														// 여기에 로그아웃 동작을 수행하는 코드를 작성합니다.
+														// 예를 들어, 로그아웃 API를 호출하거나 세션을 삭제하는 등의 작업을 수행할 수 있습니다.
+
+														// 이 예제에서는 단순히 경고창을 띄우고 페이지를 새로고침하여 로그아웃하는 것으로 가정합니다.
+														if (confirm("로그아웃 하시겠습니까?")) {
+															window.location.href = "/login"; // 로그아웃 처리 후 리다이렉트할 경로를 지정합니다.
+														}
+													});
+								</script>
 							</ul></li>
 						<!-- Control Sidebar Toggle Button -->
 						<li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
