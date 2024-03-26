@@ -32,20 +32,13 @@ noticePageVO : ${noticePageVO } --%>
 				<div class="box-body table-responsive no-padding">
 					<table id="productTable" class="table table-hover">
 						<tbody>
-							<tr>
-								<th>제품코드</th>
-								<th>제품명</th>
-								<th>입고수량</th>
-								<th>검수완료</th>
-								<th>검수대기</th>
-								<th>상태</th>
-							</tr>
-						
+	
 						</tbody>
 					</table>
 				</div>
 
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default" onclick="location.href='/inspectionMain'">입고 페이지로</button>
+				<button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#modal-default" onclick="location.href='/inspectionMain'" style="width: 200px;">
+				입고 페이지로</button>
 				
 				<h4 class="box-title">출고 정보</h4>
 			
@@ -53,20 +46,13 @@ noticePageVO : ${noticePageVO } --%>
 				<div class="box-body table-responsive no-padding">
 					<table id="releaseTable" class="table table-hover">
 						<tbody>
-							<tr>
-								<th>제품코드</th>
-								<th>제품명</th>
-								<th>출고접수일</th>
-								<th>출고수량</th>
-								<th>배송업체</th>
-								<th>상태</th>
-							</tr>
 						
 						</tbody>
 					</table>
 				</div>
 
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default" onclick="location.href='/inspectionMain'">출고 페이지로</button>
+				<button type="button" class="btn btn-block btn-primary btn-lg"" data-toggle="modal" data-target="#modal-default" onclick="location.href='/inspectionMain'" style="width: 200px;">
+				출고 페이지로</button>
 				</div>
 			  </div>
 			  
@@ -135,12 +121,14 @@ noticePageVO : ${noticePageVO } --%>
 										
 										var map = response;
 										
-										console.log(map);
+										/* console.log(map);
 										console.log(map.productList);
-										console.log(map.productList[0].codeVO[0].korname);
+										console.log(map.productList[0].codeVO[0].korname); */
 										
+										$('#productTable').append("<tr><th>제품코드</th><th>제품명</th><th>입고수량</th><th>검수완료</th><th>검수대기</th><th>상태</th></tr>");
 										map.productList.forEach(function(productList) {
-								       		 $('#productTable').append("<tr><td>"+productList.pno+
+								       		 $('#productTable').append(
+								       				 				 "<tr><td>"+productList.pno+
 								       				 				 "</td><td>"+productList.pname+
 								       				 				 "</td><td>"+productList.count+
 								       				 				 "</td><td>"+productList.finish_count+
@@ -149,8 +137,10 @@ noticePageVO : ${noticePageVO } --%>
 								       				 				 "</td></tr>");
 								        
 								        }); 
+										 $('#releaseTable').append("<tr><th>제품코드</th><th>제품명</th><th>출고접수일</th><th>출고수량</th><th>배송업체</th><th>상태</th></tr>");
 										map.releaseList.forEach(function(releaseList) {
-								       		 $('#releaseTable').append("<tr><td>"+releaseList.pno+
+								       		 $('#releaseTable').append(
+								       				 				 "<tr><td>"+releaseList.pno+
 								       				 				 "</td><td>"+releaseList.pname+
 								       				 				 "</td><td>"+releaseList.order_date+
 								       				 				 "</td><td>"+releaseList.order_count+
