@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.ErrorVO;
 import com.itwillbs.domain.ProductVO;
 import com.itwillbs.domain.WarehouseVO;
@@ -40,15 +41,15 @@ public class InspectionServiceImpl implements InspectionService{
 	}
 
 	@Override
-	public List<ProductVO> productGetInspectionList() throws Exception {
+	public List<ProductVO> productGetInspectionList(int page) throws Exception {
 		
-		return idao.productInspectionList();
+		return idao.productInspectionList(page);
 	}
 	
 	@Override
-	public List<ProductVO> productGetInspectionDiv2() throws Exception {
+	public List<ProductVO> productGetInspectionDiv2(int page) throws Exception {
 		
-		return idao.productDiv2();
+		return idao.productDiv2(page);
 	}
 
 	@Override
@@ -73,8 +74,23 @@ public class InspectionServiceImpl implements InspectionService{
 	
 	// 불량품 목록 조회
 	@Override
-	public List<ErrorVO> errorList() throws Exception {
-		return idao.errorList();
+	public List<ErrorVO> errorList(int page) throws Exception {
+		return idao.errorList(page);
+	}
+
+	@Override
+	public List<ProductVO> inspecGetListCri(Criteria cri) throws Exception {
+		return idao.productInspectionListCri(cri);
+	}
+
+	@Override
+	public List<ProductVO> productGetInspectionCri2(Criteria cri) throws Exception {
+		return idao.productDiv2Cri(cri);
+	}
+
+	@Override
+	public List<ErrorVO> errorCri(Criteria cri) throws Exception {
+		return idao.errorCri(cri);
 	}
 
 	

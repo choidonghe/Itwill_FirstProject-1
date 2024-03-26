@@ -231,6 +231,9 @@ public class HomeController {
 		
 	}
 	
+	// 정수형 데이터타입 (X) -> jackson-databind 라이브러리 -> (ㅇ)
+	// jackson-databind 라이브러리 : 객체 -> JSON 변환 혹은 그 반대 
+	
 	@RequestMapping(value = "/notice",method = RequestMethod.POST)
 	public String noticePOST(NoticeVO vo)throws Exception{
 		logger.debug(" noticePOST() 호출 ");
