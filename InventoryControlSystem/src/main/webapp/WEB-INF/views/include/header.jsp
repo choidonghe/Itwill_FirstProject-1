@@ -83,7 +83,7 @@
 
 		<header class="main-header">
 			<!-- Logo -->
-			<a href="/resources/index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels --> <span class="logo-mini"><b>I</b>CS</span> <!-- logo for regular state and mobile devices --> <span class="logo-lg"><b>Inven 	</b>Control System</span>
+			<a href="/main" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels --> <span class="logo-mini"><b>I</b>CS</span> <!-- logo for regular state and mobile devices --> <span class="logo-lg"><b>Inven 	</b>Control System</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top" role="navigation">
@@ -245,7 +245,7 @@
 							<li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i>재고 수량</a></li>
 							<li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i>창고 위치</a></li>
 						</ul></li>
-					<li class="treeview active"><a href="#"> <i class="fa fa-edit"></i> <span>공지사항</span> <i class="fa fa-angle-left pull-right"></i>
+					<li class="treeview active"><a href="/notice"> <i class="fa fa-edit"></i> <span>공지사항 작성</span> <i class="fa fa-angle-left pull-right"></i>
 					</a></li>
 					<li><a href="../calendar.html"> <i class="fa fa-calendar"></i> <span>Calendar</span> 
 					</a></li>
