@@ -20,6 +20,7 @@ ${mainList} <br>
 <input type="button" value="전체" onclick="location.href='/release/main'">
 <input type="button" value="검수" onclick="location.href='/release/inspection'">
 <input type="button" value="출고" onclick="location.href='/release/release'">
+<input type="button" value="에러" onclick="location.href='/release/error'">
 
 <div class="content">
 	<div class="box">
@@ -67,6 +68,10 @@ ${mainList} <br>
 
 										<c:when test="${mainList.divcode==6 }">
 											<input type="text" value="출고완료" readonly="readonly">
+										</c:when>
+										
+										<c:when test="${mainList.divcode==8 }">
+											<input type="text" value="제품 불량" readonly="readonly">
 										</c:when>
 									</c:choose>
 								</form>

@@ -19,9 +19,11 @@ public class ReleaseVO {
 	private Timestamp order_date;
 	private int order_count;
 	private String delivery_company;
-	private String delivery_phone;
-	private String delivery_manager;
 	private int release_count;
+	private int error_count; 
+    private String delivery_phone;
+    private String delivery_manager;
 
 	private List<CodeVO> codeVO;
+	private List<DeliveryVO> deliveryVO;
 }

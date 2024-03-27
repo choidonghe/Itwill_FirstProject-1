@@ -208,7 +208,7 @@ public class ReleaseController {
 	}
 	
 	@RequestMapping(value = "/inspection", method = RequestMethod.POST)
-	public String InspectionPOST(String pno, int divcode, HttpSession session,Model model,ReleaseVO vo,Integer order_count,Integer release_count) throws Exception {
+	public String InspectionPOST(String pno, int divcode, HttpSession session,Model model,ReleaseVO vo,Integer order_count,Integer release_count,Integer error_count) throws Exception {
 	    logger.debug("mainInspectionPOST() 호출");
 	    logger.debug("order_count:"+order_count);
 	    logger.debug("release_count:"+release_count);
@@ -225,7 +225,6 @@ public class ReleaseController {
 	    ReleaseVO subtract = rService.releaseSubtract(pno, release_count);
 //	    ReleaseVO error = rService.releaseError(pno, release_count, error_count);
 	    
-	    
 	    logger.debug("subtract:"+subtract);
 	    
 		if(divcode == 6) {
@@ -234,9 +233,15 @@ public class ReleaseController {
 			model.addAttribute("subtract", subtract);
 			
 			return "redirect:/release/release";
-		}
+		} /*
+			 * else if(divcode == 8) { logger.debug("error ->" +error);
+			 * 
+			 * model.addAttribute("error", error);
+			 * 
+			 * return "redirect:/release/error"; }
+			 */
 		    
-	    return "redirect:/release/release";
+	    return "redirect:/release/inspection";
 	    
 	    //session.setAttribute("inspectionList", inspectionList);
 	    
@@ -275,5 +280,47 @@ public class ReleaseController {
 		
 	}
 	
+	// http://localhost:8088/release/error
+	
+	@RequestMapping(value = "/error",method = RequestMethod.GET)
+	public void error(HttpSession session, Model model,Criteria cri) throws Exception{
+		logger.debug("error()");
+		
+		PageVO pageVO = new PageVO();
+		pageVO.setCri(cri);
+		//pageVO.setTotalCount(3840); // 총 개수 직접 계산
+		pageVO.setTotalCount(rService.getReleaseListCount()); // SQL 구문 계산
+		
+		
+		// 서비스 -> DAO 게시판 글 목록 가져오기
+		//List<BoardVO> boardList = bService.getList(); //all
+		List<ReleaseVO> vo = rService.getListCri(cri); //페이징
+		logger.debug("list.size :" +vo.size());
+		
+		List<CodeVO> code = rService.codeList();
+		
+		// 연결된 뷰 페이지에 정보 전달
+		model.addAttribute("vo", vo);
+		
+		model.addAttribute("cri", cri); // 페이징 처리 정보 전달
+		
+		model.addAttribute("pageVO", pageVO); // 페이징 처리 정보 전달
+		
+		model.addAttribute("code", code);
+	}
+	
+	@RequestMapping(value = "/error",method = RequestMethod.POST)
+	public String errorPOST(String pno, Integer error_count,Model model) throws Exception {
+		logger.debug("errorPOST() 호출");
+		
+		logger.debug("error_count->"+error_count);
+		
+		
+		ReleaseVO error = rService.releaseError(pno, error_count);
+		
+		model.addAttribute("error", error);
+		
+		return "redirect:/release/aa";
+	}
 	
 }

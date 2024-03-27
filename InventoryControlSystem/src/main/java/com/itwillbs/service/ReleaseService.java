@@ -32,7 +32,7 @@ public interface ReleaseService {
 	// 검수완료
 	public ReleaseVO releaseSubtract(String pno,int release_count) throws Exception;
 	
-	public ReleaseVO releaseError(String pno,int release_count, int error_count) throws Exception;
+	public ReleaseVO releaseError(String pno, int error_count) throws Exception;
 	
 	
 }

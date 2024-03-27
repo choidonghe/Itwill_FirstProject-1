@@ -19,48 +19,50 @@
 			<table class="table table-bordered">
 				<tbody>
 					<tr>
-						<th>divcode</th>
-						<th>id</th>
-						<th>pno</th>
-						<th>pname</th>
-						<th>category</th>
-						<th>release_date</th>
-						<th>update_date</th>
-						<th>price</td>
-						<th>order_date</th>
-						<th>order_count</th>
-						<th>delivery_company</th>
-						<th>delivery_phone</th>
-						<th>delivery_manager</th>
+						<th>상태</th> 
+						<th>제품번호</th> 
+						<th>제품명</th> 
+						<th>수량</th> 
+						<th>가격</th> 
+						<th>입고날짜</th> 
+						<th>수정날짜</th> 
+						<th>출고날짜</th> 
+						<th>출고 수량</th>
+						<th>불량 수량</th>
+						<th>배송 업체</th>
+						<th>전화번호</th>
+						<th>배송자</th>
+						<th>관리</th>
 					</tr>
 
 					<tr>
 						<td>${infoList.divcode}</td>
-						<td>${infoList.id}</td>
 						<td>${infoList.pno}</td>
 						<td>${infoList.pname}</td>
-						<td>${infoList.category}</td>
-						<td>${infoList.release_date}</td>
-						<td>${infoList.update_date}</td>
+						<td>${infoList.order_count}</td>
 						<td>${infoList.price}</td>
 						<td>${infoList.order_date}</td>
-						<td>${infoList.order_count}</td>
+						<td>${infoList.update_date}</td>
+						<td>${infoList.release_date}</td>
+						<td>${infoList.release_count}</td>
+						<td>${infoList.error_count}</td>
+						<td>${infoList.delivery_company}</td>
 						<td>${infoList.delivery_phone}</td>
 						<td>${infoList.delivery_manager}</td>
 						<td>
 							<input type="button" name="pno" value="수정" class="btn btn-success" onclick="location.href='/release/modify?pno=${infoList.pno}&page=${cri.page}&pageSize=${cri.pageSize}'">
-								<form role="form" action="" method="POST">
+							<form role="form" action="" method="POST">
 								<input type="hidden" name="page" value=${cri.page }>
 								<input type="hidden" name="pageSize" value=${cri.pageSize }>
-									<input type="hidden" value="${infoList.pno}">
-									<input type="button" value="삭제" class="btn btn-danger">
-								</form>
+								<input type="hidden" value="${infoList.pno}">
+								<input type="button" value="삭제" class="btn btn-danger">
+							</form>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
+		
 		<div class="box-footer clearfix">
 			<button onclick="history.back()">뒤로가기</button>
 		</div>

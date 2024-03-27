@@ -6,7 +6,7 @@
 
 <mapper namespace="com.itwillbs.mapper.ReleaseMapper">
 
-	<resultMap type="com.itwillbs.domain.ProductVO" id="productMap">
+	<!-- <resultMap type="com.itwillbs.domain.ProductVO" id="productMap">
 		<result property="pno" column="pno"/>
 		<result property="category_code" column="category_code"/>
 		<result property="pname" column="pname"/>
@@ -23,16 +23,41 @@
 		<result property="remain_count" column="remain_count"/>
 		
 		<collection property="codeVO" resultMap="codeVO"/>
-	</resultMap>
+	</resultMap> -->
 	
-	<resultMap type="com.itwillbs.domain.CodeVO" id="codeMap">
+	<resultMap type="com.itwillbs.domain.ReleaseVO" id="releaseMap">
+        <result property="pno" column="pno"/>
+        <result property="divcode" column="divcode"/>
+        <result property="id" column="id"/>
+        <result property="pname" column="pname"/>
+        <result property="category" column="category"/>
+        <result property="release_date" column="release_date"/>
+        <result property="update_date" column="update_date"/>
+        <result property="price" column="price"/>
+        <result property="order_date" column="order_date"/>
+        <result property="order_count" column="order_count"/>
+        <result property="delivery_company" column="delivery_company"/>
+        <result property="release_count" column="release_count"/>
+        <result property="error_count" column="error_count"/>
+        
+        <collection property="deliveryVO" resultMap="deliveryMap"/>
+        <collection property="codeVO" resultMap="codeVO"/>
+    </resultMap>
+	
+	<resultMap type="com.itwillbs.domain.CodeVO" id="codeVO">
 		<result property="divcode" column="divcode"></result>
 		<result property="daecode" column="daecode"></result>
 		<result property="smcode" column="smcode"></result>
 		<result property="korname" column="korname"></result>
 	</resultMap>
+	
+	<resultMap type="com.itwillbs.domain.DeliveryVO" id="deliveryMap">
+        <result property="delivery_company" column="delivery_company"></result>
+        <result property="delivery_phone" column="delivery_phone"></result>
+        <result property="delivery_manager" column="delivery_manager"></result>
+    </resultMap>
 
-	<select id="getReleaseList" resultMap="productMap">
+	<select id="getReleaseList" resultMap="releaseMap">
 		select * 
 		from product p 
 		join code c 
@@ -63,9 +88,10 @@
 		select * from code where
 		divcode=4 or divcode=5 or divcode=6 or divcode=8
 	</select>
-
+	
+<!-- 	inspection POST -->
 	<update id="updateCode">
-		update tbl_release set divcode=#{divcode}, update_date=now()
+		update tbl_release set divcode=#{divcode}, release_date = now()
 		where pno = #{pno}
 	</update>
 
@@ -75,16 +101,19 @@
 	</select>
 	
 	<!-- 글 목록 조회(페이징처리) -->
-	<select id="selectBoardListPage" resultType="ReleaseVO">
+	<select id="selectBoardListPage" resultMap="releaseMap">
 		<![CDATA[
-		select * from tbl_release 
-		where divcode > 0
+		select * 
+		from tbl_release r
+		join code c 
+		on r.divcode = c.divcode
+		
 		limit #{page},10
 		]]>
 	</select>
 		
 	<!-- 글 목록 조회(페이징처리-Cri) -->
-	<select id="releaseMainListCri" resultType="ReleaseVO">
+	<select id="releaseMainListCri" resultMap="releaseMap">
 		<![CDATA[
 		select * from tbl_release
 		where divcode > 0
@@ -98,11 +127,12 @@
 	</select>
 	
 	
-<!-- // 검수완료 -->
+<!-- 검수완료 -->
 	<update id="upSubtractRelease">
 		update tbl_release 
-		set release_count = ${release_count},
-		order_count = order_count - ${release_count}
+		set release_count = IFNULL(release_count,0) + #{release_count},
+		error_count = order_count - #{release_count},
+		order_count = order_count - error_count - #{release_count}
 		where pno=#{pno}
 	</update>
 	
@@ -111,8 +141,9 @@
 		where pno=#{pno}
 	</select>
 	
+<!-- 	제품 불량 -> 에러 -->
 	<update id="upErrorRelease">
-		update tbl_release set order_count = (order_count - #{release_count}) - #{error_count}
+		update tbl_release set error_count = error_count - #{error_count}, update_date=now()
 		where pno=#{pno}
 	</update>
 	

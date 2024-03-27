@@ -31,5 +31,5 @@ public interface ReleaseDAO {
 	
 	public ReleaseVO subtractRelease(String pno,int release_count) throws Exception;
 	
-	public ReleaseVO errorRelease(String pno,int release_count, int error_count) throws Exception;
+	public ReleaseVO errorRelease(String pno,int error_count) throws Exception;
 }
