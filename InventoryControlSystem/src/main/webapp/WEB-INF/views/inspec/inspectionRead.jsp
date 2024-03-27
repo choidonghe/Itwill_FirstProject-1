@@ -39,16 +39,16 @@ ${sessionScope.id }
     <tr>
         <td>검수 여부:</td>
         <td>
-            <select name="divcode" required>
+            <select name="divcode" id="divcode" >
+           		<option value="3">입고완료</option>
                 <option value="7">입고검수불량</option>
-                <option value="3">입고완료</option>
             </select>
         </td>
     </tr>
      <tr>
         <td>창고위치:</td>
         <td>
-            <select name="warehouse_code" required>
+            <select name="warehouse_code" id="warehouse_code" >
             	<c:forEach var="warehouseList" items="${warehouseList}">
             		<option value="${warehouseList.warehouse_code }">${warehouseList.location }</option>
             	</c:forEach>
@@ -66,5 +66,25 @@ ${sessionScope.id }
 		</c:otherwise>
 	</c:choose>
 </form>
+
+<script>
+    // 검수 여부 선택 시 이벤트 처리
+    document.getElementById('divcode').addEventListener('change', function() {
+        var divcode = this.value;
+        var warehouseSelect = document.getElementById('warehouse_code');
+
+        // divcode가 7일 때만 'C01'인 불량창고 선택
+        if (divcode === '7') {
+            for (var i = 0; i < warehouseSelect.options.length; i++) {
+                if (warehouseSelect.options[i].value === 'C01') {
+                    warehouseSelect.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+    });
+</script>
+
+
 
 <%@ include file="../include/footer.jsp"%>

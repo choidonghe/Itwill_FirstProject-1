@@ -53,9 +53,9 @@ public class InspectionServiceImpl implements InspectionService{
 	}
 
 	@Override
-	public List<ProductVO> productGetInspectionDiv3() throws Exception {
+	public List<ProductVO> productGetInspectionDiv3(int page) throws Exception {
 		
-		return idao.productDiv3();
+		return idao.productDiv3(page);
 	}
 
 	// 창고목록 조회
@@ -100,6 +100,18 @@ public class InspectionServiceImpl implements InspectionService{
 	@Override
 	public void updateStock(ProductVO pvo) throws Exception {
 		idao.stockUpdate(pvo);
+	}
+
+	@Override
+	public int countInspec() throws Exception {
+		
+		return idao.totalInspec();
+	}
+
+	@Override
+	public List<ProductVO> productGetInspectionCri3(Criteria cri) throws Exception {
+		
+		return idao.productDiv3Cri(cri);
 	}
 
 	

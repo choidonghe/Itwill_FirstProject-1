@@ -75,7 +75,19 @@ th {
         </tbody>
     </table>
 	
-	
+		<div class="box-footer clearfix">
+			<ul class="pagination pagination-sm no-margin pull-right">
+			<c:if test="${spageVO.prev }">
+				<li><a href="inspectionDiv3?page=${spageVO.startPage - 1 }">«</a></li>
+			</c:if>
+			<c:forEach var="idx" begin="${spageVO.startPage }" end="${spageVO.endPage }" step="1">
+				<li ${spageVO.cri.page == idx? "class=active": ""}><a href="inspectionDiv3?page=${idx }">${idx }</a></li>
+			</c:forEach>
+			<c:if test="${spageVO.next }">
+				<li><a href="inspectionDiv3?page=${spageVO.endPage + 1 }">»</a></li>
+			</c:if>
+			</ul>
+		</div>	
 	
 	
 	

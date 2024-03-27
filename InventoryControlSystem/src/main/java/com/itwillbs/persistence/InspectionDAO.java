@@ -34,7 +34,8 @@ public interface InspectionDAO {
 	public List<ProductVO> productDiv2Cri(Criteria cri) throws Exception;
 	
 	// 검수목록 현황별 페이지 Div3 완료 - product
-	public List<ProductVO> productDiv3() throws Exception;
+	public List<ProductVO> productDiv3(int page) throws Exception;
+	public List<ProductVO> productDiv3Cri(Criteria cri) throws Exception;
 	
 	// 창고목록 조회
 	public List<WarehouseVO> warehouseList() throws Exception;
@@ -48,6 +49,7 @@ public interface InspectionDAO {
 	public List<ErrorVO> errorList(int page) throws Exception;
 	public List<ErrorVO> errorCri(Criteria cri) throws Exception;
 	
-	
+	// 검수 총 개수 계산 
+	public int totalInspec() throws Exception;
 	
 }

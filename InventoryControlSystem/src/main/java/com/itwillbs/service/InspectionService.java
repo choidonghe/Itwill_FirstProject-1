@@ -32,7 +32,9 @@ public interface InspectionService {
 	
 	
 	// 검수 리스트 입고 완료 동작 - product
-	public List<ProductVO> productGetInspectionDiv3() throws Exception;
+	public List<ProductVO> productGetInspectionDiv3(int page) throws Exception;
+	public List<ProductVO> productGetInspectionCri3(Criteria cri) throws Exception;
+	
 	
 	// 창고 목록 조회
 	public List<WarehouseVO> warehouseList() throws Exception;
@@ -44,5 +46,9 @@ public interface InspectionService {
 	// 불량품 목록
 	public List<ErrorVO> errorList(int page) throws Exception;
 	public List<ErrorVO> errorCri(Criteria cri) throws Exception;
+	
+	// 검수 목록 개수
+	public int countInspec() throws Exception;
+	
 	
 }

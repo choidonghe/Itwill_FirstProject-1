@@ -159,7 +159,7 @@
     ]]>
 	</select>
 	<!-- 페이징 처리 - Cri -->
-	<select id="inspecListCri2" resultType="productVO">
+	<select id="inspecListCri2" resultMap="productMap">
 		<![CDATA[
 		select * from inspection p
 		join code c 
@@ -171,14 +171,29 @@
 	</select>
 
 	<!-- product - divcode=3 인 검수목록 조회 -->
-	<select id="productInspectionDiv3" resultType="ProductVO">
-		select * from stock s 
+	<select id="productInspectionDiv3" resultMap="productMap">
+		<![CDATA[
+		select * from inspection s 
 		join code c 
 		on s.divcode = c.divcode 
 		join inspection i 
 		on i.divcode = s.divcode 
 		where s.divcode = 3 order by s.regdate desc
+		LIMIT #{start}, #{pageSize}
+		]]> 
 	</select>
+	<select id="inspecListCri3" resultMap="productMap">
+		<![CDATA[
+		select * from inspection p
+		join code c 
+		on p.divcode = c.divcode
+		where p.divcode = 3
+		order by p.regdate desc 
+		limit #{startPage},#{pageSize}
+		]]>
+	</select>	
+	
+
 	
 	<!-- product - 불량 제품 목록 조회 -->
 	<select id="errorList" resultMap="errorVO">
@@ -193,7 +208,7 @@
     ]]>
 	</select>
 	<!-- 페이징 처리 - Cri -->
-	<select id="errorCri" resultType="productVO">
+	<select id="errorCri" resultMap="errorVO">
 		<![CDATA[
 		select * 
 		from error e
@@ -204,5 +219,11 @@
 		limit #{startPage},#{pageSize}
 		]]>
 	</select>
+	
+	<!-- 검수 제품의 개수 -->
+	<select id="totalInspec" resultType="int">
+		select count(pno) from inspection
+	</select>
+
 
 </mapper>

@@ -53,8 +53,8 @@ public class InspectionDAOImpl implements InspectionDAO{
 
 
 	@Override
-	public List<ProductVO> productDiv3() throws Exception {
-		
+	public List<ProductVO> productDiv3(int page) throws Exception {
+		page = (page-1) * 10;
 		return sqlSession.selectList(NAMESPACE + ".productInspectionDiv3");
 	}
 
@@ -110,6 +110,17 @@ public class InspectionDAOImpl implements InspectionDAO{
 	@Override
 	public void stockUpdate(ProductVO pvo) throws Exception {
 		sqlSession.update(NAMESPACE + ".updatestock", pvo);
+	}
+
+	@Override
+	public int totalInspec() throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE + ".totalInspec");
+	}
+
+	@Override
+	public List<ProductVO> productDiv3Cri(Criteria cri) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".inspecListCri3", cri);
 	}
 	
 	

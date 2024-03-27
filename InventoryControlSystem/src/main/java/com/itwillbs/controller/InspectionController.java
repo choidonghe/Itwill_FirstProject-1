@@ -41,7 +41,7 @@ public class InspectionController {
 		logger.debug(" inspectionMain() 실행 ");
 		StorePageVO spageVO = new StorePageVO();
 		spageVO.setCri(cri);
-		spageVO.setTotalCount(pService.getProductListCount());
+		spageVO.setTotalCount(iService.countInspec());
 		List<ProductVO> inspectionList = iService.inspecGetListCri(cri);
 		List<CodeVO> codeList = cService.allCodeList();
 		List<WarehouseVO> warehouseList = iService.warehouseList();
@@ -95,7 +95,7 @@ public class InspectionController {
 		logger.debug(" inspectionDiv2() 호출 ");
 		StorePageVO spageVO = new StorePageVO();
 		spageVO.setCri(cri);
-		spageVO.setTotalCount(pService.getProductListCount());		
+		spageVO.setTotalCount(iService.countInspec());		
 		List<ProductVO> inspectionList = iService.productGetInspectionCri2(cri);
 		List<CodeVO> codeList = cService.allCodeList();
 		model.addAttribute("inspectionList",inspectionList);
@@ -107,12 +107,17 @@ public class InspectionController {
 	// 검수 상태별 페이지 (검수완)
 	// http://local:8088/inspec/inspectionDiv3
 	@RequestMapping(value = "/inspectionDiv3", method = {RequestMethod.GET, RequestMethod.POST})
-	public void inspectionDiv3(Model model) throws Exception{
+	public void inspectionDiv3(Model model, Criteria cri) throws Exception{
 		logger.debug(" inspectionDiv3() 호출 ");
-		List<ProductVO> stockList = iService.productGetInspectionDiv3();
+		StorePageVO spageVO = new StorePageVO();
+		spageVO.setCri(cri);
+		spageVO.setTotalCount(iService.countInspec());
+		List<ProductVO> stockList = iService.productGetInspectionCri3(cri);
 		List<CodeVO> codeList = cService.allCodeList();
 		model.addAttribute("stockList",stockList);
 		model.addAttribute("codeList",codeList);
+		model.addAttribute("cri", cri);
+		model.addAttribute("spageVO", spageVO);		
 	}
 	
 	
@@ -123,7 +128,7 @@ public class InspectionController {
 		logger.debug(" inspectionDiv4() 호출 ");
 		StorePageVO spageVO = new StorePageVO();
 		spageVO.setCri(cri);
-		spageVO.setTotalCount(pService.getProductListCount());
+		spageVO.setTotalCount(iService.countInspec());
 		List<ErrorVO> errorList = iService.errorCri(cri);
 		List<WarehouseVO> warehouseList = iService.warehouseList();
 		List<CodeVO> codeList = cService.allCodeList();
