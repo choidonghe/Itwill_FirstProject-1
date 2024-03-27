@@ -1,5 +1,7 @@
 package com.itwillbs.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -104,6 +106,23 @@ public class MemberServiceImpl implements MemberService {
 			
 		return 1;
 	}
+	
+	@Override
+	public List<MemberVO> memberListGet() throws Exception {
+		logger.debug(" memberListGet() 호출");
+
+		return dao.getMemberListGet();
+	}
+
+
+	@Override
+	public void updateMember(MemberVO vo) throws Exception {
+		logger.debug(" updateMember(MemberVO vo) 실행 ");
+
+		dao.updateMember(vo);
+	}
+
+
 
 
 

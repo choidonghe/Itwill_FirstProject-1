@@ -1,5 +1,7 @@
 package com.itwillbs.persistence;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +31,10 @@ public interface MemberDAO {
 	public String getToken(String code) throws Exception;
 	
 	public MemberVO getUserInfo(String token) throws Exception;
+	
+	public List<MemberVO> getMemberListGet() throws Exception;
+
+	public void updateMember(MemberVO vo) throws Exception;
 	
 
 	 

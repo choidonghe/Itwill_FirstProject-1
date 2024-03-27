@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -268,6 +269,21 @@ public class MemberDAOImpl implements MemberDAO {
 	       }
 	    
 		return vo;
+	}
+	
+	@Override
+	public List<MemberVO> getMemberListGet() throws Exception {
+		logger.debug(" getMemberListGet() 실행 ");
+
+		return sql.selectList(NAMESPACE+".memberListGet");
+	}
+
+
+	@Override
+	public void updateMember(MemberVO vo) throws Exception {
+		logger.debug(" updateMember(MemberVO vo) 실행 ");
+
+		sql.update(NAMESPACE+".updateMember", vo);
 	}
 
 
