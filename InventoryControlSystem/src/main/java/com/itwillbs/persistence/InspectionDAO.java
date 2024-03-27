@@ -25,6 +25,9 @@ public interface InspectionDAO {
 	
 	// 검수에서 재고로 넘어가기 - product
 	public void productMoveToStock() throws Exception;
+	// 검수에서 재고 수량 넘기면 업데이트
+	public void stockUpdate(ProductVO pvo) throws Exception;
+	
 	
 	// 검수목록 현황별 페이지 Div2 검수 - product
 	public List<ProductVO> productDiv2(int page) throws Exception;
@@ -38,6 +41,8 @@ public interface InspectionDAO {
 	
 	// 불량 제품 넘기기
 	public void insertError(ProductVO pvo) throws Exception;
+	// 불량 제품 업데이트
+	public void updateError(ProductVO pvo) throws Exception;
 	
 	// 불량품 목록
 	public List<ErrorVO> errorList(int page) throws Exception;

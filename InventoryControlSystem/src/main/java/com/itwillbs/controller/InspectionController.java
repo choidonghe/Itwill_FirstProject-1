@@ -74,17 +74,16 @@ public class InspectionController {
 	public String inspectionReadPOST(String pno,int divcode, Model model,ProductVO pvo) throws Exception{
 		logger.debug(" inspectionReadPOST() 호출 ");
 		
-		logger.debug(" divcode : " + divcode);
 		if(divcode == 3) {
 			iService.productModify(pvo);
+			iService.updateStock(pvo);
+		}
+		if(divcode == 7) {
+			iService.insertError(pvo);
+			iService.updateError(pvo);
 		}
 		
 		iService.productUpdateRemain(pvo);
-		
-		logger.debug(" divcode : " + divcode);
-		if(divcode == 7) {
-			iService.insertError(pvo);
-		}
 		
 		return "redirect:/inspec/inspectionMain";
 	}
@@ -110,9 +109,9 @@ public class InspectionController {
 	@RequestMapping(value = "/inspectionDiv3", method = {RequestMethod.GET, RequestMethod.POST})
 	public void inspectionDiv3(Model model) throws Exception{
 		logger.debug(" inspectionDiv3() 호출 ");
-		List<ProductVO> inspectionList = iService.productGetInspectionDiv3();
+		List<ProductVO> stockList = iService.productGetInspectionDiv3();
 		List<CodeVO> codeList = cService.allCodeList();
-		model.addAttribute("inspectionList",inspectionList);
+		model.addAttribute("stockList",stockList);
 		model.addAttribute("codeList",codeList);
 	}
 	
@@ -134,6 +133,5 @@ public class InspectionController {
 		model.addAttribute("spageVO", spageVO);
 		model.addAttribute("codeList", codeList);
 	}
-	
 	
 }

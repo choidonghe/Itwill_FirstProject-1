@@ -35,7 +35,8 @@ th {
 	</div>
 	
 	 <h1>입고 검수완료 현황</h1>
-	 ${codeList } <br>
+	 stockList = ${stockList } <br>
+	 codeList = ${codeList } <br>
 	 <h2>stock이랑 합치면 상태에 korname으로 출력하게 하기</h2>
 	 
 	<div class="button-container">
@@ -57,20 +58,18 @@ th {
                 <th>제품명</th>
                 <th>담당자 아이디</th>
                 <th>상태</th>
-                <th>총 검수량</th>
-                <th>남은 검수량</th>
+                <th>완료 검수량</th>
                 <th>입고날짜</th>
                 <th>검수날짜</th>
             </tr>
-       		<c:forEach var="inspectionList" items="${inspectionList }">
+       		<c:forEach var="stockList" items="${stockList }">
             <tr>
-                <td><a href="/inspec/inspectionRead?pno=${inspectionList.pno}">${inspectionList.pno }</a></td>
+                <td><a href="/inspec/inspectionRead?pno=${stockList.pno}">${stockList.pno }</a></td>
                 <td>${sessionScope.id }</td>
-                <td>${inspectionList.divcode}</td>
-                <td>${inspectionList.count }</td>
-                <td>${inspectionList.remain_count }</td>
-                <td>${inspectionList.regdate }</td>
-                <td>${inspectionList.update_date }</td>
+                <td>${stockList.codeVO[1].korname}</td>
+                <td>${stockList.count }</td>
+                <td>${stockList.regdate }</td>
+                <td>${stockList.update_date }</td>
             </tr>
             </c:forEach>
         </tbody>

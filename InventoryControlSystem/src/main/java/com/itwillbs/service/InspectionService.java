@@ -20,6 +20,8 @@ public interface InspectionService {
 	
 	// 검수 업데이트 동작 - product
 	public void productModify(ProductVO pvo) throws Exception;
+	// 검수에서 재고 수량 넘기면 업데이트
+	public void updateStock(ProductVO pvo) throws Exception; 
 	
 	// 검수 remain_quantity 동작 - product
 	public void productUpdateRemain(ProductVO pvo) throws Exception;
@@ -28,6 +30,7 @@ public interface InspectionService {
 	public List<ProductVO> productGetInspectionDiv2(int page) throws Exception;
 	public List<ProductVO> productGetInspectionCri2(Criteria cri) throws Exception;
 	
+	
 	// 검수 리스트 입고 완료 동작 - product
 	public List<ProductVO> productGetInspectionDiv3() throws Exception;
 	
@@ -35,7 +38,8 @@ public interface InspectionService {
 	public List<WarehouseVO> warehouseList() throws Exception;
 	// 에러제품 넘기기
 	public void insertError(ProductVO pvo) throws Exception;
-	
+	// 에러 제품 업데이트
+	public void updateError(ProductVO pvo) throws Exception;
 	
 	// 불량품 목록
 	public List<ErrorVO> errorList(int page) throws Exception;

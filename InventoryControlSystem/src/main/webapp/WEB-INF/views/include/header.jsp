@@ -263,7 +263,7 @@
 					</a></li>
 					<li><a href="../mailbox/mailbox.html"> <i class="fa fa-envelope"></i> <span>Mailbox</span> 
 					</a></li>
-					<li><a href="/resources/documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+					<li><a href="/account/accountMain"><i class="fa fa-book"></i> <span>거래처 관리</span></a></li>
 
 				</ul>
 			</section>

@@ -26,7 +26,6 @@ public class InspectionDAOImpl implements InspectionDAO{
 	
 	@Override
 	public void productInspectionUpdate(ProductVO pvo) throws Exception {
-		
 		sqlSession.update(NAMESPACE + ".productUpdateInspection", pvo);
 	}
 
@@ -66,11 +65,16 @@ public class InspectionDAOImpl implements InspectionDAO{
 		return sqlSession.selectList(NAMESPACE + ".selectWarehouse");
 	}
 
+	// 불량 제품 넣기
 	@Override
 	public void insertError(ProductVO pvo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".insertError", pvo);
 	}
-	
+	// 불량 제품 업데이트
+	@Override
+	public void updateError(ProductVO pvo) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateError", pvo);
+	}
 
 	// 불량품 목록 조회
 	@Override
@@ -101,5 +105,13 @@ public class InspectionDAOImpl implements InspectionDAO{
 	public List<ErrorVO> errorCri(Criteria cri) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".errorCri", cri);
 	}
+	
+	// 검수에서 재고 수량 넘기면 업데이트
+	@Override
+	public void stockUpdate(ProductVO pvo) throws Exception {
+		sqlSession.update(NAMESPACE + ".updatestock", pvo);
+	}
+	
+	
 	
 }

@@ -70,8 +70,12 @@ public class InspectionServiceImpl implements InspectionService{
 		idao.productInspectionUpdate(pvo);
 		idao.insertError(pvo);
 	}
+	// 에러제품 업데이트
+	@Override
+	public void updateError(ProductVO pvo) throws Exception {
+		idao.updateError(pvo);
+	}
 
-	
 	// 불량품 목록 조회
 	@Override
 	public List<ErrorVO> errorList(int page) throws Exception {
@@ -91,6 +95,11 @@ public class InspectionServiceImpl implements InspectionService{
 	@Override
 	public List<ErrorVO> errorCri(Criteria cri) throws Exception {
 		return idao.errorCri(cri);
+	}
+
+	@Override
+	public void updateStock(ProductVO pvo) throws Exception {
+		idao.stockUpdate(pvo);
 	}
 
 	
