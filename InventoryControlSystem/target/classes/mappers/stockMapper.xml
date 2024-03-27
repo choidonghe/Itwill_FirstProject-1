@@ -124,9 +124,21 @@
 	<insert id = "moveRelease">
 	insert into tbl_release (divcode, pno, order_count)
 	value ('4', #{pno} , #{count} )
-	on duplicate key update
-	order_count = #{count} + order_count
 	</insert>
+	
+	<!-- 출고 수량 업데이트 구문 -->
+	<update id="updateRelease">
+	update tbl_release
+	set order_count = #{count} + order_count
+	where pno = #{pno}
+	</update>
+	
+	<!-- 출고 후 변동된 재고 수량 -->
+	<update id = "updateStockCount">
+	update stock
+	set count = count - #{count}
+	where pno = #{pno}
+	</update>
 
 
 

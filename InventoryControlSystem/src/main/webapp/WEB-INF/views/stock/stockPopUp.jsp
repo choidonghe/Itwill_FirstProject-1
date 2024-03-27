@@ -26,6 +26,7 @@
   }
 </style>
 <meta charset="UTF-8">
+
 <title>${param.pno }번 제품 상세보기</title>
 
 </head>

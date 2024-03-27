@@ -206,8 +206,9 @@ document.addEventListener("DOMContentLoaded", function() {
 								<td>${sVO.company }</td>
 								<td data-available-count="${sVO.count }">${sVO.count }</td>
 								<td>${sVO.warehouse_code }</td>		
-								<td><input type="number" style="width : 100px;">
-								<button type="button" class="btn btn-block btn-primary" style ="width: 60px;">출고</button></td>													
+								<td>
+								<button type="button" class="btn btn-block btn-primary" style ="width: 60px;">출고</button>
+								</td>													
 							</tr>
 						</c:forEach>
 						</tbody>
@@ -228,44 +229,38 @@ document.addEventListener("DOMContentLoaded", function() {
 				</div>
 			</div>
 			
-			<!-- 출고 버튼 클릭 시 DB에 정보 전달 -->
+			<!-- 출고 버튼 클릭 시 새로운 팝업 창 열기 -->
 			<script>
-			document.addEventListener("DOMContentLoaded", function() {
-			    // 출고 버튼 클릭 시 이벤트 처리
-			    var releaseButtons = document.querySelectorAll('button.btn-primary');
-			    releaseButtons.forEach(function(button) {
-			        button.addEventListener('click', function() {
-			            var productCode = button.closest('tr').querySelector('td[data-product-code]').innerText;
-			            var releaseCount = parseInt(button.closest('tr').querySelector('input[type="number"]').value);
-			            var availableCount = parseInt(button.closest('tr').querySelector('td[data-available-count]').innerText);
-			
-			            if (releaseCount > availableCount) {
-			                alert('재고량보다 많습니다.');
-			                return;
-			            }
-			
-			            // AJAX를 사용하여 서버로 데이터 전송
-			            var xhr = new XMLHttpRequest();
-			            xhr.open('POST', '/stock/moveRelease', true);
-			            xhr.setRequestHeader('Content-Type', 'application/json');
-			            xhr.onreadystatechange = function() {
-			                if (xhr.readyState === XMLHttpRequest.DONE) {
-			                    if (xhr.status === 200) {
-			                        alert('출고가 완료되었습니다.');
-			                        // 성공적으로 처리된 경우에 수행할 작업 추가
-			                    } else {
-			                        alert('오류가 발생했습니다. 다시 시도해주세요.');
-			                        // 오류 발생 시 처리
-			                    }
+			    document.addEventListener("DOMContentLoaded", function() {
+			        var releaseButtons = document.querySelectorAll('.btn-primary'); // 출고 버튼을 선택합니다.
+			        releaseButtons.forEach(function(button) {
+			            button.addEventListener('click', function() {
+			                var productCode = button.parentNode.parentNode.querySelector('td[data-product-code]').dataset.productCode; // 해당 행의 제품 코드를 가져옵니다.
+			                var productName = button.parentNode.parentNode.querySelector('td:nth-of-type(3)').textContent.trim(); // 해당 행의 제품 이름을 가져옵니다.
+			                var productCount = button.parentNode.parentNode.querySelector('td[data-available-count]').dataset.availableCount; // 해당 행의 제품 수량을 가져옵니다.
+			                
+			                // 출고 페이지 URL을 생성합니다.
+			                var popupUrl = '/stock/moveRelease?pno=' + encodeURIComponent(productCode) + '&pname=' + encodeURIComponent(productName) + '&count=' + encodeURIComponent(productCount);
+			                
+			                // 팝업 창을 가운데에 위치시키기 위해 창의 크기와 위치를 계산합니다.
+			                var width = 500;
+			                var height = 600;
+			                var left = (window.innerWidth - width) / 2;
+			                var top = (window.innerHeight - height) / 2;
+			                
+			                // 새로운 팝업 창을 엽니다.
+			                var popupWindow = window.open(popupUrl, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+			                
+			                if (popupWindow) {
+			                    popupWindow.focus(); // 팝업 창이 이미 열려있다면 포커스를 이동합니다.
 			                }
-			            };
-			            xhr.send(JSON.stringify({ productCode: productCode, releaseCount: releaseCount }));
+			            });
 			        });
 			    });
-			});
 			</script>
+
+
 			
-			<!-- 출고 버튼 클릭 시 DB에 정보 전달 -->
 			<div class="row">
                 <div class="col-sm-5">
 					<c:choose>

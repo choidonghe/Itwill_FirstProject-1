@@ -21,7 +21,13 @@ public interface StockService {
 	public List<StockDetailVO> getDetailList(String pno) throws Exception;
 	
 	// 출고 테이블로 정보 이동
-	public void moveRelease(StockVO stockVO) throws Exception;
+	public void moveRelease(StockDetailVO sdVO) throws Exception;
+	
+	// 출고 리스트 업데이트
+	public void updRelease(StockDetailVO sdVO) throws Exception;
+	
+	// 재고 count 업데이트
+	public void stockCountUpdate(StockDetailVO sdVO) throws Exception;
 	
 
 

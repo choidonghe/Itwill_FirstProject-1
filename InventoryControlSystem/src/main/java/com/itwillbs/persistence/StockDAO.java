@@ -24,7 +24,13 @@ public interface StockDAO {
 	public List<StockDetailVO> stockDetailList(String pno) throws Exception;
 	
 	// 재고에서 출고로~
-	public void moveReleaseUpdate(StockVO stockVO) throws Exception;
+	public void moveReleaseUpdate(StockDetailVO sdVO) throws Exception;
+	
+	// 출고 리스트 업데이트
+	public void updateRelease(StockDetailVO sdVO) throws Exception;
+	
+	// 재고 count 업데이트
+	public void updateStockCount(StockDetailVO sdVO) throws Exception;
 	
 
 	

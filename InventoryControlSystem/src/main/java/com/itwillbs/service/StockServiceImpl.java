@@ -53,9 +53,25 @@ public class StockServiceImpl implements StockService {
 
 
 	@Override
-	public void moveRelease(StockVO stockVO) throws Exception {
+	public void moveRelease(StockDetailVO sdVO) throws Exception {
 		logger.debug(" Serivce - moveRelease(StockVO stockVO) 호출 ");
-		sdao.moveReleaseUpdate(stockVO);
+		sdao.moveReleaseUpdate(sdVO);
+	}
+
+
+	@Override
+	public void updRelease(StockDetailVO sdVO) throws Exception {
+		logger.debug(" Service - updRelease(StockDetailVO sdVO) 호출 ");
+		sdao.updateRelease(sdVO);
+		
+	}
+
+
+	@Override
+	public void stockCountUpdate(StockDetailVO sdVO) throws Exception {
+		logger.debug(" Service - stockCountUpdate(StockDetailVO sdVO) 호출 ");
+		sdao.updateStockCount(sdVO);
+		
 	}
 
 
