@@ -46,8 +46,8 @@ public class HomeController {
 	@Inject
 	private MemberService mService;
 	
-	@Inject
-	private MainService mainService;
+	@Inject  
+	private MainService mainService;   
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
