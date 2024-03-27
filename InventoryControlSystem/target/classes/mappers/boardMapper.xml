@@ -17,6 +17,18 @@
 		value (#{id}, #{pass}, #{name}, #{email}, #{phone}, #{salt}, #{position})
 	
 	</insert>
+	
+	<insert id="authMember">
+		insert into member_auth (id, auth) 
+		value (#{id}, 'ROLE_USER')
+	</insert>
+	
+	<select id="getAuth" resultType="com.itwillbs.domain.AuthVO">
+		select * from member_auth 
+		where id = #{id}
+	</select>
+	
+	
 
 	<insert id="insertKakaoMember">
 		insert into member (
