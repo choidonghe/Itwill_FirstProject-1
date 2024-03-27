@@ -89,7 +89,7 @@ public class StockController {
 	
 	
 	@RequestMapping(value = "/moveRelease", method = RequestMethod.POST)
-	public void stockMoveReleasePOST(StockDetailVO sdVO) throws Exception {
+	public String stockMoveReleasePOST(StockDetailVO sdVO) throws Exception {
 		logger.debug("moveReleasesdVO :  " + sdVO);
 		
 		try {
@@ -103,6 +103,13 @@ public class StockController {
 			sService.stockCountUpdate(sdVO);
 		}
 		
+		return "redirect:/stock/releaseFin";
+	}
+	
+	@RequestMapping(value = "releaseFin", method = RequestMethod.GET)
+	public void finishReleaseGET() {
+		logger.debug(" finishReleaseGET() 호출 ");
+		logger.debug(" 출고 신청 완료! ");
 	}
 	
 	

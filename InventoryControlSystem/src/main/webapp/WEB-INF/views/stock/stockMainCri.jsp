@@ -207,7 +207,12 @@ document.addEventListener("DOMContentLoaded", function() {
 								<td data-available-count="${sVO.count }">${sVO.count }</td>
 								<td>${sVO.warehouse_code }</td>		
 								<td>
-								<button type="button" class="btn btn-block btn-primary" style ="width: 60px;">출고</button>
+								<c:if test="${sVO.count eq 0}">
+                    			<button type="button" class="btn btn-block btn-danger" style="width: 60px;" disabled>품절</button>
+                				</c:if>
+                				<c:if test="${sVO.count ne 0}">
+                    			<button type="button" class="btn btn-block btn-primary" style="width: 60px;">출고</button>
+                				</c:if>
 								</td>													
 							</tr>
 						</c:forEach>
