@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.itwillbs.domain.AuthVO;
 import com.itwillbs.domain.MemberVO;
 import com.itwillbs.domain.NoticeVO;
 import com.itwillbs.persistence.MemberDAO;
@@ -56,7 +57,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String memberLogin(MemberVO vo) throws Exception {
+	public AuthVO memberLogin(MemberVO vo) throws Exception {
 		logger.debug(" memberLogin() 실행");
 		
 		vo.setSalt(dao.getSalt(vo));
@@ -69,11 +70,12 @@ public class MemberServiceImpl implements MemberService {
 		vo = dao.getMember(vo);
 		if(pass.equals(vo.getPass())) {
 			logger.debug(" 비밀번호 일치 ");
-			return vo.getId();
+			
+			return dao.getAuth(vo.getId());
 			
 		}else logger.debug(" 비밀번호 불일치");
 		
-		return "";
+		return null;
 	}
 
 	@Override

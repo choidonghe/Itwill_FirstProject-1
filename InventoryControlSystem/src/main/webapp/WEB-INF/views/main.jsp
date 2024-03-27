@@ -18,6 +18,7 @@ nCri : ${nCri }
 orderPageVO : ${orderPageVO }
 <br>
 noticePageVO : ${noticePageVO } --%>
+authVO : ${authVO }
 
 <!-- 모달창 -->
 <div id="customModal" class="modal">

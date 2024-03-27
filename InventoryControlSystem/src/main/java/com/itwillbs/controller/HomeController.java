@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.itwillbs.domain.AuthVO;
 import com.itwillbs.domain.EmergencyOrderVO;
 import com.itwillbs.domain.ErgOrderCriteria;
 import com.itwillbs.domain.MemberVO;
@@ -79,13 +80,13 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginPOST(MemberVO vo, HttpSession session) throws Exception{
 		logger.debug(" loginPOST() 호출");
-		String id = mService.memberLogin(vo);
-		logger.debug(" 로그인 id : "+id);
+		AuthVO authVO = mService.memberLogin(vo);
+		logger.debug(" 로그인 id & auth : "+authVO);
 		
 		
 		
-		if(!id.isEmpty()) { // 정상 로그인
-			session.setAttribute("id", id);
+		if(!authVO.getAuth().isEmpty()) { // 정상 로그인
+			session.setAttribute("authVO", authVO);
 			
 			return "redirect:/main";
 		}
