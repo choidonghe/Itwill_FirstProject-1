@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -277,7 +278,23 @@ public class HomeController {
 		return new ResponseEntity<>(map, HttpStatus.OK );
 	}
 	
+		@GetMapping(value = "/adminPage")
+		public void adminPageGET(Model model) throws Exception{
+			logger.debug(" adminPageGET() 호출");
+			
+			List<MemberVO> mList = mService.memberListGet();
+			model.addAttribute("mList", mList);
+		}
 	
+		@PostMapping(value = "/adminPage")
+		public String adminPagePOST(MemberVO vo)throws Exception{
+			logger.debug(" adminPagePOST(MemberVO vo) 호출 ");
+
+			mService.updateMember(vo);
+			logger.debug(" 회원정보 수정 완료!");
+
+			return "redirect:/adminPage";
+		}
 	
 	
 	

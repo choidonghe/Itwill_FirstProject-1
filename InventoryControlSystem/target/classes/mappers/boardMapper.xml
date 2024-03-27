@@ -58,5 +58,20 @@
 	
 	</select>
 	
+	<select id="memberListGet" resultType="com.itwillbs.domain.MemberVO">
+		SELECT m.eno, m.id, m.name, m.email, m.phone, m.position, m.regdate, a.auth
+		FROM member m
+		LEFT JOIN member_auth a 
+		ON m.id = a.id 
+	</select>
+
+	<update id="updateMember">
+		UPDATE member m, member_auth a 
+		SET m.eno = #{eno}, m.name = #{name}, m.email = #{email}, m.phone = #{phone}, m.position = #{position}, a.auth = #{auth}
+		WHERE m.id = #{id} AND a.id = #{id}
+
+	</update>
+	
+	
 
 </mapper>

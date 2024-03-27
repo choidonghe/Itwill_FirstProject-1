@@ -20,6 +20,7 @@ public class MemberVO {
 
 	private Timestamp regdate;
 	
+	private String auth;
 	
 
 }
