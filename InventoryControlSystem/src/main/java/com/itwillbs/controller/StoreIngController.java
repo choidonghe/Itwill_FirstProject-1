@@ -11,12 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.itwillbs.domain.AccountVO;
 import com.itwillbs.domain.CodeVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.ErrorVO;
 import com.itwillbs.domain.MemberVO;
 import com.itwillbs.domain.ProductVO;
 import com.itwillbs.domain.StorePageVO;
+import com.itwillbs.service.AccountService;
 import com.itwillbs.service.CodeService;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.ProductService;
@@ -30,6 +32,8 @@ public class StoreIngController {
 	private ProductService pService;
 	@Inject
 	private MemberService mService;
+	@Inject
+	private AccountService aService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(StoreIngController.class);
 	
@@ -48,6 +52,8 @@ public class StoreIngController {
 		List<CodeVO> codeList = cService.allCodeList();
 		MemberVO mvo = mService.getMember(vo);
 		
+		
+		
 		logger.debug(" list.size() : " + productList.size());
 		logger.debug(" @!@!@!" + productList);
 		logger.debug("spageVO : " + spageVO);
@@ -57,6 +63,7 @@ public class StoreIngController {
 		model.addAttribute("spageVO", spageVO);
 		model.addAttribute("codeList", codeList);
 		model.addAttribute("mvo", mvo);
+		
 		//model.addAttribute("productListPage", productListPage);
 	}
 	
@@ -73,8 +80,10 @@ public class StoreIngController {
 	}
 	
 	@RequestMapping(value = "/insertPro", method = RequestMethod.GET)
-	public void registerGET() throws Exception{
+	public void registerGET(Model model, AccountVO avo) throws Exception{
 		logger.debug(" registerGET() 호출 ");
+		List<AccountVO> aList = aService.aList(avo);
+		model.addAttribute("aList", aList);
 	}
 	
 	@RequestMapping(value = "/insertPro", method = RequestMethod.POST)

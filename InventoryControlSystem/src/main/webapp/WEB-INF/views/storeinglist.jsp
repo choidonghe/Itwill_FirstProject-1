@@ -6,7 +6,6 @@
 	<div class="box">
 	<div class="box-header with-border">
 		<h3 class="box-title">입고예정</h3> <br>
-		id : ${sessionScope.id } <br>
 		<a href="insertPro">제품 생산</a>
 	</div>
 	
@@ -20,8 +19,7 @@
 				<th>수량</th>
 				<th>가격</th>
 				<th>판매가격</th>
-				<th>계좌코드</th>
-				
+				<th>거래처</th>
 			</tr>
 			<c:forEach var="store" items="${productList}">
 			<tr>
@@ -56,9 +54,6 @@
 			</c:forEach>
 			</tbody>
 		</table>
-<!-- 		<div class="box-footer"> -->
-<!-- 			<button type="submit" class="btn btn-danger">수정하기</button> -->
-<!-- 		</div> -->
 	</div>
 		<div class="box-footer clearfix">
 			<ul class="pagination pagination-sm no-margin pull-right">

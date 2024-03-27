@@ -38,8 +38,8 @@
 	
 	<!-- product 생성 -->
 	<insert id="insertProduct">
-		insert into product (pno, category_code, pname, price, company, sales_price, regdate, divcode, count, remain_count, id)
-		values(#{pno},#{category_code},#{pname},#{price},#{company},#{sales_price}, now(), #{divcode}, #{count}, #{count}, #{id})
+		insert into product (pno, category_code, pname, price, company, sales_price, regdate, divcode, count, remain_count, id, account_code)
+		values(#{pno},#{category_code},#{pname},#{price},#{company},#{sales_price}, now(), 1, #{count}, #{count}, #{id}, #{account_code})
 	</insert>
 	
 	<!-- product 목록 조회 -->

@@ -15,8 +15,6 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 
 
-
-
 <meta charset="UTF-8">
 <title>1조 재고관리시스템</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -257,13 +255,18 @@
 							<li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i>재고 수량</a></li>
 							<li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i>창고 위치</a></li>
 						</ul></li>
+					<li class="treeview"><a href=""> <i class="fa fa-check"></i> <span>관리</span> <i class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class ="treeview-menu">
+							<li><a href="/account/accountMain"><i class="fa fa-circle-o"></i>거래처 관리</a></li>
+							<li><a href="/insertPro"><i class="fa fa-circle-o"></i>제품 생산</a></li>
+						</ul></li>
 					<li class="treeview active"><a href="/notice"> <i class="fa fa-edit"></i> <span>공지사항 작성</span> <i class="fa fa-angle-left pull-right"></i>
 					</a></li>
 					<li><a href="../calendar.html"> <i class="fa fa-calendar"></i> <span>Calendar</span> 
 					</a></li>
 					<li><a href="../mailbox/mailbox.html"> <i class="fa fa-envelope"></i> <span>Mailbox</span> 
 					</a></li>
-					<li><a href="/account/accountMain"><i class="fa fa-book"></i> <span>거래처 관리</span></a></li>
 
 				</ul>
 			</section>

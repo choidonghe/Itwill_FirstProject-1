@@ -35,9 +35,6 @@ th {
 	</div>
 	
 	 <h1>입고 검수완료 현황</h1>
-	 stockList = ${stockList } <br>
-	 codeList = ${codeList } <br>
-	 <h2>stock이랑 합치면 상태에 korname으로 출력하게 하기</h2>
 	 
 	<div class="button-container">
 		<form action="/inspec/inspectionMain" method="get">
@@ -66,7 +63,7 @@ th {
             <tr>
                 <td><a href="/inspec/inspectionRead?pno=${stockList.pno}">${stockList.pno }</a></td>
                 <td>${sessionScope.id }</td>
-                <td>${stockList.codeVO[1].korname}</td>
+                <td>${stockList.codeVO[0].korname}</td>
                 <td>${stockList.count }</td>
                 <td>${stockList.regdate }</td>
                 <td>${stockList.update_date }</td>

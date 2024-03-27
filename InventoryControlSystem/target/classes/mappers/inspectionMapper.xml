@@ -173,7 +173,7 @@
 	<!-- product - divcode=3 인 검수목록 조회 -->
 	<select id="productInspectionDiv3" resultMap="productMap">
 		<![CDATA[
-		select * from inspection s 
+		select * from stock s 
 		join code c 
 		on s.divcode = c.divcode 
 		join inspection i 
@@ -184,7 +184,7 @@
 	</select>
 	<select id="inspecListCri3" resultMap="productMap">
 		<![CDATA[
-		select * from inspection p
+		select * from stock p
 		join code c 
 		on p.divcode = c.divcode
 		where p.divcode = 3

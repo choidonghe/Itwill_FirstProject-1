@@ -68,21 +68,47 @@ ${sessionScope.id }
 </form>
 
 <script>
+    // 페이지 로드 시 실행되는 함수
+    window.onload = function() {
+        updateWarehouseOptions();
+    };
+
     // 검수 여부 선택 시 이벤트 처리
     document.getElementById('divcode').addEventListener('change', function() {
-        var divcode = this.value;
+        updateWarehouseOptions();
+    });
+
+    // 창고 옵션 업데이트 함수
+    function updateWarehouseOptions() {
+        var divcode = document.getElementById('divcode').value;
         var warehouseSelect = document.getElementById('warehouse_code');
 
-        // divcode가 7일 때만 'C01'인 불량창고 선택
+        // 모든 옵션 제거
+        warehouseSelect.innerHTML = '';
+
+        // divcode가 7인 경우 'C01' 창고를 추가하고 선택
         if (divcode === '7') {
-            for (var i = 0; i < warehouseSelect.options.length; i++) {
-                if (warehouseSelect.options[i].value === 'C01') {
-                    warehouseSelect.selectedIndex = i;
-                    break;
-                }
-            }
+            addOptionAndSelect(warehouseSelect, 'C01', '불량창고');
         }
-    });
+        // divcode가 3인 경우 'A01'과 'B01' 창고를 추가하고 선택
+        else if (divcode === '3') {
+            addOptionAndSelect(warehouseSelect, 'A01', '창고A');
+            addOptionAndSelect(warehouseSelect, 'B01', '창고B');
+        }
+    }
+
+    // 옵션 추가 및 선택 함수
+    function addOptionAndSelect(selectElement, value, text) {
+        var option = document.createElement('option');
+        option.value = value;
+        option.text = text;
+        selectElement.add(option);
+
+        // 선택된 옵션 설정
+       	if (selectElement.value === '') {
+            selectElement.value = value;
+        }
+    }
 </script>
 
 
