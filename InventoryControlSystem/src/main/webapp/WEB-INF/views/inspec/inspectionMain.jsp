@@ -35,7 +35,7 @@ th {
 </div>
 	<fieldset>
 	${spageVO }
-	${cri }
+	${cri } <br>
 		<legend>입고 검수 현황</legend>
 		<div class="button-container">
 			<form action="/inspec/inspectionMain" method="GET">
@@ -93,7 +93,6 @@ th {
 			</c:if>
 			</ul>
 		</div>
-	
 </div>
 
 

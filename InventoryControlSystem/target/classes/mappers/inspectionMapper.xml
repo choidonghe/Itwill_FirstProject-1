@@ -20,7 +20,7 @@
 		<result property="warehouse_code" column="warehouse_code"/>
 		<result property="finish_count" column="finish_count"/>
 		<result property="remain_count" column="remain_count"/>
-		<result property="remain_count" column="remain_count"/>
+		<result property="id" column="id"/>
 		<collection property="codeVO" resultMap="codeMap"/>
 		<collection property="warehouseVO" resultMap="warehouseVO"/>
 	</resultMap>
@@ -68,13 +68,14 @@
     <![CDATA[
         SELECT * 
         FROM inspection p 
-        JOIN code c ON c.divcode = p.divcode
+        JOIN code c 
+        ON c.divcode = p.divcode 
         WHERE p.divcode = 2 OR p.divcode = 7
         LIMIT #{start}, #{pageSize}
     ]]>
 	</select>
 	<!-- 페이징 처리 - Cri -->
-	<select id="inspecListCri" resultType="productVO">
+	<select id="inspecListCri" resultMap="productMap">
 		<![CDATA[
 		select * from inspection p
 		join code c 

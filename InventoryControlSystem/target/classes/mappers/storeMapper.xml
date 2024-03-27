@@ -46,27 +46,32 @@
 	<select id="productList" resultMap="productMap" parameterType="ProductVO">
 		select * 
 		from product p 
-		join code c on p.divcode = c.divcode
+		join code c 
+		on p.divcode = c.divcode 
 		where p.divcode=1
 	</select>
 	
 	<!-- 제품 목록 조회(페이징처리) -->
-	<select id="selectProductListPage" resultType="productVO">
+	<select id="selectProductListPage" resultMap="productMap">
 		<![CDATA[
-		select * from product 
-		where divcode = 1 
+		select * from 
+		product p 
+		join code c 
+		on p.divcode = c.divcode
+		where p.divcode = 1 
 		order by regdate desc 
 		limit #{page},10
 		]]>
 	</select>
 	
 	<!-- 페이징 처리 - Cri -->
-	<select id="productListCri" resultType="productVO">
+	<select id="productListCri" resultMap="productMap">
 		<![CDATA[
-		select * from product p
+		select * from 
+		product p 
 		join code c 
-		on p.divcode = c.divcode
-		where p.divcode = 1
+		on p.divcode = c.divcode 
+		where p.divcode = 1 
 		order by p.regdate desc 
 		limit #{startPage},#{pageSize}
 		]]>
@@ -83,7 +88,7 @@
 	</select>
 	
 	<update id="updateProductCode">
-		update product set divcode = #{divcode}, remain_count=count, pname=#{pname}
+		update product set divcode = #{divcode}, remain_count=count, pname=#{pname} 
 		where pno = #{pno}
 	</update>
 	
