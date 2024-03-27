@@ -4,10 +4,11 @@
 
 <%@ include file="../include/header.jsp"%>
 
-	<h1>modify.jsp</h1>
 	
-	<%-- ${modifyList} <br>
-	${code} <br> --%>
+	
+<%-- ${modifyList} <br>
+${code} <br> 
+<h1>modify.jsp</h1> --%>
 	
 	<form action="" method="post">
 		<input type="hidden" name="page" value=${cri.page }>

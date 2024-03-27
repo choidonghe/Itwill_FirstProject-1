@@ -321,6 +321,7 @@
                 <li><a href="/release/main"><i class="fa fa-circle-o"></i>출고 메인</a></li>
                 <li><a href="/release/inspection"><i class="fa fa-circle-o"></i>출고 검수</a></li>
                 <li><a href="/release/release"><i class="fa fa-circle-o"></i>출고 검수 완료</a></li>
+                <li><a href="/release/error"><i class="fa fa-circle-o"></i>불량 제품</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -455,12 +456,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            General Form Elements
-            <small>Preview</small>
+           		 출고 관리
+<!--             <small>Preview</small> -->
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Forms</a></li>
-            <li class="active">General Elements</li>
+<!--             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li> -->
+<!--             <li><a href="#">Forms</a></li> -->
+<!--             <li class="active">General Elements</li> -->
           </ol>
         </section>

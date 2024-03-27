@@ -81,11 +81,50 @@ public class ReleaseServiceImpl implements ReleaseService{
 		
 		return rdao.boardListCriSelect(cri);
 	}
+	
+	@Override
+	public List<ReleaseVO> CriDiv5(Criteria cri) throws Exception {
+		logger.debug("getListCri(Criteria cri5) 호출");
+		
+		return rdao.releaseCriDiv5(cri);
+	}
+	
+	@Override
+	public List<ReleaseVO> CriDiv6(Criteria cri) throws Exception {
+		logger.debug("getListCri(Criteria cri6) 호출");
+		
+		return rdao.releaseCriDiv6(cri);
+	}
+	
+	@Override
+	public List<ReleaseVO> CriDiv8(Criteria cri) throws Exception {
+		logger.debug("getListCri(Criteria cri8) 호출");
+		
+		return rdao.releaseCriDiv8(cri);
+	}
 
 	@Override
 	public int getReleaseListCount() throws Exception {
 		logger.debug(" getBoardListCount() 호출 ");
 		return rdao.releaseListCount();
+	}
+	
+	@Override
+	public int cri5Count() throws Exception {
+		logger.debug(" cri5Count() 호출 ");
+		return rdao.releaseDiv5Count();
+	}
+	
+	@Override
+	public int cri6Count() throws Exception {
+		logger.debug(" cri6Count() 호출 ");
+		return rdao.releaseDiv6Count();
+	}
+	
+	@Override
+	public int cri8Count() throws Exception {
+		logger.debug(" cri8Count() 호출 ");
+		return rdao.releaseDiv8Count();
 	}
 	
 	@Override
@@ -97,11 +136,22 @@ public class ReleaseServiceImpl implements ReleaseService{
 	}
 
 	@Override
-	public ReleaseVO releaseError(String pno, int error_count) throws Exception {
-		logger.debug("releaseError(String pno) 호출");
+	public void insertError(ReleaseVO rvo) throws Exception {
+		logger.debug("insertError(ReleaseVO rvo) 호출");
 		
-		return rdao.errorRelease(pno, error_count);
+		rdao.errorInsert(rvo);
+		rdao.errorUpdate(rvo);
 	}
+
+	@Override
+	public void updateError(ReleaseVO rvo) throws Exception {
+		logger.debug("updateError(ReleaseVO rvo) 호출");
+		
+		rdao.errorUpdate(rvo);
+		
+	}
+
+	
 	
 	
 	

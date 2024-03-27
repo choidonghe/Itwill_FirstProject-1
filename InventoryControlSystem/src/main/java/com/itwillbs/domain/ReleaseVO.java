@@ -26,4 +26,5 @@ public class ReleaseVO {
 
 	private List<CodeVO> codeVO;
 	private List<DeliveryVO> deliveryVO;
+//	private List<WarehouseVO> warehouseVO;
 }

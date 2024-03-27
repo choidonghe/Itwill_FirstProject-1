@@ -25,14 +25,27 @@ public interface ReleaseService {
 	
 	// 글 목록 조회 동작(페이징처리 - cri)
 	public List<ReleaseVO> getListCri(Criteria cri) throws Exception;
+	
+	// 글 목록 조회 동작(페이징처리 - cri)
+	public List<ReleaseVO> CriDiv5(Criteria cri) throws Exception;
 		
+	public List<ReleaseVO> CriDiv6(Criteria cri) throws Exception;
+	
+	public List<ReleaseVO> CriDiv8(Criteria cri) throws Exception;
+	
 	// 총 글의 개수
 	public int getReleaseListCount() throws Exception;
+	
+	public int cri5Count() throws Exception;
+	
+	public int cri6Count() throws Exception;
+	
+	public int cri8Count() throws Exception;
 	
 	// 검수완료
 	public ReleaseVO releaseSubtract(String pno,int release_count) throws Exception;
 	
-	public ReleaseVO releaseError(String pno, int error_count) throws Exception;
+	public void insertError(ReleaseVO rvo) throws Exception;
 	
-	
+	public void updateError(ReleaseVO rvo) throws Exception;
 }

@@ -165,7 +165,7 @@ public class ReleaseController {
 	}
 	
 	@RequestMapping(value = "/inspection", method = RequestMethod.GET)
-	public void inspection(HttpSession session, Model model,Criteria cri) throws Exception {
+	public void inspection(HttpSession session, Model model,Criteria cri,Integer divcode) throws Exception {
 	   logger.debug("inspection() 호출");
 
 	// 페이징 처리 객체
@@ -174,30 +174,29 @@ public class ReleaseController {
 		PageVO pageVO = new PageVO();
 		pageVO.setCri(cri);
 		//pageVO.setTotalCount(3840); // 총 개수 직접 계산
-		pageVO.setTotalCount(rService.getReleaseListCount()); // SQL 구문 계산
+		pageVO.setTotalCount(rService.cri5Count()); // SQL 구문 계산
+		
+		logger.debug("pageVO=>"+pageVO);
 		
 		
 		// 서비스 -> DAO 게시판 글 목록 가져오기
 		//List<BoardVO> boardList = bService.getList(); //all
-		List<ReleaseVO> vo = rService.getListCri(cri); //페이징
+		List<ReleaseVO> vo = rService.CriDiv5(cri); //페이징
 		logger.debug("list.size :" +vo.size());
 		
 		List<CodeVO> code = rService.codeList();
 		
 		// 연결된 뷰 페이지에 정보 전달
 		model.addAttribute("vo", vo);
-		
+		logger.debug("vo=>"+vo);
+			
 		model.addAttribute("cri", cri); // 페이징 처리 정보 전달
-		
+		logger.debug("cri=>"+cri);
+			
 		model.addAttribute("pageVO", pageVO); // 페이징 처리 정보 전달
-		
+			
 		model.addAttribute("code", code);
-		
-		
-		
-		
-		
-	   
+			
 		/*
 		 * ReleaseVO inspectionList = (ReleaseVO)
 		 * session.getAttribute("inspectionList");
@@ -259,25 +258,28 @@ public class ReleaseController {
 			PageVO pageVO = new PageVO();
 			pageVO.setCri(cri);
 			//pageVO.setTotalCount(3840); // 총 개수 직접 계산
-			pageVO.setTotalCount(rService.getReleaseListCount()); // SQL 구문 계산
+			pageVO.setTotalCount(rService.cri6Count()); // SQL 구문 계산
+			
+			logger.debug("pageVO=>"+pageVO);
 			
 			
 			// 서비스 -> DAO 게시판 글 목록 가져오기
 			//List<BoardVO> boardList = bService.getList(); //all
-			List<ReleaseVO> vo = rService.getListCri(cri); //페이징
+			List<ReleaseVO> vo = rService.CriDiv6(cri); //페이징
 			logger.debug("list.size :" +vo.size());
 			
 			List<CodeVO> code = rService.codeList();
 			
 			// 연결된 뷰 페이지에 정보 전달
 			model.addAttribute("vo", vo);
-			
+			logger.debug("vo=>"+vo);
+				
 			model.addAttribute("cri", cri); // 페이징 처리 정보 전달
-			
+			logger.debug("cri=>"+cri);
+				
 			model.addAttribute("pageVO", pageVO); // 페이징 처리 정보 전달
-			
+				
 			model.addAttribute("code", code);
-		
 	}
 	
 	// http://localhost:8088/release/error
@@ -286,41 +288,70 @@ public class ReleaseController {
 	public void error(HttpSession session, Model model,Criteria cri) throws Exception{
 		logger.debug("error()");
 		
-		PageVO pageVO = new PageVO();
-		pageVO.setCri(cri);
-		//pageVO.setTotalCount(3840); // 총 개수 직접 계산
-		pageVO.setTotalCount(rService.getReleaseListCount()); // SQL 구문 계산
-		
-		
-		// 서비스 -> DAO 게시판 글 목록 가져오기
-		//List<BoardVO> boardList = bService.getList(); //all
-		List<ReleaseVO> vo = rService.getListCri(cri); //페이징
-		logger.debug("list.size :" +vo.size());
-		
-		List<CodeVO> code = rService.codeList();
-		
-		// 연결된 뷰 페이지에 정보 전달
-		model.addAttribute("vo", vo);
-		
-		model.addAttribute("cri", cri); // 페이징 처리 정보 전달
-		
-		model.addAttribute("pageVO", pageVO); // 페이징 처리 정보 전달
-		
-		model.addAttribute("code", code);
+		// 페이징 처리 객체
+					//Criteria cri = new Criteria();
+					//cri.setPageSize(20);
+					PageVO pageVO = new PageVO();
+					pageVO.setCri(cri);
+					//pageVO.setTotalCount(3840); // 총 개수 직접 계산
+					pageVO.setTotalCount(rService.cri6Count()); // SQL 구문 계산
+					
+					logger.debug("pageVO=>"+pageVO);
+					
+					
+					// 서비스 -> DAO 게시판 글 목록 가져오기
+					//List<BoardVO> boardList = bService.getList(); //all
+					List<ReleaseVO> vo = rService.CriDiv6(cri); //페이징
+					logger.debug("list.size :" +vo.size());
+					
+					List<CodeVO> code = rService.codeList();
+					
+					// 연결된 뷰 페이지에 정보 전달
+					model.addAttribute("vo", vo);
+						
+					model.addAttribute("cri", cri); // 페이징 처리 정보 전달
+						
+					model.addAttribute("pageVO", pageVO); // 페이징 처리 정보 전달
+						
+					model.addAttribute("code", code);
+	
+		/*
+		 * PageVO pageVO = new PageVO(); pageVO.setCri(cri);
+		 * //pageVO.setTotalCount(3840); // 총 개수 직접 계산
+		 * pageVO.setTotalCount(rService.getReleaseListCount()); // SQL 구문 계산
+		 * 
+		 * 
+		 * // 서비스 -> DAO 게시판 글 목록 가져오기 //List<BoardVO> boardList = bService.getList();
+		 * //all List<ReleaseVO> vo = rService.getListCri(cri); //페이징
+		 * logger.debug("list.size :" +vo.size());
+		 * 
+		 * List<CodeVO> code = rService.codeList();
+		 * 
+		 * // 연결된 뷰 페이지에 정보 전달 model.addAttribute("vo", vo);
+		 * 
+		 * model.addAttribute("cri", cri); // 페이징 처리 정보 전달
+		 * 
+		 * model.addAttribute("pageVO", pageVO); // 페이징 처리 정보 전달
+		 * 
+		 * model.addAttribute("code", code);
+		 */
 	}
 	
+	
 	@RequestMapping(value = "/error",method = RequestMethod.POST)
-	public String errorPOST(String pno, Integer error_count,Model model) throws Exception {
+	public String errorPOST(String pno, Integer error_count,Model model,ReleaseVO rvo) throws Exception {
 		logger.debug("errorPOST() 호출");
 		
 		logger.debug("error_count->"+error_count);
 		
+		rService.insertError(rvo);
+		rService.updateError(rvo);
 		
-		ReleaseVO error = rService.releaseError(pno, error_count);
+		logger.debug("rvo=>"+rvo);
 		
-		model.addAttribute("error", error);
 		
-		return "redirect:/release/aa";
+			
+		return "redirect:/release/main";
 	}
 	
 }

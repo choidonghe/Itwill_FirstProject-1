@@ -106,9 +106,46 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 	}
 	
 	@Override
+	public List<ReleaseVO> releaseCriDiv5(Criteria cri) throws Exception {
+		logger.debug(" releaseCriDiv5(Criteria cri) 호출 ");
+		
+		return sqlSession.selectList(NAMESPACE+".criDiv5", cri);
+	}
+	@Override
+	public List<ReleaseVO> releaseCriDiv6(Criteria cri) throws Exception {
+		logger.debug(" releaseCriDiv6(Criteria cri) 호출 ");
+		
+		return sqlSession.selectList(NAMESPACE+".criDiv6", cri);
+	}
+	@Override
+	public List<ReleaseVO> releaseCriDiv8(Criteria cri) throws Exception {
+		logger.debug(" releaseCriDiv8(Criteria cri) 호출 ");
+		
+		return sqlSession.selectList(NAMESPACE+".criDiv8", cri);
+	}
+	
+	@Override
 	public int releaseListCount() throws Exception {
-		logger.debug(" boardListCount() 호출");
+		logger.debug(" releaseListCount() 호출");
 		return sqlSession.selectOne(NAMESPACE + ".totalCount");
+	}
+	
+	@Override
+	public int releaseDiv5Count() throws Exception {
+		logger.debug(" releaseDiv5Count() 호출");
+		return sqlSession.selectOne(NAMESPACE + ".div5Count");
+	}
+	
+	@Override
+	public int releaseDiv6Count() throws Exception {
+		logger.debug(" releaseDiv6Count() 호출");
+		return sqlSession.selectOne(NAMESPACE + ".div6Count");
+	}
+	
+	@Override
+	public int releaseDiv8Count() throws Exception {
+		logger.debug(" releaseDiv8Count() 호출");
+		return sqlSession.selectOne(NAMESPACE + ".div8Count");
 	}
 	
 	@Override
@@ -133,23 +170,18 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 	}
 
 	@Override
-	public ReleaseVO errorRelease(String pno, int error_count) throws Exception {
-		logger.debug("errorRelease(String pno) 호출");
+	public void errorInsert(ReleaseVO rvo) throws Exception {
+		logger.debug("errorRelease(ReleaseVO rvo) 호출");
 		
-		// 데이터 업데이트 수행
-	    Map<String, Object> parameters = new HashMap<>();
-	    parameters.put("pno", pno);
-	    parameters.put("error_count", error_count);
-	    
-	    sqlSession.update(NAMESPACE + ".upErrorRelease", parameters);
-	    
-	    // 업데이트된 데이터 조회
-	    ReleaseVO getupSubtractRelease = sqlSession.selectOne(NAMESPACE + ".getupSubtractRelease", pno);
-	    
-	    logger.debug("updatedData:" + getupSubtractRelease);
-	    
-	    return getupSubtractRelease;
+		sqlSession.selectOne(NAMESPACE+".insertError", rvo);
 	
+	}
+
+	@Override
+	public void errorUpdate(ReleaseVO rvo) throws Exception {
+		logger.debug("errorInsert(ReleaseVO rvo) 호출");
+		
+		sqlSession.update(NAMESPACE+".updateError", rvo);
 	}
 	
 }
