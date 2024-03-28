@@ -27,6 +27,7 @@
 <title>${param.pno }번 ${param.pname } 출고하기</title>
 </head>
 <body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<h3>출고하실 수량을 입력하세요</h3>
 	<form role="form" method="post" action="/stock/moveRelease" id="releaseForm">
     <div class="box-body">
@@ -39,7 +40,7 @@
         <div class="form-group">
             <label for="exampleInputEmail1">제품 품명</label>
             <c:forEach var="sdVO" items="${detailList}">
-                <input type="text" class="form-control" readonly id="exampleInputEmail1" placeholder="${sdVO.pname}">
+                <input type="text" class="form-control" readonly id="exampleInputEmail1" name="pname" placeholder="${sdVO.pname}">
             </c:forEach>
         </div>
         <div class="form-group">
@@ -61,29 +62,48 @@
 
 <script>
 document.getElementById("releaseButton").addEventListener("click", function(event) {
-    var stockCount = parseInt(document.getElementById("stockCount").value);
-    var releaseCount = parseInt(document.getElementById("count").value);
+    var stockCounts = document.querySelectorAll("#stockCount");
+    var releaseCounts = document.querySelectorAll("#count");
+    var pnames = document.querySelectorAll("input[name='pname']");
+    var releaseForm = document.getElementById("releaseForm");
     
-    // 출고 수량이 0 이하인 경우 경고 메시지를 띄우고 폼 제출을 막습니다.
-    if (releaseCount <= 0) {
-        alert("출고 수량을 1 이상 입력해 주세요.");
-        event.preventDefault(); // 폼 제출 막기
-        return;
-    }
-    
-    // 출고 수량이 재고 수량보다 많은 경우 경고 메시지를 띄우고 폼 제출을 막습니다.
-    if (releaseCount > stockCount) {
-        alert("출고 수량이 재고 수량보다 많습니다.");
-        event.preventDefault(); // 폼 제출 막기
-        return;
-    }
-    
-    // 출고 수량이 재고 수량보다 같거나 작으면 출고 동작을 수행합니다.
-    if (confirm("출고하시겠습니까?")) {
-        document.getElementById("releaseForm").submit();
+    for (var i = 0; i < stockCounts.length; i++) {
+        var stockCount = parseInt(stockCounts[i].value);
+        var releaseCount = parseInt(releaseCounts[i].value);
+        var pname = pnames[i].value;
+
+        // 출고 수량이 0 이하인 경우 경고 메시지를 띄우고 폼 제출을 막습니다.
+        if (isNaN(releaseCount) || releaseCount <= 0) {
+            swal('출고 요청 실패!',"출고 수량을 1개 이상으로 지정하세요.",'warning');
+            event.preventDefault(); // 폼 제출 막기
+            return;
+        }
+
+        // 출고 수량이 재고 수량보다 많은 경우 경고 메시지를 띄우고 폼 제출을 막습니다.
+        if (releaseCount > stockCount) {
+            swal('출고 요청 실패!',"출고 수량이 재고수량보다 많습니다.",'error');
+            event.preventDefault(); // 폼 제출 막기
+            return;
+        }
+        
+        // SweetAlert로 변경
+        swal({
+            title: "출고하시겠습니까?",
+            text: releaseCount + "개 출고하시겠습니까?", // pname 값 활용하여 메시지 설정
+            icon: "info",
+            buttons: true,
+            dangerMode: false,
+        }).then((willRelease) => {
+            if (willRelease) {
+                releaseForm.submit();
+            }
+        });
     }
 });
 </script>
+
+
+
 
 
 

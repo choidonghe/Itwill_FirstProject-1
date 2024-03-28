@@ -3,25 +3,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-// 페이지 로드 시 화면 크기를 조정하는 함수
-function adjustWindowSize() {
-    // 원하는 가로, 세로 크기 지정
-    var desiredWidth = 500;
-    var desiredHeight = 350;
-    
-    // 현재 창의 크기와 위치 계산
-    var left = (window.screen.width - desiredWidth) / 2;
-    var top = (window.screen.height - desiredHeight) / 2;
-    
-    // 창의 크기와 위치 설정
-    window.resizeTo(desiredWidth, desiredHeight);
-    window.moveTo(left, top);
-}
-
-// 페이지 로드 시 화면 크기 조정 함수 호출
+// 페이지 로드 시 SweetAlert 알람 띄우기
 window.onload = function() {
-    adjustWindowSize();
+    swal({
+        title: "출고 신청 완료",
+        text: "재고 리스트로 나가셔서 새로고침 해주세요.",
+        icon: "success",
+        button: "재고 리스트로 나가기"
+    }).then(function() {
+        window.close(); // 현재 창 닫기
+    });
 };
 </script>
 
@@ -58,16 +51,5 @@ window.onload = function() {
 </style>
 </head>
 <body class="center-content">
-<h3>출고 신청이 완료되었습니다.</h3>
-<h3>재고 리스트로 나가셔서 새로고침 해주세요.</h3>
-<div class="box-footer">
-<button type="button" class="btn btn-primary" id="releaseButton">재고 리스트로 나가기</button>
-</div>
-<script>
-// 버튼 클릭 시 창 닫기
-document.getElementById("releaseButton").addEventListener("click", function() {
-    window.close(); // 현재 창 닫기
-});
-</script>
 </body>
 </html>
