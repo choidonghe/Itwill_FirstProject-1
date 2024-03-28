@@ -34,8 +34,6 @@ th {
 	<div class="box-header">
 </div>
 	<fieldset>
-	${spageVO }
-	${cri } <br>
 		<legend>입고 검수 현황</legend>
 		<div class="button-container">
 			<form action="/inspec/inspectionMain" method="GET">
@@ -68,7 +66,7 @@ th {
 	            <tr>
 	                <td><a href="/inspec/inspectionRead?pno=${inspectionList.pno}">${inspectionList.pno }</a></td>
 	                <td>${inspectionList.pname }</td>
-	                <td>${sessionScope.id }</td>
+	                <td>${sessionScope.authVO.id }</td>
 	                <td>${inspectionList.codeVO[0].korname }</td>
 	                <td>${inspectionList.count }</td>
 	                <td>${inspectionList.remain_count }</td>

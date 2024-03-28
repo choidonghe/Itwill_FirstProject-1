@@ -11,7 +11,7 @@
 		<result property="pname" column="pname"/>
 		<result property="regdate" column="regdate"/>
 		<result property="update_date" column="update_date"/>
-		<result property="price" column="price"/>
+		<result property="unit_price" column="unit_price"/>
 		<result property="company" column="company"/>
 		<result property="sales_price" column="sales_price"/>
 		<result property="divcode" column="divcode"/>
@@ -20,7 +20,7 @@
 		<result property="warehouse_code" column="warehouse_code"/>
 		<result property="finish_count" column="finish_count"/>
 		<result property="remain_count" column="remain_count"/>
-		<result property="id" column="id"/>
+		<result property="id" column="id"/>	
 		<collection property="codeVO" resultMap="codeMap"/>
 		<collection property="warehouseVO" resultMap="warehouseVO"/>
 	</resultMap>
@@ -112,7 +112,7 @@
     	(pno,pname,divcode,count,regdate,warehouse_code, id) 
         	select pno, pname, 7, 0, now() AS regdate, warehouse_code, id 
         	from inspection 
-        	<!-- where divcode = 7  -->
+<!--         	where divcode = 7 -->
        	WHERE NOT EXISTS (
         SELECT 1 FROM error WHERE error.pno = inspection.pno)
     </insert>

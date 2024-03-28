@@ -12,7 +12,7 @@ public class ProductVO {
 	private String pname;
 	private Timestamp regdate;
 	private Timestamp update_date;
-	private int price;
+	private int unit_price;
 	private String company;
 	private int sales_price;
 	private int divcode;

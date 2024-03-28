@@ -6,7 +6,6 @@
 <link href="<c:url value='/resources/bootstrap/css/style.css' />" rel="stylesheet">
 
 <h1>inspectionRead.jsp</h1>
-${sessionScope.id }
 <form action="/inspec/inspectionRead" method="post">
 
 <table class="styled-table">
@@ -20,7 +19,7 @@ ${sessionScope.id }
     </tr>
     <tr>
         <td>담당자명:</td>
-        <td><input type="text" name="id" required readonly value="${sessionScope.id }"></td>
+        <td><input type="text" name="id" required readonly value="${sessionScope.authVO.id }"></td>
     </tr>
     <tr>
         <td>전체 수량:</td>

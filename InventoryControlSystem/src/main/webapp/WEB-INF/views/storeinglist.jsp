@@ -46,7 +46,7 @@
 				<td>${store.pno }</td>
 				<td>${store.pname }</td>
 				<td>${store.count }</td>
-				<td>${store.price }</td>
+				<td>${store.unit_price }</td>
 				<td>${store.sales_price }</td>
 				<td>${store.account_code }</td>
 				

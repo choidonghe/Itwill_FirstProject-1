@@ -11,7 +11,7 @@
 		<result property="pname" column="pname"/>
 		<result property="regdate" column="regdate"/>
 		<result property="update_date" column="update_date"/>
-		<result property="price" column="price"/>
+		<result property="unit_price" column="unit_price"/>
 		<result property="company" column="company"/>
 		<result property="sales_price" column="sales_price"/>
 		<result property="divcode" column="divcode"/>
@@ -38,8 +38,8 @@
 	
 	<!-- product 생성 -->
 	<insert id="insertProduct">
-		insert into product (pno, category_code, pname, price, company, sales_price, regdate, divcode, count, remain_count, id, account_code)
-		values(#{pno},#{category_code},#{pname},#{price},#{company},#{sales_price}, now(), 1, #{count}, #{count}, #{id}, #{account_code})
+		insert into product (pno, category_code, pname, unit_price, company, sales_price, regdate, divcode, count, remain_count, id, account_code)
+		values(#{pno},#{category_code},#{pname},#{unit_price},#{company},#{sales_price}, now(), 1, #{count}, #{count}, #{id}, #{account_code})
 	</insert>
 	
 	<!-- product 목록 조회 -->

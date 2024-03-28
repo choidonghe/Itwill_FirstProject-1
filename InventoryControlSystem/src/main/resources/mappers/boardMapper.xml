@@ -5,6 +5,25 @@
   
 <mapper namespace="com.itwillbs.mapper.BoardMapper">
 
+	<resultMap type="com.itwillbs.domain.MemberVO" id="memberMap">
+		<result property="id" column="id"/>
+		<result property="pass" column="pass"/>
+		<result property="salt" column="salt"/>
+		<result property="name" column="name"/>
+		<result property="email" column="email"/>
+		<result property="phone" column="phone"/>
+		<result property="eno" column="eno"/>
+		<result property="position" column="position"/>
+		<result property="sns_email" column="sns_email"/>
+		<result property="regdate" column="regdate"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+
+	<resultMap type="com.itwillbs.domain.AuthVO" id="authMap">
+		<result property="id" column="id"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+
 	<select id="checkId" resultType="int">
 		SELECT COUNT(*) FROM member 
 		WHERE id = #{id}
@@ -23,12 +42,10 @@
 		value (#{id}, 'ROLE_USER')
 	</insert>
 	
-	<select id="getAuth" resultType="com.itwillbs.domain.AuthVO">
+	<select id="getAuth" resultMap="authMap">
 		select * from member_auth 
 		where id = #{id}
 	</select>
-	
-	
 
 	<insert id="insertKakaoMember">
 		insert into member (
@@ -52,13 +69,12 @@
 	
 	</select>
 	
-	<select id="getMember" resultType="com.itwillbs.domain.MemberVO">
+	<select id="getMember" resultMap="memberMap">
 		select * from member 
 		where id = #{id}
-	
 	</select>
 	
-	<select id="memberListGet" resultType="com.itwillbs.domain.MemberVO">
+	<select id="memberListGet" resultMap="memberMap">
 		SELECT m.eno, m.id, m.name, m.email, m.phone, m.position, m.regdate, a.auth
 		FROM member m
 		LEFT JOIN member_auth a 

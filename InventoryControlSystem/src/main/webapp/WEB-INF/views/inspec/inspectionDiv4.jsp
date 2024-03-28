@@ -57,7 +57,7 @@ th {
             <tr>
                 <td>${errorList.pno }</td>
                 <td>${errorList.pname}</td>
-                <td>${sessionScope.id }</td>
+                <td>${sessionScope.authVO.id }</td>
                 <td>${errorList.codeVO[0].korname }</td>
                 <td>${errorList.count }</td>
                 <td>${errorList.regdate }</td>

@@ -62,7 +62,7 @@ th {
        		<c:forEach var="stockList" items="${stockList }">
             <tr>
                 <td><a href="/inspec/inspectionRead?pno=${stockList.pno}">${stockList.pno }</a></td>
-                <td>${sessionScope.id }</td>
+                <td>${sessionScope.authVO.id }</td>
                 <td>${stockList.codeVO[0].korname}</td>
                 <td>${stockList.count }</td>
                 <td>${stockList.regdate }</td>

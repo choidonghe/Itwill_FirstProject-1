@@ -77,13 +77,14 @@ public class InspectionController {
 		if(divcode == 3) {
 			iService.productModify(pvo);
 			iService.updateStock(pvo);
+			iService.productUpdateRemain(pvo);
 		}
 		if(divcode == 7) {
 			iService.insertError(pvo);
 			iService.updateError(pvo);
+			iService.productUpdateRemain(pvo);
 		}
 		
-		iService.productUpdateRemain(pvo);
 		
 		return "redirect:/inspec/inspectionMain";
 	}
