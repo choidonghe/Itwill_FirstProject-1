@@ -51,29 +51,30 @@ document.addEventListener("DOMContentLoaded", function() {
 	        				</label>
 					    </div>
 					</div>
+	
 					<!-- 한 페이지에 표시할 항목 수 스크립트 추가 -->	
-<script>
-    function changePageSize() {
-        // 선택된 페이지 크기 가져오기
-        var selectedPageSize = document.getElementById("pageSizeSelect").value;
-        
-        // 검색어와 검색 유형 가져오기
-        var keyword = document.getElementById("searchInput").value.trim();
-        var type = document.getElementById("categorySelect").value;
-        
-        // 검색어가 존재하는 경우에만 URL에 추가
-        var searchParams = "";
-        if (keyword !== "") {
-            searchParams = "&type=" + type + "&keyword=" + encodeURIComponent(keyword);
-        }
-        
-        // 새로운 URL로 이동
-        location.href = "/stock/stockMainCri?page=1&pageSize=" + selectedPageSize + searchParams;
-    }
-</script>
+					<script>
+					    function changePageSize() {
+					        // 선택된 페이지 크기 가져오기
+					        var selectedPageSize = document.getElementById("pageSizeSelect").value;
+					        
+					        // 검색어와 검색 유형 가져오기
+					        var keyword = document.getElementById("searchInput").value.trim();
+					        var type = document.getElementById("categorySelect").value;
+					        
+					        // 검색어가 존재하는 경우에만 URL에 추가
+					        var searchParams = "";
+					        if (keyword !== "") {
+					            searchParams = "&type=" + type + "&keyword=" + encodeURIComponent(keyword);
+					        }
+					        
+					        // 새로운 URL로 이동
+					        location.href = "/stock/stockMainCri?page=1&pageSize=" + selectedPageSize + searchParams;
+					    }
+					</script>
+					<!-- 한 페이지에 표시할 항목 수 스크립트 추가 -->
 
 				</div>
-			<!-- 한 페이지에 표시할 항목 수 스크립트 추가 -->
 				
 				
 			<!-- 검색창 추가 -->
@@ -117,41 +118,44 @@ document.addEventListener("DOMContentLoaded", function() {
 				<input type = "hidden" name = "pageSize" value = "${cri.pageSize }">
 			    </form>
 			</div>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // 폼 요소와 검색 버튼 요소 가져오기
-        var searchForm = document.getElementById("searchForm");
-        var searchBtn = document.getElementById("search-btn");
-
-        // 검색 버튼 클릭 시 이벤트 처리
-        searchBtn.addEventListener("click", function(event) {
-            event.preventDefault(); // 기본 동작 방지 (페이지 새로고침 방지)
-
-            // 검색어 입력 요소 가져오기
-            var searchInput = document.getElementById("searchInput");
-            
-            // 검색어에서 공백 제거
-            var keyword = searchInput.value.trim();
-
-            // 선택된 카테고리 가져오기
-            var type = document.getElementById("categorySelect").value;
-
-            // 페이지 크기 가져오기
-            var pageSize = document.getElementById("pageSizeSelect").value;
-
-            // 새로운 URL로 이동
-            location.href = "/stock/stockMainCri?page=1&pageSize=" + pageSize + "&keyword=" + encodeURIComponent(keyword) + "&type=" + type;
-            
-            searchForm.submit();
-            
-        });
-    });
-</script>
+			
+			<!-- 검색기능 구현 스크립트 추가 -->
+			<script>
+			    document.addEventListener("DOMContentLoaded", function() {
+			        // 폼 요소와 검색 버튼 요소 가져오기
+			        var searchForm = document.getElementById("searchForm");
+			        var searchBtn = document.getElementById("search-btn");
+			
+			        // 검색 버튼 클릭 시 이벤트 처리
+			        searchBtn.addEventListener("click", function(event) {
+			            event.preventDefault(); // 기본 동작 방지 (페이지 새로고침 방지)
+			
+			            // 검색어 입력 요소 가져오기
+			            var searchInput = document.getElementById("searchInput");
+			            
+			            // 검색어에서 공백 제거
+			            var keyword = searchInput.value.trim();
+			
+			            // 선택된 카테고리 가져오기
+			            var type = document.getElementById("categorySelect").value;
+			
+			            // 페이지 크기 가져오기
+			            var pageSize = document.getElementById("pageSizeSelect").value;
+			
+			            // 새로운 URL로 이동
+			            location.href = "/stock/stockMainCri?page=1&pageSize=" + pageSize + "&keyword=" + encodeURIComponent(keyword) + "&type=" + type;
+			            
+			            searchForm.submit();
+			            
+			        });
+			    });
+			</script>
+			<!-- 검색기능 구현 스크립트 추가 -->
 
 
 				
 				
-
+			<!-- 재고 차트 -->
 			<div class="row">
 				<div class="col-sm-12">
 					<table id="example1"
@@ -220,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function() {
 						</tbody>
 						<!-------------------------- 제품 내용 넣는 곳 -------------------------->
 						<tfoot>
-							<tr style = "background-color: #f2f2f2;">
+							<tr style = "background-color : #f2f2f2;" >
 								<th rowspan="1" colspan="1">제품 코드</th>
 								<th rowspan="1" colspan="1">제품 카테고리</th>
 								<th rowspan="1" colspan="1">품목명</th>
@@ -266,7 +270,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			</script>
 
 
-			
+			<!-- 현재 페이지 총 사이즈와 보고있는 리스트 상태를 보여줌 -->
 			<div class="row">
                 <div class="col-sm-5">
 					<c:choose>
