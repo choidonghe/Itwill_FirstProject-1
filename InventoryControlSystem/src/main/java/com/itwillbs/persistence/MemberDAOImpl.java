@@ -121,7 +121,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public void insertKakaoMember(MemberVO vo) throws Exception{
 		logger.debug(" insertMember() 실행");
 		
-		sql.insert(NAMESPACE+".insertKakaoMember", vo);
+		sql.insert(NAMESPACE+".authMember", vo);
 		
 	}
 

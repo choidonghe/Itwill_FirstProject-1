@@ -70,8 +70,11 @@
 	</select>
 	
 	<select id="getMember" resultMap="memberMap">
-		select * from member 
-		where id = #{id}
+		SELECT m.eno, m.id, m.pass, m.name, m.email, m.phone, m.position, m.regdate, a.auth
+		FROM member m
+		LEFT JOIN member_auth a 
+		ON m.id = a.id 
+		WHERE m.id = #{id}
 	</select>
 	
 	<select id="memberListGet" resultMap="memberMap">

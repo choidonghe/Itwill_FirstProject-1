@@ -226,7 +226,7 @@
 
 														// 이 예제에서는 단순히 경고창을 띄우고 페이지를 새로고침하여 로그아웃하는 것으로 가정합니다.
 														if (confirm("로그아웃 하시겠습니까?")) {
-															window.location.href = "/login"; // 로그아웃 처리 후 리다이렉트할 경로를 지정합니다.
+															window.location.href = "/logout"; // 로그아웃 처리 후 리다이렉트할 경로를 지정합니다.
 														}
 													});
 								</script>
@@ -295,7 +295,10 @@
 					</a></li>
 					<li><a href="../mailbox/mailbox.html"> <i class="fa fa-envelope"></i> <span>Mailbox</span> 
 					</a></li>
-
+					<c:if test="${authVO.auth == 'ROLE_ADMIN' }">
+					<li><a href="./adminPage"> <span>관리자 페이지</span> 
+					</a></li>
+					</c:if>
 				</ul>
 			</section>
 			<!-- /.sidebar -->

@@ -70,6 +70,8 @@ public class MemberServiceImpl implements MemberService {
 		logger.debug(" 입력한 비밀번호 해싱값 : "+ pass);
 		// 기존 디비에 저장된 비밀번호 가져와서 비교
 		vo = dao.getMember(vo);
+		logger.debug("##########"+vo);
+		
 		if(pass.equals(vo.getPass())) {
 			logger.debug(" 비밀번호 일치 ");
 			
@@ -92,7 +94,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int checkUser(MemberVO vo) throws Exception {
+	public MemberVO checkUser(MemberVO vo) throws Exception {
 		logger.debug(" checkUser(MemberVO vo) 실행");
 		
 		logger.debug("checkvo : "+vo);
@@ -100,11 +102,7 @@ public class MemberServiceImpl implements MemberService {
 		logger.debug(" cvo : "+cvo);
 		
 
-		if(cvo == null) { // 회원가입 필요
-			return 0;
-		}
-			
-		return 1;
+		return cvo;
 	}
 	
 	@Override
@@ -123,7 +121,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public MemberVO kakaoMemberGet(MemberVO vo) throws Exception {
+		logger.debug(" kakaoMemberGet(MemberVO vo) 실행");
 
+		return dao.getMember(vo);
+	}
 
 
 

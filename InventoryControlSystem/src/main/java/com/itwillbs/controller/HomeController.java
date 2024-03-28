@@ -67,9 +67,9 @@ public class HomeController {
 		logger.debug(" idCheckPOST() 호출");
 		logger.debug("조회된 아이디 : "+mService.idCheck(id));
 		int result = 0;;
-		
-		if(mService.idCheck(id)==0) {
-			result = 1;
+		if(id != "") {
+			logger.debug("조회된 아이디 : "+mService.idCheck(id));	
+			
 			
 		}
 		
@@ -114,18 +114,21 @@ public class HomeController {
 		
 		MemberVO vo =  mService.kakaoInfo(code);
 		logger.debug("!!!!!!!!!!!!!!"+vo);
-		int result = mService.checkUser(vo);
-		logger.debug(" result : "+result);
+		MemberVO cvo = mService.checkUser(vo);
 		
-		if(result == 0) {
+		if(cvo == null) {
 			
 			mService.memberKakaoInsert(vo);
 			
 			logger.debug(" 카카오 회원가입 완료! ");
-			
+			cvo = mService.kakaoMemberGet(vo);
 		}
 			
-		session.setAttribute("id", vo.getId());
+		AuthVO authVO = new AuthVO();
+		authVO.setId(cvo.getId());
+		authVO.setAuth(cvo.getAuth());
+
+		session.setAttribute("authVO", authVO);
 		
 		logger.debug(" main 페이지로 이동");
 		return "redirect:/main";

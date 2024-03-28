@@ -122,8 +122,8 @@
 	
 	<!-- 출고 테이블로 정보 이동 구문 -->
 	<insert id = "moveRelease">
-	insert into tbl_release (divcode, pno, order_count, update_date)
-	value ('4', #{pno} , #{count} , now() )
+		insert into tbl_release (divcode, pno, order_count, update_date)
+		value ('4', #{pno} , #{count} , now())
 	</insert>
 	
 	<!-- 출고 수량 업데이트 구문 -->

@@ -18,13 +18,13 @@ public interface MemberService {
 	
 	public MemberVO kakaoInfo(String code) throws Exception;
 	
-	public int checkUser(MemberVO vo) throws Exception;
+	public MemberVO checkUser(MemberVO vo) throws Exception;
 	
 	public List<MemberVO> memberListGet()throws Exception;
 
 	public void updateMember(MemberVO vo) throws Exception;
-
 	
+	public MemberVO kakaoMemberGet(MemberVO vo) throws Exception;
 	
 
 } //service
