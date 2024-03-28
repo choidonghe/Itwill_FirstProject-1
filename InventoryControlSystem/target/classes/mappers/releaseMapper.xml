@@ -219,11 +219,11 @@
     </update>
     
 	<update id="upErrorRelease">
-		update tbl_release
-		set error_count = error_count - #{error_count},
-			count = #{count} + #{error_count}
-		where pno=#{pno}
-	</update>
+        update tbl_release
+        set error_count = error_count - #{error_count},
+             count = COALESCE(count, 0) + #{error_count}
+        where pno=#{pno}
+    </update>
 	
 	
 	

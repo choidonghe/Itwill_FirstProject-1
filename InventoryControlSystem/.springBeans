@@ -10,6 +10,11 @@
 		<config>src/main/webapp/WEB-INF/spring/root-context.xml</config>
 	</configs>
 	<autoconfigs>
+<<<<<<< HEAD
+=======
+		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/root-context.xml</config>
+>>>>>>> refs/remotes/origin/develop
 	</autoconfigs>
 	<configSets>
 	</configSets>

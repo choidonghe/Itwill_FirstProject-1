@@ -12,7 +12,7 @@ public class ProductVO {
 	private String pname;
 	private Timestamp regdate;
 	private Timestamp update_date;
-	private int price;
+	private int unit_price;
 	private String company;
 	private int sales_price;
 	private int divcode;
@@ -21,9 +21,9 @@ public class ProductVO {
 	private String warehouse_code;
 	private int finish_count;
 	private int remain_count;
-	private int release_count;
-	private int error_count;
+	private String id;
 	
 	private List<CodeVO> codeVO;
 	//private List<CategoryVO> categoryVO;
+	private List<WarehouseVO> warehouseVO;
 }
