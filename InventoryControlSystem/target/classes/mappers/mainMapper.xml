@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwillbs.mapper.MainMapper">
+
+	<resultMap type="com.itwillbs.domain.ProductVO" id="productMap">
+		<result property="pno" column="pno"/>
+		<result property="category_code" column="category_code"/>
+		<result property="pname" column="pname"/>
+		<result property="regdate" column="regdate"/>
+		<result property="update_date" column="update_date"/>
+		<result property="price" column="price"/>
+		<result property="company" column="company"/>
+		<result property="sales_price" column="sales_price"/>
+		<result property="divcode" column="divcode"/>
+		<result property="count" column="count"/>
+		<result property="account_code" column="account_code"/>
+		<result property="warehouse_code" column="warehouse_code"/>
+		<result property="finish_count" column="finish_count"/>
+		<result property="remain_count" column="remain_count"/>
+		<collection property="codeVO" resultMap="codeMap"/>
+	</resultMap>
+	
+	<resultMap type="com.itwillbs.domain.ReleaseVO" id="releaseMap">
+		<result property="pno" column="pno"/>
+		<result property="divcode" column="divcode"/>
+		<result property="id" column="id"/>
+		<result property="pname" column="pname"/>
+		<result property="category" column="category"/>
+		<result property="release_date" column="release_date"/>
+		<result property="update_date" column="update_date"/>
+		<result property="price" column="price"/>
+		<result property="order_date" column="order_date"/>
+		<result property="order_count" column="order_count"/>
+		<result property="delivery_company" column="delivery_count"/>
+		<result property="delivery_phone" column="delivery_phone"/>
+		<result property="delivery_manager" column="delivery_manager"/>
+		<collection property="codeVO" resultMap="codeMap"/>
+	</resultMap>
+
+	<resultMap type="com.itwillbs.domain.CodeVO" id="codeMap">
+		<result property="divcode" column="divcode"></result>
+		<result property="daecode" column="daecode"></result>
+		<result property="smcode" column="smcode"></result>
+		<result property="korname" column="korname"></result>
+	</resultMap>
+
+	<select id="getSellTotal" resultType="String">
+		SELECT SUM(price) FROM tbl_release 
+		WHERE release_date LIKE CONCAT('%',#{date},'%')
+	
+	</select>
+	
+	<select id="getReleaseMonth" resultType="String">	
+		SELECT CAST(release_date AS DATE) FROM tbl_release 
+		WHERE release_date LIKE CONCAT('%',#{month},'%') 
+		GROUP BY CAST(release_date AS DATE)
+	</select>
+
+	<select id="getStoreMonth" resultType="String">	
+		SELECT CAST(store_date AS DATE) FROM store  
+		WHERE store_date LIKE CONCAT('%',#{month},'%') 
+		GROUP BY CAST(store_date AS DATE)
+	</select>
+	
+	<select id="ergOrder" resultType="com.itwillbs.domain.EmergencyOrderVO">
+		SELECT p.pno, p.pname, s.count
+		FROM product p 
+		LEFT JOIN stock s
+		ON p.pno = s.pno
+		WHERE <![CDATA[ s.count < 5 ]]> 
+		limit #{startPage},#{orderPageSize};
+	</select>
+	
+	<select id="orderTotalCount" resultType="int">
+		SELECT count(p.pno) 
+		FROM product p 
+		LEFT JOIN stock s
+		ON p.pno = s.pno
+		WHERE <![CDATA[ s.count < 5 ]]>;
+	</select>
+	
+	<select id="noticeTotalCount" resultType="int">
+		SELECT count(bno) 
+		FROM notice
+	</select>
+	
+	<select id="noticeList" resultType="com.itwillbs.domain.NoticeVO">
+		<![CDATA[
+		select * from notice  
+		where bno > 0 
+		order by bno desc, regdate desc
+		limit #{startPage},#{noticePageSize}
+		]]>
+	</select>
+	
+	<select id="searchNoticeCount" resultType="int">
+		SELECT COUNT(bno) FROM notice 
+		WHERE content LIKE CONCAT('%',#{search},'%')
+	
+	</select>
+	
+	<select id="searchNoticeList" resultType="com.itwillbs.domain.NoticeVO">
+		SELECT * FROM notice  
+		WHERE content LIKE CONCAT('%',#{search},'%') 
+	
+	</select>
+	
+	<select id="getNoticeBno" resultType="int">
+		SELECT MAX(bno) FROM notice
+	</select>
+	
+	
+	<insert id="insertNotice">
+		INSERT INTO notice (bno, title, content) 
+		VALUES(#{bno}, #{title}, #{content})
+	
+	</insert>
+	
+	<select id="getcontent" resultType="com.itwillbs.domain.NoticeVO">
+		SELECT * FROM notice 
+		WHERE bno = #{bno}
+	
+	</select>
+	
+	<select id="productDay" resultMap="productMap">
+		SELECT pno, pname, count, finish_count, remain_count,e.korname 
+		FROM product p
+		LEFT JOIN code e 
+		ON p.divcode = e.divcode 
+		WHERE p.regdate LIKE CONCAT('%',#{startStr},'%');
+	
+	</select>
+	
+	<select id="releaseDay" resultMap="releaseMap">
+		SELECT pno, pname, order_date, order_count, delivery_company, e.korname 
+		FROM projectdb.release r
+		LEFT JOIN code e 
+		ON r.divcode = e.divcode 
+		WHERE r.release_date LIKE CONCAT('%',#{startStr},'%');
+	
+	</select>
+	
+	
+</mapper>

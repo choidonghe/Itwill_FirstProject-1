@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+/* 테이블 스타일 */
+.styled-table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-size: 16px;
+    color: #333;
+}
+
+.styled-table th,
+.styled-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.styled-table th {
+    background-color: #444;
+    color: #fff;
+}
+
+.styled-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.styled-table tr:hover {
+    background-color: #ddd;
+}
+
+/* 수정 완료 버튼 스타일 */
+form {
+    text-align: center;
+    margin-top: 20px;
+}
+
+input[type="submit"] {
+    background-color: #777;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #555;
+}

@@ -12,7 +12,6 @@ public class Criteria {
 	
 	private String[] typeArr;
 	
-	
 	public String[] getTypeArr() {
 		return typeArr;
 	}
@@ -48,8 +47,6 @@ public class Criteria {
 		this.keyword = keyword;
 	}
 
-	
-
 
 	@Override
 	public String toString() {
@@ -57,7 +54,6 @@ public class Criteria {
 				+ ", typeArr=" + Arrays.toString(typeArr) + "]";
 	}
 
-	
 	// 페이지 정보를 인덱스로 변경하는 메서드 -----------------------------------
 	public int getStartPage() {
 		return (this.page - 1 ) * pageSize;
@@ -87,17 +83,5 @@ public class Criteria {
 		}
 		this.pageSize = pageSize;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

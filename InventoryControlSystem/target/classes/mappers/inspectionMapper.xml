@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itwillbs.mapper.InspectionMapper">
+	
+	<resultMap type="com.itwillbs.domain.ProductVO" id="productMap">
+		<result property="pno" column="pno"/>
+		<result property="category_code" column="category_code"/>
+		<result property="pname" column="pname"/>
+		<result property="regdate" column="regdate"/>
+		<result property="update_date" column="update_date"/>
+		<result property="price" column="price"/>
+		<result property="company" column="company"/>
+		<result property="sales_price" column="sales_price"/>
+		<result property="divcode" column="divcode"/>
+		<result property="count" column="count"/>
+		<result property="account_code" column="account_code"/>
+		<result property="warehouse_code" column="warehouse_code"/>
+		<result property="finish_count" column="finish_count"/>
+		<result property="remain_count" column="remain_count"/>
+		<result property="id" column="id"/>
+		<collection property="codeVO" resultMap="codeMap"/>
+		<collection property="warehouseVO" resultMap="warehouseVO"/>
+	</resultMap>
+
+	<resultMap type="com.itwillbs.domain.CodeVO" id="codeMap">
+		<result property="divcode" column="divcode"></result>
+		<result property="daecode" column="daecode"></result>
+		<result property="smcode" column="smcode"></result>
+		<result property="korname" column="korname"></result>
+	</resultMap>
+		
+	<resultMap type="com.itwillbs.domain.WarehouseVO" id="warehouseVO">
+		<result property="warehouse_code" column="warehouse_code"/>
+		<result property="category_code" column="category_code"/>
+		<result property="location" column="location"/>
+		<result property="pname" column="pname"/>
+		<result property="capacity" column="capacity"/>
+		<result property="manager" column="manager"/>
+		<result property="regdate" column="regdate"/>
+		<result property="update_date" column="update_date"/>
+	</resultMap>
+	
+	<resultMap type="com.itwillbs.domain.ErrorVO" id="errorVO">
+		<result property="pno" column="pno"/>
+		<result property="pname" column="pname"/>
+		<result property="divcode" column="divcode"/>
+		<result property="count" column="count"/>
+		<result property="regdate" column="regdate"/>
+		<result property="warehouse_code" column="warehouse_code"/>
+		<collection property="warehouseVO" resultMap="warehouseVO"></collection>
+		<collection property="codeVO" resultMap="codeMap"/>
+	</resultMap>
+	
+	<!-- 검수목록 조회 페이징처리 -->
+	<select id="selectInspection" resultMap="productMap">
+    <![CDATA[
+        SELECT * 
+        FROM inspection p 
+        JOIN code c 
+        ON c.divcode = p.divcode 
+        WHERE p.divcode = 2 OR p.divcode = 7
+        LIMIT #{start}, #{pageSize}
+    ]]>
+	</select>
+	<!-- 페이징 처리 - Cri -->
+	<select id="inspecListCri" resultMap="productMap">
+		<![CDATA[
+		select * from inspection p
+		join code c 
+		on p.divcode = c.divcode
+		where p.divcode = 2 OR p.divcode = 7
+		order by p.regdate desc 
+		limit #{startPage},#{pageSize}
+		]]>
+	</select>
+	
+	<!-- 총 제품의 개수 -->
+	<select id="totalCount" resultType="int">
+		select count(pno) from product
+	</select>
+	
+	<!-- 검수현황본문 조회 - product -->
+	<select id="productInspectionRead" resultType="ProductVO"
+		resultMap="productMap">
+		select * from inspection where pno=#{pno}
+	</select>
+	
+	<!-- 창고 코드 조회 -->
+	<select id="selectWarehouse" resultMap="warehouseVO">
+		select * from warehouse
+	</select>
+	
+	<!-- 검수현황업데이트 - product -->
+    <update id="productUpdateInspection" parameterType="ProductVO">
+		UPDATE inspection
+		SET count = count - #{finish_count},
+		    remain_count = count,
+		    divcode = CASE WHEN count = 0 AND (divcode = 2 OR divcode = 7) THEN 3 ELSE divcode END,
+		    finish_count = #{finish_count},
+		    update_date = now(),
+		    warehouse_code = #{warehouse_code},
+		    id = #{id}
+		WHERE pno = #{pno}
+    </update>
+    
+    <!-- 검수 중 불량을 error테이블로 보내기 -->
+    <insert id="insertError" parameterType="java.lang.String">
+    	insert into error
+    	(pno,pname,divcode,count,regdate,warehouse_code, id) 
+        	select pno, pname, 7, 0, now() AS regdate, warehouse_code, id 
+        	from inspection 
+        	<!-- where divcode = 7  -->
+       	WHERE NOT EXISTS (
+        SELECT 1 FROM error WHERE error.pno = inspection.pno)
+    </insert>
+    
+    <update id="updateError">
+    	update error
+    	set count = error.count + #{finish_count}, regdate = now()
+    	where pno = #{pno}
+    </update>
+    
+    <!-- product에서 검수완료 상태이며, remain_count가 0인 데이터 stock으로 옮기기 -->
+    <insert id="productMoveToStock" parameterType="java.lang.String">
+        INSERT INTO stock
+        (divcode, pno, warehouse_code, category, regdate, count, id)
+	        SELECT 3 AS divcode, pno, warehouse_code, SUBSTRING(pno, 1, 4) AS category, NOW() AS regdate,0, id
+	        FROM inspection 
+	        WHERE divcode = 2
+        AND NOT EXISTS (
+        SELECT 1 FROM stock WHERE stock.pno = inspection.pno)
+    </insert>
+    
+    <update id="updatestock">
+    	update stock 
+    	set count = stock.count + #{finish_count}, update_date = now()
+    	where pno = #{pno} 
+    </update>
+    
+	<!-- product - finish양 quantity에서 빼기 -->
+	<update id="productUpdateRemain">
+    	update inspection
+    	set remain_count = (#{count} - #{finish_count})
+    	where pno = #{pno}
+	</update>
+    
+	<!-- product - divcode=2 인 검수목록 조회 -->
+	<!-- 검수목록 조회 페이징처리 -->
+	<select id="selectInspection2" resultMap="productMap">
+    <![CDATA[
+        SELECT * 
+        FROM inspection p 
+        JOIN code c ON c.divcode = p.divcode
+        WHERE p.divcode = 2
+        LIMIT #{start}, #{pageSize}
+    ]]>
+	</select>
+	<!-- 페이징 처리 - Cri -->
+	<select id="inspecListCri2" resultMap="productMap">
+		<![CDATA[
+		select * from inspection p
+		join code c 
+		on p.divcode = c.divcode
+		where p.divcode = 2
+		order by p.regdate desc 
+		limit #{startPage},#{pageSize}
+		]]>
+	</select>
+
+	<!-- product - divcode=3 인 검수목록 조회 -->
+	<select id="productInspectionDiv3" resultMap="productMap">
+		<![CDATA[
+		select * from stock s 
+		join code c 
+		on s.divcode = c.divcode 
+		join inspection i 
+		on i.divcode = s.divcode 
+		where s.divcode = 3 order by s.regdate desc
+		LIMIT #{start}, #{pageSize}
+		]]> 
+	</select>
+	<select id="inspecListCri3" resultMap="productMap">
+		<![CDATA[
+		select * from stock p
+		join code c 
+		on p.divcode = c.divcode
+		where p.divcode = 3
+		order by p.regdate desc 
+		limit #{startPage},#{pageSize}
+		]]>
+	</select>	
+	
+
+	
+	<!-- product - 불량 제품 목록 조회 -->
+	<select id="errorList" resultMap="errorVO">
+    <![CDATA[
+	    select * 
+	    from error e
+	    join code c
+	    on e.divcode = c.divcode
+	    where e.divcode = 7 or e.divcode = 8 
+	    order by e.regdate desc
+	    limit #{start}, #{pageSize}
+    ]]>
+	</select>
+	<!-- 페이징 처리 - Cri -->
+	<select id="errorCri" resultMap="errorVO">
+		<![CDATA[
+		select * 
+		from error e
+		join code c
+		on e.divcode = c.divcode
+		where e.divcode = 7 or c.divcode = 8
+		order by e.regdate desc 
+		limit #{startPage},#{pageSize}
+		]]>
+	</select>
+	
+	<!-- 검수 제품의 개수 -->
+	<select id="totalInspec" resultType="int">
+		select count(pno) from inspection
+	</select>
+
+
+</mapper>
