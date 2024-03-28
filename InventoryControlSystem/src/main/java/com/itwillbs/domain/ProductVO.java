@@ -21,7 +21,9 @@ public class ProductVO {
 	private String warehouse_code;
 	private int finish_count;
 	private int remain_count;
+	private String id;
 	
 	private List<CodeVO> codeVO;
 	//private List<CategoryVO> categoryVO;
+	private List<WarehouseVO> warehouseVO;
 }

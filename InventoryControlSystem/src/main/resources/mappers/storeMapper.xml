@@ -4,7 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.mapper.StoreMapper">
-	
+	 
 	<resultMap type="com.itwillbs.domain.ProductVO" id="productMap">
 		<result property="pno" column="pno"/>
 		<result property="category_code" column="category_code"/>
@@ -20,6 +20,7 @@
 		<result property="warehouse_code" column="warehouse_code"/>
 		<result property="finish_count" column="finish_count"/>
 		<result property="remain_count" column="remain_count"/>
+		<result property="id" column="id"/>
 		<collection property="codeVO" resultMap="codeVO"/>
 	</resultMap>
 	
@@ -35,21 +36,66 @@
 		<result property="korname" column="korname"></result>
 	</resultMap>
 	
-	<select id="productList" parameterType="productVO" resultMap="productMap">
-		select c.korname, p.divcode, p.pno, p.pname, p.count, p.price, p.sales_price, p.account_code  
+	<!-- product 생성 -->
+	<insert id="insertProduct">
+		insert into product (pno, category_code, pname, price, company, sales_price, regdate, divcode, count, remain_count, id, account_code)
+		values(#{pno},#{category_code},#{pname},#{price},#{company},#{sales_price}, now(), 1, #{count}, #{count}, #{id}, #{account_code})
+	</insert>
+	
+	<!-- product 목록 조회 -->
+	<select id="productList" resultMap="productMap" parameterType="ProductVO">
+		select * 
 		from product p 
-		join code c on p.divcode = c.divcode
+		join code c 
+		on p.divcode = c.divcode 
 		where p.divcode=1
 	</select>
 	
+	<!-- 제품 목록 조회(페이징처리) -->
+	<select id="selectProductListPage" resultMap="productMap">
+		<![CDATA[
+		select * from 
+		product p 
+		join code c 
+		on p.divcode = c.divcode
+		where p.divcode = 1 
+		order by regdate desc 
+		limit #{page},10
+		]]>
+	</select>
+	
+	<!-- 페이징 처리 - Cri -->
+	<select id="productListCri" resultMap="productMap">
+		<![CDATA[
+		select * from 
+		product p 
+		join code c 
+		on p.divcode = c.divcode 
+		where p.divcode = 1 
+		order by p.regdate desc 
+		limit #{startPage},#{pageSize}
+		]]>
+	</select>
+	<!-- 총 제품의 개수 -->
+	<select id="totalCount" resultType="int">
+		select count(pno) from product
+	</select>
+
+	
+	<!-- c.korname, p.divcode, p.pno, p.pname, p.count, p.price, p.sales_price, p.account_code -->  
 	<select id="selectCodeList" resultType="codeVO">
 		select * from code where divcode=1 or divcode=2 or divcode=3
 	</select>
 	
 	<update id="updateProductCode">
-		update product set divcode = #{divcode} 
+		update product set divcode = #{divcode}, remain_count=count, pname=#{pname} 
 		where pno = #{pno}
 	</update>
+	
+	<insert id="insertInspection">
+		insert into inspection(pno,pname,divcode,count,finish_count,remain_count,regdate,update_date,warehouse_code,category_code, id) 
+		values(#{pno},#{pname},#{divcode},#{count},#{finish_count},#{remain_count},#{regdate},now(),#{warehouse_code},#{category_code}, #{id})
+	</insert>
 	
 	<select id="selectProduct" resultType="ProductVO">
 		select * from product 
@@ -60,5 +106,12 @@
 		update store set divcode = #{divcode}, update_date=now()
 		where pno = #{pno}
 	</update>
+	
+	
+
+	
+	
+	
+	
 	
 </mapper>
