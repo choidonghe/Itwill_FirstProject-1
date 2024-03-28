@@ -5,31 +5,32 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-
-	<!-- HikariConfig : 디비연결 정보 -->
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	<bean id="dataSource" 
+		  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		  
+		  <!-- log4jdbc 설정이전
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/springdb"/> -->
+		
+		<!-- log4jdbc 설정이후 -->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://localhost:3306/projectdb"/>
+		<property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/projectdb"/>
 		<property name="username" value="root"/>
 		<property name="password" value="1234"/>
 	</bean>
-	<!-- HikariConfig : 디비연결 정보 -->
-
-	<!-- DataSource : 디비연결(CP) -->
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" 
-				destroy-method="close">
-		<constructor-arg ref="hikariConfig"/>
+	<!-- DataSource : 디비연결정보 -->
+	
+	
+	<!-- SqlSessionFactory : 디비연결, SQL실행, Mybatis설정, Mapper설정 -->
+	<bean id="sqlSessionFactory"
+		  class="org.mybatis.spring.SqlSessionFactoryBean">
+		  <property name="dataSource" ref="dataSource"/>
+		  <property name="configLocation"
+		  			value="classpath:/mybatis-config.xml"/>
+		  <property name="mapperLocations"
+		  			value="classpath:/mappers/**/*Mapper.xml"/>
 	</bean>
 	<!-- DataSource : 디비연결(CP) -->
-
-	<!-- SqlSessionFactory : 디비연결, SQL실행, Mybaties설정, Mapper설정 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
-		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
-		<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml"/>
-	</bean>
-	<!-- SqlSessionFactory : 디비연결, SQL실행, Mybaties설정, Mapper설정 -->
 
 	<!-- SqlSessionTemplate : 디비연결(자동),자원해제(자동), SQL실행, Mybaties설정, Mapper설정 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
