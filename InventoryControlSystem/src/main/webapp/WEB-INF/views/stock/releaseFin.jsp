@@ -11,9 +11,14 @@ window.onload = function() {
         title: "출고 신청 완료",
         text: "재고 리스트로 나가셔서 새로고침 해주세요.",
         icon: "success",
-        button: "재고 리스트로 나가기"
+        button: "나가기"
     }).then(function() {
-        window.close(); // 현재 창 닫기
+        window.close();
+        
+        // 팝업 창 종료 시 부모창 새로고침
+        if (window.opener) {
+        	window.opener.location.reload();
+        }
     });
 };
 </script>

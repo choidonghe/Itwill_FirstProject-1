@@ -16,6 +16,7 @@
     z-index: 9999; /* 팝업창을 다른 요소 위로 올립니다. */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 팝업창에 그림자 효과를 추가합니다. */
 }
+
   </style>
     <meta charset="UTF-8">
     <title>AdminLTE 2 | Dashboard</title>

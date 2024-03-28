@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					<table id="example1"
 						class="table table-bordered table-striped dataTable" role="grid"
 						aria-describedby="example1_info" style ="border-collapse: collapse;">
-						<thead>
+						<thead style = "background-color: #f2f2f2;">
 							<tr role="row">
 								<th class="sorting_asc" tabindex="0" aria-controls="example1"
 									rowspan="1" colspan="1" aria-sort="ascending"
@@ -200,12 +200,13 @@ document.addEventListener("DOMContentLoaded", function() {
 						<tbody>
 						<c:forEach var="sVO" items="${stockList }" >
 							<tr>
-								<td data-product-code="${sVO.pno}">${sVO.pno}</td>
-								<td>${sVO.category }</td>
-								<td>${sVO.pname }</td>
-								<td>${sVO.company }</td>
-								<td data-available-count="${sVO.count }">${sVO.count }</td>
-								<td>${sVO.warehouse_code }</td>		
+								<td data-product-code="${sVO.pno}" style = "vertical-align: middle;">
+								${sVO.pno}</td>
+								<td style = "vertical-align: middle;">${sVO.category }</td>
+								<td style = "vertical-align: middle;">${sVO.pname }</td>
+								<td style = "vertical-align: middle;">${sVO.company }</td>
+								<td data-available-count="${sVO.count }" style = "vertical-align: middle;">${sVO.count }</td>
+								<td style = "vertical-align: middle;">${sVO.warehouse_code }</td>		
 								<td>
 								<c:if test="${sVO.count eq 0}">
                     			<button type="button" class="btn btn-block btn-danger" style="width: 60px;" disabled>품절</button>
@@ -219,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function() {
 						</tbody>
 						<!-------------------------- 제품 내용 넣는 곳 -------------------------->
 						<tfoot>
-							<tr>
+							<tr style = "background-color: #f2f2f2;">
 								<th rowspan="1" colspan="1">제품 코드</th>
 								<th rowspan="1" colspan="1">제품 카테고리</th>
 								<th rowspan="1" colspan="1">품목명</th>
@@ -240,24 +241,24 @@ document.addEventListener("DOMContentLoaded", function() {
 			        var releaseButtons = document.querySelectorAll('.btn-primary'); // 출고 버튼을 선택합니다.
 			        releaseButtons.forEach(function(button) {
 			            button.addEventListener('click', function() {
-			                var productCode = button.parentNode.parentNode.querySelector('td[data-product-code]').dataset.productCode; // 해당 행의 제품 코드를 가져옵니다.
-			                var productName = button.parentNode.parentNode.querySelector('td:nth-of-type(3)').textContent.trim(); // 해당 행의 제품 이름을 가져옵니다.
-			                var productCount = button.parentNode.parentNode.querySelector('td[data-available-count]').dataset.availableCount; // 해당 행의 제품 수량을 가져옵니다.
+			                var productCode = button.parentNode.parentNode.querySelector('td[data-product-code]').dataset.productCode; // 제품 코드 가져오기
+			                var productName = button.parentNode.parentNode.querySelector('td:nth-of-type(3)').textContent.trim(); // 제품 이름 가져오기
+			                var productCount = button.parentNode.parentNode.querySelector('td[data-available-count]').dataset.availableCount; // 제품 수량 가져오기
 			                
-			                // 출고 페이지 URL을 생성합니다.
+			                // 출고 페이지 URL 생성
 			                var popupUrl = '/stock/moveRelease?pno=' + encodeURIComponent(productCode) + '&pname=' + encodeURIComponent(productName) + '&count=' + encodeURIComponent(productCount);
 			                
-			                // 팝업 창을 가운데에 위치시키기 위해 창의 크기와 위치를 계산합니다.
+			                // 팝업창 가운데 띄우기 및 크기 조정
 			                var width = 500;
 			                var height = 600;
 			                var left = (window.innerWidth - width) / 2;
 			                var top = (window.innerHeight - height) / 2;
 			                
-			                // 새로운 팝업 창을 엽니다.
+			                // 팝업창 띄우기
 			                var popupWindow = window.open(popupUrl, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 			                
 			                if (popupWindow) {
-			                    popupWindow.focus(); // 팝업 창이 이미 열려있다면 포커스를 이동합니다.
+			                    popupWindow.focus();
 			                }
 			            });
 			        });
