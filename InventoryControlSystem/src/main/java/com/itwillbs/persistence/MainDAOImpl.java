@@ -19,6 +19,8 @@ import com.itwillbs.domain.EmergencyOrderVO;
 import com.itwillbs.domain.ErgOrderCriteria;
 import com.itwillbs.domain.NoticeCriteria;
 import com.itwillbs.domain.NoticeVO;
+import com.itwillbs.domain.ProductVO;
+import com.itwillbs.domain.ReleaseVO;
 
 @Repository
 public class MainDAOImpl implements MainDAO {
@@ -40,7 +42,7 @@ public class MainDAOImpl implements MainDAO {
 		
 		Date today = new Date();
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
 		String month = dateFormat.format(today);
 		
 		logger.debug(" todayMonth : "+month);
@@ -190,6 +192,20 @@ public class MainDAOImpl implements MainDAO {
 		logger.debug(" getContent(String bno) 호출");
 		
 		return sql.selectOne(NAMESPACE+".getcontent", bno);
+	}
+
+	@Override
+	public List<ProductVO> getProductDay(String startStr) throws Exception {
+		logger.debug(" getProductDay(String startStr) 호출");
+		
+		return sql.selectList(NAMESPACE+".productDay", startStr);
+	}
+
+	@Override
+	public List<ReleaseVO> getReleaseDayList(String startStr) throws Exception {
+		logger.debug(" getReleaseDayList(String startStr) 호출 ");
+		
+		return sql.selectList(NAMESPACE+".releaseDay", startStr);
 	}
 	
 	

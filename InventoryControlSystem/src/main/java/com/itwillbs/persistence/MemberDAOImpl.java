@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Repository;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.itwillbs.domain.AuthVO;
 import com.itwillbs.domain.MemberVO;
 
 @Repository
@@ -111,6 +113,7 @@ public class MemberDAOImpl implements MemberDAO {
 		logger.debug(" insertMember() 실행");
 		
 		sql.insert(NAMESPACE+".insertMember", vo);
+		sql.insert(NAMESPACE+".authMember", vo);
 		
 	}
 	
@@ -139,7 +142,14 @@ public class MemberDAOImpl implements MemberDAO {
 		return sql.selectOne(NAMESPACE+".getMember", vo);
 		
 	}
+	
 
+	@Override
+	public AuthVO getAuth(String id) throws Exception {
+		logger.debug(" getAuth(String id) 실행");
+		
+		return sql.selectOne(NAMESPACE+".getAuth", id);
+	}
 
 
 	@Override
@@ -259,6 +269,21 @@ public class MemberDAOImpl implements MemberDAO {
 	       }
 	    
 		return vo;
+	}
+	
+	@Override
+	public List<MemberVO> getMemberListGet() throws Exception {
+		logger.debug(" getMemberListGet() 실행 ");
+
+		return sql.selectList(NAMESPACE+".memberListGet");
+	}
+
+
+	@Override
+	public void updateMember(MemberVO vo) throws Exception {
+		logger.debug(" updateMember(MemberVO vo) 실행 ");
+
+		sql.update(NAMESPACE+".updateMember", vo);
 	}
 
 

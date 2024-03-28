@@ -78,7 +78,7 @@
 <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <body class="skin-blue sidebar-mini">
 
-<c:if test="${empty id}">
+<c:if test="${empty authVO.id}">
 	<c:redirect url="localhost:8088/login"/>
 </c:if>
 	<div class="wrapper">
