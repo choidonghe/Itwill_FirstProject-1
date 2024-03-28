@@ -204,8 +204,8 @@
 	<!-- 검수 중 불량을 error테이블로 보내기 -->
     <insert id="insertError" parameterType="java.lang.String">
         insert into error
-        (pno,pname,divcode,count,error_count,regdate,warehouse_code, id) 
-            select pno, pname, 8, 0, 0, now() AS regdate, warehouse_code, id 
+        (pno,pname,divcode,count,regdate,warehouse_code, id) 
+            select pno, pname, 8, 0, now() AS regdate, warehouse_code, id 
             from tbl_release 
             where pno=#{pno}
            AND NOT EXISTS (

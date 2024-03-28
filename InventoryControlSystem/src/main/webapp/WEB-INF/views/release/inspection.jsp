@@ -51,8 +51,9 @@ ${vo} <br>
 												</c:forEach>
 											</select>
 											<input type="number" min="0" max="${vo.order_count}" name="release_count" placeholder="수량을 적으세요." required="required" onkeyup="this.value=numberFormat(this.value, false, false, false)">
-											<input type="hidden" name="id" value="${vo.id}">
+											<%-- <input type="hidden" name="id" value="${vo.id}"> --%>
 											<input type="hidden" name="pno" value="${vo.pno}">
+											<input type="hidden" name="id" value="${authVO.id }">
 											<input type="submit" value="출고하기" class="btn btn-danger">
 									</form>
 <%-- 									</c:if> --%>

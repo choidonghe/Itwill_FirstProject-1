@@ -123,21 +123,29 @@
     	where pno = #{pno}
     </update>
     
-    <!-- product에서 검수완료 상태이며, remain_count가 0인 데이터 stock으로 옮기기 -->
-    <insert id="productMoveToStock" parameterType="java.lang.String">
-	    <![CDATA[
-		    INSERT INTO stock (divcode, pno, warehouse_code, category, regdate, count, id)
-		    SELECT 
-		    3 AS divcode, i.pno, i.warehouse_code, SUBSTRING(i.pno, 1, 4) AS category_code, NOW() AS regdate, i.finish_count - e.count, i.id
-		    FROM inspection i
-		    JOIN error e 
-		    ON i.pno = e.pno
-		    WHERE i.remain_count = 0
-		    AND NOT EXISTS (
-		        SELECT 1 FROM stock WHERE stock.pno = i.pno
-		    );
-	   ]]>
+    <insert id="product">
+    
     </insert>
+    
+    <!-- product에서 검수완료 상태이며, remain_count가 0인 데이터 stock으로 옮기기 - 에러있고 완료할때 -->
+    <insert id="productMoveToStock" parameterType="java.lang.String">
+	    INSERT IGNORE INTO stock (divcode, pno, warehouse_code, category, regdate, count, id)
+SELECT 
+    3 AS divcode, 
+    i.pno, 
+    i.warehouse_code, 
+    SUBSTRING(i.pno, 1, 4) AS category_code, 
+    NOW() AS regdate, 
+    i.finish_count - COALESCE(e.count, 0) AS count, 
+    i.id
+FROM inspection i
+LEFT JOIN error e ON i.pno = e.pno
+WHERE i.remain_count = 0;
+
+
+    </insert>
+    
+    
     
     <update id="updatestock">
     	update stock 
