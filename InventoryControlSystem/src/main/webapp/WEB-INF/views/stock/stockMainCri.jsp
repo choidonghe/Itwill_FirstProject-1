@@ -210,6 +210,7 @@ document.addEventListener("DOMContentLoaded", function() {
 								<td style = "vertical-align: middle;">${sVO.pname }</td>
 								<td style = "vertical-align: middle;">${sVO.company }</td>
 								<td data-available-count="${sVO.count }" style = "vertical-align: middle;">${sVO.count }</td>
+								
 								<td style = "vertical-align: middle;">${sVO.warehouse_code }</td>		
 								<td>
 								<c:if test="${sVO.count eq 0}">

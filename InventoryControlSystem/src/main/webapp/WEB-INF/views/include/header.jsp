@@ -271,17 +271,17 @@
 							<li><a href="/storeinglist"><i class="fa fa-circle-o"></i> 입고예정</a></li>
 							<li><a href="/inspec/inspectionMain"><i class="fa fa-circle-o"></i> 입고검수</a></li>
 						</ul></li>
+					<li class="treeview"><a href=""> <i class="fa fa-check"></i> <span>재고</span> <i class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class ="treeview-menu">
+							<li><a href="/stock/stockMainCri?page=1&pageSize=10"><i class="fa fa-circle-o"></i>재고 수량</a></li>
+							<li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i>창고 위치</a></li>
+						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-check"></i> <span>출고</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
 							<li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i>출고예정</a></li>
 							<li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i>출고검수</a></li>
-						</ul></li>
-					<li class="treeview"><a href=""> <i class="fa fa-check"></i> <span>재고</span> <i class="fa fa-angle-left pull-right"></i>
-					</a>
-						<ul class ="treeview-menu">
-							<li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i>재고 수량</a></li>
-							<li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i>창고 위치</a></li>
 						</ul></li>
 					<li class="treeview"><a href=""> <i class="fa fa-check"></i> <span>관리</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>

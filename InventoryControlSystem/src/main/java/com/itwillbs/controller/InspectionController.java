@@ -65,6 +65,7 @@ public class InspectionController {
 		List<WarehouseVO> warehouseList = iService.warehouseList();
 		logger.debug(" warehouseList : "+warehouseList);
 		ProductVO vo = iService.productRead(pno);
+		logger.debug(" vo " + vo);
 		model.addAttribute("vo", vo);
 		model.addAttribute("warehouseList", warehouseList);
 	}
@@ -73,16 +74,32 @@ public class InspectionController {
 	@RequestMapping(value = "/inspectionRead", method = RequestMethod.POST)
 	public String inspectionReadPOST(String pno,int divcode, Model model,ProductVO pvo) throws Exception{
 		logger.debug(" inspectionReadPOST() 호출 ");
-		
+		ProductVO vo = iService.productRead(pno);
+		logger.debug(" vo " + vo);
 		if(divcode == 3) {
-			iService.productModify(pvo);
-			iService.updateStock(pvo);
-			iService.productUpdateRemain(pvo);
+			try {
+				iService.productModify(pvo);
+				iService.productUpdateRemain(pvo);
+			}
+			catch (Exception e) {
+				logger.debug(" 이미 중복 ");
+				iService.updateStock(pvo);
+				iService.productUpdateRemain(pvo);
+			}
 		}
+		
 		if(divcode == 7) {
-			iService.insertError(pvo);
-			iService.updateError(pvo);
-			iService.productUpdateRemain(pvo);
+			try {
+				logger.debug(" vo " + vo);
+				logger.debug("불량");
+				iService.insertError(pvo);
+				iService.productUpdateRemain(pvo);
+				iService.updateError(pvo);
+			} catch (Exception e) {
+				logger.debug(" 이미 중복 ");
+				iService.updateError(pvo);
+				iService.productUpdateRemain(pvo);
+			}
 		}
 		
 		
