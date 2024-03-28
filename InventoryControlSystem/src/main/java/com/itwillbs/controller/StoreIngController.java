@@ -78,7 +78,7 @@ public class StoreIngController {
 		logger.debug("vo : " + pvo);
 		return "redirect:storeinglist";
 	}
-	
+	 
 	@RequestMapping(value = "/insertPro", method = RequestMethod.GET)
 	public void registerGET(Model model, AccountVO avo) throws Exception{
 		logger.debug(" registerGET() 호출 ");
