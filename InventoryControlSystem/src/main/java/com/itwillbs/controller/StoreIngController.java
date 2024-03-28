@@ -20,7 +20,6 @@ import com.itwillbs.domain.ProductVO;
 import com.itwillbs.domain.StorePageVO;
 import com.itwillbs.service.AccountService;
 import com.itwillbs.service.CodeService;
-import com.itwillbs.service.MemberService;
 import com.itwillbs.service.ProductService;
 
 @Controller
@@ -30,8 +29,6 @@ public class StoreIngController {
 	private CodeService cService;
 	@Inject
 	private ProductService pService;
-	@Inject
-	private MemberService mService;
 	@Inject
 	private AccountService aService;
 	
@@ -50,19 +47,16 @@ public class StoreIngController {
 		List<ProductVO> productList = pService.productGetListCri(cri);
 		//List<ProductVO> productListPage = pService.productListPaget(1);
 		List<CodeVO> codeList = cService.allCodeList();
-		MemberVO mvo = mService.getMember(vo);
 		
 		
 		
 		logger.debug(" list.size() : " + productList.size());
 		logger.debug(" @!@!@!" + productList);
 		logger.debug("spageVO : " + spageVO);
-		logger.debug(" mvo : " + mvo);
 		model.addAttribute("productList", productList);
 		model.addAttribute("cri", cri);
 		model.addAttribute("spageVO", spageVO);
 		model.addAttribute("codeList", codeList);
-		model.addAttribute("mvo", mvo);
 		
 		//model.addAttribute("productListPage", productListPage);
 	}
