@@ -38,14 +38,26 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 		logger.debug("listInfoRelease(ReleaseVO vo) 호출");
 		
 		return sqlSession.selectOne(NAMESPACE+".getReleaseInfoList", pno);
+		
+	}
+	
+
+	@Override
+	public ReleaseVO mainInspectionRelease(ReleaseVO rvo) throws Exception {
+		logger.debug("mainInspectionRelease(ReleaseVO rvo) 호출");
+		
+		sqlSession.update(NAMESPACE+".upMainInstpection", rvo);
+		
+		return rvo;
 	}
 
 	@Override
-	public void modifyRelease(ReleaseVO vo) throws Exception {
+	public ReleaseVO modifyRelease(ReleaseVO rvo) throws Exception {
 		logger.debug("modifyRelease(ReleaseVO vo) 호출");
 		
-		sqlSession.update(NAMESPACE+".upReleaseModify", vo);
+		sqlSession.update(NAMESPACE+".upReleaseModify", rvo);
 		
+		return rvo;
 	}
 
 	@Override
@@ -62,41 +74,48 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 		return sqlSession.selectList(NAMESPACE+".selectCodeList");
 	}
 
-	@Override
-	public ReleaseVO inspectionMain(String pno, int divcode) throws Exception {
-	    logger.debug(" inspectionMain(String pno, int divcode) 호출");
-	    
-	    // 데이터 업데이트 수행
-	    Map<String, Object> parameters = new HashMap<>(); // pno는 문자열, divcode는 정수
-	    parameters.put("pno", pno);
-	    parameters.put("divcode", divcode);
-	    sqlSession.update(NAMESPACE + ".updateCode", parameters);
-	    
-	    // 업데이트된 데이터 조회
-	    ReleaseVO updatedData = sqlSession.selectOne(NAMESPACE + ".getUpdatedData", pno);
-	    
-	    logger.debug("updatedData:" + updatedData);
-	    
-	    return updatedData;
-	}
+	/*
+	 * @Override public ReleaseVO inspectionMain(String pno, int divcode) throws
+	 * Exception { logger.debug(" inspectionMain(String pno, int divcode) 호출");
+	 * 
+	 * // 데이터 업데이트 수행 Map<String, Object> parameters = new HashMap<>(); // pno는 문자열,
+	 * divcode는 정수 parameters.put("pno", pno); parameters.put("divcode", divcode);
+	 * sqlSession.update(NAMESPACE + ".updateCode", parameters);
+	 * 
+	 * // 업데이트된 데이터 조회 ReleaseVO updatedData = sqlSession.selectOne(NAMESPACE +
+	 * ".getUpdatedData", pno);
+	 * 
+	 * logger.debug("updatedData:" + updatedData);
+	 * 
+	 * return updatedData; }
+	 */
 	
 	@Override
-	public ReleaseVO modifyInspection(String pno, int divcode) throws Exception {
-	    logger.debug(" inspectionMain(String pno, int divcode) 호출");
-	    
-	    // 데이터 업데이트 수행
-	    Map<String, Object> parameters = new HashMap<>(); // pno는 문자열, divcode는 정수
-	    parameters.put("pno", pno);
-	    parameters.put("divcode", divcode);
-	    sqlSession.update(NAMESPACE + ".updateCode", parameters);
-	    
-	    // 업데이트된 데이터 조회
-	    ReleaseVO updatedData = sqlSession.selectOne(NAMESPACE + ".getUpdatedData", pno);
-	    
-	    logger.debug("updatedData:" + updatedData);
-	    
-	    return updatedData;
+	public ReleaseVO inspectionRelease(ReleaseVO rvo) throws Exception {
+		logger.debug(" inspectionMain(String pno, int divcode) 호출");
+		
+		sqlSession.update(NAMESPACE+".upReleaseInstpection", rvo);
+		
+		return rvo;
 	}
+	
+//	@Override
+//	public ReleaseVO modifyInspection(String pno, int divcode) throws Exception {
+//	    logger.debug(" inspectionMain(String pno, int divcode) 호출");
+//	    
+//	    // 데이터 업데이트 수행
+//	    Map<String, Object> parameters = new HashMap<>(); // pno는 문자열, divcode는 정수
+//	    parameters.put("pno", pno);
+//	    parameters.put("divcode", divcode);
+//	    sqlSession.update(NAMESPACE + ".updateCode", parameters);
+//	    
+//	    // 업데이트된 데이터 조회
+//	    ReleaseVO updatedData = sqlSession.selectOne(NAMESPACE + ".getUpdatedData", pno);
+//	    
+//	    logger.debug("updatedData:" + updatedData);
+//	    
+//	    return updatedData;
+//	}
 	
 	@Override
 	public List<ReleaseVO> boardListCriSelect(Criteria cri) throws Exception {
@@ -148,25 +167,31 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 		return sqlSession.selectOne(NAMESPACE + ".div8Count");
 	}
 	
+	/*
+	 * @Override public ReleaseVO subtractRelease(String pno,int release_count)
+	 * throws Exception { logger.debug(" subtractRelease() 호출");
+	 * logger.debug("release_count:"+release_count);
+	 * 
+	 * // 데이터 업데이트 수행 Map<String, Object> parameters = new HashMap<>();
+	 * parameters.put("pno", pno); parameters.put("release_count", release_count);
+	 * 
+	 * sqlSession.update(NAMESPACE + ".upSubtractRelease", parameters);
+	 * 
+	 * // 업데이트된 데이터 조회 ReleaseVO getupSubtractRelease =
+	 * sqlSession.selectOne(NAMESPACE + ".getupSubtractRelease", pno);
+	 * 
+	 * logger.debug("getupSubtractRelease:"+getupSubtractRelease);
+	 * 
+	 * 
+	 * return getupSubtractRelease; }
+	 */
+	
 	@Override
-	public ReleaseVO subtractRelease(String pno,int release_count) throws Exception {
-		logger.debug(" subtractRelease() 호출");
-		logger.debug("release_count:"+release_count);
+	public ReleaseVO subtractRelease(ReleaseVO rvo) throws Exception {
 		
-		// 데이터 업데이트 수행
-	    Map<String, Object> parameters = new HashMap<>();
-	    parameters.put("pno", pno);
-	    parameters.put("release_count", release_count);
-	 
-	    sqlSession.update(NAMESPACE + ".upSubtractRelease", parameters);
-
-	    // 업데이트된 데이터 조회
-	    ReleaseVO getupSubtractRelease = sqlSession.selectOne(NAMESPACE + ".getupSubtractRelease", pno);
-	    
-	    logger.debug("getupSubtractRelease:"+getupSubtractRelease);
-	    
-	    
-	    return getupSubtractRelease;
+		sqlSession.update(NAMESPACE+".upSubtractRelease", rvo);
+		
+		return rvo;
 	}
 
 	@Override
@@ -182,6 +207,18 @@ public class ReleaseDAOImpl implements ReleaseDAO{
 		logger.debug("errorInsert(ReleaseVO rvo) 호출");
 		
 		sqlSession.update(NAMESPACE+".updateError", rvo);
+		
+		logger.debug("rvo ->>>"+ rvo);
+		
 	}
+
+	@Override
+	public void releaseError(ReleaseVO rvo) throws Exception {
+		logger.debug("releaseError(ReleaseVO rvo) 호출");
+		
+		sqlSession.update(NAMESPACE+".upErrorRelease", rvo);
+	}
+	
+	
 	
 }

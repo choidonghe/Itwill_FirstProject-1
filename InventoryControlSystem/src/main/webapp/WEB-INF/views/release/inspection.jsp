@@ -14,7 +14,7 @@ ${vo} <br>
 	
 	<input type="button" value="전체" onclick="location.href='/release/main'">
 	<input type="button" value="출고" onclick="location.href='/release/release'">
-	<input type="button" value="에러" onclick="location.href='/release/error'">
+	<input type="button" value="불량" onclick="location.href='/release/error'">
 	
 	
 	
@@ -38,10 +38,10 @@ ${vo} <br>
 						</tr>
 						
 						<c:forEach var="vo" items="${vo}">
-	<%-- 					<c:if test="${vo.divcode==5 || vo.divcode == 8}"> --%>
 							<c:if test="${vo.divcode == 5 && vo.order_count > 0 }">
 							<tr>
 								<td>
+<%-- 								<c:if test="${vo.id == 'admin' }"> --%>
 									<form action="" method="post" onsubmit="return test()">
 											<select name="divcode" aria-controls="example1" class="form-control input-sm">
 												<c:forEach var="code" items="${code}">
@@ -50,19 +50,20 @@ ${vo} <br>
 													</c:if>
 												</c:forEach>
 											</select>
-											<input type="text" name="release_count" placeholder="수량을 적으세요." required="required">
+											<input type="number" min="0" max="${vo.order_count}" name="release_count" placeholder="수량을 적으세요." required="required" onkeyup="this.value=numberFormat(this.value, false, false, false)">
+											<input type="hidden" name="id" value="${vo.id}">
 											<input type="hidden" name="pno" value="${vo.pno}">
-											<input type="submit" value="수정" class="btn btn-danger">
+											<input type="submit" value="출고하기" class="btn btn-danger">
 									</form>
+<%-- 									</c:if> --%>
 								</td>
 								<td>${vo.pno}</td>
 								<td>${vo.pname}</td>
 								<td>${vo.order_count}</td>
+								<td>${vo.price}</td>
 								<td>${vo.order_date}</td>
-								<td>${vo.release_date}</td>
 							</tr>
-	<%-- 						</c:if> --%>
-	</c:if>
+							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -85,6 +86,83 @@ ${vo} <br>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+//숫자 입력 (마이너스, 소수점, 콤마)
+function numberFormat(val, isMinus, isFloat, isComma){
+  var str = val;
+  //일단 마이너스, 소수점을 제외한 문자열 모두 제거
+  str = str.replace(/[^-\.0-9]/g, '');
+  //마이너스
+  if(isMinus){
+     str = chgMinusFormat(str);   
+  } else {
+     str = str.replace('-','');
+  }
+  
+  //소수점
+  if(isFloat){
+     str = chgFloatFormat(str);       
+  } else {
+     if(!isMinus ){
+        str = str.replace('-','');
+     }
+     str = str.replace('.','');
+     if(str.length>1){
+        str = Math.floor(str);
+        str = String(str);
+     }
+  }
+  
+  //콤마처리
+  if(isComma){
+     var parts = str.toString().split('.');
+     if(str.substring(str.length - 1, str.length)=='.'){
+        str = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,",") +".";
+     } else {
+        str = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,",") + (parts[1] ? "." + parts[1] : "");
+     }
+  }
+
+  return str;
+}
+
+function chgFloatFormat(str){
+  var idx = str.indexOf('.');  
+  if(idx<0){  
+     return str;
+  } else if(idx>0){
+     var tmpStr = str.substr(idx+1);    
+     if(tmpStr.length>1){             
+        if(tmpStr.indexOf('.')>=0){        
+           tmpStr =  tmpStr.replace(/[^\d]+/g, '');                  
+           str = str.substr(0,idx+1) + tmpStr;
+        }
+     }    
+  } else if(idx==0){
+        str = '0'+str;
+  }
+  return str;  
+}
+  
+function chgMinusFormat(str){
+  var idx = str.indexOf('-');
+  if(idx==0){
+  var tmpStr = str.substr(idx+1);
+     //뒤에 마이너스가 또 있는지 확인
+     if(tmpStr.indexOf('-')>=0){
+           tmpStr = tmpStr.replace('-','');
+        str = str.substr(0,idx+1) + tmpStr;  
+     }
+  } else if(idx>0){
+        str = str.replace('-','');
+  } else if(idx<0){
+        return str;
+  }
+     return str;
+}
+
+</script>
 
 
 

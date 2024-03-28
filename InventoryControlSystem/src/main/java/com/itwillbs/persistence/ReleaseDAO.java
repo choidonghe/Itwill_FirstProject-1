@@ -13,15 +13,19 @@ public interface ReleaseDAO {
 
 	public ReleaseVO listInfoRelease(String pno) throws Exception;
 	
-	public void modifyRelease(ReleaseVO vo) throws Exception;
+	public ReleaseVO mainInspectionRelease(ReleaseVO rvo) throws Exception;
+	
+	public ReleaseVO modifyRelease(ReleaseVO rvo) throws Exception;
 	
 	public void deleteRelease(String pno) throws Exception;
 
 	public List<CodeVO> listCode() throws Exception;
 	
-	public ReleaseVO inspectionMain(String pno, int divcode) throws Exception;
+	//public ReleaseVO inspectionMain(String pno, int divcode) throws Exception;
 	
-	public ReleaseVO modifyInspection(String pno, int divcdoe) throws Exception;
+	public ReleaseVO inspectionRelease(ReleaseVO rvo) throws Exception;
+	
+//	public ReleaseVO modifyInspection(String pno, int divcdoe) throws Exception;
 	
 	// 글 목록 조회(페이징-Cri)
 	public List<ReleaseVO> boardListCriSelect(Criteria cri) throws Exception;
@@ -41,11 +45,15 @@ public interface ReleaseDAO {
 	
 	public int releaseDiv8Count() throws Exception;
 	
-	public ReleaseVO subtractRelease(String pno,int release_count) throws Exception;
+	//public ReleaseVO subtractRelease(String pno,int release_count) throws Exception;
+	
+	public ReleaseVO subtractRelease(ReleaseVO rvo) throws Exception;
 	
 	public void errorInsert(ReleaseVO rvo) throws Exception;
 	
 	public void errorUpdate(ReleaseVO rvo) throws Exception;
+	
+	public void releaseError(ReleaseVO rvo) throws Exception;
 	
 	
 	

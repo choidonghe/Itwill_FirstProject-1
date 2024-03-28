@@ -35,11 +35,19 @@ public class ReleaseServiceImpl implements ReleaseService{
 		return rdao.listInfoRelease(pno);
 	}
 
+
 	@Override
-	public void releaseModify(ReleaseVO vo) throws Exception {
+	public ReleaseVO releaseMainInspection(ReleaseVO rvo) throws Exception {
+		logger.debug("releaseMainInspection(ReleaseVO rvo) 호출");
+		
+		return rdao.mainInspectionRelease(rvo);
+	}
+
+	@Override
+	public ReleaseVO releaseModify(ReleaseVO rvo) throws Exception {
 		logger.debug("releaseModify() 호출");
 		
-		rdao.modifyRelease(vo);
+		return rdao.modifyRelease(rvo);
 		
 	}
 
@@ -61,18 +69,26 @@ public class ReleaseServiceImpl implements ReleaseService{
 		return rdao.listCode();
 	}
 
+	/*
+	 * @Override public ReleaseVO mainInspection(String pno,int divcode) throws
+	 * Exception { logger.debug("mainInspection(String pno) 호출");
+	 * 
+	 * return rdao.inspectionMain(pno, divcode); }
+	 */
+	
 	@Override
-	public ReleaseVO mainInspection(String pno,int divcode) throws Exception {
+	public ReleaseVO releaseInspection(ReleaseVO rvo) throws Exception {
 		logger.debug("mainInspection(String pno) 호출");
 		
-		return rdao.inspectionMain(pno, divcode);
+		return rdao.inspectionRelease(rvo);
 	}
+	
 
-	@Override
-	public ReleaseVO inspectionModify(String pno, int divcode) throws Exception {
-		// TODO Auto-generated method stub
-		return rdao.modifyInspection(pno, divcode);
-	}
+//	@Override
+//	public ReleaseVO inspectionModify(String pno, int divcode) throws Exception {
+//		// TODO Auto-generated method stub
+//		return rdao.modifyInspection(pno, divcode);
+//	}
 	
 	
 	@Override
@@ -127,12 +143,19 @@ public class ReleaseServiceImpl implements ReleaseService{
 		return rdao.releaseDiv8Count();
 	}
 	
+	/*
+	 * @Override public ReleaseVO releaseSubtract(String pno,int release_count)
+	 * throws Exception { logger.debug("releaseSubtract(ReleaseVO vo) 호출");
+	 * logger.debug("release_count:"+release_count);
+	 * 
+	 * return rdao.subtractRelease(pno, release_count); }
+	 */
+	
 	@Override
-	public ReleaseVO releaseSubtract(String pno,int release_count) throws Exception {
+	public ReleaseVO releaseSubtract(ReleaseVO rvo) throws Exception {
 		logger.debug("releaseSubtract(ReleaseVO vo) 호출");
-		logger.debug("release_count:"+release_count);
 		
-		 return rdao.subtractRelease(pno, release_count);
+		return rdao.subtractRelease(rvo);
 	}
 
 	@Override
@@ -140,7 +163,6 @@ public class ReleaseServiceImpl implements ReleaseService{
 		logger.debug("insertError(ReleaseVO rvo) 호출");
 		
 		rdao.errorInsert(rvo);
-		rdao.errorUpdate(rvo);
 	}
 
 	@Override
@@ -151,19 +173,14 @@ public class ReleaseServiceImpl implements ReleaseService{
 		
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Override
+	public void errorRelease(ReleaseVO rvo) throws Exception {
+		logger.debug("errorRelease(ReleaseVO rvo) 호출");
+		
+		rdao.releaseError(rvo);
+		
+	}
+
 	
 	
 }

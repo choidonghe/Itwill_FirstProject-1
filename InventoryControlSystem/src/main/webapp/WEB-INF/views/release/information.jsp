@@ -5,9 +5,9 @@
 <%@ include file="../include/header.jsp"%>
 
 
-<%-- ${infoList}<br> 
+<%--  ${infoList}<br> 
 
-<h1>informatin.jsp</h1> --%>
+<h1>informatin.jsp</h1>  --%>
 
 
 
@@ -26,9 +26,12 @@
 							<th>제품번호</th> 
 							<th>제품명</th> 
 							<th>수량</th> 
-							<th>가격</th> 
-							<th>입고날짜</th> 
+							<th>가격</th>
+							<th>입고자</th>
+							<th>입고날짜</th>
+							<th>수정자</th>
 							<th>수정날짜</th> 
+							<th>출고자</th>
 							<th>출고날짜</th> 
 							<th>출고 수량</th>
 							<th>불량 수량</th>
@@ -44,11 +47,14 @@
 							<td>${infoList.pname}</td>
 							<td>${infoList.order_count}</td>
 							<td>${infoList.price}</td>
+							<td>${infoList.id}</td>
 							<td>${infoList.order_date}</td>
+							<td>${infoList.modify_id}
 							<td>${infoList.update_date}</td>
+							<td>${infoList.release_id}
 							<td>${infoList.release_date}</td>
 							<td>${infoList.release_count}</td>
-							<td>${infoList.error_count}</td>
+							<td>${infoList.count}</td>
 							<td>${infoList.delivery_company}</td>
 							<td>${infoList.delivery_phone}</td>
 							<td>${infoList.delivery_manager}</td>
@@ -67,7 +73,7 @@
 			</div>
 			
 			<div class="box-footer clearfix">
-				<button onclick="history.back()">뒤로가기</button>
+				<button onclick="location.href='/release/main'">메인으로</button>
 			</div>
 		</div>
 	</div>

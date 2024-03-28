@@ -15,7 +15,7 @@ ${vo} <br>
 
 	<input type="button" value="전체" onclick="location.href='/release/main'">
 	<input type="button" value="검수" onclick="location.href='/release/inspection'">
-	<input type="button" value="에러" onclick="location.href='/release/error'">
+	<input type="button" value="불량" onclick="location.href='/release/error'">
 	
 	
 	<div class="content">
@@ -44,7 +44,7 @@ ${vo} <br>
 	
 						<c:forEach var="vo" items="${vo}">
 	<%-- 					<c:if test="${vo.divcode==6 }"> --%>
-							<c:if test="${vo.release_count > 0 }">
+<%-- 							<c:if test="${vo.release_count > 0 }"> --%>
 							<tr>
 								<td>
 									<c:forEach var="code" items="${code}">
@@ -57,15 +57,15 @@ ${vo} <br>
 								<td>${vo.pname}</td>
 								<td>${vo.release_count}</td>
 								<td>${vo.price}</td>
+								<td>${vo.order_date}</td>
 								<td>${vo.update_date}</td>
 								<td>${vo.release_date}</td>
-								<td>${vo.order_date}</td>
 								<td>${vo.delivery_company}</td>
 								<td>${vo.delivery_phone}</td>
 								<td>${vo.delivery_manager}</td>
 							</tr>
 	<%-- 						</c:if> --%>
-	</c:if>
+<%-- 	</c:if> --%>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -73,7 +73,7 @@ ${vo} <br>
 			</div>
 			<div class="box-footer clearfix">
 	
-				<button onclick="history.back()">뒤로가기</button>
+				<button onclick="location.href='/release/main'">메인으로</button>
 	
 				<ul class="pagination pagination-sm no-margin pull-right">
 					<c:if test="${pageVO.prev}">

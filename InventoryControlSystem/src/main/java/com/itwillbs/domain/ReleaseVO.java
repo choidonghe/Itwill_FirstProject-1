@@ -23,8 +23,12 @@ public class ReleaseVO {
 	private int error_count; 
     private String delivery_phone;
     private String delivery_manager;
+    private int count;
+    private String modify_id;
+    private String release_id;
 
 	private List<CodeVO> codeVO;
 	private List<DeliveryVO> deliveryVO;
 //	private List<WarehouseVO> warehouseVO;
+	
 }
