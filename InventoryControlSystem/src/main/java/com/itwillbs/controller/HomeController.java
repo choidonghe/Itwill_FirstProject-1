@@ -34,7 +34,7 @@ import com.itwillbs.service.MemberService;
 /**
  * Handles requests for the application home page.
  */
-@Controller
+@Controller 
 public class HomeController {
 	
 	@Inject

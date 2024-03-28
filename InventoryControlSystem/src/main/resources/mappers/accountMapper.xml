@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwillbs.mapper.AccountMapper">
+	
+	<resultMap type="com.itwillbs.domain.AccountVO" id="accountMap">
+		<result property="account_code" column="account_code"/>
+		<result property="account_name" column="account_name"/>
+		<result property="account_manager" column="account_manager"/>
+		<result property="account_phone" column="account_phone"/>
+		<result property="account_addr" column="account_addr"/>
+		<result property="account_explain" column="account_explain"/>
+	</resultMap>
+	
+	<select id="aList" resultMap="accountMap">
+		select * from account
+	</select>
+	
+	<!-- 거래처 리스트 조회 -->
+	<select id="accountList" resultMap="accountMap">
+	<![CDATA[
+        SELECT * 
+        FROM account 
+        LIMIT #{start}, #{pageSize}
+    ]]>
+	</select>
+	<!-- 거래처 리스트 페이징 처리 Cri -->
+	<select id="accountListCri" resultType="accountVO">
+	<![CDATA[
+		select * from account
+		limit #{startPage},#{pageSize}
+	]]>
+	</select>
+	
+	<!-- 총 거래처 개수  -->
+	<select id="totalCountAccount" resultType="int">
+		select count(account_code) from account
+	</select>
+	
+	 <!-- 거래처 본문 조회 -->
+	<select id="accountRead" resultMap="accountMap">
+		select * from account where account_code = #{account_code}
+	</select>
+	
+	<!-- 거래처 본문 수정 -->
+	<update id="updateAccount" parameterType="AccountVO">
+		update account
+		set account_manager = #{account_manager}, account_phone = #{account_phone}, account_explain = #{account_explain} 
+		where account_code = #{account_code}
+	</update>
+	
+	<!-- 거래처 삭제 -->
+	<delete id="deleteAccount">
+		delete from account where account_code = #{account_code}
+	</delete>
+	
+	<!-- 거래처 추가 -->
+	<insert id="addAccount">
+		insert into account(account_code,account_name,account_manager,account_phone,account_addr,account_explain)
+		values(#{account_code}, #{account_name}, #{account_manager}, #{account_phone}, #{account_addr}, #{account_explain})
+	</insert>
+	
+</mapper>
