@@ -27,6 +27,93 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+
+<!-- 모달창 검색 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content" style="display: flex; align-items: center; justify-content: center;">
+    <table>
+    	<tr>
+    	<td>
+        <input type="text" id="modalSearchInput" class="form-control" placeholder="검색어를 입력하세요" >
+        </td>
+        <td>
+        <button id="search-btn" class="btn btn-flat" onclick="searchModal()" style="margin-left: 3px;">
+        <i class="fa fa-search"></i>
+        </button>
+        </td>
+        </tr>
+    </table>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var searchInput = document.getElementById("modalSearchInput");
+
+    searchInput.addEventListener("keydown", function(event) {
+        // 엔터 키를 눌렀을 때만 실행
+        if (event.key === "Enter") {
+            // 검색 함수 호출
+            searchModal();
+        }
+    });
+});
+
+function focusSearchInput() {
+    document.getElementById("modalSearchInput").focus(); // 검색 창에 포커스를 줌
+}
+
+// 모달 표시 함수
+function showModal() {
+    var modal = document.getElementById("searchModal");
+    modal.classList.add("show"); // 모달을 화면에 표시
+    focusSearchInput(); // 검색 창에 포커스를 줌
+}
+
+// 모달 닫기 함수
+document.getElementsByClassName("close")[0].onclick = function() {
+    var modal = document.getElementById("searchModal");
+    modal.classList.remove("show"); // 모달을 화면에서 숨김
+}
+
+// 사용자가 모달 외부를 클릭하면 모달 닫기
+window.onclick = function(event) {
+    var modal = document.getElementById("searchModal");
+    if (event.target == modal) {
+        modal.classList.remove("show"); // 모달을 화면에서 숨김
+    }
+}
+
+// 모달 내부의 검색 버튼 클릭 시 동작
+function searchModal() {
+    var searchInput = document.getElementById("modalSearchInput").value;
+    // 검색어를 사용하여 새로운 URL로 이동
+    var pageSize = document.getElementById("pageSizeSelect").value; 
+    var type = document.getElementById("categorySelect").value; 
+    var newUrl = "/stock/stockMainCri?page=1&pageSize=" + pageSize + "&keyword=" + encodeURIComponent(searchInput) + "&type=" + type;
+    window.location.href = newUrl; 
+}
+</script>
+
+
+<script>
+document.addEventListener("keydown", function(event) {
+    if (event.key === "/") {
+        event.preventDefault();
+        showModal(); 
+    } else if (event.key === "Escape") {
+        closeModal(); // ESC 키를 누르면 모달을 닫음
+    }
+});
+
+function closeModal() {
+    var modal = document.getElementById("searchModal");
+    modal.classList.remove("show"); // 모달을 화면에서 숨김
+}
+</script>
+<!-- 모달창 검색 코드 -->
+
+
 <button class = "upButton">
 	<i class = "glyphicon glyphicon-menu-up" style = "margin : auto;"></i>
 </button>

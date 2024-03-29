@@ -15,7 +15,6 @@
 	            	<label>PNO</label>
 		            <input type="text" class="form-control" name="pno" id="pno" placeholder="자동 생성됨" readonly>
 		        </div>
-		        	<button type="submit" class="btn btn-primary">pno 생산</button>
 				<div class="form-group">
 					<label>제품명</label>
 					<input type="text" class="form-control" name="pname" placeholder="제품명">

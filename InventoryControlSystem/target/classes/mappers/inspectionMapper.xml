@@ -215,7 +215,7 @@ WHERE i.remain_count = 0;
 	    from error e
 	    join code c
 	    on e.divcode = c.divcode
-	    where e.divcode = 7 or e.divcode = 8 
+	    where e.divcode = 7 
 	    order by e.regdate desc
 	    limit #{start}, #{pageSize}
     ]]>
@@ -227,7 +227,7 @@ WHERE i.remain_count = 0;
 		from error e
 		join code c
 		on e.divcode = c.divcode
-		where e.divcode = 7 or c.divcode = 8
+		where e.divcode = 7 
 		order by e.regdate desc 
 		limit #{startPage},#{pageSize}
 		]]>

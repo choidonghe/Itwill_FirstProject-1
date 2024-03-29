@@ -38,22 +38,57 @@
 	.upButton:hover {
 	    box-shadow: 1px 1px 5px rgb(147 141 201), -1px -1px 5px #525252;
 	}
+	.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1; /* 모달을 다른 요소 위에 표시 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;	
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.4); /* 배경을 반투명하게 */
+}
+
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 모달이 화면 중앙에 위치하도록 */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20%; /* 모달의 너비 설정 */
+    
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 
   </style>
     <meta charset="UTF-8">
     <title>AdminLTE 2 | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
-    <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath }/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href="/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath }/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
-    <link href="/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath }/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 <meta charset='utf-8' />
 <!-- 화면 해상도에 따라 글자 크기 대응(모바일 대응) -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -70,16 +105,16 @@
 <title>1조 재고관리시스템</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
-<link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath }/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- Font Awesome Icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <!-- Ionicons -->
 <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 <!-- Theme style -->
-<link href="/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath }/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
 <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
-<link href="/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath }/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -126,7 +161,7 @@
 
 </head>
 <!-- jQuery 2.1.4 -->
-<script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <body class="skin-blue sidebar-mini">
 
 <c:if test="${empty authVO.id}">
@@ -156,7 +191,7 @@
 										<li>
 											<!-- start message --> <a href="#">
 												<div class="pull-left">
-													<img src="/resources/dist/img/credit/circle-user-solid.svg" class="img-circle" alt="User Image" />
+													<img src="${pageContext.request.contextPath }/resources/dist/img/credit/circle-user-solid.svg" class="img-circle" alt="User Image" />
 												</div>	
 												<h4>
 													출고 관리자 <small><i class="fa fa-clock-o"></i> 5 mins</small>
@@ -167,7 +202,7 @@
 										<!-- end message -->
 										<li><a href="#">
 												<div class="pull-left">
-													<img src="/resources/dist/img/credit/circle-user-solid.svg" class="img-circle" alt="user image" />
+													<img src="${pageContext.request.contextPath }/resources/dist/img/credit/circle-user-solid.svg" class="img-circle" alt="user image" />
 												</div>
 												<h4>
 													AdminLTE Design Team <small><i class="fa fa-clock-o"></i> 2 hours</small>
@@ -176,7 +211,7 @@
 										</a></li>
 										<li><a href="#">
 												<div class="pull-left">
-													<img src="/resources/dist/img/credit/circle-user-solid.svg" class="img-circle" alt="user image" />
+													<img src="${pageContext.request.contextPath }/resources/dist/img/credit/circle-user-solid.svg" class="img-circle" alt="user image" />
 												</div>
 												<h4>
 													Developers <small><i class="fa fa-clock-o"></i> Today</small>
@@ -185,7 +220,7 @@
 										</a></li>
 										<li><a href="#">
 												<div class="pull-left">
-													<img src="/resources/dist/img/credit/circle-user-solid.svg" class="img-circle" alt="user image" />
+													<img src="${pageContext.request.contextPath }/resources/dist/img/credit/circle-user-solid.svg" class="img-circle" alt="user image" />
 												</div>
 												<h4>
 													Sales Department <small><i class="fa fa-clock-o"></i> Yesterday</small>
@@ -194,7 +229,7 @@
 										</a></li>
 										<li><a href="#">
 												<div class="pull-left">
-													<img src="/resources/dist/img/credit/circle-user-solid.svg" class="img-circle" alt="user image" />
+													<img src="${pageContext.request.contextPath }/resources/dist/img/credit/circle-user-solid.svg" class="img-circle" alt="user image" />
 												</div>
 												<h4>
 													Reviewers <small><i class="fa fa-clock-o"></i> 2 days</small>
@@ -225,7 +260,7 @@
 						</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
-								<li class="user-header"><img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+								<li class="user-header"><img src="${pageContext.request.contextPath }/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
 									<p>
 										Admin
 									</p></li>
@@ -267,7 +302,7 @@
 				<!-- Sidebar user panel -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img src="/resources/dist/img/credit/circle-user-solid (1).svg" color = "white" class="img-circle" alt="User Image" />
+						<img src="${pageContext.request.contextPath }/resources/dist/img/credit/circle-user-solid (1).svg" color = "white" class="img-circle" alt="User Image" />
 					</div>
 					<div class="pull-left info">
 						<p>Admin</p>
@@ -298,7 +333,7 @@
 					</a>
 						<ul class ="treeview-menu">
 							<li><a href="/stock/stockMainCri?page=1&pageSize=10"><i class="fa fa-circle-o"></i>재고 수량</a></li>
-							<li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i>창고 위치</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i>창고 위치</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-check"></i> <span>출고</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
@@ -316,10 +351,7 @@
 						</ul></li>
 					<li class="treeview active"><a href="/notice"> <i class="fa fa-edit"></i> <span>공지사항 작성</span> <i class="fa fa-angle-left pull-right"></i>
 					</a></li>
-					<li><a href="../calendar.html"> <i class="fa fa-calendar"></i> <span>Calendar</span> 
-					</a></li>
-					<li><a href="../mailbox/mailbox.html"> <i class="fa fa-envelope"></i> <span>Mailbox</span> 
-					</a></li>
+					
 					<c:if test="${authVO.auth == 'ROLE_ADMIN' }">
 					<li><a href="./adminPage"> <span>관리자 페이지</span> 
 					</a></li>
