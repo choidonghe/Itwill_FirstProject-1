@@ -24,6 +24,5 @@ public class ProductVO {
 	private String id;
 	
 	private List<CodeVO> codeVO;
-	//private List<CategoryVO> categoryVO;
 	private List<WarehouseVO> warehouseVO;
 }

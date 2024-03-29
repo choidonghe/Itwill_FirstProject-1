@@ -44,12 +44,8 @@ public class StoreIngController {
 		spageVO.setCri(cri);
 		spageVO.setTotalCount(pService.getProductListCount());
 		
-		//List<ProductVO> productList = pService.productGetList();
 		List<ProductVO> productList = pService.productGetListCri(cri);
-		//List<ProductVO> productListPage = pService.productListPaget(1);
 		List<CodeVO> codeList = cService.allCodeList();
-		
-		
 		
 		logger.debug(" list.size() : " + productList.size());
 		logger.debug(" @!@!@!" + productList);
@@ -58,8 +54,6 @@ public class StoreIngController {
 		model.addAttribute("cri", cri);
 		model.addAttribute("spageVO", spageVO);
 		model.addAttribute("codeList", codeList);
-		
-		//model.addAttribute("productListPage", productListPage);
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)

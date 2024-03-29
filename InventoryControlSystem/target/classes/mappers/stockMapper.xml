@@ -11,9 +11,6 @@
 		<result property="count" column="count" />
 		<result property="pname" column="pname" />
 		<result property="company" column="divcode" />
-		<!-- <result property="category" column="category"/> -->
-		<!-- <result property= "type" column= "type"/> -->
-		<!-- <result property= "keyword" column="keyword"/> -->
 	</resultMap>
 
 	<resultMap type="com.itwillbs.domain.StockDetailVO"
@@ -105,6 +102,7 @@
 		warehouse.location,
 		product.unit_price,
 		product.sales_price,
+		stock.regdate,
 		inspection.id
 		FROM
 		stock

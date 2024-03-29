@@ -70,10 +70,5 @@ public class ProductServiceIpl implements ProductService {
 	public List<CategoryVO> cList(CategoryVO cvo) throws Exception {
 		return pdao.cList(cvo);
 	}
-
-	
-
-	
-	
 	
 }

@@ -110,10 +110,4 @@
 	<select id="selectCategory" resultMap="categoryVO">
 		select * from category
 	</select>
-	
-	
-	
-	
-	
-	
 </mapper>

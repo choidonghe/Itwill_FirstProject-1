@@ -14,11 +14,9 @@
     });
 </script>
 
-
 	<input type="button" value="전체" onclick="location.href='/release/main'">
 	<input type="button" value="검수" onclick="location.href='/release/inspection'">
 	<input type="button" value="불량" onclick="location.href='/release/error'">
-	
 	
 	<div class="content">
 		<div class="box">
@@ -32,21 +30,16 @@
 						<tr>
 							<th>상태</th> 
 							<th>제품번호</th> 
-							<th>제품명</th> 
 							<th>출고 수량</th>
 							<th>가격</th> 
 							<th>입고날짜</th> 
-							<th>수정날짜</th> 
 							<th>출고날짜</th> 
 							<th>배송 업체</th>
 							<th>전화번호</th>
 							<th>배송자</th>
 						</tr>
 	
-	
 						<c:forEach var="vo" items="${vo}">
-	<%-- 					<c:if test="${vo.divcode==6 }"> --%>
-<%-- 							<c:if test="${vo.release_count > 0 }"> --%>
 							<tr>
 								<td>
 									<c:forEach var="code" items="${code}">
@@ -56,18 +49,14 @@
 									</c:forEach>
 								</td>
 								<td>${vo.pno}</td>
-								<td>${vo.pname}</td>
 								<td>${vo.release_count}</td>
 								<td>${vo.price}</td>
-								<td>${vo.order_date}</td>
 								<td>${vo.update_date}</td>
 								<td>${vo.release_date}</td>
 								<td>${vo.delivery_company}</td>
 								<td>${vo.delivery_phone}</td>
 								<td>${vo.delivery_manager}</td>
 							</tr>
-	<%-- 						</c:if> --%>
-<%-- 	</c:if> --%>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -93,11 +82,5 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
 
 <%@ include file="../include/footer.jsp"%>

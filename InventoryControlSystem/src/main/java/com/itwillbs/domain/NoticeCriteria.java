@@ -49,7 +49,4 @@ public class NoticeCriteria {
 		return "Criteria [noticePage=" + noticePage + ", noticePageSize=" + noticePageSize + "]";
 	}
 	
-	
-	
-	
 }

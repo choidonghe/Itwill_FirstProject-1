@@ -93,27 +93,6 @@ th {
 			</c:if>
 			</ul>
 		</div>	
-	
-	
-	
-	
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <%@ include file="../include/footer.jsp"%>

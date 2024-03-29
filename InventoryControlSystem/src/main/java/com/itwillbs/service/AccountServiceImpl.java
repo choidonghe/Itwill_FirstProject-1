@@ -65,7 +65,5 @@ public class AccountServiceImpl implements AccountService {
 	public List<AccountVO> aList(AccountVO avo) throws Exception {
 		return adao.aLit(avo);
 	}
-	
-	
 
 }

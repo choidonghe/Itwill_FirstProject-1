@@ -36,7 +36,4 @@ public interface MemberDAO {
 
 	public void updateMember(MemberVO vo) throws Exception;
 	
-
-	 
-
 }

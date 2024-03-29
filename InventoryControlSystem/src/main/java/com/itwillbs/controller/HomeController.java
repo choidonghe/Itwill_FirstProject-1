@@ -38,9 +38,6 @@ import com.itwillbs.domain.ErgOrderPageVO;
 import com.itwillbs.service.MainService;
 import com.itwillbs.service.MemberService;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class HomeController {
 	
@@ -52,13 +49,10 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public void loginGET() {
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String loginGET() {
 		logger.debug(" registerGET() 호출");
-		
+		return "login";
 	}
 	
 	@RequestMapping(value = "/confirmid", method = RequestMethod.POST)
@@ -70,15 +64,13 @@ public class HomeController {
 		if(id != "") {
 			logger.debug("조회된 아이디 : "+mService.idCheck(id));	
 			
-			
 		}
 		
 		return new ResponseEntity<Integer>(result, HttpStatus.OK );
-		
 	}
 	
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String loginPOST(MemberVO vo, HttpSession session, Model model) throws Exception{
 		logger.debug(" loginPOST() 호출");
 		AuthVO authVO = mService.memberLogin(vo);
@@ -145,9 +137,6 @@ public class HomeController {
 		return "redirect:/login";
 	}
 	
-	
-	
-	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public void mainGET(ErgOrderCriteria oCri,NoticeCriteria nCri, Model model) throws Exception{
 		logger.debug(" main() 실행");
@@ -187,9 +176,6 @@ public class HomeController {
 		model.addAttribute("storeList", storeList);
 		model.addAttribute("ergList", ergList);
 		model.addAttribute("noList", noList);
-		
-		
-		
 		
 		//페이지 이동
 		
@@ -235,8 +221,6 @@ public class HomeController {
 		model.addAttribute("ergList", ergList);
 		model.addAttribute("noList", noList);		
 		
-		
-		
 	}
 	
 	@RequestMapping(value = "/notice",method = RequestMethod.GET)
@@ -269,12 +253,6 @@ public class HomeController {
 		logger.debug(" dayStoreReleasePOST() 호출");
 		logger.debug("클릭한 날짜 : "+startStr);
 		
-//		List<ProductVO> productList = mainService.productDayGet(startStr);
-//		logger.debug("!@@@@@@@@@"+productList);
-//		
-//		List<ReleaseVO> releaseList = mainService.releaseDayGet(startStr);
-//		logger.debug(" !@@@@@@@@@@"+releaseList);
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("productList", mainService.productDayGet(startStr));
@@ -301,9 +279,5 @@ public class HomeController {
 
 			return "redirect:/adminPage";
 		}
-	
-	
-	
-	
 	
 } // controller

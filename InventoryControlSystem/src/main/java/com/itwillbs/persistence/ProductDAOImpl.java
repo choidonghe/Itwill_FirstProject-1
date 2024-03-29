@@ -22,7 +22,6 @@ public class ProductDAOImpl implements ProductDAO {
 	private static final Logger logger = LoggerFactory.getLogger(ProductDAOImpl.class);
 	
 	private static final String NAMESPACE = "com.itwillbs.mapper.StoreMapper";
-	
 
 	 @Override 
 	 public List<ProductVO> productList() throws Exception {
@@ -80,8 +79,5 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList(NAMESPACE + ".selectCategory", cvo);
 				
 	}
-	
-	
-	
 	
 }

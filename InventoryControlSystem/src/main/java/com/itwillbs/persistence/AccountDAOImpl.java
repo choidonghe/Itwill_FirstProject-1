@@ -67,9 +67,5 @@ public class AccountDAOImpl implements AccountDAO {
 	public List<AccountVO> aLit(AccountVO avo) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".aList", avo);
 	}
-
-	
-	
-	
 	
 }

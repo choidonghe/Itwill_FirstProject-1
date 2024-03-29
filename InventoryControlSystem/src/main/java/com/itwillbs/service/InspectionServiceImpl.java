@@ -113,7 +113,5 @@ public class InspectionServiceImpl implements InspectionService{
 		
 		return idao.productDiv3Cri(cri);
 	}
-
-	
 	
 }

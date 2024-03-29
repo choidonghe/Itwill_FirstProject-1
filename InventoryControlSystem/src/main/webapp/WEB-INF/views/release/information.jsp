@@ -13,7 +13,6 @@
     });
 </script>
 
-
 	<div class="content">
 		<div class="box">
 			<div class="box-header with-border">
@@ -26,12 +25,6 @@
 						<tr>
 							<th>상태</th> 
 							<th>제품번호</th> 
-							<th>제품명</th> 
-							<th>수량</th> 
-							<th>가격</th>
-							<th>입고자</th>
-							<th>입고날짜</th>
-							<th>수정자</th>
 							<th>수정날짜</th> 
 							<th>출고자</th>
 							<th>출고날짜</th> 
@@ -46,12 +39,6 @@
 						<tr>
 							<td>${infoList.divcode}</td>
 							<td>${infoList.pno}</td>
-							<td>${infoList.pname}</td>
-							<td>${infoList.order_count}</td>
-							<td>${infoList.price}</td>
-							<td>${infoList.id}</td>
-							<td>${infoList.order_date}</td>
-							<td>${infoList.modify_id}
 							<td>${infoList.update_date}</td>
 							<td>${infoList.release_id}
 							<td>${infoList.release_date}</td>
@@ -96,10 +83,5 @@
 			});
 		});
 	</script>
-
-
-
-
-
+	
 <%@ include file="../include/footer.jsp"%>
-

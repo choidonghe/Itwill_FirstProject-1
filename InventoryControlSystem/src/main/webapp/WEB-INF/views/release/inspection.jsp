@@ -17,9 +17,6 @@
 	<input type="button" value="출고" onclick="location.href='/release/release'">
 	<input type="button" value="불량" onclick="location.href='/release/error'">
 	
-	
-	
-	
 	<div class="content">
 		<div class="box">
 			<div class="box-header with-border">
@@ -42,7 +39,6 @@
 							<c:if test="${vo.divcode == 5 && vo.order_count > 0 }">
 							<tr>
 								<td>
-<%-- 								<c:if test="${vo.id == 'admin' }"> --%>
 									<form action="" method="post" onsubmit="return test()">
 											<select name="divcode" aria-controls="example1" class="form-control input-sm">
 												<c:forEach var="code" items="${code}">
@@ -52,12 +48,10 @@
 												</c:forEach>
 											</select>
 											<input type="number" min="0" max="${vo.order_count}" name="release_count" placeholder="수량을 적으세요." required="required" onkeyup="this.value=numberFormat(this.value, false, false, false)">
-											<%-- <input type="hidden" name="id" value="${vo.id}"> --%>
 											<input type="hidden" name="pno" value="${vo.pno}">
 											<input type="hidden" name="id" value="${authVO.id }">
 											<input type="submit" value="출고하기" class="btn btn-danger">
 									</form>
-<%-- 									</c:if> --%>
 								</td>
 								<td>${vo.pno}</td>
 								<td>${vo.pname}</td>
@@ -165,9 +159,5 @@ function chgMinusFormat(str){
 }
 
 </script>
-
-
-
-
 
 <%@ include file="../include/footer.jsp"%>

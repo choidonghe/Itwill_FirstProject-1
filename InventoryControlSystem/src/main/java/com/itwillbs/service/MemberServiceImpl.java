@@ -128,18 +128,4 @@ public class MemberServiceImpl implements MemberService {
 		return dao.getMember(vo);
 	}
 
-
-
-	
-	
-
-
-	
-	
-	
-	
-	
-	
-	
-
 } // serviceImpl

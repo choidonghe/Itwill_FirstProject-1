@@ -28,7 +28,4 @@ public interface StockService {
 	
 	// 재고 count 업데이트
 	public void stockCountUpdate(StockDetailVO sdVO) throws Exception;
-	
-
-
 }

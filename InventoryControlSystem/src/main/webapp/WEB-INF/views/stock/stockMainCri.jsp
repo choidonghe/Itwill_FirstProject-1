@@ -407,6 +407,4 @@ function closeModal() {
 </div>
 
 
-
-
 <%@ include file="../include/footer.jsp"%>

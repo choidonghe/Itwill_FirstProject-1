@@ -49,7 +49,4 @@ public class ErgOrderCriteria {
 		return "Criteria [orderPage=" + orderPage + ", orderPageSize=" + orderPageSize + "]";
 	}
 	
-	
-	
-	
 }

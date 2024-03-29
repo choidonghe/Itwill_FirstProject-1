@@ -29,7 +29,6 @@ public class StockDAOImpl implements StockDAO{
 		return sqlSession.selectList(NAMESPACE + ".selectStockList");
 	}
 	
-
 	// 재고 리스트 조회 (페이징)
 	@Override
 	public List<StockVO> stockListPageSelect(int page) throws Exception {
@@ -64,7 +63,6 @@ public class StockDAOImpl implements StockDAO{
 		return sqlSession.selectList(NAMESPACE + ".detailView",pno);
 	}
 
-
 	@Override
 	public void moveReleaseUpdate(StockDetailVO sdVO) throws Exception {
 		logger.debug(" moveReleaseUpdate(stockVO) 호출 ");
@@ -88,9 +86,4 @@ public class StockDAOImpl implements StockDAO{
 		
 		sqlSession.update(NAMESPACE+".updateStockCount", sdVO);
 	}
-	
-
-
-
-
 }

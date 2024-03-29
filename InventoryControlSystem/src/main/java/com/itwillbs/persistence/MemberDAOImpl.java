@@ -33,14 +33,12 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	private static final String NAMESPACE = "com.itwillbs.mapper.BoardMapper";
 
-
 	@Override
 	public int checkId(String id) throws Exception {
 		logger.debug(" checkId(String id) 실행");
 		
 		return sql.selectOne(NAMESPACE+".checkId", id);
 	}
-	
 	
 	@Override
 	public String createSalt() throws Exception {
@@ -57,7 +55,6 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sb.toString();
 	}
-
 
 	
 	@Override
@@ -173,7 +170,7 @@ public class MemberDAOImpl implements MemberDAO {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=519552de35c6233367d12dde932a05c8"); // 개인 REST IP
-            sb.append("&redirect_uri=http://c6d2311t1.itwillbs.com/wms/registerkakao");
+            sb.append("&redirect_uri=http://c6d2311t1.itwillbs.com/registerkakao");
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
@@ -278,28 +275,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sql.selectList(NAMESPACE+".memberListGet");
 	}
 
-
 	@Override
 	public void updateMember(MemberVO vo) throws Exception {
 		logger.debug(" updateMember(MemberVO vo) 실행 ");
 
 		sql.update(NAMESPACE+".updateMember", vo);
 	}
-
-
-
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }// DAOImpl

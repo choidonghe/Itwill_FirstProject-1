@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class CommonExceptionAdvice {
 	
-	
 	private static final Logger logger = LoggerFactory.getLogger(CommonExceptionAdvice.class);
 	
 	@ExceptionHandler(Exception.class)

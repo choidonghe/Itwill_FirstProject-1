@@ -48,7 +48,6 @@ public class ReleaseServiceImpl implements ReleaseService{
 		logger.debug("releaseModify() 호출");
 		
 		return rdao.modifyRelease(rvo);
-		
 	}
 
 
@@ -57,8 +56,6 @@ public class ReleaseServiceImpl implements ReleaseService{
 		logger.debug("releaseDelete(ReleaseVO vo) 호출");
 		
 		rdao.deleteRelease(pno);
-		
-		
 	}
 
 	@Override
@@ -69,27 +66,12 @@ public class ReleaseServiceImpl implements ReleaseService{
 		return rdao.listCode();
 	}
 
-	/*
-	 * @Override public ReleaseVO mainInspection(String pno,int divcode) throws
-	 * Exception { logger.debug("mainInspection(String pno) 호출");
-	 * 
-	 * return rdao.inspectionMain(pno, divcode); }
-	 */
-	
 	@Override
 	public ReleaseVO releaseInspection(ReleaseVO rvo) throws Exception {
 		logger.debug("mainInspection(String pno) 호출");
 		
 		return rdao.inspectionRelease(rvo);
 	}
-	
-
-//	@Override
-//	public ReleaseVO inspectionModify(String pno, int divcode) throws Exception {
-//		// TODO Auto-generated method stub
-//		return rdao.modifyInspection(pno, divcode);
-//	}
-	
 	
 	@Override
 	public List<ReleaseVO> getListCri(Criteria cri) throws Exception {
@@ -143,14 +125,6 @@ public class ReleaseServiceImpl implements ReleaseService{
 		return rdao.releaseDiv8Count();
 	}
 	
-	/*
-	 * @Override public ReleaseVO releaseSubtract(String pno,int release_count)
-	 * throws Exception { logger.debug("releaseSubtract(ReleaseVO vo) 호출");
-	 * logger.debug("release_count:"+release_count);
-	 * 
-	 * return rdao.subtractRelease(pno, release_count); }
-	 */
-	
 	@Override
 	public ReleaseVO releaseSubtract(ReleaseVO rvo) throws Exception {
 		logger.debug("releaseSubtract(ReleaseVO vo) 호출");
@@ -181,6 +155,4 @@ public class ReleaseServiceImpl implements ReleaseService{
 		
 	}
 
-	
-	
 }

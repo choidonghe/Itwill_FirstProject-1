@@ -31,10 +31,6 @@ public class MainDAOImpl implements MainDAO {
 	private static final Logger logger = LoggerFactory.getLogger(MainDAOImpl.class);
 	
 	private static final String NAMESPACE = "com.itwillbs.mapper.MainMapper";
-	
-	
-	
-	
 
 	@Override
 	public String getTodayMonth() throws Exception {
@@ -56,11 +52,7 @@ public class MainDAOImpl implements MainDAO {
 		
 		List<String> dayList = new ArrayList<String>();
 		
-//		Date today = new Date();
-//		logger.debug("today : "+today);
-		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
 		
 		for(int i = 0; i < 5; i++ ){
 			
@@ -154,9 +146,6 @@ public class MainDAOImpl implements MainDAO {
 		return sql.selectList(NAMESPACE+".noticeList", cri);
 	}
 	
-	
-	
-
 	@Override
 	public int serchNoticeCount() throws Exception {
 		logger.debug(" serchNoticeCount() 호출");
@@ -207,9 +196,4 @@ public class MainDAOImpl implements MainDAO {
 		
 		return sql.selectList(NAMESPACE+".releaseDay", startStr);
 	}
-	
-	
-	
-	
-	
 }// daoImpl

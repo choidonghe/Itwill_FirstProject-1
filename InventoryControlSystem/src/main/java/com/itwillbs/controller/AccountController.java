@@ -20,7 +20,6 @@ import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.StorePageVO;
 import com.itwillbs.service.AccountService;
 
-
 @Controller
 @RequestMapping(value = "/account/*")
 public class AccountController { 
@@ -84,6 +83,5 @@ public class AccountController {
 		aService.accountAdd(avo);
 		return "redirect:/account/accountMain";
 	}
-		
 	
 }

@@ -111,10 +111,5 @@ public class StockController {
 		logger.debug(" finishReleaseGET() 호출 ");
 		logger.debug(" 출고 신청 완료! ");
 	}
-	
-	
-
-
-	
 
 }

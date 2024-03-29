@@ -41,7 +41,6 @@ public class MainServiceImpl implements MainService {
 		return dList;
 	}
 
-
 	@Override
 	public List<String> dayListGet() throws Exception {
 		logger.debug(" dayListGet() 호출");
@@ -49,7 +48,6 @@ public class MainServiceImpl implements MainService {
 		return mdao.getDayList();
 		
 	}
-
 
 	@Override
 	public List<String> releaseListGet() throws Exception {
@@ -98,9 +96,6 @@ public class MainServiceImpl implements MainService {
 		return mdao.noticeBoard(cri);
 	}
 
-	
-	
-
 	@Override
 	public int searchNoCount() throws Exception {
 		logger.debug(" searchNoCount() 호출 ");
@@ -148,11 +143,5 @@ public class MainServiceImpl implements MainService {
 		
 		return mdao.getReleaseDayList(startStr);
 	}
-	
-	
-	
-	
-	
-
 	
 }// serviceImpl

@@ -59,9 +59,6 @@ public class NoticePageVO {
 		next = endPage * cri.getNoticePageSize() < totalCount;		
 	}
 	
-	
-	
-	
 	public int getTotalCount() {
 		return totalCount;
 	}
@@ -116,11 +113,6 @@ public class NoticePageVO {
 		return "NoticePageVO [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
 				+ prev + ", next=" + next + ", pageBlock=" + pageBlock + ", cri=" + cri + "]";
 	}
-
-	
-	
-	
-	
 	
 	
 } // PageVO

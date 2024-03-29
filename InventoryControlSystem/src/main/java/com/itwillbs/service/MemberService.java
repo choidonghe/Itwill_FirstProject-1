@@ -26,5 +26,4 @@ public interface MemberService {
 	
 	public MemberVO kakaoMemberGet(MemberVO vo) throws Exception;
 	
-
 } //service

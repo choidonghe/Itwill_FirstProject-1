@@ -157,7 +157,4 @@ function chgMinusFormat(str){
 
 </script>
 
-
-
-
 <%@ include file="../include/footer.jsp"%>

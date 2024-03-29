@@ -28,11 +28,7 @@ public interface AccountService {
 	// 거래처 추가
 	public void accountAdd(AccountVO avo) throws Exception;
 	
-	
 	// 거래처리스트
 	public List<AccountVO> aList(AccountVO avo) throws Exception;
-	
-	
-	
 	
 }

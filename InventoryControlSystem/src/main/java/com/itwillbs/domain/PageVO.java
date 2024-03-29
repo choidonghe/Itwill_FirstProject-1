@@ -7,7 +7,6 @@ public class PageVO {
 
 	private static final Logger logger = LoggerFactory.getLogger(PageVO.class);
 
-	
 	private int totalCount; // 전체 글의 수
 	private int startPage; // 블럭의 시작번호
 	private int endPage; // 블럭의 끝번호

@@ -36,21 +36,16 @@
 	
 							<tr>
 								<td>
-<%-- 								<c:if test="${id eq 'admin}"> --%>
 										<select name="divcode">
 												<c:forEach var="code" items="${code}">
 													<option value="${code.divcode}">${code.korname}</option>
 												</c:forEach>
 										</select>
-<%-- 								</c:if> --%>
 								</td>
 								<td><input type="text" value="${modifyList.pno}" readonly="readonly"></td>
 								<td><input type="text" name="pname" value="${modifyList.pname}" readonly="readonly"></td>
-<%-- 								<td><input type="number" min="0" name="order_count" value="${modifyList.order_count}"></td> --%>
-																																	<!--     숫자만 입력, 마이너스 불가, 소수점 불가, 콤마처리 -->
 								<td><input type="number" min="0" name="order_count" value="${modifyList.order_count}" onkeyup="this.value=numberFormat(this.value, false, false, false)"></td>
 								<td><input type="text" name="id" value="${modifyList.id}" readonly="readonly" ></td>
-								
 							</tr>
 						</tbody>
 					</table>
@@ -144,6 +139,4 @@ function chgMinusFormat(str){
 
 </script>
 
-
 <%@ include file="../include/footer.jsp"%>
-

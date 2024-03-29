@@ -90,7 +90,5 @@
 		WHERE m.id = #{id} AND a.id = #{id}
 
 	</update>
-	
-	
 
 </mapper>

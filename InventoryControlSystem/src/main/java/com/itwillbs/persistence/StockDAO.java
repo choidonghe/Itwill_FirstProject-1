@@ -31,9 +31,5 @@ public interface StockDAO {
 	
 	// 재고 count 업데이트
 	public void updateStockCount(StockDetailVO sdVO) throws Exception;
-	
-
-	
-	
 
 }

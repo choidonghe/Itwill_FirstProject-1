@@ -17,5 +17,4 @@ public class StockDetailVO {
 	private String location;
 	private int count;
 	private String id;
-
 }

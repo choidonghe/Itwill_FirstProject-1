@@ -50,5 +50,4 @@ public interface InspectionService {
 	// 검수 목록 개수
 	public int countInspec() throws Exception;
 	
-	
 }

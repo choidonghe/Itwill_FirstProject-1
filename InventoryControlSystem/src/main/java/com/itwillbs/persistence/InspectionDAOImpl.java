@@ -123,6 +123,4 @@ public class InspectionDAOImpl implements InspectionDAO{
 		return sqlSession.selectList(NAMESPACE + ".inspecListCri3", cri);
 	}
 	
-	
-	
 }

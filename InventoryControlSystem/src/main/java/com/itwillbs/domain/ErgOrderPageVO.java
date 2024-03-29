@@ -59,9 +59,6 @@ public class ErgOrderPageVO {
 		next = endPage * cri.getOrderPageSize() < totalCount;		
 	}
 	
-	
-	
-	
 	public int getTotalCount() {
 		return totalCount;
 	}
@@ -116,11 +113,6 @@ public class ErgOrderPageVO {
 		return "PageVO [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
 				+ prev + ", next=" + next + ", pageBlock=" + pageBlock + ", cri=" + cri + "]";
 	}
-
-	
-	
-	
-	
 	
 	
 } // PageVO

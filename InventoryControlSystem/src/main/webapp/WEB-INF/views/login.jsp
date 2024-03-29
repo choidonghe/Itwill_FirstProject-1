@@ -128,7 +128,7 @@ span {
  	 
  	function loginWithKakao() {
  	    Kakao.Auth.authorize({
- 	      redirectUri: 'http://c6d2311t1.itwillbs.com/wms/registerkakao',
+ 	      redirectUri: 'http://c6d2311t1.itwillbs.com/registerkakao',
  	    });
  	  }
  	 
@@ -176,12 +176,7 @@ span {
          	}); //End Ajax
      	});
      })
- 	 
 </script>
- 	 
- 	 
-
-
 
 	<div class="wrap">
 	<h1 style="text-align: center; margin-top: 100px;, margin-bottom: 10px;">InventoryControlSystem</h1>
@@ -199,13 +194,14 @@ span {
 			<form id="login" action="" class="input-group" method="post">
 				<input type="text" class="input-field" placeholder="User ID" name="id" required> 
 				<input type="password" class="input-field" placeholder="Enter Password" name="pass" required> 
-				<!-- <input type="checkbox" class="checkbox"> -->
 				<button class="submit">Login</button>
 			</form>
 			<form id="register" action="/register" class="input-group" method="post">
 				<input id="id" type="text" class="input-field" placeholder="User ID" name="id" required> 
 				<label id="label1"></label>
-				<input type="password" class="input-field" placeholder="Enter Password" name="pass" required>
+				<input id="pass" type="password" class="input-field" placeholder="Enter Password" name="pass" required>
+				<input id="pass2" type="password" class="input-field" placeholder="Enter Password" required>
+				<label id="label2"></label>
 				<input type="text" class="input-field" placeholder="Enter Name" name="name" required>
 				<input type="email" class="input-field" placeholder="Your Email" name="email" required> 
 				<input type="number" class="input-field" placeholder="Your PhoneNumber" name="phone" required> 

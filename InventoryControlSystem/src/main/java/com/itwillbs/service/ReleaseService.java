@@ -21,10 +21,7 @@ public interface ReleaseService {
 	
 	public List<CodeVO> codeList() throws Exception;
 	
-//	public ReleaseVO mainInspection(String pno,int divcode) throws Exception;
 	public ReleaseVO releaseInspection(ReleaseVO rvo) throws Exception;
-	
-//	public ReleaseVO inspectionModify(String pno,int divcode) throws Exception;
 	
 	// 글 목록 조회 동작(페이징처리 - cri)
 	public List<ReleaseVO> getListCri(Criteria cri) throws Exception;
@@ -44,9 +41,6 @@ public interface ReleaseService {
 	public int cri6Count() throws Exception;
 	
 	public int cri8Count() throws Exception;
-	
-	// 검수완료
-	//public ReleaseVO releaseSubtract(String pno,int release_count) throws Exception;
 	
 	public ReleaseVO releaseSubtract(ReleaseVO rvo) throws Exception;
 	

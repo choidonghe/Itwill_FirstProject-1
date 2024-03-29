@@ -34,7 +34,7 @@
 					</table>
 				</div>
 
-				<button type="button" class="btn btn-block btn-primary btn-lg"" data-toggle="modal" data-target="#modal-default" onclick="location.href='/release/main'" style="width: 200px;">
+				<button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#modal-default" onclick="location.href='/release/main'" style="width: 200px;">
 				출고 페이지로</button>
 				</div>
 			  </div>
