@@ -1,23 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="./include/header.jsp"%>
-<%-- id : ${id }
-<br>
-release : ${releaseList }
-<br>
-store : ${storeList }
-<br>
-order : ${ergList }
-<br>
-notice : ${noList }
-<br>
-oCri : ${oCri }
-<br>
-nCri : ${nCri }
-<br>
-orderPageVO : ${orderPageVO }
-<br>
-noticePageVO : ${noticePageVO } --%>
 
 <!-- 모달창 -->
 <div id="customModal" class="modal">
@@ -37,7 +20,7 @@ noticePageVO : ${noticePageVO } --%>
 					</table>
 				</div>
 
-				<button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#modal-default" onclick="location.href='/inspectionMain'" style="width: 200px;">
+				<button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#modal-default" onclick="location.href='/inspec/inspectionMain'" style="width: 200px;">
 				입고 페이지로</button>
 				
 				<h4 class="box-title">출고 정보</h4>
@@ -51,7 +34,7 @@ noticePageVO : ${noticePageVO } --%>
 					</table>
 				</div>
 
-				<button type="button" class="btn btn-block btn-primary btn-lg"" data-toggle="modal" data-target="#modal-default" onclick="location.href='/inspectionMain'" style="width: 200px;">
+				<button type="button" class="btn btn-block btn-primary btn-lg"" data-toggle="modal" data-target="#modal-default" onclick="location.href='/release/main'" style="width: 200px;">
 				출고 페이지로</button>
 				</div>
 			  </div>

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.itwillbs.domain.CategoryVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.ErrorVO;
 import com.itwillbs.domain.ProductVO;
@@ -62,6 +63,12 @@ public class ProductServiceIpl implements ProductService {
 	@Override
 	public void insertProduct(ProductVO pvo) throws Exception {
 		pdao.insertProduct(pvo);
+	}
+
+
+	@Override
+	public List<CategoryVO> cList(CategoryVO cvo) throws Exception {
+		return pdao.cList(cvo);
 	}
 
 	

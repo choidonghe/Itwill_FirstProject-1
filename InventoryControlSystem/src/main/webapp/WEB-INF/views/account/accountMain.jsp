@@ -46,8 +46,6 @@ th {
 	<div class="box-header">
 </div>
 	<fieldset>
-	${spageVO }
-	${cri }
 		<legend>거래처 관리</legend>
 
 	    <table>

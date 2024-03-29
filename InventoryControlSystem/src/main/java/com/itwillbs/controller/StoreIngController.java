@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.AccountVO;
+import com.itwillbs.domain.CategoryVO;
 import com.itwillbs.domain.CodeVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.ErrorVO;
@@ -74,10 +75,12 @@ public class StoreIngController {
 	}
 	 
 	@RequestMapping(value = "/insertPro", method = RequestMethod.GET)
-	public void registerGET(Model model, AccountVO avo) throws Exception{
+	public void registerGET(Model model, AccountVO avo, CategoryVO cvo) throws Exception{
 		logger.debug(" registerGET() 호출 ");
 		List<AccountVO> aList = aService.aList(avo);
+		List<CategoryVO> cList = pService.cList(cvo);
 		model.addAttribute("aList", aList);
+		model.addAttribute("cList", cList);
 	}
 	
 	@RequestMapping(value = "/insertPro", method = RequestMethod.POST)

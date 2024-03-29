@@ -3,20 +3,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ include file="../include/header.jsp"%>
+<button class = "upButton">
+	<i class = "glyphicon glyphicon-menu-up" style = "margin : auto;"></i>
+</button>
+<script>
+    document.querySelector('.upButton').addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
 
-
-<%-- cri : ${cri } <br>
-
-cri.page : ${param.page} <br>
-cri.pageSize : ${param.pageSize} <br>
-
-pageVO : ${pageVO} <br>
-
-${mainList} <br>
-${code} <br>
-
-	<h1>main.jsp</h1> --%>
-	
 	<input type="button" value="전체" onclick="location.href='/release/main'">
 	<input type="button" value="검수" onclick="location.href='/release/inspection'">
 	<input type="button" value="출고" onclick="location.href='/release/release'">

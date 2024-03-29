@@ -4,7 +4,7 @@
 <html>
   <head>
   <style>
-  .popup-container {
+  	.popup-container {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -14,7 +14,30 @@
     padding: 20px;
     z-index: 9999; /* 팝업창을 다른 요소 위로 올립니다. */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 팝업창에 그림자 효과를 추가합니다. */
-}
+	}
+	.upButton {
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%;
+    border: none; 
+    background-color: #eeeeee;
+    color: #616161; 
+    font-size: 18px;
+    outline: none; 
+    box-shadow: 0px 1px 5px rgb(147 141 201 / 25%), 0px 10px 25px rgb(147 141 201 / 20%); 
+    transition: all 0.4s;
+    overflow: hidden;
+    position: fixed;
+    display: block;
+    bottom: 35px;
+    right : 30px;
+    z-index: 999;
+    cursor: pointer;
+	}
+	
+	.upButton:hover {
+	    box-shadow: 1px 1px 5px rgb(147 141 201), -1px -1px 5px #525252;
+	}
 
   </style>
     <meta charset="UTF-8">

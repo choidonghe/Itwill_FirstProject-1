@@ -2,6 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header.jsp" %>
 
+<button class = "upButton">
+	<i class = "glyphicon glyphicon-menu-up" style = "margin : auto;"></i>
+</button>
+<script>
+    document.querySelector('.upButton').addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+
 <div class="content">
 	<div class="box">
 	<div class="box-header with-border">

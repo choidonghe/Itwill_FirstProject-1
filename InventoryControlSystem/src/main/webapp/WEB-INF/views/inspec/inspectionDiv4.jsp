@@ -30,6 +30,14 @@ th {
 }
 </style>
 </head>
+<button class = "upButton">
+	<i class = "glyphicon glyphicon-menu-up" style = "margin : auto;"></i>
+</button>
+<script>
+    document.querySelector('.upButton').addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
 <div class="box">
 	<div class="box-header">
 	</div>

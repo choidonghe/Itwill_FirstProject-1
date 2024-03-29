@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.CategoryVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.ErrorVO;
 import com.itwillbs.domain.ProductVO;
@@ -71,6 +72,13 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public void insertProduct(ProductVO pvo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".insertProduct", pvo);
+	}
+
+
+	@Override
+	public List<CategoryVO> cList(CategoryVO cvo) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".selectCategory", cvo);
+				
 	}
 	
 	

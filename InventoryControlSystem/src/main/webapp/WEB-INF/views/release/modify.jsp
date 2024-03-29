@@ -4,11 +4,14 @@
 
 <%@ include file="../include/header.jsp"%>
 
-	
-	
-<%-- ${modifyList} <br>
-${code} <br> 
-<h1>modify.jsp</h1> --%>
+<button class = "upButton">
+	<i class = "glyphicon glyphicon-menu-up" style = "margin : auto;"></i>
+</button>
+<script>
+    document.querySelector('.upButton').addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>>
 	
 	<form action="" method="post">
 		<input type="hidden" name="page" value=${cri.page }>

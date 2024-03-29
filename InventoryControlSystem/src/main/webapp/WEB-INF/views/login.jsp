@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <title>로그인 / 회원가입 폼 템플릿</title>
@@ -20,7 +21,7 @@
 }
 .form-wrap {
     width: 380px;
-    height: 550px;
+    height: 650px;
     position: relative;
     margin: 6% auto;
     background: #fff;
@@ -114,7 +115,11 @@ span {
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
 <body style="background-color: rgb(60,141,188);">
-
+<c:if test="${not empty error}">
+	<script>
+	alert("회원정보를 확인해 주세요.");
+	</script>
+</c:if>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js"
   integrity="sha384-l+xbElFSnPZ2rOaPrU//2FF5B4LB8FiX5q4fXYTlfcG4PGpMkE1vcL7kNXI6Cci0" crossorigin="anonymous"></script>
   
@@ -123,10 +128,27 @@ span {
  	 
  	function loginWithKakao() {
  	    Kakao.Auth.authorize({
- 	      redirectUri: 'http://localhost:8088/registerkakao',
+ 	      redirectUri: 'http://c6d2311t1.itwillbs.com/wms/registerkakao',
  	    });
  	  }
  	 
+ 	$(document).ready(function(){
+   	 $("#pass2").on("focusout",function(){
+   		 let pass1 = $("#pass").val();
+   		 let pass2 = $("#pass2").val();
+   		 console.log(pass1, pass2);
+   		 
+   		 if(pass1 == pass2){
+   			 $("#label2").css("color", "black").text("비밀번호가 같습니다.");
+   		 }else{
+   			 $("#label2").css("color", "red").text("비밀번호가 다릅니다");
+ 				 $("#pass").val('');
+ 				 $("#pass2").val('');
+   		 }
+   		 
+   	 });
+   	 
+    });
 
  	 $(document).ready(function() {
      

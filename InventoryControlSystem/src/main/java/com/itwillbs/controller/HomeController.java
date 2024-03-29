@@ -79,20 +79,23 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPOST(MemberVO vo, HttpSession session) throws Exception{
+	public String loginPOST(MemberVO vo, HttpSession session, Model model) throws Exception{
 		logger.debug(" loginPOST() 호출");
 		AuthVO authVO = mService.memberLogin(vo);
 		logger.debug(" 로그인 id & auth : "+authVO);
 		
-		
-		
-		if(!authVO.getAuth().isEmpty()) { // 정상 로그인
-			session.setAttribute("authVO", authVO);
+		try {
+			if(!authVO.getAuth().isEmpty()) { // 정상 로그인
+				session.setAttribute("authVO", authVO);
+				
+				return "redirect:/main";
+			}
 			
-			return "redirect:/main";
+		} catch (Exception e) {
 		}
 		
-		// 비밀번호 오류
+		logger.debug(" 로그인 실패");
+		model.addAttribute("error", "로그인실패");
 		return "/login";
 	}
 	

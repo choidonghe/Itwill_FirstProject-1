@@ -2,6 +2,7 @@ package com.itwillbs.service;
 
 import java.util.List;
 
+import com.itwillbs.domain.CategoryVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.ErrorVO;
 import com.itwillbs.domain.ProductVO;
@@ -27,4 +28,5 @@ public interface ProductService {
 	
 	// product 생산
 	public void insertProduct(ProductVO pvo) throws Exception;
+	public List<CategoryVO> cList(CategoryVO cvo) throws Exception;
 }

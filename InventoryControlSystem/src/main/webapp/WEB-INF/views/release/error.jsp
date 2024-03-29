@@ -4,11 +4,14 @@
 
 <%@ include file="../include/header.jsp"%>
 
-<%-- cri=${cri } <br>
-pageVO=${pageVO } <br>
-${vo} <br>
-
-	<h1>error.jsp</h1> --%>
+<button class = "upButton">
+	<i class = "glyphicon glyphicon-menu-up" style = "margin : auto;"></i>
+</button>
+<script>
+    document.querySelector('.upButton').addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
 	
 	<input type="button" value="전체" onclick="location.href='/release/main'">
 	<input type="button" value="검수" onclick="location.href='/release/inspection'">

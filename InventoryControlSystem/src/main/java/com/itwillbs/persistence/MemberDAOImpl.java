@@ -173,7 +173,7 @@ public class MemberDAOImpl implements MemberDAO {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=519552de35c6233367d12dde932a05c8"); // 개인 REST IP
-            sb.append("&redirect_uri=http://localhost:8088/registerkakao");
+            sb.append("&redirect_uri=http://c6d2311t1.itwillbs.com/wms/registerkakao");
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
