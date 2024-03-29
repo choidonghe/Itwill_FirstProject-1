@@ -107,7 +107,9 @@
 		where pno = #{pno}
 	</update>
 	
-	
+	<select id="selectCategory" resultMap="categoryVO">
+		select * from category
+	</select>
 
 	
 	

@@ -5,9 +5,10 @@
 <%@ include file="../include/header.jsp"%>
 <link href="<c:url value='/resources/bootstrap/css/style.css' />" rel="stylesheet">
 
-<h1>inspectionRead.jsp</h1>
-<form action="/inspec/inspectionRead" method="post">
 
+<form action="/inspec/inspectionRead" method="post">
+<fieldset>
+<legend> 입고 검수 </legend>
 <table class="styled-table">
     <tr>
         <td>제품 번호:</td>
@@ -65,6 +66,7 @@
 		</c:otherwise>
 	</c:choose>
 </form>
+</fieldset>
 
 <script>
     // 페이지 로드 시 실행되는 함수
